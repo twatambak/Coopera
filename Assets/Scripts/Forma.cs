@@ -14,8 +14,6 @@ public class Forma : MonoBehaviour {
 
     float tamanhoForma = 1f;
 
-    static int quantiaAtual;
-
     /* ----------------------------------------------------------------------------------------------
      * void Start()
      * Start() é chamada antes do update do primeiro frame.
@@ -63,9 +61,10 @@ public class Forma : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        if (quantiaAtual > 0) {
+        if (Main.quantiaAtual > 0) {
             Destroy(this.gameObject);
-            quantiaAtual--;
+            Main.quantiaAtual--;
         }
+
     }
 }

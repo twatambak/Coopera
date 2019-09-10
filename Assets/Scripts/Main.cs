@@ -11,7 +11,7 @@ public class Main : MonoBehaviour {
     public GameObject forma;
     public GameObject obj;
 
-    static int quantiaAtual;
+    public static int quantiaAtual;
     int quantiaMaxima;
 
     Material material;
@@ -27,8 +27,8 @@ public class Main : MonoBehaviour {
      * uma função que faz a criação de clones do prefab Forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
+        esperar(5);
         quantiaMaxima = utils.toInt(utils.leArquivoConfig(2));
-        criaFormas();
     }
 
 
@@ -38,6 +38,8 @@ public class Main : MonoBehaviour {
      * Nada por enquanto;
     ---------------------------------------------------------------------------------------------- */
     void Update() {
+        print("" + quantiaAtual);
+        criaFormas();
     }
 
 
@@ -51,13 +53,20 @@ public class Main : MonoBehaviour {
     void criaFormas() {    
         if(quantiaAtual < quantiaMaxima) {
             for (int i = 0; i < quantiaMaxima; i++) {
-                Color novaCor = new Vector4(Random.value, Random.value, Random.value);
-                obj = Instantiate(forma) as GameObject;
-                obj.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
-                material = obj.GetComponent<Renderer>().material;
-                material.color = novaCor;
-                quantiaAtual++;
+                StartCoroutine(esperar(10));
+                if (quantiaAtual < quantiaMaxima) {
+                    Color novaCor = new Vector4(Random.value, Random.value, Random.value);
+                    obj = Instantiate(forma) as GameObject;
+                    obj.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
+                    material = obj.GetComponent<Renderer>().material;
+                    material.color = novaCor;
+                    quantiaAtual++;
+                }
             }
         }
+    }
+
+    IEnumerator esperar(int tempo) {
+        yield return new WaitForSeconds(tempo);
     }
 }
