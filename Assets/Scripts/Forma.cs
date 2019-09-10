@@ -10,18 +10,17 @@ public class Forma : MonoBehaviour {
     
     float vel = 30f; // Velocidade de movimentação
 
-    public Forma() {
-
-    }
+    float tamanhoForma = 1f;
 
     // A função Start() é chama uma única vez no ínicio do frame
     void Start() {
-
+        vel = leArquivoConfig(4);
+        tamanhoForma = leArquivoConfig(6);
+        transform.localScale = new Vector3(tamanhoForma, tamanhoForma, tamanhoForma);
     }
 
     // A função Update() é chamada em loop a cada frame
     void Update() {
-
         transform.Translate(Vector2.right * (dirX * vel) * Time.deltaTime); // Movimenta o quadrado na horizontal. Caso a velocidade varie de máquina para máquina: ( * Time.deltaTime)
         transform.Translate(Vector2.up * (dirY * vel) * Time.deltaTime); // Movimenta o quadrado na vertical. Caso a velocidade varie de máquina para máquina: ( * Time.deltaTime)
     }
@@ -37,5 +36,27 @@ public class Forma : MonoBehaviour {
             dirY *= -1;
             
         }
+    }
+
+    // Lê o arquivo de configuração
+    int leArquivoConfig(int id) {
+        id--;
+        System.IO.StreamReader rd = new System.IO.StreamReader(@"config.txt");
+
+        string linha = null;
+        string[] linhaSeparada = null;
+        List<string> linhas = new List<string>();
+
+        // ler o conteudo da linha e add na list 
+        while ((linha = rd.ReadLine()) != null)
+        {
+            linhaSeparada = linha.Split('|');
+            foreach (var item in linhaSeparada)
+            {
+                linhas.Add(item);
+            }
+        }
+
+        return System.Int32.Parse(linhas[id]);
     }
 }

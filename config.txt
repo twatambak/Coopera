@@ -1,0 +1,3 @@
+Quantia_de_Formas|5
+Velocidade_das_Formas|35
+Tamanho_das_Formas|1

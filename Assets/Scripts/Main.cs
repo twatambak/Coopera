@@ -7,22 +7,24 @@ public class Main : MonoBehaviour {
     int posX;
     int posY;
 
-    List<Color> listaCores = new List<Color> {Color.blue, Color.red };
+    //List<Color> listaCores = new List<Color> {Color.blue, Color.red };
 
     public GameObject forma;
     public GameObject obj;
 
-    static public int quantiaAtual;
+    public static int quantiaAtual;
     int quantiaMaxima;
 
     Material material;
 
-    static public int pontosAmarelo;
-    static public int pontosVerde;
+    public static int pontosAmarelo;
+    public static int pontosVerde;
+
+    public static string[] campos;
 
     // Start is called before the first frame update
     void Start() {
-        quantiaMaxima = 5;
+        quantiaMaxima = leArquivoConfig(2);
         criaFormas();
     }
 
@@ -39,9 +41,28 @@ public class Main : MonoBehaviour {
                 obj.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
                 material = obj.GetComponent<Renderer>().material;
                 material.color = novaCor;
-                //obj.GetComponent<Renderer>().material = material;
                 quantiaAtual++;
             }
         }
+    }
+
+    int leArquivoConfig(int id) {
+        id--;
+
+        System.IO.StreamReader rd = new System.IO.StreamReader(@"config.txt");
+
+        string linha = null;
+        string[] linhaSeparada = null;
+        List<string> linhas = new List<string>();
+
+        // ler o conteudo da linha e add na list 
+        while ((linha = rd.ReadLine()) != null) {
+            linhaSeparada = linha.Split('|');                
+            foreach(var item in linhaSeparada) {
+                linhas.Add(item);
+            }
+        }
+
+        return System.Int32.Parse(linhas[id]);
     }
 }
