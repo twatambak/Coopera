@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//===================================================================================================
+// A classe Main é responsável pelo funcionamento geral do jogo.
+//===================================================================================================
 public class Main : MonoBehaviour {
-
-    int posX;
-    int posY;
-
-    //List<Color> listaCores = new List<Color> {Color.blue, Color.red };
+    public Utils utils;
 
     public GameObject forma;
     public GameObject obj;
@@ -20,19 +19,35 @@ public class Main : MonoBehaviour {
     public static int pontosAmarelo;
     public static int pontosVerde;
 
-    public static string[] campos;
-
-    // Start is called before the first frame update
+    /* ----------------------------------------------------------------------------------------------
+     * void Start()
+     * Start() é chamada antes do update do primeiro frame.
+     * Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
+     * definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
+     * uma função que faz a criação de clones do prefab Forma.
+    ---------------------------------------------------------------------------------------------- */
     void Start() {
-        quantiaMaxima = leArquivoConfig(2);
+        quantiaMaxima = utils.leArquivoConfig(2);
         criaFormas();
     }
 
-    // Update is called once per frame
-    void Update() {
 
+    /* ----------------------------------------------------------------------------------------------
+     * void Update()
+     * Update() é chamada no início de cada novo frame.
+     * Nada por enquanto;
+    ---------------------------------------------------------------------------------------------- */
+    void Update() {
     }
 
+
+    /* ----------------------------------------------------------------------------------------------
+     * void criaFormas()
+     * A função criaFormas() é utlizada para fazer a criação das formas presentes na cena utilizando
+     * o prefab de Forma. É verificada a quantia de formas presentes na cena e caso a quantidade for
+     * menor do que o máximo estipulado (e carregado para variável através do arquivo CSV) novas
+     * formas são criadas. A posição das formas é gerada aleatoriamente, assim como sua cor.
+    ---------------------------------------------------------------------------------------------- */
     void criaFormas() {    
         if(quantiaAtual < quantiaMaxima) {
             for (int i = 0; i < quantiaMaxima; i++) {
@@ -44,25 +59,5 @@ public class Main : MonoBehaviour {
                 quantiaAtual++;
             }
         }
-    }
-
-    int leArquivoConfig(int id) {
-        id--;
-
-        System.IO.StreamReader rd = new System.IO.StreamReader(@"config.txt");
-
-        string linha = null;
-        string[] linhaSeparada = null;
-        List<string> linhas = new List<string>();
-
-        // ler o conteudo da linha e add na list 
-        while ((linha = rd.ReadLine()) != null) {
-            linhaSeparada = linha.Split('|');                
-            foreach(var item in linhaSeparada) {
-                linhas.Add(item);
-            }
-        }
-
-        return System.Int32.Parse(linhas[id]);
     }
 }
