@@ -7,13 +7,14 @@ using UnityEngine;
 //===================================================================================================
 public class Forma : MonoBehaviour {
     public Utils utils;
-
     float dirX = 0.1f; // Direção de movimentação no eixo X
     float dirY = 0.1f; // Direção de movimentação no eixo Y
     
     float vel = 30f; // Velocidade de movimentação
 
     float tamanhoForma = 1f;
+
+    static int quantiaAtual;
 
     /* ----------------------------------------------------------------------------------------------
      * void Start()
@@ -22,8 +23,8 @@ public class Forma : MonoBehaviour {
      * definição para as variáveis correspondentes para a velocidade e o tamanho da forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        //vel = utils.leArquivoConfig(4);
-        //tamanhoForma = utils.leArquivoConfig(6);
+        //vel = utils.toInt(utils.leArquivoConfig(4));
+        //tamanhoForma = utils.toInt(utils.leArquivoConfig(6));
         //transform.localScale = new Vector3(tamanhoForma, tamanhoForma, tamanhoForma);
     }
 
@@ -60,5 +61,11 @@ public class Forma : MonoBehaviour {
             
         }
     }
-    //===============================================================================================
+
+    void OnMouseDown() {
+        if (quantiaAtual > 0) {
+            Destroy(this.gameObject);
+            quantiaAtual--;
+        }
+    }
 }

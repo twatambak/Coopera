@@ -11,7 +11,7 @@ public class Main : MonoBehaviour {
     public GameObject forma;
     public GameObject obj;
 
-    public static int quantiaAtual;
+    static int quantiaAtual;
     int quantiaMaxima;
 
     Material material;
@@ -27,7 +27,7 @@ public class Main : MonoBehaviour {
      * uma função que faz a criação de clones do prefab Forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        quantiaMaxima = utils.leArquivoConfig(2);
+        quantiaMaxima = utils.toInt(utils.leArquivoConfig(2));
         criaFormas();
     }
 

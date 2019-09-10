@@ -36,7 +36,7 @@ public class Utils : MonoBehaviour {
      * primeira posição relacionada aos valores seja 1. Os valores de configuração estão sempre
      * dispostos em posições pares exceto 0.
      --------------------------------------------------------------------------------------------- */
-     public int leArquivoConfig(int id) {
+     public string leArquivoConfig(int id) {
         id--;
         System.IO.StreamReader rd = new System.IO.StreamReader(@"config.txt");
         string linha = null;
@@ -48,6 +48,10 @@ public class Utils : MonoBehaviour {
                 linhas.Add(item);
             }
         }
-        return System.Int32.Parse(linhas[id]);
+        return linhas[id];
      }
+
+    public int toInt(string texto) {
+        return System.Int32.Parse(texto);
+    }
 }
