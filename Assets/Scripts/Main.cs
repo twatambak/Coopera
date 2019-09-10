@@ -7,15 +7,15 @@ public class Main : MonoBehaviour {
     int posX;
     int posY;
 
-    float distX = 1.5f;
-    float distY = 1.5f;
+    List<Color> listaCores = new List<Color> {Color.blue, Color.red };
 
     public GameObject forma;
     public GameObject obj;
-    Vector3 pos = new Vector3();
 
     static public int quantiaAtual;
     int quantiaMaxima;
+
+    Material material;
 
     static public int pontosAmarelo;
     static public int pontosVerde;
@@ -34,8 +34,12 @@ public class Main : MonoBehaviour {
     void criaFormas() {    
         if(quantiaAtual < quantiaMaxima) {
             for (int i = 0; i < quantiaMaxima; i++) {
+                Color novaCor = new Vector4(Random.value, Random.value, Random.value);
                 obj = Instantiate(forma) as GameObject;
-                obj.transform.position = new Vector2 (Random.RandomRange(-7,7), Random.RandomRange(-3, 3)); 
+                obj.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
+                material = obj.GetComponent<Renderer>().material;
+                material.color = novaCor;
+                //obj.GetComponent<Renderer>().material = material;
                 quantiaAtual++;
             }
         }
