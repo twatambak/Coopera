@@ -1,6 +1,6 @@
-Quantidade de Formas (Padrão: 5)	|5
-Velocidade das Formas (Padrão: 30)	|35
+Quantidade de Formas (Padrão: 5)	|8
+Velocidade das Formas (Padrão: 30)	|100
 Tamanho das Formas (Padrão: 1)		|5
 
 Porta Arduino				|COM3
-Baud Rate				|9600
+Baud Rate				|115200

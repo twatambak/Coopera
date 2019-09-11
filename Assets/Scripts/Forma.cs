@@ -6,13 +6,14 @@ using UnityEngine;
 // A classe Forma é responsável por definir as variáveis e comportamentos das formas presentes nas fases
 //===================================================================================================
 public class Forma : MonoBehaviour {
-    public Utils utils;
+
+    public Utils utils; // Repositório de funções
     float dirX = 0.1f; // Direção de movimentação no eixo X
     float dirY = 0.1f; // Direção de movimentação no eixo Y
     
     float vel = 30f; // Velocidade de movimentação
 
-    float tamanhoForma = 1f;
+    float tamanhoForma = 1f; // Tamanho da Forma 
 
     /* ----------------------------------------------------------------------------------------------
      * void Start()
@@ -21,9 +22,9 @@ public class Forma : MonoBehaviour {
      * definição para as variáveis correspondentes para a velocidade e o tamanho da forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        //vel = utils.toInt(utils.leArquivoConfig(4));
-        //tamanhoForma = utils.toInt(utils.leArquivoConfig(6));
-        //transform.localScale = new Vector3(tamanhoForma, tamanhoForma, tamanhoForma);
+        vel = utils.toInt(utils.leArquivoConfig(4));
+        tamanhoForma = utils.toInt(utils.leArquivoConfig(6));
+        transform.localScale = new Vector3(tamanhoForma, tamanhoForma, tamanhoForma);
     }
 
 
@@ -40,8 +41,8 @@ public class Forma : MonoBehaviour {
 
 
     /* ----------------------------------------------------------------------------------------------
-     * void onCollisionEnter(Collision outro)
-     * onCollisionEnter(Collision outro) é chamada quando há colisão entre objetos.
+     * void OnCollisionEnter(Collision outro)
+     * OnCollisionEnter(Collision outro) é chamada quando há colisão entre objetos.
      * A função verifica a tag do objeto com o qual está havendo colisão. Dependendo do objeto, é
      * aplicada a direção inversa ao eixo relacionado a essa colisão. Quando a colisão acontece com
      * um GameObject com a tag "Vertical" a direção X é invertida, quando a colisão acontece com um
@@ -60,11 +61,20 @@ public class Forma : MonoBehaviour {
         }
     }
 
+
+    /* ----------------------------------------------------------------------------------------------
+     * void OnMouseDown()
+     * OnMouseDown() é chamada quando o objeto é clicado.
+     * A função verifica a quantia de elementos na cena e caso essa quantia seja maior do que 0, o
+     * objeto que foi clicado é destruído.
+    ---------------------------------------------------------------------------------------------- */
     void OnMouseDown() {
         if (Main.quantiaAtual > 0) {
             Destroy(this.gameObject);
             Main.quantiaAtual--;
+            Main.pontosAmarelo++;
         }
-
     }
+
+
 }

@@ -6,18 +6,21 @@ using UnityEngine;
 // A classe Main é responsável pelo funcionamento geral do jogo.
 //===================================================================================================
 public class Main : MonoBehaviour {
-    public Utils utils;
 
-    public GameObject forma;
-    public GameObject obj;
+    public Utils utils; // Repositório de funções
 
-    public static int quantiaAtual;
-    int quantiaMaxima;
+    public GameObject forma; // O GameObject relacionado a Forma
+    public GameObject obj; // Instância GameObject de Forma
 
-    Material material;
+    public static int quantiaAtual; // A quantia atual de formas na tela
+    int quantiaMaxima; // A quantia máxima de formas na tela
 
-    public static int pontosAmarelo;
-    public static int pontosVerde;
+    Material material; // O material relacionado a Forma
+
+    public static int pontosAmarelo; // Pontos do time Amarelo
+    public static int pontosVerde;// Pontos do time Verde
+
+    public static bool game = false; // Condição de funcionamento do jogo
 
     /* ----------------------------------------------------------------------------------------------
      * void Start()
@@ -27,7 +30,7 @@ public class Main : MonoBehaviour {
      * uma função que faz a criação de clones do prefab Forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        esperar(5);
+        wait(5);
         quantiaMaxima = utils.toInt(utils.leArquivoConfig(2));
     }
 
@@ -38,8 +41,9 @@ public class Main : MonoBehaviour {
      * Nada por enquanto;
     ---------------------------------------------------------------------------------------------- */
     void Update() {
-        print("" + quantiaAtual);
-        criaFormas();
+        if (game) {
+            criaFormas();
+        }
     }
 
 
@@ -53,7 +57,7 @@ public class Main : MonoBehaviour {
     void criaFormas() {    
         if(quantiaAtual < quantiaMaxima) {
             for (int i = 0; i < quantiaMaxima; i++) {
-                StartCoroutine(esperar(10));
+                StartCoroutine(wait(10));
                 if (quantiaAtual < quantiaMaxima) {
                     Color novaCor = new Vector4(Random.value, Random.value, Random.value);
                     obj = Instantiate(forma) as GameObject;
@@ -66,7 +70,43 @@ public class Main : MonoBehaviour {
         }
     }
 
-    IEnumerator esperar(int tempo) {
+
+    /* ----------------------------------------------------------------------------------------------
+     * IEnumerator esperar(int tempo) 
+     * Faz com que o programa tenha um delay.
+    ---------------------------------------------------------------------------------------------- */
+    IEnumerator wait(int tempo) {
         yield return new WaitForSeconds(tempo);
+    }
+
+
+    /* ----------------------------------------------------------------------------------------------
+     * OnGUI()
+     * OnGUI() é chamada para gerenciamento de objetos GUI.
+     * Gerencia o início do jogo através das condições de ativamento de um botão e cria as labels
+     * de informação de pontos.
+    ---------------------------------------------------------------------------------------------- */
+    void OnGUI() {
+        if (!game) {
+            if (GUI.Button(new Rect(220, 150, 200, 50), "JOGAR")) {
+                game = true;
+            }
+        }
+        GUI.Label(new Rect(10, 5, 100, 100), "PONTOS");
+        GUI.Label(new Rect(100, 5, 100, 100), pontosAmarelo.ToString());
+
+        GUI.Label(new Rect(580, 5, 100, 100), "PONTOS");
+        GUI.Label(new Rect(540, 5, 100, 100), pontosVerde.ToString());
+    }
+
+
+    /* ----------------------------------------------------------------------------------------------
+     * void limparTela()
+     * A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
+    ---------------------------------------------------------------------------------------------- */
+    void limparTela() {
+        for (int i = quantiaMaxima; i < quantiaMaxima; i--) {
+            Destroy(this.gameObject);
+        }
     }
 }
