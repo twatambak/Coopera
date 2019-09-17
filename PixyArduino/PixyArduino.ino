@@ -15,18 +15,11 @@ void loop() {
   
   // If there are detect blocks, print them!
   if (pixy.ccc.numBlocks) {
-    Serial.println(pixy.ccc.numBlocks);    
-    for (i=0; i<pixy.ccc.numBlocks; i++) {
-      String blocos = String(pixy.ccc.blocks[i].m_index + '|' + pixy.ccc.blocks[i].m_signature + '|' + pixy.ccc.blocks[i].m_x + '|' + pixy.ccc.blocks[i].m_y);
-      //blocos.concat(pixy.ccc.blocks[i].m_index);
-      //blocos.concat("|");
-      //blocos.concat(pixy.ccc.blocks[i].m_signature);
-      //blocos.concat("|");
-      //blocos.concat(pixy.ccc.blocks[i].m_x);
-      //blocos.concat("|");
-      //blocos.concat(pixy.ccc.blocks[i].m_y);
-      //blocos.concat("|");
-      Serial.print(blocos);
+    //Serial.println(pixy.ccc.numBlocks);    
+    for (i = 0; i < pixy.ccc.numBlocks; i++) {
+      Serial.println((String)pixy.ccc.blocks[i].m_index + '|' + (String)pixy.ccc.blocks[i].m_signature + '|' + (String)pixy.ccc.blocks[i].m_x + '|' + (String)pixy.ccc.blocks[i].m_y);
     }
-  }  
+  } else {
+    Serial.println("Nenhum bloco sendo dectado. Sem resposta");  
+  }
 }

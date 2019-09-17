@@ -7,6 +7,9 @@ using UnityEngine;
 //===================================================================================================
 public class Utils : MonoBehaviour {
 
+    public Utils() {
+    }
+
     /* ----------------------------------------------------------------------------------------------
      * void Start()
      * Start() é chamada antes do update do primeiro frame.
@@ -38,17 +41,18 @@ public class Utils : MonoBehaviour {
      --------------------------------------------------------------------------------------------- */
      public string leArquivoConfig(int id) {
         id--;
-        System.IO.StreamReader rd = new System.IO.StreamReader(@"config.txt");
+        System.IO.StreamReader stream = new System.IO.StreamReader(@"config.txt");
         string linha = null;
         string[] linhaSeparada = null;
-        List<string> linhas = new List<string>();
-        while ((linha = rd.ReadLine()) != null) {
+        List<string> dados = new List<string>();
+
+        while ((linha = stream.ReadLine()) != null) {
             linhaSeparada = linha.Split('|');
             foreach (var item in linhaSeparada) {
-                linhas.Add(item);
+                dados.Add(item);
             }
         }
-        return linhas[id];
+        return dados[id];
      }
 
 

@@ -1,0 +1,42 @@
+import pygame
+from forma import *
+
+pygame.init()
+
+frame = pygame.display.set_mode((1280, 720)) # Criação do frame
+
+pygame.display.set_caption("Coopera Teste 1") # Título da janela
+
+loop = 0
+run = True # Define o estado para o loop
+listaFormas = []
+
+def atualizarTela():
+	print("Is nice")
+
+while run:
+	pygame.time.delay(30) # Delay do jogo em milisegundos
+
+	if loop >= 0:
+		loop += 1
+	if loop > 6:
+		loop = 0
+
+	if loop == 0:
+		if len(listaFormas) < 5:
+			listaFormas.append(forma(frame))
+		else:
+			listaFormas.pop(0)
+
+	for formas in listaFormas:
+		if formas.getVisibilidade():
+			print("Nice")
+
+	for event in pygame.event.get(): # Navega pelos eventos do jogo e verifica se estão acontecendo ou não        
+        if event.type == pygame.QUIT: # Evento para fechar o jogo
+            run = False # Interrompe o ciclo
+    #frame.fill((0, 0, 0)) # Preenche o background do jogo para evitar que sejam criados novos sprites do jogador
+    
+    pygame.display.update() # É necessário atualizar o display
+
+pygame.quit()

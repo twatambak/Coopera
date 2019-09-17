@@ -19,7 +19,8 @@ public class Main : MonoBehaviour {
 
     public static int pontosAmarelo; // Pontos do time Amarelo
     public static int pontosVerde;// Pontos do time Verde
-    public static Color novaCor;
+
+    public static Color novaCor; // Nova cor a ser integrada ao material da forma criada
     public static bool game = false; // Condição de funcionamento do jogo
 
     /* ----------------------------------------------------------------------------------------------
@@ -73,7 +74,7 @@ public class Main : MonoBehaviour {
 
     /* ----------------------------------------------------------------------------------------------
      * IEnumerator esperar(int tempo) 
-     * Faz com que o programa tenha um delay.
+     * Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
     ---------------------------------------------------------------------------------------------- */
     IEnumerator wait(int tempo) {
         yield return new WaitForSeconds(tempo);

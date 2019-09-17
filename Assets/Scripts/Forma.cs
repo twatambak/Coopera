@@ -25,8 +25,8 @@ public class Forma : MonoBehaviour {
      * definição para as variáveis correspondentes para a velocidade e o tamanho da forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        //vel = utils.toInt(utils.leArquivoConfig(4));
-        //atamanhoForma = utils.toInt(utils.leArquivoConfig(6));
+        vel = utils.toInt(utils.leArquivoConfig(4));
+        tamanhoForma = utils.toInt(utils.leArquivoConfig(6));
         transform.localScale = new Vector3(tamanhoForma, tamanhoForma, tamanhoForma);
     }
 
