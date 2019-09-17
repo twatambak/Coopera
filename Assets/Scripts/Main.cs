@@ -19,7 +19,7 @@ public class Main : MonoBehaviour {
 
     public static int pontosAmarelo; // Pontos do time Amarelo
     public static int pontosVerde;// Pontos do time Verde
-
+    public static Color novaCor;
     public static bool game = false; // Condição de funcionamento do jogo
 
     /* ----------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ public class Main : MonoBehaviour {
             for (int i = 0; i < quantiaMaxima; i++) {
                 StartCoroutine(wait(10));
                 if (quantiaAtual < quantiaMaxima) {
-                    Color novaCor = new Vector4(Random.value, Random.value, Random.value);
+                    novaCor = new Vector4(Random.value, Random.value, Random.value);
                     obj = Instantiate(forma) as GameObject;
                     obj.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
                     material = obj.GetComponent<Renderer>().material;

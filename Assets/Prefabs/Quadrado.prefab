@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   utils: {fileID: 0}
+  particulas: {fileID: 1625705721856338625, guid: 088076700fb2b984a8fa2dae6cec447b,
+    type: 3}
 --- !u!54 &8512417875904783704
 Rigidbody:
   m_ObjectHideFlags: 0

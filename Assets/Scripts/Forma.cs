@@ -8,6 +8,9 @@ using UnityEngine;
 public class Forma : MonoBehaviour {
 
     public Utils utils; // Repositório de funções
+
+    public GameObject particulas;
+
     float dirX = 0.1f; // Direção de movimentação no eixo X
     float dirY = 0.1f; // Direção de movimentação no eixo Y
     
@@ -22,8 +25,8 @@ public class Forma : MonoBehaviour {
      * definição para as variáveis correspondentes para a velocidade e o tamanho da forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        vel = utils.toInt(utils.leArquivoConfig(4));
-        tamanhoForma = utils.toInt(utils.leArquivoConfig(6));
+        //vel = utils.toInt(utils.leArquivoConfig(4));
+        //atamanhoForma = utils.toInt(utils.leArquivoConfig(6));
         transform.localScale = new Vector3(tamanhoForma, tamanhoForma, tamanhoForma);
     }
 
@@ -71,6 +74,10 @@ public class Forma : MonoBehaviour {
     void OnMouseDown() {
         if (Main.quantiaAtual > 0) {
             Destroy(this.gameObject);
+            //particulas.GetComponent<ParticleSystem.MainModule>().startColor = new ParticleSystem.MinMaxGradient(Main.novaCor);
+
+
+            Instantiate(particulas, this.transform.position, this.transform.rotation);
             Main.quantiaAtual--;
             Main.pontosAmarelo++;
         }

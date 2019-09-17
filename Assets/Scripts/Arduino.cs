@@ -11,13 +11,14 @@ public class Arduino : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        stream = new SerialPort(utils.leArquivoConfig(8),  utils.toInt(utils.leArquivoConfig(10)));
-        stream.Open();
+        //stream = new SerialPort(utils.leArquivoConfig(8),  utils.toInt(utils.leArquivoConfig(10)));
+        //stream = new SerialPort("COM3", 115200);
+        //stream.Open();
     }
 
     // Update is called once per frame
     void Update() {
-        frase = stream.ReadLine();
-        Debug.Log(frase);
+        //frase = stream.ReadLine();
+       // Debug.Log(frase);
     }
 }
