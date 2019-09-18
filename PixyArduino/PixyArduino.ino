@@ -4,7 +4,7 @@
 Pixy2 pixy;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   pixy.init();
 }
 
@@ -19,7 +19,6 @@ void loop() {
     for (i = 0; i < pixy.ccc.numBlocks; i++) {
       Serial.println((String)pixy.ccc.blocks[i].m_index + '|' + (String)pixy.ccc.blocks[i].m_signature + '|' + (String)pixy.ccc.blocks[i].m_x + '|' + (String)pixy.ccc.blocks[i].m_y);
     }
-  } else {
-    Serial.println("Nenhum bloco sendo dectado. Sem resposta");  
   }
+  delay(50);
 }

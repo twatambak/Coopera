@@ -8,7 +8,7 @@ using System.IO.Ports;
 //===================================================================================================
 public class Arduino : MonoBehaviour {
     public Utils utils;
-    SerialPort stream;
+    SerialPort stream = new SerialPort("COM3", 9600);
 
     /* ----------------------------------------------------------------------------------------------
      * void Start()
@@ -19,13 +19,12 @@ public class Arduino : MonoBehaviour {
      --------------------------------------------------------------------------------------------- */
     void Start() {
         try {
-            stream = new SerialPort("COM3", 115200);
             stream.Open();
+            stream.ReadTimeout = 1;
         } catch (global::System.Exception) {
-            Debug.LogError("Não foi possível estabelecer uma conexão com a placa Arduino. Tenha certeza de que esta está concectada corretamente. Verifique a conexão, a porta de entrada, o baud rate, e tente novamente.");
+            //Debug.LogError("Não foi possível estabelecer uma conexão com a placa Arduino. Tenha certeza de que esta está concectada corretamente. Verifique a conexão, a porta de entrada, o baud rate, e tente novamente.");
             throw;
         }
-
     }
 
     /* ----------------------------------------------------------------------------------------------
@@ -33,6 +32,10 @@ public class Arduino : MonoBehaviour {
      * Update() é é chamada no início de cada novo frame.
      --------------------------------------------------------------------------------------------- */
     void Update() {
+        if (stream.IsOpen) {
+            leituraSerial();
+            Debug.Log("A leitura dos dados foi executada com sucesso.");
+        }
     }
 
 
@@ -48,15 +51,25 @@ public class Arduino : MonoBehaviour {
     void leituraSerial() {         
         string linha = null;
 
+        stream.ReadTimeout = 1;
         linha = stream.ReadLine();
+        
         string[] linhaSeparada = null;
         List<string> dados = new List<string>();
-
-        while ((linha = stream.ReadLine()) != null) {
-            linhaSeparada = linha.Split('|');
-            foreach (var item in linhaSeparada) {
-                dados.Add(item);
+        try {
+            while ((linha = stream.ReadLine()) != null) {
+                if (!string.Equals(linha, "No")) {
+                    linhaSeparada = linha.Split('|');
+                    foreach (var item in linhaSeparada) {
+                        dados.Add(item);
+                    }
+                }
             }
+        } catch (global::System.Exception) {
+            Debug.LogError("Não foi possível fazer essas coisas não mermão.");
+            throw;
         }
+
     }
 }
+ 
