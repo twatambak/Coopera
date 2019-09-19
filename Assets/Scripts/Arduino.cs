@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
+using System.Threading;
 
 //===================================================================================================
 // A classe Arduino está ligada a configuração da comunicação da Unity com a placa Arduino.
@@ -20,7 +21,7 @@ public class Arduino : MonoBehaviour {
     void Start() {
         try {
             stream.Open();
-            stream.ReadTimeout = 1;
+            stream.ReadTimeout = 5000;
         } catch (global::System.Exception) {
             //Debug.LogError("Não foi possível estabelecer uma conexão com a placa Arduino. Tenha certeza de que esta está concectada corretamente. Verifique a conexão, a porta de entrada, o baud rate, e tente novamente.");
             throw;
@@ -33,9 +34,10 @@ public class Arduino : MonoBehaviour {
      --------------------------------------------------------------------------------------------- */
     void Update() {
         if (stream.IsOpen) {
-            leituraSerial();
-            Debug.Log("A leitura dos dados foi executada com sucesso.");
-        }
+            Thread thread = new Thread(new ThreadStart(leituraSerial));
+            thread.IsBackground = true;
+            thread.Start();
+        } 
     }
 
 
@@ -51,7 +53,7 @@ public class Arduino : MonoBehaviour {
     void leituraSerial() {         
         string linha = null;
 
-        stream.ReadTimeout = 1;
+        stream.ReadTimeout = 5000;
         linha = stream.ReadLine();
         
         string[] linhaSeparada = null;
