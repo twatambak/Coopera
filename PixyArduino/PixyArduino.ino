@@ -18,5 +18,5 @@ void loop() {
     }
   }
   Serial.flush(); 
-  delay(50);
+  delay(100);
 }

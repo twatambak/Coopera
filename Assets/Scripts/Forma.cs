@@ -9,14 +9,14 @@ public class Forma : MonoBehaviour {
 
     public Utils utils; // Repositório de funções
 
-    public GameObject particulas;
+    public GameObject destructionParticles;
 
     float dirX = 0.1f; // Direção de movimentação no eixo X
     float dirY = 0.1f; // Direção de movimentação no eixo Y
-    
+
     float vel = 30f; // Velocidade de movimentação
 
-    float tamanhoForma = 1f; // Tamanho da Forma 
+    float size = 1f; // Tamanho da Forma
 
     /* ----------------------------------------------------------------------------------------------
      * void Start()
@@ -26,8 +26,8 @@ public class Forma : MonoBehaviour {
     ---------------------------------------------------------------------------------------------- */
     void Start() {
         vel = utils.toInt(utils.leArquivoConfig(4));
-        tamanhoForma = utils.toInt(utils.leArquivoConfig(6));
-        transform.localScale = new Vector3(tamanhoForma, tamanhoForma, tamanhoForma);
+        size = utils.toInt(utils.leArquivoConfig(6));
+        transform.localScale = new Vector3(size, size, size);
     }
 
 
@@ -60,7 +60,7 @@ public class Forma : MonoBehaviour {
         } else if(outro.gameObject.tag == "Forma"){
             dirX *= -1;
             dirY *= -1;
-            
+
         }
     }
 
@@ -72,14 +72,13 @@ public class Forma : MonoBehaviour {
      * objeto que foi clicado é destruído.
     ---------------------------------------------------------------------------------------------- */
     void OnMouseDown() {
-        if (Main.quantiaAtual > 0) {
+        if (Level1.currentAmount > 0) {
             Destroy(this.gameObject);
-            //particulas.GetComponent<ParticleSystem.MainModule>().startColor = new ParticleSystem.MinMaxGradient(Main.novaCor);
+            //destructionParticles.GetComponent<ParticleSystem.Level1Module>().startColor = new ParticleSystem.MinMaxGradient(Level1.novaCor);
 
-
-            Instantiate(particulas, this.transform.position, this.transform.rotation);
-            Main.quantiaAtual--;
-            Main.pontosAmarelo++;
+            Instantiate(destructionParticles, this.transform.position, this.transform.rotation);
+            Level1.currentAmount--;
+            Level1.yellowPoints++;
         }
     }
 

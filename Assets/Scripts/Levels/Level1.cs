@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //===================================================================================================
-// A classe Main é responsável pelo funcionamento geral do jogo.
+// A classe Fase1 é responsável pelo funcionamento geral do jogo.
 //===================================================================================================
-public class Main : MonoBehaviour {
+public class Level1 : MonoBehaviour {
 
     public Utils utils; // Repositório de funções
 
-    public GameObject forma; // O GameObject relacionado a Forma
-    public GameObject obj; // Instância GameObject de Forma
+    public GameObject form; // O GameObject relacionado a Forma
+    public GameObject newForm; // Instância GameObject de Forma
 
-    public static int quantiaAtual; // A quantia atual de formas na tela
-    int quantiaMaxima; // A quantia máxima de formas na tela
+    public static int currentAmount; // A quantia atual de formas na tela
+    int maxAmount; // A quantia máxima de formas na tela
 
     Material material; // O material relacionado a Forma
 
-    public static int pontosAmarelo; // Pontos do time Amarelo
-    public static int pontosVerde;// Pontos do time Verde
+    public static int yellowPoints; // Pontos do time Amarelo
+    public static int greenPoints;// Pontos do time Verde
 
-    public static Color novaCor; // Nova cor a ser integrada ao material da forma criada
+    public static Color newColor; // Nova cor a ser integrada ao material da forma criada
     public static bool game = false; // Condição de funcionamento do jogo
 
     /* ----------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ public class Main : MonoBehaviour {
     ---------------------------------------------------------------------------------------------- */
     void Start() {
         wait(5);
-        quantiaMaxima = utils.toInt(utils.leArquivoConfig(2));
+        maxAmount = utils.toInt(utils.leArquivoConfig(2));
     }
 
 
@@ -55,17 +55,17 @@ public class Main : MonoBehaviour {
      * menor do que o máximo estipulado (e carregado para variável através do arquivo CSV) novas
      * formas são criadas. A posição das formas é gerada aleatoriamente, assim como sua cor.
     ---------------------------------------------------------------------------------------------- */
-    void criaFormas() {    
-        if(quantiaAtual < quantiaMaxima) {
-            for (int i = 0; i < quantiaMaxima; i++) {
+    void criaFormas() {
+        if(currentAmount < maxAmount) {
+            for (int i = 0; i < maxAmount; i++) {
                 StartCoroutine(wait(10));
-                if (quantiaAtual < quantiaMaxima) {
-                    novaCor = new Vector4(Random.value, Random.value, Random.value);
-                    obj = Instantiate(forma) as GameObject;
-                    obj.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
-                    material = obj.GetComponent<Renderer>().material;
-                    material.color = novaCor;
-                    quantiaAtual++;
+                if (currentAmount < maxAmount) {
+                    newColor = new Vector4(Random.value, Random.value, Random.value);
+                    newForm = Instantiate(form) as GameObject;
+                    newForm.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
+                    material = newForm.GetComponent<Renderer>().material;
+                    material.color = newColor;
+                    currentAmount++;
                 }
             }
         }
@@ -73,7 +73,7 @@ public class Main : MonoBehaviour {
 
 
     /* ----------------------------------------------------------------------------------------------
-     * IEnumerator esperar(int tempo) 
+     * IEnumerator esperar(int tempo)
      * Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
     ---------------------------------------------------------------------------------------------- */
     IEnumerator wait(int tempo) {
@@ -83,7 +83,7 @@ public class Main : MonoBehaviour {
 
     /* ----------------------------------------------------------------------------------------------
      * OnGUI()
-     * OnGUI() é chamada para gerenciamento de objetos GUI.
+     * OnGUI() é chamada para gerenciamento de newFormetos GUI.
      * Gerencia o início do jogo através das condições de ativamento de um botão e cria as labels
      * de informação de pontos.
     ---------------------------------------------------------------------------------------------- */
@@ -94,10 +94,10 @@ public class Main : MonoBehaviour {
             }
         }
         GUI.Label(new Rect(10, 5, 100, 100), "PONTOS");
-        GUI.Label(new Rect(100, 5, 100, 100), pontosAmarelo.ToString());
+        GUI.Label(new Rect(100, 5, 100, 100), yellowPoints.ToString());
 
         GUI.Label(new Rect(580, 5, 100, 100), "PONTOS");
-        GUI.Label(new Rect(540, 5, 100, 100), pontosVerde.ToString());
+        GUI.Label(new Rect(540, 5, 100, 100), greenPoints.ToString());
     }
 
 
@@ -106,7 +106,7 @@ public class Main : MonoBehaviour {
      * A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
     ---------------------------------------------------------------------------------------------- */
     void limparTela() {
-        for (int i = quantiaMaxima; i < quantiaMaxima; i--) {
+        for (int i = maxAmount; i < maxAmount; i--) {
             Destroy(this.gameObject);
         }
     }

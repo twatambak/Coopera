@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //===================================================================================================
 // A classe Utils contém alguns métodos de uso geral utilizados por classes distintas.
@@ -9,26 +10,6 @@ public class Utils : MonoBehaviour {
 
     public Utils() {
     }
-
-    /* ----------------------------------------------------------------------------------------------
-     * void Start()
-     * Start() é chamada antes do update do primeiro frame.
-     * Utils não possui ligação direta com nenhum GameObject e serve como um repositório de métodos
-     * logo, não possui chamada de iniciação no começo do frame.
-     --------------------------------------------------------------------------------------------- */
-    void Start() {  
-    }
-    
-
-    /* ----------------------------------------------------------------------------------------------
-     * void Update()
-     * Update() é chamada no início de cada novo frame.
-     * Utils não possui ligação direta com nenhum GameObject e serve como um repositório de métodos
-     * logo, não possui chamada de iniciação no começo do frame.
-     --------------------------------------------------------------------------------------------- */
-    void Update() {   
-    }
-
 
     /* ----------------------------------------------------------------------------------------------
      * public int leArquivoConfig(int id)
@@ -67,5 +48,9 @@ public class Utils : MonoBehaviour {
      --------------------------------------------------------------------------------------------- */
     public int toInt(string texto) {
         return System.Int32.Parse(texto);
+    }
+
+    public void goToScene(string scene){
+      SceneManager.LoadScene(scene);
     }
 }
