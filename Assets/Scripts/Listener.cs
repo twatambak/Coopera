@@ -28,7 +28,7 @@ public class Listener : MonoBehaviour {
       string[] seperatedLine = null;
       List<string> arduinoData = new List<string>();
       try {
-          while ((msg != null)) {
+          while (msg != null) {
               seperatedLine = msg.Split('|');
               foreach (var item in seperatedLine) {
                   arduinoData.Add(item);

@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //===================================================================================================
-// A classe Forma é responsável por definir as variáveis e comportamentos das formas presentes nas fases
+// A classe Form é responsável por definir as variáveis e comportamentos das formas presentes nas fases
 //===================================================================================================
-public class Forma : MonoBehaviour {
+public class Form : MonoBehaviour {
 
     public Utils utils; // Repositório de funções
 
-    public GameObject destructionParticles;
+    public GameObject destructionParticles; // Partículas de destruição
 
     float dirX = 0.1f; // Direção de movimentação no eixo X
     float dirY = 0.1f; // Direção de movimentação no eixo Y
 
     float vel = 30f; // Velocidade de movimentação
 
-    float size = 1f; // Tamanho da Forma
+    float size = 1f; // Tamanho da Form
 
     /* ----------------------------------------------------------------------------------------------
      * void Start()
@@ -34,7 +34,7 @@ public class Forma : MonoBehaviour {
     /* ----------------------------------------------------------------------------------------------
      * void Update()
      * Update() é chamada no início de cada novo frame.
-     * Ao começar um novo frame é definido para que a Forma se movimente respeitando a direção
+     * Ao começar um novo frame é definido para que a Form se movimente respeitando a direção
      * definida em dirX para o eixo X e a direção definida em dirY para o eixo Y.
     ---------------------------------------------------------------------------------------------- */
     void Update() {
@@ -50,7 +50,7 @@ public class Forma : MonoBehaviour {
      * aplicada a direção inversa ao eixo relacionado a essa colisão. Quando a colisão acontece com
      * um GameObject com a tag "Vertical" a direção X é invertida, quando a colisão acontece com um
      * GameObject com a tag "Horizontal" a direção de Y é invertida, e quando a colisão acontece com
-     * outra Forma ambas as direções são invertidas.
+     * outra Form ambas as direções são invertidas.
     ---------------------------------------------------------------------------------------------- */
     void OnCollisionEnter(Collision outro) {
         if(outro.gameObject.tag == "Vertical") {
@@ -60,7 +60,6 @@ public class Forma : MonoBehaviour {
         } else if(outro.gameObject.tag == "Forma"){
             dirX *= -1;
             dirY *= -1;
-
         }
     }
 
@@ -74,13 +73,11 @@ public class Forma : MonoBehaviour {
     void OnMouseDown() {
         if (Level1.currentAmount > 0) {
             Destroy(this.gameObject);
-            //destructionParticles.GetComponent<ParticleSystem.Level1Module>().startColor = new ParticleSystem.MinMaxGradient(Level1.novaCor);
+            destructionParticles.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
 
             Instantiate(destructionParticles, this.transform.position, this.transform.rotation);
             Level1.currentAmount--;
             Level1.yellowPoints++;
         }
     }
-
-
 }

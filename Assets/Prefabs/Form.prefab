@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 967042834533993803}
   - component: {fileID: 8512417875904783704}
   m_Layer: 0
-  m_Name: Quadrado
+  m_Name: Form
   m_TagString: Forma
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

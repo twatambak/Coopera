@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1625705721856338631}
   - component: {fileID: 1625705721856338630}
   m_Layer: 0
-  m_Name: ParticulaDestruicao
+  m_Name: DestructionParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.4351496, g: 0.20519951, b: 0.58001083, a: 0}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

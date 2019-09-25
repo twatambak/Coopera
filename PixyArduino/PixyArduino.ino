@@ -7,9 +7,9 @@ void setup() {
   pixy.init();
 }
 
-void loop() { 
-  int i; 
-  
+void loop() {
+  int i;
+
   pixy.ccc.getBlocks();
 
   if (pixy.ccc.numBlocks) {
@@ -17,6 +17,5 @@ void loop() {
       Serial.println((String)pixy.ccc.blocks[i].m_index + '|' + (String)pixy.ccc.blocks[i].m_signature + '|' + (String)pixy.ccc.blocks[i].m_x + '|' + (String)pixy.ccc.blocks[i].m_y);
     }
   }
-  Serial.flush(); 
-  delay(100);
+  Serial.flush();
 }

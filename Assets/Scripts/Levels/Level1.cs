@@ -43,19 +43,19 @@ public class Level1 : MonoBehaviour {
     ---------------------------------------------------------------------------------------------- */
     void Update() {
         if (game) {
-            criaFormas();
+            createForms();
         }
     }
 
 
     /* ----------------------------------------------------------------------------------------------
-     * void criaFormas()
-     * A função criaFormas() é utlizada para fazer a criação das formas presentes na cena utilizando
+     * void createForms()
+     * A função createForms() é utlizada para fazer a criação das formas presentes na cena utilizando
      * o prefab de Forma. É verificada a quantia de formas presentes na cena e caso a quantidade for
      * menor do que o máximo estipulado (e carregado para variável através do arquivo CSV) novas
      * formas são criadas. A posição das formas é gerada aleatoriamente, assim como sua cor.
     ---------------------------------------------------------------------------------------------- */
-    void criaFormas() {
+    void createForms() {
         if(currentAmount < maxAmount) {
             for (int i = 0; i < maxAmount; i++) {
                 StartCoroutine(wait(10));
@@ -73,11 +73,11 @@ public class Level1 : MonoBehaviour {
 
 
     /* ----------------------------------------------------------------------------------------------
-     * IEnumerator esperar(int tempo)
+     * IEnumerator wait(int time)
      * Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
     ---------------------------------------------------------------------------------------------- */
-    IEnumerator wait(int tempo) {
-        yield return new WaitForSeconds(tempo);
+    IEnumerator wait(int time) {
+        yield return new WaitForSeconds(time);
     }
 
 
@@ -102,10 +102,10 @@ public class Level1 : MonoBehaviour {
 
 
     /* ----------------------------------------------------------------------------------------------
-     * void limparTela()
+     * void clearScene()
      * A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
     ---------------------------------------------------------------------------------------------- */
-    void limparTela() {
+    void clearScene() {
         for (int i = maxAmount; i < maxAmount; i--) {
             Destroy(this.gameObject);
         }
