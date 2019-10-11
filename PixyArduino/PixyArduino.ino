@@ -17,5 +17,6 @@ void loop() {
       Serial.println((String)pixy.ccc.blocks[i].m_index + '|' + (String)pixy.ccc.blocks[i].m_signature + '|' + (String)pixy.ccc.blocks[i].m_x + '|' + (String)pixy.ccc.blocks[i].m_y);
     }
   }
+  delay(1000);
   Serial.flush();
 }

@@ -54,6 +54,9 @@ public class Utils : MonoBehaviour {
         return System.Int32.Parse(texto);
     }
 
+
+    /* ----------------------------------------------------------------------------------------------
+     --------------------------------------------------------------------------------------------- */
     public void goToScene(string scene){
       SceneManager.LoadScene(scene);
     }

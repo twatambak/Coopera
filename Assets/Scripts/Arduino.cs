@@ -18,8 +18,9 @@ public class Arduino : MonoBehaviour {
     List<string> rawData = new List<string>();
 
     List<string> arduinoData = new List<string>();
+    List<TrackedBlocks> trackedList = new List<TrackedBlocks>();
 
-    string message;
+    string arduinoSerialLine;
 
     /* ----------------------------------------------------------------------------------------------
      * void Start()
@@ -57,10 +58,10 @@ public class Arduino : MonoBehaviour {
     /* ----------------------------------------------------------------------------------------------
      --------------------------------------------------------------------------------------------- */
     public void getTrackedBlocks(){
-      message = serialController.ReadSerialMessage();
-      while(message != null & message != "" & message != "error: no response"){
-        var taskCreateTrackedBlocks = new Thread(createTrackedBlocks());
-        taskCreateTrackedBlocks.Start(message);
+      arduinoSerialLine = serialController.ReadSerialMessage();
+      var taskCreateTrackedBlocks = new Thread(createTrackedBlocks);
+      while(arduinoSerialLine != null & arduinoSerialLine != "" & arduinoSerialLine != "error: no response"){
+        taskCreateTrackedBlocks.Start();
       }
       Thread.Sleep(100);
     }
@@ -68,15 +69,38 @@ public class Arduino : MonoBehaviour {
 
     /* ----------------------------------------------------------------------------------------------
      --------------------------------------------------------------------------------------------- */
-    public void createTrackedBlocks(string text){
-      if(text != null & text != ""){
-        seperatedLine = message.Split('|');
-        /*foreach(var item in seperatedLine){
-          Form obj = new Form();
-          arduinoData.Add(item);
-        }*/
-        TrackedBlocks obj = new TrackedBlocks(utils.toInt(seperatedLine[0]), utils.toInt(seperatedLine[1]), utils.toInt(seperatedLine[2]), utils.toInt(seperatedLine[1]));
+    public void createTrackedBlocks(){
+      int count = 0;
+      if(arduinoSerialLine != null & arduinoSerialLine != ""){
+        seperatedLine = arduinoSerialLine.Split('|');
+
+        if(seperatedLine != null){
+          foreach(var item in seperatedLine){
+            count++;
+          }
+
+          if(count == 4){
+            TrackedBlocks obj = new TrackedBlocks(utils.toInt(seperatedLine[0]), utils.toInt(seperatedLine[1]), utils.toInt(seperatedLine[2]), utils.toInt(seperatedLine[3]));
+
+            /*foreach(var item in trackedList){
+              if(item.getIndex() == obj.getIndex()){
+                item = obj;
+              } else {
+                trackedList.Add(obj);
+              }
+            }*/
+
+            for(int i = 0; i < trackedList.Count; i++){
+              if(trackedList[i].getIndex() == obj.getIndex()){
+                trackedList[i] = obj;
+              } else {
+                trackedList.Add(obj);
+              }
+            }
+          }
+        }
       }
+      seperatedLine = null;
       Thread.Sleep(100);
     }
 }

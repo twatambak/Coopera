@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 //===================================================================================================
@@ -9,6 +10,8 @@ public class Level1 : MonoBehaviour {
 
     public Utils utils; // Repositório de funções
 
+    public Text greenPointsText;
+    public Text yellowPointsText;
     public GameObject form; // O GameObject relacionado a Forma
     public GameObject newForm; // Instância GameObject de Forma
 
@@ -93,11 +96,9 @@ public class Level1 : MonoBehaviour {
                 game = true;
             }
         }
-        GUI.Label(new Rect(10, 5, 100, 100), "PONTOS");
-        GUI.Label(new Rect(100, 5, 100, 100), yellowPoints.ToString());
 
-        GUI.Label(new Rect(580, 5, 100, 100), "PONTOS");
-        GUI.Label(new Rect(540, 5, 100, 100), greenPoints.ToString());
+        yellowPointsText.text = "Pontos: " + yellowPoints;
+        greenPointsText.text = "Pontos: " + greenPoints;
     }
 
 
