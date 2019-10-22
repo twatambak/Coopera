@@ -9,7 +9,7 @@ using System.Threading;
 //===================================================================================================
 public class Arduino : MonoBehaviour {
 
-    public Utils utils;
+    public Utils utils; // Referencia a classe Utils que traz algumas funções gerais necessárias para a aplicação
     public SerialController serialController;
 
     public bool arduinoStatus = false;
@@ -40,8 +40,7 @@ public class Arduino : MonoBehaviour {
      --------------------------------------------------------------------------------------------- */
     void Update() {
       if(arduinoStatus){
-        var taskGetTrackedBlocks = new Thread(getTrackedBlocks);
-        taskGetTrackedBlocks.Start();
+        createTrackedBlocks();
       } else {
 
       }
@@ -60,10 +59,10 @@ public class Arduino : MonoBehaviour {
     public void getTrackedBlocks(){
       arduinoSerialLine = serialController.ReadSerialMessage();
       var taskCreateTrackedBlocks = new Thread(createTrackedBlocks);
+
       while(arduinoSerialLine != null & arduinoSerialLine != "" & arduinoSerialLine != "error: no response"){
         taskCreateTrackedBlocks.Start();
       }
-      Thread.Sleep(100);
     }
 
 
@@ -101,6 +100,5 @@ public class Arduino : MonoBehaviour {
         }
       }
       seperatedLine = null;
-      Thread.Sleep(100);
     }
 }

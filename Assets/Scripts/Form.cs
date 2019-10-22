@@ -73,9 +73,9 @@ public class Form : MonoBehaviour {
     void OnMouseDown() {
         if (Level1.currentAmount > 0) {
             Destroy(this.gameObject);
-            destructionParticles.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
+            /*destructionParticles.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
 
-            Instantiate(destructionParticles, this.transform.position, this.transform.rotation);
+            Instantiate(destructionParticles, this.transform.position, this.transform.rotation);*/
             Level1.currentAmount--;
             Level1.yellowPoints++;
         }
