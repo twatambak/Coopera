@@ -49,6 +49,7 @@ public class Level1 : MonoBehaviour {
     void Update() {
         if (game) {
             CreateForms();
+            CompareTrackedPosition();
         }
     }
 
@@ -115,11 +116,11 @@ public class Level1 : MonoBehaviour {
         }
     }
 
-    public void compareTrackedPosition(){
+    public void CompareTrackedPosition(){
         List<TrackedBlocks> trackedBlocks = utils.GetTrackedBlocks();
         for(int i = 0; i < trackedBlocks.Count; i++){
             for(int j = 0; j < formTargets.Count; i++){
-                if(trackedBlocks[i].getX() == formTargets[j].transform.position.x || trackedBlocks[i].getY() == formTargets[j].transform.position.y){
+                if(trackedBlocks[i].GetX() + trackedBlocks[i].GetWidth() == formTargets[j].transform.position.x + formTargets[j].transform.localScale.x || trackedBlocks[i].GetY() + trackedBlocks[i].GetHeight() == formTargets[j].transform.position.y + formTargets[j].transform.localScale.y) {
                     formTargets[j].GetComponent<Form>().DestroyForm();
                 }
             }

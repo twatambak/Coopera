@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
@@ -82,16 +83,10 @@ public class Arduino : MonoBehaviour {
           if(count == 4){
             TrackedBlocks obj = new TrackedBlocks(utils.ToInt(separatedLine[0]), utils.ToInt(separatedLine[1]), utils.ToInt(separatedLine[2]), utils.ToInt(separatedLine[3]));
 
-            /*foreach(var item in trackedList){
-              if(item.getIndex() == obj.getIndex()){
-                item = obj;
-              } else {
-                trackedList.Add(obj);
-              }
-            }*/
+
 
             for(int i = 0; i < trackedList.Count; i++){
-              if(trackedList[i].getIndex() == obj.getIndex()){
+              if(trackedList[i].GetIndex() == obj.GetIndex()){
                 trackedList[i] = obj;
               } else {
                 trackedList.Add(obj);
@@ -103,3 +98,4 @@ public class Arduino : MonoBehaviour {
       separatedLine = null;
     }
 }
+*/

@@ -10,33 +10,44 @@ public class TrackedBlocks {
     int signature;
     int x;
     int y;
+    int width;
+    int height;
 
-    public TrackedBlocks(int index, int signature, int x, int y){
-      this.index = index;
-      this.signature = signature;
-      this.x = x;
-      this.y = y;
+    public TrackedBlocks(int index, int signature, int x, int y, int width, int height) {
+        this.index = index;
+        this.signature = signature;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
-    public int getIndex(){
-      return index;
+    public int GetIndex() {
+        return index;
     }
 
-    public int getSignature(){
-      return signature;
+    public int GetSignature() {
+        return signature;
     }
 
-    public int getX(){
-      return x;
+    public int GetX() {
+        return x;
     }
 
-    public int getY(){
-      return y;
+    public int GetY() {
+        return y;
     }
 
-    
-    public override string ToString(){
-        string text = "ID: " + index + "| Sig: " + signature + "| X: " + x + "| Y: " + y;
+    public int GetWidth() {
+        return width;
+    }
+
+    public int GetHeight() {
+        return height;
+    }
+
+    public override string ToString() {
+        string text = "ID: " + index + "| Sig: " + signature + "| X: " + x + "| Y: " + y + "| Width: " + width + "| Height: " + height;
         return text;
     }
 }

@@ -35,7 +35,7 @@ public class Utils : MonoBehaviour {
             }
         }
         return data[id];
-     }
+    }
 
 
     //============================================================================================================
@@ -45,13 +45,20 @@ public class Utils : MonoBehaviour {
     // classe atual (Utils), armazena todos os blocos rastreados. Essa lista é atualizada com as informações
     // recebidas por essa função.
     //============================================================================================================
-    public void UpdateArduinoTrackedData(List<TrackedBlocks> data){
+    public void UpdateArduinoTrackedData(List<TrackedBlocks> data) {
         arduinoData = data;
     }
 
+
+    //============================================================================================================
+    // public List<TrackedBlocks> GetTrackedBlocks()
+    //
+    // Retorna os objetos rastreados.
+    //============================================================================================================
     public List<TrackedBlocks> GetTrackedBlocks() {
         return arduinoData;
     }   
+
 
     //============================================================================================================
     // public int loadCSV(int id)
@@ -66,7 +73,6 @@ public class Utils : MonoBehaviour {
     public int ToInt(string texto) {
         return System.Int32.Parse(texto);
     }
-
 
     //============================================================================================================
     // public void goToScene(string scene);

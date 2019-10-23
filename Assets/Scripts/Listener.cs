@@ -56,16 +56,18 @@ public class Listener : MonoBehaviour {
     List<TrackedBlocks> createTrackedList(){
         List<TrackedBlocks> trackedData = new List<TrackedBlocks>();
         if(data != null) { 
-            while(data.Count > 4){
-                TrackedBlocks block = new TrackedBlocks(utils.ToInt(data[0]), utils.ToInt(data[1]), utils.ToInt(data[2]), utils.ToInt(data[3]));
+            while(data.Count > 6){
+                TrackedBlocks block = new TrackedBlocks(utils.ToInt(data[0]), utils.ToInt(data[1]), utils.ToInt(data[2]), utils.ToInt(data[3]), utils.ToInt(data[4]), utils.ToInt(data[5]));
                 Debug.Log(block.ToString());
                 for(int i = 0; i < trackedData.Count; i++){
-                    if(trackedData[i].getIndex() == block.getIndex()){
+                    if(trackedData[i].GetIndex() == block.GetIndex()){
                         trackedData[i] = block;
                     } else {
                         trackedData.Add(block);
                     }
                 }
+                data.RemoveAt(5);
+                data.RemoveAt(4);
                 data.RemoveAt(3);
                 data.RemoveAt(2);
                 data.RemoveAt(1);

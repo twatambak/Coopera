@@ -71,7 +71,7 @@ public class Form : MonoBehaviour {
      * objeto que foi clicado é destruído.
     ---------------------------------------------------------------------------------------------- */
     void OnMouseDown() {
-        if (Level1.currentAmount > 0) {
+        if(Level1.currentAmount > 0) {
             Destroy(this.gameObject);
             //destructionParticles.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
 
@@ -82,8 +82,8 @@ public class Form : MonoBehaviour {
         }
     }
 
-    public void DestroyForm(GameObject form){
-        if (Level1.currentAmount > 0) {
+    public void DestroyForm(GameObject form) {
+        if(Level1.currentAmount > 0) {
             Destroy(form);
             Level1.formTargets.Remove(form);
             Level1.currentAmount--;
@@ -91,7 +91,7 @@ public class Form : MonoBehaviour {
         }
     }
 
-    public void DestroyForm(){
+    public void DestroyForm() {
         if(Level1.currentAmount > 0){
             Destroy(this.gameObject);
             Level1.formTargets.Remove(this.gameObject);
