@@ -12,9 +12,9 @@ public class Arduino : MonoBehaviour {
     public Utils utils; // Referencia a classe Utils que traz algumas funções gerais necessárias para a aplicação
     public SerialController serialController;
 
-    public bool arduinoStatus = false;
+    public bool statusArduino = false;
 
-    string[] seperatedLine = null;
+    string[] separatedLine = null;
     List<string> rawData = new List<string>();
 
     List<string> arduinoData = new List<string>();
@@ -29,7 +29,7 @@ public class Arduino : MonoBehaviour {
     // e a placa é estabelecida.
     //================================================================================================
     void Start() {
-      arduinoStatus = true;
+      statusArduino = true;
     }
 
 
@@ -37,7 +37,7 @@ public class Arduino : MonoBehaviour {
     // Update é chamada no início de cada novo frame.
     //================================================================================================
     void Update() {
-      if(arduinoStatus){
+      if(statusArduino){
         createTrackedBlocks();
       } else {
 
@@ -49,7 +49,7 @@ public class Arduino : MonoBehaviour {
     // Define o status do Arduino.
     //================================================================================================
     public void setArduino(){
-      arduinoStatus = !arduinoStatus;
+      statusArduino = !statusArduino;
     }
 
 
@@ -72,15 +72,15 @@ public class Arduino : MonoBehaviour {
     public void createTrackedBlocks(){
       int count = 0;
       if(arduinoSerialLine != null & arduinoSerialLine != ""){
-        seperatedLine = arduinoSerialLine.Split('|');
+        separatedLine = arduinoSerialLine.Split('|');
 
-        if(seperatedLine != null){
-          foreach(var item in seperatedLine){
+        if(separatedLine != null){
+          foreach(var item in separatedLine){
             count++;
           }
 
           if(count == 4){
-            TrackedBlocks obj = new TrackedBlocks(utils.toInt(seperatedLine[0]), utils.toInt(seperatedLine[1]), utils.toInt(seperatedLine[2]), utils.toInt(seperatedLine[3]));
+            TrackedBlocks obj = new TrackedBlocks(utils.toInt(separatedLine[0]), utils.toInt(separatedLine[1]), utils.toInt(separatedLine[2]), utils.toInt(separatedLine[3]));
 
             /*foreach(var item in trackedList){
               if(item.getIndex() == obj.getIndex()){
@@ -100,6 +100,6 @@ public class Arduino : MonoBehaviour {
           }
         }
       }
-      seperatedLine = null;
+      separatedLine = null;
     }
 }

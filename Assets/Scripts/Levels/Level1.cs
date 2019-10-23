@@ -35,7 +35,7 @@ public class Level1 : MonoBehaviour {
     ---------------------------------------------------------------------------------------------- */
     void Start() {
         wait(5);
-        maxAmount = utils.toInt(utils.leArquivoConfig(2));
+        maxAmount = utils.toInt(utils.loadCSV(2));
     }
 
 

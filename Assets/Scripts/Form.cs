@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//===================================================================================================
-// A classe Form é responsável por definir as variáveis e comportamentos das formas presentes nas fases
-//===================================================================================================
+/*****************************************************************************************************************
+ * A classe Form é responsável por definir as variáveis e comportamentos das formas presentes nas fases.
+*****************************************************************************************************************/
 public class Form : MonoBehaviour {
 
     public Utils utils; // Repositório de funções
@@ -25,8 +25,8 @@ public class Form : MonoBehaviour {
      * definição para as variáveis correspondentes para a velocidade e o tamanho da forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        vel = utils.toInt(utils.leArquivoConfig(4));
-        size = utils.toInt(utils.leArquivoConfig(6));
+        vel = utils.toInt(utils.loadCSV(4));
+        size = utils.toInt(utils.loadCSV(6));
         transform.localScale = new Vector3(size, size, size);
     }
 
@@ -73,9 +73,9 @@ public class Form : MonoBehaviour {
     void OnMouseDown() {
         if (Level1.currentAmount > 0) {
             Destroy(this.gameObject);
-            /*destructionParticles.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
+            //destructionParticles.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
 
-            Instantiate(destructionParticles, this.transform.position, this.transform.rotation);*/
+            //Instantiate(destructionParticles, this.transform.position, this.transform.rotation);
             Level1.currentAmount--;
             Level1.yellowPoints++;
         }
