@@ -5,7 +5,7 @@ using UnityEngine;
 //===================================================================================================
 // A classe TrackedBlocks está ligada ao gerenciamento dos objetos reconhecidos pela PixyCam.
 //===================================================================================================
-public class TrackedBlocks : MonoBehaviour {
+public class TrackedBlocks {
     int index;
     int signature;
     int x;
@@ -32,5 +32,11 @@ public class TrackedBlocks : MonoBehaviour {
 
     public int getY(){
       return y;
+    }
+
+    
+    public override string ToString(){
+        string text = "ID: " + index + "| Sig: " + signature + "| X: " + x + "| Y: " + y;
+        return text;
     }
 }

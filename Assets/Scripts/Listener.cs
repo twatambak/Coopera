@@ -6,20 +6,25 @@ using UnityEngine;
     A classe Arduino está ligada a configuração da comunicação da Unity com a placa Arduino.
 *****************************************************************************************************************/
 public class Listener : MonoBehaviour {
-    Utils utils;
-
+    public Utils utils;
+    string line = null;
+    string[] separatedLine = null;
+    List<string> data = new List<string>();
     //============================================================================================================
     // Cria os objetos que estão sendo rastreados
     //============================================================================================================
-    List<TrackedBlocks> createTrackedBlocks(List<string> data){
+    List<TrackedBlocks> createTrackedList(){
         List<TrackedBlocks> trackedData = new List<TrackedBlocks>();
-        while(data.Count >= 4){
-            TrackedBlocks block = new TrackedBlocks(utils.toInt(data[0]), utils.toInt(data[1]), utils.toInt(data[2]), utils.toInt(data[3]));
-            trackedData.Add(block);
-            data.RemoveAt(0);
-            data.RemoveAt(1);
-            data.RemoveAt(2);
-            data.RemoveAt(3);
+        if(data != null) { 
+            while(data.Count > 4){
+                TrackedBlocks block = new TrackedBlocks(utils.toInt(data[0]), utils.toInt(data[1]), utils.toInt(data[2]), utils.toInt(data[3]));
+                Debug.Log(block.ToString());
+                trackedData.Add(block);
+                data.RemoveAt(3);
+                data.RemoveAt(2);
+                data.RemoveAt(1);
+                data.RemoveAt(0);
+            }
         }
         return trackedData;
     }
@@ -42,16 +47,15 @@ public class Listener : MonoBehaviour {
             throw;
         }*/
 
-        string line = null;
-        string[] separatedLine = null;
-        List<string> data = new List<string>();
-        while(msg != null) {
+        if(msg != null) {
             separatedLine = msg.Split('|');
             foreach(var item in separatedLine){
                 data.Add(item);
             }
         }
-        Debug.Log("Mensagem: " + msg);
+
+        createTrackedList();
+        //Debug.Log("Mensagem: " + msg);
     }
 
 

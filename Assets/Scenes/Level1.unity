@@ -565,6 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fc6ce779dc00944b403c8e1b883bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  utils: {fileID: 785675051}
 --- !u!114 &785675051 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2233414974405836191, guid: 7f2529e0797a18c4a861b460f6997d62,
