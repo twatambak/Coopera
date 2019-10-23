@@ -29,7 +29,7 @@ public class Level2 : MonoBehaviour {
       ---------------------------------------------------------------------------------------------- */
       void Start() {
           wait(5);
-          maxAmount = utils.toInt(utils.loadCSV(2));
+          maxAmount = utils.ToInt(utils.LoadCSV(2));
       }
 
 

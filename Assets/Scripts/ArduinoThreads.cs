@@ -80,7 +80,7 @@ public class Arduino : MonoBehaviour {
           }
 
           if(count == 4){
-            TrackedBlocks obj = new TrackedBlocks(utils.toInt(separatedLine[0]), utils.toInt(separatedLine[1]), utils.toInt(separatedLine[2]), utils.toInt(separatedLine[3]));
+            TrackedBlocks obj = new TrackedBlocks(utils.ToInt(separatedLine[0]), utils.ToInt(separatedLine[1]), utils.ToInt(separatedLine[2]), utils.ToInt(separatedLine[3]));
 
             /*foreach(var item in trackedList){
               if(item.getIndex() == obj.getIndex()){

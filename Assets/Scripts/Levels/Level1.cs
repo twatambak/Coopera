@@ -18,6 +18,8 @@ public class Level1 : MonoBehaviour {
     public static int currentAmount; // A quantia atual de formas na tela
     int maxAmount; // A quantia máxima de formas na tela
 
+    public static List<GameObject> formTargets = new List<GameObject>();
+
     Material material; // O material relacionado a Forma
 
     public static int yellowPoints; // Pontos do time Amarelo
@@ -35,7 +37,7 @@ public class Level1 : MonoBehaviour {
     ---------------------------------------------------------------------------------------------- */
     void Start() {
         wait(5);
-        maxAmount = utils.toInt(utils.loadCSV(2));
+        maxAmount = utils.ToInt(utils.LoadCSV(2));
     }
 
 
@@ -46,19 +48,19 @@ public class Level1 : MonoBehaviour {
     ---------------------------------------------------------------------------------------------- */
     void Update() {
         if (game) {
-            createForms();
+            CreateForms();
         }
     }
 
 
     /* ----------------------------------------------------------------------------------------------
-     * void createForms()
+     * void CreateForms()
      * A função createForms() é utlizada para fazer a criação das formas presentes na cena utilizando
      * o prefab de Forma. É verificada a quantia de formas presentes na cena e caso a quantidade for
      * menor do que o máximo estipulado (e carregado para variável através do arquivo CSV) novas
      * formas são criadas. A posição das formas é gerada aleatoriamente, assim como sua cor.
     ---------------------------------------------------------------------------------------------- */
-    void createForms() {
+    void CreateForms() {
         if(currentAmount < maxAmount) {
             for (int i = 0; i < maxAmount; i++) {
                 StartCoroutine(wait(10));
@@ -68,6 +70,7 @@ public class Level1 : MonoBehaviour {
                     newForm.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
                     material = newForm.GetComponent<Renderer>().material;
                     material.color = newColor;
+                    formTargets.Add(newForm);
                     currentAmount++;
                 }
             }
@@ -111,4 +114,16 @@ public class Level1 : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+
+    public void compareTrackedPosition(){
+        List<TrackedBlocks> trackedBlocks = utils.GetTrackedBlocks();
+        for(int i = 0; i < trackedBlocks.Count; i++){
+            for(int j = 0; j < formTargets.Count; i++){
+                if(trackedBlocks[i].getX() == formTargets[j].transform.position.x || trackedBlocks[i].getY() == formTargets[j].transform.position.y){
+                    formTargets[j].GetComponent<Form>().DestroyForm();
+                }
+            }
+        }
+    }
+
 }

@@ -25,8 +25,8 @@ public class Form : MonoBehaviour {
      * definição para as variáveis correspondentes para a velocidade e o tamanho da forma.
     ---------------------------------------------------------------------------------------------- */
     void Start() {
-        vel = utils.toInt(utils.loadCSV(4));
-        size = utils.toInt(utils.loadCSV(6));
+        vel = utils.ToInt(utils.LoadCSV(4));
+        size = utils.ToInt(utils.LoadCSV(6));
         transform.localScale = new Vector3(size, size, size);
     }
 
@@ -76,6 +76,25 @@ public class Form : MonoBehaviour {
             //destructionParticles.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
 
             //Instantiate(destructionParticles, this.transform.position, this.transform.rotation);
+            Level1.formTargets.Remove(this.gameObject);
+            Level1.currentAmount--;
+            Level1.yellowPoints++;
+        }
+    }
+
+    public void DestroyForm(GameObject form){
+        if (Level1.currentAmount > 0) {
+            Destroy(form);
+            Level1.formTargets.Remove(form);
+            Level1.currentAmount--;
+            Level1.yellowPoints++;
+        }
+    }
+
+    public void DestroyForm(){
+        if(Level1.currentAmount > 0){
+            Destroy(this.gameObject);
+            Level1.formTargets.Remove(this.gameObject);
             Level1.currentAmount--;
             Level1.yellowPoints++;
         }
