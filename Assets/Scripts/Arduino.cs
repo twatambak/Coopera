@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO.Ports;
 using System.Threading;
 
-//===================================================================================================
+//==================================================================================================
 // A classe Arduino está ligada a configuração da comunicação da Unity com a placa Arduino.
 //===================================================================================================
 public class Arduino : MonoBehaviour {
@@ -22,22 +22,20 @@ public class Arduino : MonoBehaviour {
 
     string arduinoSerialLine;
 
-    /* ----------------------------------------------------------------------------------------------
-     * void Start()
-     * Start() é chamada antes do update do primeiro frame.
-     * Ao iniciar o frame é realizada uma tentativa de conexão com o Arduino. Caso a conexão falhe
-     * uma mensagem de erro é exibida. Caso a conexão seja bem-sucedida a comunicação entre a Unity
-     * e a placa é estabelecida.
-     --------------------------------------------------------------------------------------------- */
+    //================================================================================================
+    // Start() é chamada antes do update do primeiro frame.
+    // Ao iniciar o frame é realizada uma tentativa de conexão com o Arduino. Caso a conexão falhe
+    // uma mensagem de erro é exibida. Caso a conexão seja bem-sucedida a comunicação entre a Unity
+    // e a placa é estabelecida.
+    //================================================================================================
     void Start() {
       arduinoStatus = true;
     }
 
 
-    /* ----------------------------------------------------------------------------------------------
-     * void Update()
-     * Update() é é chamada no início de cada novo frame.
-     --------------------------------------------------------------------------------------------- */
+    //================================================================================================
+    // Update é chamada no início de cada novo frame.
+    //================================================================================================
     void Update() {
       if(arduinoStatus){
         createTrackedBlocks();
@@ -47,15 +45,17 @@ public class Arduino : MonoBehaviour {
     }
 
 
-    /* ----------------------------------------------------------------------------------------------
-     --------------------------------------------------------------------------------------------- */
+    //================================================================================================
+    // Define o status do Arduino.
+    //================================================================================================
     public void setArduino(){
       arduinoStatus = !arduinoStatus;
     }
 
 
-    /* ----------------------------------------------------------------------------------------------
-     --------------------------------------------------------------------------------------------- */
+    //================================================================================================
+    // Pega os objetos rastreados
+    //================================================================================================
     public void getTrackedBlocks(){
       arduinoSerialLine = serialController.ReadSerialMessage();
       var taskCreateTrackedBlocks = new Thread(createTrackedBlocks);
@@ -66,8 +66,9 @@ public class Arduino : MonoBehaviour {
     }
 
 
-    /* ----------------------------------------------------------------------------------------------
-     --------------------------------------------------------------------------------------------- */
+    //================================================================================================
+    // Cria os objetos trackeados.
+    //================================================================================================
     public void createTrackedBlocks(){
       int count = 0;
       if(arduinoSerialLine != null & arduinoSerialLine != ""){
