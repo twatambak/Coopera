@@ -91,7 +91,7 @@ public abstract class AbstractSerialThread
 
     // ------------------------------------------------------------------------
     // Polls the internal message queue returning the next available message
-    // in a generic form. This can be invoked by subclasses to change the
+    // in a generic forma. This can be invoked by subclasses to change the
     // type of the returned object.
     // It returns null if no message has arrived since the latest invocation.
     // ------------------------------------------------------------------------

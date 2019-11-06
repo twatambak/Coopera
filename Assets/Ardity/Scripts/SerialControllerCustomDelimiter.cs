@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Threading;
 
 /**
- * While 'SerialController' only allows reading/sending text data that is
+ * While 'SerialController' only allows reading/sending text dados that is
  * terminated by new-lines, this class allows reading/sending messages 
  * using a binary protocol where each message is separated from the next by 
  * a 1-char delimiter.
@@ -20,7 +20,7 @@ public class SerialControllerCustomDelimiter : MonoBehaviour
     [Tooltip("Port name with which the SerialPort object will be created.")]
     public string portName = "COM3";
 
-    [Tooltip("Baud rate that the serial device is using to transmit data.")]
+    [Tooltip("Baud rate that the serial device is using to transmit dados.")]
     public int baudRate = 9600;
 
     [Tooltip("Reference to an scene object that will receive the events of connection, " +
@@ -31,11 +31,11 @@ public class SerialControllerCustomDelimiter : MonoBehaviour
              "connect, how many milliseconds we should Wait.")]
     public int reconnectionDelay = 1000;
 
-    [Tooltip("Maximum number of unread data messages in the queue. " +
+    [Tooltip("Maximum number of unread dados messages in the queue. " +
              "New messages will be discarded.")]
     public int maxUnreadMessages = 1;
 
-    [Tooltip("Maximum number of unread data messages in the queue. " +
+    [Tooltip("Maximum number of unread dados messages in the queue. " +
              "New messages will be discarded.")]
     public byte separator = 90;
 
@@ -106,7 +106,7 @@ public class SerialControllerCustomDelimiter : MonoBehaviour
         if (message == null)
             return;
 
-        // Check if the message is plain data or a connect/disconnect event.
+        // Check if the message is plain dados or a connect/disconnect event.
         messageListener.SendMessage("OnMessageArrived", message);
     }
 

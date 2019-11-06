@@ -21,14 +21,14 @@ using System.Threading;
  * The serial device must send its messages separated by a newline character.
  * Neither the SerialController nor the SerialThread perform any validation
  * on the integrity of the message. It's up to the one that makes sense of the
- * data.
+ * dados.
  */
 public class SerialController : MonoBehaviour
 {
     [Tooltip("Port name with which the SerialPort object will be created.")]
     public string portName = "COM3";
 
-    [Tooltip("Baud rate that the serial device is using to transmit data.")]
+    [Tooltip("Baud rate that the serial device is using to transmit dados.")]
     public int baudRate = 9600;
 
     [Tooltip("Reference to an scene object that will receive the events of connection, " +
@@ -39,7 +39,7 @@ public class SerialController : MonoBehaviour
              "connect, how many milliseconds we should Wait.")]
     public int reconnectionDelay = 1000;
 
-    [Tooltip("Maximum number of unread data messages in the queue. " +
+    [Tooltip("Maximum number of unread dados messages in the queue. " +
              "New messages will be discarded.")]
     public int maxUnreadMessages = 100000;
 
@@ -117,7 +117,7 @@ public class SerialController : MonoBehaviour
         if (message == null)
             return;
 
-        // Check if the message is plain data or a connect/disconnect event.
+        // Check if the message is plain dados or a connect/disconnect event.
         if (ReferenceEquals(message, SERIAL_DEVICE_CONNECTED))
             messageListener.SendMessage("OnConnectionEvent", true);
         else if (ReferenceEquals(message, SERIAL_DEVICE_DISCONNECTED))

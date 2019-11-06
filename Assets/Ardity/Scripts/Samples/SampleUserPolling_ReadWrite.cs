@@ -28,7 +28,7 @@ public class SampleUserPolling_ReadWrite : MonoBehaviour
     void Update()
     {
         //---------------------------------------------------------------------
-        // Send data
+        // Send dados
         //---------------------------------------------------------------------
 
         // If you press one of these keys send it to the serial device. A
@@ -47,7 +47,7 @@ public class SampleUserPolling_ReadWrite : MonoBehaviour
 
 
         //---------------------------------------------------------------------
-        // Receive data
+        // Receive dados
         //---------------------------------------------------------------------
 
         string message = serialController.ReadSerialMessage();
@@ -55,7 +55,7 @@ public class SampleUserPolling_ReadWrite : MonoBehaviour
         if (message == null)
             return;
 
-        // Check if the message is plain data or a connect/disconnect event.
+        // Check if the message is plain dados or a connect/disconnect event.
         if (ReferenceEquals(message, SerialController.SERIAL_DEVICE_CONNECTED))
             Debug.Log("Connection established");
         else if (ReferenceEquals(message, SerialController.SERIAL_DEVICE_DISCONNECTED))

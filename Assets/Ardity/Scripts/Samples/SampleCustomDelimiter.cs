@@ -29,7 +29,7 @@ public class SampleCustomDelimiter : MonoBehaviour
     void Update()
     {
         //---------------------------------------------------------------------
-        // Send data
+        // Send dados
         //---------------------------------------------------------------------
 
         // If you press one of these keys send it to the serial device. A
@@ -44,7 +44,7 @@ public class SampleCustomDelimiter : MonoBehaviour
 
 
         //---------------------------------------------------------------------
-        // Receive data
+        // Receive dados
         //---------------------------------------------------------------------
 
         byte[] message = serialController.ReadSerialMessage();

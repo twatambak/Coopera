@@ -15,11 +15,11 @@ public class Arduino : MonoBehaviour {
 
     public bool statusArduino = false;
 
-    string[] separatedLine = null;
+    string[] vetorStringSerial = null;
     List<string> rawData = new List<string>();
 
-    List<string> arduinoData = new List<string>();
-    List<TrackedBlocks> trackedList = new List<TrackedBlocks>();
+    List<string> listaRastreados = new List<string>();
+    List<ObjetosRastreados> trackedList = new List<ObjetosRastreados>();
 
     string arduinoSerialLine;
 
@@ -73,20 +73,20 @@ public class Arduino : MonoBehaviour {
     public void createTrackedBlocks(){
       int count = 0;
       if(arduinoSerialLine != null & arduinoSerialLine != ""){
-        separatedLine = arduinoSerialLine.Split('|');
+        vetorStringSerial = arduinoSerialLine.Split('|');
 
-        if(separatedLine != null){
-          foreach(var item in separatedLine){
+        if(vetorStringSerial != null){
+          foreach(var item in vetorStringSerial){
             count++;
           }
 
           if(count == 4){
-            TrackedBlocks obj = new TrackedBlocks(utils.ToInt(separatedLine[0]), utils.ToInt(separatedLine[1]), utils.ToInt(separatedLine[2]), utils.ToInt(separatedLine[3]));
+            ObjetosRastreados obj = new ObjetosRastreados(utils.ToInt(vetorStringSerial[0]), utils.ToInt(vetorStringSerial[1]), utils.ToInt(vetorStringSerial[2]), utils.ToInt(vetorStringSerial[3]));
 
 
 
             for(int i = 0; i < trackedList.Count; i++){
-              if(trackedList[i].GetIndex() == obj.GetIndex()){
+              if(trackedList[i].GetID() == obj.GetID()){
                 trackedList[i] = obj;
               } else {
                 trackedList.Add(obj);
@@ -95,7 +95,7 @@ public class Arduino : MonoBehaviour {
           }
         }
       }
-      separatedLine = null;
+      vetorStringSerial = null;
     }
 }
 */

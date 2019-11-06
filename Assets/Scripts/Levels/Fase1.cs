@@ -8,17 +8,17 @@ using UnityEngine;
 
     -={ ATRIBUTOS }=-
         -> Utils utils = extensão da classe de utilidades, contém funções auxiliares.
-        -> Text greenPointsText = o texto de exibição dos pontos do time verde.
-        -> Text yellowPointsText = o texto de exibição dos pontos do time amarelo.
-        -> GameObject form = o GameObject de base para forma.
-        -> GameObject newForm = a nova forma que será gerada.
-        -> int currentAmount = a quantidade atual de formas.
-        -> int maxAmount = a quantidade máxima de formas.
-        -> List<GameObject> formTargets = a lista de formas já criadas.
+        -> Text textoPontosVerdes = o texto de exibição dos pontos do time verde.
+        -> Text pontosTimeAmarelo = o texto de exibição dos pontos do time amarelo.
+        -> GameObject forma = o GameObject de base para forma.
+        -> GameObject novaForma = a nova forma que será gerada.
+        -> int quantiaAtual = a quantidade atual de formas.
+        -> int quantiaMaxima = a quantidade máxima de formas.
+        -> List<GameObject> listaFormas = a lista de formas já criadas.
         -> Material material = o material para cor das formas.
-        -> int yellowPoints = os pontos do time amarelo.
-        -> int greenPoints = os pontos do time verde.
-        -> Color newColor = a nova cor das formas.
+        -> int pontosTimeAmarelo = os pontos do time amarelo.
+        -> int pontosTimeVerde = os pontos do time verde.
+        -> Color novaCor = a nova cor das formas.
         -> bool game = booleano representando o funcionamento do jogo.
         -> GameObject yellowHUD = o GameObject representando a barra de HUD do time amarelo.
         -> GameObject greenHUD = o GameObject representando a barra de HUD do time verde.
@@ -30,19 +30,18 @@ using UnityEngine;
         -> public bool IsColliding(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
         -> public void CompareTrackedPosition() 
 *****************************************************************************************************************/
-public class Level1 : MonoBehaviour {
+public class Fase1 : MonoBehaviour {
     public Utils utils;
-    public Text greenPointsText;
-    public Text yellowPointsText;
-    public GameObject form;
-    public GameObject newForm;
-    public static int currentAmount; 
-    int maxAmount;
-    public static List<GameObject> formTargets = new List<GameObject>();
+    public Text textoPontosVerdes;
+    public Text textoPontosAmarelos;
+    public GameObject forma;
+    public GameObject novaForma;
+    //public static int quantiaAtual; 
+    int quantiaMaxima;
+    //public static List<GameObject> listaFormas = new List<GameObject>();
     Material material;
-    public static int yellowPoints;
-    public static int greenPoints;
-    public static Color newColor; 
+
+    public static Color novaCor; 
     public static bool game = false;
     public GameObject yellowHUD;
     public GameObject greenHUD;
@@ -56,7 +55,7 @@ public class Level1 : MonoBehaviour {
     //============================================================================================================
     void Start() {
         Wait(5);
-        maxAmount = utils.ToInt(utils.LoadCSV(2));
+        quantiaMaxima = utils.ToInt(utils.LoadCSV(2));
     }
 
 
@@ -66,7 +65,7 @@ public class Level1 : MonoBehaviour {
     // Responsável por atualizar o jogo a cada novo frame.
     //============================================================================================================
     void Update() {
-        CreateForms();
+        Forma a = new Forma();
         CompareTrackedPosition();
     }
 
@@ -78,22 +77,7 @@ public class Level1 : MonoBehaviour {
     // menor do que o máximo estipulado (e carregado para variável através do arquivo CSV) novas
     // formas são criadas. A posição das formas é gerada aleatoriamente, assim como sua cor.
     //============================================================================================================
-    void CreateForms() {
-        if(currentAmount < maxAmount) {
-            for (int i = 0; i < maxAmount; i++) {
-                StartCoroutine(Wait(10));
-                if (currentAmount < maxAmount) {
-                    newColor = new Vector4(Random.value, Random.value, Random.value);
-                    newForm = Instantiate(form) as GameObject;
-                    newForm.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
-                    material = newForm.GetComponent<Renderer>().material;
-                    material.color = newColor;
-                    formTargets.Add(newForm);
-                    currentAmount++;
-                }
-            }
-        }
-    }
+
 
 
     //============================================================================================================
@@ -119,8 +103,8 @@ public class Level1 : MonoBehaviour {
             }
         }
 
-        yellowPointsText.text = "Pontos: " + yellowPoints;
-        greenPointsText.text = "Pontos: " + greenPoints;
+        textoPontosAmarelos.text = "Pontos: " + Utils.pontosTimeAmarelo;
+        textoPontosVerdes.text = "Pontos: " + Utils.pontosTimeVerde;
     }
 
 
@@ -130,7 +114,7 @@ public class Level1 : MonoBehaviour {
     // A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
     //============================================================================================================
     void clearScene() {
-        for (int i = maxAmount; i < maxAmount; i--) {
+        for (int i = quantiaMaxima; i < quantiaMaxima; i--) {
             Destroy(this.gameObject);
         }
     }
@@ -158,21 +142,22 @@ public class Level1 : MonoBehaviour {
     // Precisa ser alterado).
     //===================================================================================================
     public void CompareTrackedPosition() {
-        List<TrackedBlocks> trackedBlocks = utils.GetTrackedBlocks(); // A lista de objetos rastreados 
-        for(int i = 0; i < trackedBlocks.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
-            for(int j = 0; j < formTargets.Count; i++) { // 
-                if(IsColliding(trackedBlocks[i].GetX(), trackedBlocks[i].GetY(), trackedBlocks[i].GetWidth(), trackedBlocks[i].GetHeight(), formTargets[j].dirX, )) {
-                    if(trackedBlocks[i].GetSignature() == 2) {
-                        formTargets[j].GetComponent<Form>().DestroyForm();
+        List<ObjetosRastreados> listaRastreados = Utils.listaRastreados; // A lista de objetos rastreados
+        List<GameObject> listaFormas = Utils.listaFormas; // A lista de objetos rastreados
+
+        for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
+            for(int j = 0; j < Utils.listaFormas.Count; i++) { // 
+                if(IsColliding(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1, 2,3, 4)) {
+                    if(listaRastreados[i].GetAssinatura() == 2) {
+                        listaFormas[j].GetComponent<Forma>().DestroiForma();
                         yellowHUD.transform.localScale = new Vector3(9, 1.24f, 1);
                     }
 
-                    if(trackedBlocks[i].GetSignature() == 3) {
-                        formTargets[j].GetComponent<Form>().DestroyForm();
+                    if(listaRastreados[i].GetAssinatura() == 3) {
+                        Utils.listaFormas[j].GetComponent<Forma>().DestroiForma();
                     }
                 }
             }
         }
     }
-
 }

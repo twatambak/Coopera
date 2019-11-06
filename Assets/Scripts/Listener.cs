@@ -7,21 +7,21 @@ using UnityEngine;
 
     -={ ATRIBUTOS }=-
         -> Utils utils = extensão da classe de utilidades, contém funções auxiliares.
-        -> string[] separatedLine = vetor que separa os valores recebidos pelo serial. 
-        -> List<string> data = lista de string que armazena todos os valores referentes aos objetos rastreados.
+        -> string[] vetorStringSerial = vetor que separa os valores recebidos pelo serial. 
+        -> List<string> dados = lista de string que armazena todos os valores referentes aos objetos rastreados.
 
     -={ MÉTODOS }=-
-        -> List<TrackedBlocks> createTrackedList() = cria e carrega os blocos que foram rastreados.
+        -> List<ObjetosRastreados> createTrackedList() = cria e carrega os blocos que foram rastreados.
         -> void OnMessageArrived(string msg) = trata as mensagens recebidas pela portal serial.
         -> void OnConnectionEvent(bool success) = analisa se a conexão com o arduino foi executada.
 *****************************************************************************************************************/
 public class Listener : MonoBehaviour {
     public Utils utils;
-    string[] separatedLine = null;
-    List<string> data = new List<string>();
+    string[] vetorStringSerial = null;
+    List<string> dados = new List<string>();
 
     //============================================================================================================
-    // List<TrackedBlocks> createTrackedList()
+    // List<ObjetosRastreados> createTrackedList()
     //
     // Cria os objetos que estão sendo rastreados utilizando das informações contidas nos quatro primeiros
     // elementos da lista que recebeu os dados dos objetos rastreados pelo arduino. As informações dos dados do
@@ -30,21 +30,21 @@ public class Listener : MonoBehaviour {
     // posição X e posição Y. Após adicioná-los removemos os quatro primeiros elementos da lista. Assim, o próximo
     // grupo de elemntos a serem analisados representam outro bloco rastreado. 
     //============================================================================================================
-    List<TrackedBlocks> createTrackedList(){
-        List<TrackedBlocks> trackedData = new List<TrackedBlocks>();
-        if(data != null) { 
-            while(data.Count > 6){
-                TrackedBlocks block = new TrackedBlocks(utils.ToInt(data[0]), utils.ToInt(data[1]), utils.ToInt(data[2]), utils.ToInt(data[3]), utils.ToInt(data[4]), utils.ToInt(data[5]));
+    List<ObjetosRastreados> CriaObjetosRastreados(){
+        List<ObjetosRastreados> trackedData = new List<ObjetosRastreados>();
+        if(dados != null) { 
+            while(dados.Count > 6){
+                ObjetosRastreados block = new ObjetosRastreados(utils.ToInt(dados[0]), utils.ToInt(dados[1]), utils.ToInt(dados[2]), utils.ToInt(dados[3]), utils.ToInt(dados[4]), utils.ToInt(dados[5]));
                 Debug.Log(block.ToString());
                 for(int i = 0; i < trackedData.Count; i++){
-                    if(trackedData[i].GetIndex() == block.GetIndex()){
+                    if(trackedData[i].GetID() == block.GetID()){
                         trackedData[i] = block;
                     } else {
                         trackedData.Add(block);
                     }
                 }
                 for(int i = 5; i < 0; i--) { 
-                    data.RemoveAt(i);
+                    dados.RemoveAt(i);
                 }
             }
         }
@@ -63,13 +63,12 @@ public class Listener : MonoBehaviour {
     //============================================================================================================
     void OnMessageArrived(string msg) {
         if(msg != null) {
-            separatedLine = msg.Split('|');
-            foreach(var item in separatedLine){
-                data.Add(item);
+            vetorStringSerial = msg.Split('|');
+            foreach(var item in vetorStringSerial){
+                dados.Add(item);
             }
         }
-        utils.UpdateArduinoTrackedData(createTrackedList());
-        //Debug.Log("Mensagem: " + msg);
+        utils.UpdateArduinoTrackedData(CriaObjetosRastreados());
     }
 
 

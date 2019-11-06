@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 /*****************************************************************************************************************
     A classe Utils contém alguns métodos de uso geral utilizados por classes distintas.
 *****************************************************************************************************************/
-public class Utils : MonoBehaviour {
+public class Utils {
+    public static List<ObjetosRastreados> listaRastreados = new List<ObjetosRastreados>();
+    public static List<GameObject> listaFormas = new List<GameObject>();
+    public static int quantiaAtual;
+    public GameObject formaBase;
+    public static int pontosTimeAmarelo;
+    public static int pontosTimeVerde;
 
-    List<TrackedBlocks> arduinoData = new List<TrackedBlocks>();
-
-  
     //============================================================================================================
     // public int LoadCSV(int id)
     //
@@ -37,28 +40,45 @@ public class Utils : MonoBehaviour {
         return data[id];
     }
 
+    //============================================================================================================
+    // public List<GameObject> GetListaFormas()
+    //============================================================================================================
+    public List<GameObject> GetListaFormas() {
+        return listaFormas;
+    }
 
     //============================================================================================================
-    // public void updateArduinoTrackedData(List<TrackedBlocks> data)
+    // public List<ObjetosRastreados> GetListaRastreados()
+    //============================================================================================================
+    public List<ObjetosRastreados> GetListaRastreados() {
+        return listaRastreados;
+    }
+
+    //============================================================================================================
+    // public int GetQuantiaAtualFormas()
+    //============================================================================================================
+    public int GetQuantiaAtualFormas() {
+        return quantiaAtual;
+    }
+
+    //============================================================================================================
+    // public int GetMaximoFormasCSV()
+    //============================================================================================================
+    public int GetMaximoFormasCSV() {
+        return ToInt(LoadCSV(2));
+    }
+
+
+    //============================================================================================================
+    // public void updateArduinoTrackedData(List<ObjetosRastreados> dados)
     //
-    // A função recebe uma lista de TrackedBlocks, refente aos objetos rastreados. A lista (arduinoData) dentro da
+    // A função recebe uma lista de ObjetosRastreados, refente aos objetos rastreados. A lista (listaRastreados) dentro da
     // classe atual (Utils), armazena todos os blocos rastreados. Essa lista é atualizada com as informações
     // recebidas por essa função.
     //============================================================================================================
-    public void UpdateArduinoTrackedData(List<TrackedBlocks> data) {
-        arduinoData = data;
+    public void UpdateArduinoTrackedData(List<ObjetosRastreados> data) {
+        listaRastreados = data;
     }
-
-
-    //============================================================================================================
-    // public List<TrackedBlocks> GetTrackedBlocks()
-    //
-    // Retorna os objetos rastreados.
-    //============================================================================================================
-    public List<TrackedBlocks> GetTrackedBlocks() {
-        return arduinoData;
-    }
-
 
     //============================================================================================================
     // public void GoToScene(string scene)
