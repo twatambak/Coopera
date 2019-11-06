@@ -22,6 +22,13 @@ using UnityEngine;
         -> bool game = booleano representando o funcionamento do jogo.
         -> GameObject yellowHUD = o GameObject representando a barra de HUD do time amarelo.
         -> GameObject greenHUD = o GameObject representando a barra de HUD do time verde.
+
+    -={ MÉTODOS }=-
+        -> void CreateForms()
+        -> IEnumerator Wait(int time)
+        -> void clearScene()
+        -> public bool IsColliding(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
+        -> public void CompareTrackedPosition() 
 *****************************************************************************************************************/
 public class Level1 : MonoBehaviour {
     public Utils utils;
@@ -48,7 +55,7 @@ public class Level1 : MonoBehaviour {
     // uma função que faz a criação de clones do prefab Forma.
     //============================================================================================================
     void Start() {
-        wait(5);
+        Wait(5);
         maxAmount = utils.ToInt(utils.LoadCSV(2));
     }
 
@@ -74,7 +81,7 @@ public class Level1 : MonoBehaviour {
     void CreateForms() {
         if(currentAmount < maxAmount) {
             for (int i = 0; i < maxAmount; i++) {
-                StartCoroutine(wait(10));
+                StartCoroutine(Wait(10));
                 if (currentAmount < maxAmount) {
                     newColor = new Vector4(Random.value, Random.value, Random.value);
                     newForm = Instantiate(form) as GameObject;
@@ -90,11 +97,11 @@ public class Level1 : MonoBehaviour {
 
 
     //============================================================================================================
-    // IEnumerator wait(int time)
+    // IEnumerator Wait(int time)
     //
     // Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
     //============================================================================================================
-    IEnumerator wait(int time) {
+    IEnumerator Wait(int time) {
         yield return new WaitForSeconds(time);
     }
 
@@ -128,18 +135,33 @@ public class Level1 : MonoBehaviour {
         }
     }
 
+    //============================================================================================================
+    // public bool IsColliding(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
+    //
+    // Confere a posição dos objetos.
+    //============================================================================================================
+    public bool IsColliding(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2) {
+        if(posX1 < (posX2 + (width2 / 2)) || posX2< (posX1 + (width1 / 2)) || posY1 < (posY2 + (height2 / 2)) || posY2 < (posY1 + (height1 / 2))) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     //===================================================================================================
     // void CompareTrackedPosition()
     //
     // Realiza a comparação de posição dos objetos rastreados com as formas presentes na tela. Caso a
-    // posição seja a mesma a forma é destruída. (Atualmente o controle de comparação é realizado
-    // utilizando a posição fornecida pela Unity. Precisa ser alterado).
+    // posição seja a mesma a forma é destruída. A comparação é feita caso a posição seja maior.
+    // (Atualmente o controle de comparação é realizado utilizando a posição fornecida pela Unity.
+    // Precisa ser alterado).
     //===================================================================================================
-    public void CompareTrackedPosition(){
-        List<TrackedBlocks> trackedBlocks = utils.GetTrackedBlocks();
-        for(int i = 0; i < trackedBlocks.Count; i++){
-            for(int j = 0; j < formTargets.Count; i++){
-                if(trackedBlocks[i].GetX() + trackedBlocks[i].GetWidth() == formTargets[j].transform.position.x + formTargets[j].transform.localScale.x || trackedBlocks[i].GetY() + trackedBlocks[i].GetHeight() == formTargets[j].transform.position.y + formTargets[j].transform.localScale.y) {
+    public void CompareTrackedPosition() {
+        List<TrackedBlocks> trackedBlocks = utils.GetTrackedBlocks(); // A lista de objetos rastreados 
+        for(int i = 0; i < trackedBlocks.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
+            for(int j = 0; j < formTargets.Count; i++) { // 
+                if(IsColliding(trackedBlocks[i].GetX(), trackedBlocks[i].GetY(), trackedBlocks[i].GetWidth(), trackedBlocks[i].GetHeight(), formTargets[j].dirX, )) {
                     if(trackedBlocks[i].GetSignature() == 2) {
                         formTargets[j].GetComponent<Form>().DestroyForm();
                         yellowHUD.transform.localScale = new Vector3(9, 1.24f, 1);
