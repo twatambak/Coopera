@@ -45,7 +45,6 @@ public class Fase1 : MonoBehaviour {
     public static bool game = false;
     public GameObject yellowHUD;
     public GameObject greenHUD;
-
     //============================================================================================================
     // void Start()
     // Start() é chamada antes do update do primeiro frame.
@@ -65,7 +64,7 @@ public class Fase1 : MonoBehaviour {
     // Responsável por atualizar o jogo a cada novo frame.
     //============================================================================================================
     void Update() {
-        Forma a = new Forma();
+        
         CompareTrackedPosition();
     }
 

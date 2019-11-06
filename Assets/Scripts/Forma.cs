@@ -32,15 +32,18 @@ public class Forma : MonoBehaviour {
     public GameObject novaForma;
     public GameObject forma;
 
-    public Forma() {
+    public void criaLogo() {
         int quantiaMaxima = utils.GetMaximoFormasCSV();
         int quantiaAtual = utils.GetQuantiaAtualFormas();
-        if(Utils.quantiaAtual < quantiaMaxima) {
-            for (int i = 0; i < quantiaMaxima; i++) {
-                if(quantiaAtual < quantiaMaxima) {
+        if (Utils.quantiaAtual < quantiaMaxima)
+        {
+            for (int i = 0; i < quantiaMaxima; i++)
+            {
+                if (quantiaAtual < quantiaMaxima)
+                {
                     novaCor = new Vector4(Random.value, Random.value, Random.value);
                     novaForma = Instantiate(forma) as GameObject;
-                    novaForma.transform.position = new Vector2 (Random.Range(-7,7), Random.Range(-3, 3));
+                    novaForma.transform.position = new Vector2(Random.Range(-7, 7), Random.Range(-3, 3));
                     material = novaForma.GetComponent<Renderer>().material;
                     material.color = novaCor;
                     Utils.listaFormas.Add(novaForma);

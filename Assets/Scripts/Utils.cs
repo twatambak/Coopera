@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 /*****************************************************************************************************************
     A classe Utils contém alguns métodos de uso geral utilizados por classes distintas.
 *****************************************************************************************************************/
-public class Utils {
+public class Utils : MonoBehaviour {
     public static List<ObjetosRastreados> listaRastreados = new List<ObjetosRastreados>();
     public static List<GameObject> listaFormas = new List<GameObject>();
     public static int quantiaAtual;
     public GameObject formaBase;
     public static int pontosTimeAmarelo;
     public static int pontosTimeVerde;
-
+    public Forma forma;
     //============================================================================================================
     // public int LoadCSV(int id)
     //
@@ -65,7 +65,7 @@ public class Utils {
     // public int GetMaximoFormasCSV()
     //============================================================================================================
     public int GetMaximoFormasCSV() {
-        return ToInt(LoadCSV(2));
+        return (ToInt(LoadCSV(2)));
     }
 
 
@@ -96,5 +96,9 @@ public class Utils {
     //============================================================================================================
     public void GoToScene(string scene){
       SceneManager.LoadScene(scene);
+    }
+
+    public void criaaaaaa() {
+        forma.criaLogo();
     }
 }
