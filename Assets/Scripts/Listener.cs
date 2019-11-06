@@ -3,31 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*****************************************************************************************************************
-    The Listener class is responsible for communicating between the arduino board and Unity.
-
-    -= ATTRIBUTES =-
-        -> Utils utils = utility class extension, contains auxiliary functions.
-        -> string[] separatedLine = vector separating the values ​​received by the serial.
-        -> List<string> data = string list that stores all values ​​for tracked objects.
-
-    -= METHODS =-
-        -> List <TrackedBlocks> createTrackedList() = create and load blocks that have been tracked.
-        -> void OnMessageArrived(string msg) = handles messages received by the serial portal.
-        -> void OnConnectionEvent(bool success) = parses if connection to arduino has been performed.
-    
-------------------------------------------------------------------------------------------------------------------
     A classe Listener é responsável por realizar a comunicação entre a placa arduino e a Unity.
 
-    -= ATRIBUTOS =-
+    -={ ATRIBUTOS }=-
         -> Utils utils = extensão da classe de utilidades, contém funções auxiliares.
         -> string[] separatedLine = vetor que separa os valores recebidos pelo serial. 
         -> List<string> data = lista de string que armazena todos os valores referentes aos objetos rastreados.
 
-    -= MÉTODOS =-
+    -={ MÉTODOS }=-
         -> List<TrackedBlocks> createTrackedList() = cria e carrega os blocos que foram rastreados.
         -> void OnMessageArrived(string msg) = trata as mensagens recebidas pela portal serial.
         -> void OnConnectionEvent(bool success) = analisa se a conexão com o arduino foi executada.
-
 *****************************************************************************************************************/
 public class Listener : MonoBehaviour {
     public Utils utils;
@@ -35,15 +21,6 @@ public class Listener : MonoBehaviour {
     List<string> data = new List<string>();
 
     //============================================================================================================
-    // List <TrackedBlocks> createTrackedList ()
-    //
-    // Create the objects that are being tracked using the information contained in the first four
-    // list elements that received data from objects tracked by arduino. The data information of the
-    // tracked blocks are warehouses in four element structures, so we chose the first four
-    // list elements for creating the tracked block within Unity. The four elements are: ID, Signature
-    // position X and position Y. After adding them we remove the first four elements from the list. So the next
-    // group of elements to parse represent another tracked block.
-    // -----------------------------------------------------------------------------------------------------------
     // List<TrackedBlocks> createTrackedList()
     //
     // Cria os objetos que estão sendo rastreados utilizando das informações contidas nos quatro primeiros
@@ -66,12 +43,9 @@ public class Listener : MonoBehaviour {
                         trackedData.Add(block);
                     }
                 }
-                data.RemoveAt(5);
-                data.RemoveAt(4);
-                data.RemoveAt(3);
-                data.RemoveAt(2);
-                data.RemoveAt(1);
-                data.RemoveAt(0);
+                for(int i = 5; i < 0; i--) { 
+                    data.RemoveAt(i);
+                }
             }
         }
         return trackedData;
@@ -94,7 +68,6 @@ public class Listener : MonoBehaviour {
                 data.Add(item);
             }
         }
-
         utils.UpdateArduinoTrackedData(createTrackedList());
         //Debug.Log("Mensagem: " + msg);
     }

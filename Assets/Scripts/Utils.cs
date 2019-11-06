@@ -12,9 +12,9 @@ public class Utils : MonoBehaviour {
 
   
     //============================================================================================================
-    // public int loadCSV(int id)
+    // public int LoadCSV(int id)
     //
-    // A função loadCSV(int id) é utilizada para retornar um valor de configuração presente
+    // A função LoadCSV(int id) é utilizada para retornar um valor de configuração presente
     // no CSV de configurações. As configurações do CSV estão ligadas tanto a propriedades da fase
     // quanto da conexão com o arduino. Ao se escolher a posição referente ao valor de configuração
     // lembrar-se que o id está sendo decrementado no início da função. Isso é feito para que a
@@ -57,25 +57,20 @@ public class Utils : MonoBehaviour {
     //============================================================================================================
     public List<TrackedBlocks> GetTrackedBlocks() {
         return arduinoData;
-    }   
+    }
 
 
     //============================================================================================================
-    // public int loadCSV(int id)
-
-    // A função loadCSV(int id) é utilizada para retornar um valor de configuração presente
-    // no CSV de configurações. As configurações do CSV estão ligadas tanto a propriedades da fase
-    // quanto da conexão com o arduino. Ao se escolher a posição referente ao valor de configuração
-    // lembrar-se que o id está sendo decrementado no início da função. Isso é feito para que a
-    // primeira posição relacionada aos valores seja 1. Os valores de configuração estão sempre
-    // dispostos em posições pares exceto 0.
+    // public void GoToScene(string scene)
+    //
+    // Recebe uma string e retorna um inteiro.
     //============================================================================================================
     public int ToInt(string texto) {
         return System.Int32.Parse(texto);
     }
 
     //============================================================================================================
-    // public void goToScene(string scene);
+    // public void GoToScene(string scene);
     //
     // Recebe o nome de uma cena e redireciona a essa cena.
     //============================================================================================================
