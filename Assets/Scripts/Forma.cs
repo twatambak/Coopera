@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*****************************************************************************************************************
-    A classe Forma é responsável por definir as variáveis e comportamentos das formas presentes nas fases.
-*****************************************************************************************************************/
+/************************************************************************************************************/
+ /// <summary>
+ /// A classe Forma é responsável por definir as variáveis e comportamentos das formas presentes nas fases.
+ /// </summary>
+/************************************************************************************************************/
 public class Forma : MonoBehaviour {
+    /// <summary> Instância de utils  </summary>
     static InterfaceUtils instance = Utils.GetInstance();
-    public GameObject particulas; // Partículas de destruição
-    float dirX = 0.1f; // Direção de movimentação no eixo X
-    float dirY = 0.1f; // Direção de movimentação no eixo Y
-    float vel = 0; // Velocidade de movimentação
-    float tam = 1f; // Tamanho da Forma
-    Material material;
-    public static Color novaCor;
+    /// <summary> Partículas de destruição </summary>
+    public GameObject particulas;
+    /// <summary> Direção de movimentação no eixo X </summary>
+    float dirX = 0.1f; // 
+    /// <summary> Direção de movimentação no eixo Y </summary>
+    float dirY = 0.1f; // 
+    /// <summary> Velocidade de movimentação </summary>
+    float vel = 0; // 
+    /// <summary> Tamanho da Forma </summary>
+    float tam = 1f;
 
     //==========================================================================================================//
     // void Start()
@@ -46,9 +52,9 @@ public class Forma : MonoBehaviour {
     public void DestroiForma(GameObject forma) {
         if(Utils.quantiaAtual > 0) {
             Destroy(forma);
-            Utils.listaFormas.Remove(forma);
-            Utils.quantiaAtual--;
-            Utils.pontosTimeAmarelo++;
+            instance.RemoveListaFormas(forma);
+            instance.RemoveQuantiaAtual();
+            instance.AddPontosAmarelos(1);
         }
     }
 
@@ -60,9 +66,9 @@ public class Forma : MonoBehaviour {
     public void DestroiForma() {
         if(Utils.quantiaAtual > 0){
             Destroy(this.gameObject);
-            Utils.listaFormas.Remove(this.gameObject);
-            Utils.quantiaAtual--;
-            Utils.pontosTimeAmarelo++;
+            instance.RemoveListaFormas(this.gameObject);
+            instance.RemoveQuantiaAtual();
+            instance.AddPontosAmarelos(1);
         }
     }
 
@@ -99,9 +105,9 @@ public class Forma : MonoBehaviour {
             Destroy(this.gameObject);
             //particulas.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
             //Instantiate(particulas, this.transform.position, this.transform.rotation);
-            instance.GetListaFormas().Remove(this.gameObject);
-            Utils.quantiaAtual--;
-            Utils.pontosTimeAmarelo++;
+            instance.RemoveListaFormas(this.gameObject);
+            instance.RemoveQuantiaAtual();
+            instance.AddPontosAmarelos(1);
         }
     }
 }

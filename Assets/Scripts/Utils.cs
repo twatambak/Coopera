@@ -177,7 +177,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void CriarFormas(GameObject formaBase) {
         GameObject novaForma;
         int quantiaMaxima = GetMaximoFormas();
-        int quantiaAtual = GetQuantiaAtualFormas();
+        quantiaAtual = GetQuantiaAtualFormas();
         vel = GetVelocidadeFormas();
         tam = GetTamanhoFormas();
         if (quantiaAtual < quantiaMaxima) {
@@ -209,6 +209,16 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
+     /// Remove a Forma recebida da lista de formas.
+     /// </summary>
+     /// <param name="forma"></param>
+    //==========================================================================================================//
+    public void RemoveListaFormas(GameObject forma) {
+        listaFormas.Remove(forma);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
      /// Acrescenta uma unidade da quantia atual de formas.
      /// </summary>
     //==========================================================================================================//
@@ -227,5 +237,23 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         if(quantiaAtual > 0) {
             quantiaAtual--;
         }
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona o valor passado aos pontos do time amarelo.
+     /// </summary>
+    //==========================================================================================================//
+    public void AddPontosAmarelos(int pontos) {
+        pontosTimeAmarelo += pontos;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona o valor passado aos pontos do time verded.
+     /// </summary>
+    //==========================================================================================================//
+    public void AddPontosVerdes(int pontos) {
+        pontosTimeVerde += pontos;
     }
 }
