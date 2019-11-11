@@ -39,6 +39,7 @@ public class Fase1 : MonoBehaviour {
     public static bool game = false;
     public GameObject yellowHUD;
     public GameObject greenHUD;
+    public GameObject formaBase;
 
     //============================================================================================================
     // void Start()
@@ -59,20 +60,9 @@ public class Fase1 : MonoBehaviour {
     // Responsável por atualizar o jogo a cada novo frame.
     //============================================================================================================
     void Update() {
-        instance.CriarFormas();
+        instance.CriarFormas(formaBase);
         CompararPosicao();
     }
-
-
-    //============================================================================================================
-    // void CreateForms()
-    // A função createForms() é utlizada para fazer a criação das formas presentes na cena utilizando
-    // o prefab de Forma. É verificada a quantia de formas presentes na cena e caso a quantidade for
-    // menor do que o máximo estipulado (e carregado para variável através do arquivo CSV) novas
-    // formas são criadas. A posição das formas é gerada aleatoriamente, assim como sua cor.
-    //============================================================================================================
-
-
 
     //============================================================================================================
     // IEnumerator Wait(int time)

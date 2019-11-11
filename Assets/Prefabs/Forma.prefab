@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41de35fa4cf3464cbd508ebe4adb076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utils: {fileID: 0}
   particulas: {fileID: 1625705721856338625, guid: 088076700fb2b984a8fa2dae6cec447b,
     type: 3}
   novaForma: {fileID: 0}
-  forma: {fileID: 0}
+  forma: {fileID: 7903402880027064089, guid: eb3e28ebd898a5746a3a537ef6e8e5f7, type: 3}

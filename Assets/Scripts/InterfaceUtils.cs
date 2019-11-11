@@ -15,7 +15,7 @@ interface InterfaceUtils {
     void UpdateListaRastreados(List<ObjetosRastreados> dados);
     int ToInt(string texto);
     void GoToScene(string scene);
-    void CriarFormas();
+    void CriarFormas(GameObject formaBase);
     void AddListaFormas(GameObject forma);
     void AddQuantiaAtual();
 }

@@ -68,6 +68,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -105,9 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41de35fa4cf3464cbd508ebe4adb076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utils: {fileID: 2233414974405836191, guid: 7f2529e0797a18c4a861b460f6997d62, type: 3}
-  destructionParticles: {fileID: 1625705721856338625, guid: 088076700fb2b984a8fa2dae6cec447b,
+  particulas: {fileID: 1625705721856338625, guid: 088076700fb2b984a8fa2dae6cec447b,
     type: 3}
+  novaForma: {fileID: 555834837231948907, guid: 11d59ff89edce3948bd5c4cfa56d767c,
+    type: 3}
+  forma: {fileID: 555834837231948907, guid: 11d59ff89edce3948bd5c4cfa56d767c, type: 3}
 --- !u!54 &8512417875904783704
 Rigidbody:
   m_ObjectHideFlags: 0
