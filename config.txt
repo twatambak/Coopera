@@ -1,5 +1,5 @@
-Quantidade de Formas (Padrão: 5)	|5
-Velocidade das Formas (Padrão: 30)	|30
-Tamanho das Formas (Padrão: 1)		|1
+Quantidade de Máxima de Formas (Padrão: 5)	|5
+Velocidade das Formas (Padrão: 30)		|30
+Tamanho das Formas (Padrão: 1)			|1
 
-Porta Arduino				|COM3
+Porta Arduino					|COM3

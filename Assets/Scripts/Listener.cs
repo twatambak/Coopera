@@ -68,7 +68,7 @@ public class Listener : MonoBehaviour {
                 dados.Add(item);
             }
         }
-        utils.UpdateArduinoTrackedData(CriaObjetosRastreados());
+        utils.UpdateListaRastreados(CriaObjetosRastreados());
     }
 
 

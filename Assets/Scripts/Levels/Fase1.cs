@@ -7,10 +7,10 @@ using UnityEngine;
     A classe Fase1 é responsável pelo funcionamento geral do jogo.
 
     -={ ATRIBUTOS }=-
-        -> Utils utils = extensão da classe de utilidades, contém funções auxiliares.
-        -> Text textoPontosVerdes = o texto de exibição dos pontos do time verde.
-        -> Text pontosTimeAmarelo = o texto de exibição dos pontos do time amarelo.
-        -> GameObject forma = o GameObject de base para forma.
+        -> Utils utils = 
+        -> Text textoPontosVerdes = 
+        -> Text pontosTimeAmarelo = o 
+        -> GameObject forma = o 
         -> GameObject novaForma = a nova forma que será gerada.
         -> int quantiaAtual = a quantidade atual de formas.
         -> int quantiaMaxima = a quantidade máxima de formas.
@@ -26,25 +26,20 @@ using UnityEngine;
     -={ MÉTODOS }=-
         -> void CreateForms()
         -> IEnumerator Wait(int time)
-        -> void clearScene()
-        -> public bool IsColliding(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
-        -> public void CompareTrackedPosition() 
+        -> void LimparFormas()
+        -> public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
+        -> public void CompararPosicao() 
 *****************************************************************************************************************/
 public class Fase1 : MonoBehaviour {
-    public Utils utils;
-    public Text textoPontosVerdes;
-    public Text textoPontosAmarelos;
-    public GameObject forma;
-    public GameObject novaForma;
-    //public static int quantiaAtual; 
+    static InterfaceUtils instance = Utils.GetInstance();
+    public Utils utils; // Extensão da classe de utilidades, contém funções auxiliares.
+    public Text textoPontosVerdes; // Texto de exibição dos pontos do time verde.
+    public Text textoPontosAmarelos; // Texto de exibição dos pontos do time amarelo.
     int quantiaMaxima;
-    //public static List<GameObject> listaFormas = new List<GameObject>();
-    Material material;
-
-    public static Color novaCor; 
     public static bool game = false;
     public GameObject yellowHUD;
     public GameObject greenHUD;
+
     //============================================================================================================
     // void Start()
     // Start() é chamada antes do update do primeiro frame.
@@ -54,7 +49,7 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Start() {
         Wait(5);
-        quantiaMaxima = utils.ToInt(utils.LoadCSV(2));
+        quantiaMaxima = instance.GetMaximoFormas();
     }
 
 
@@ -64,8 +59,8 @@ public class Fase1 : MonoBehaviour {
     // Responsável por atualizar o jogo a cada novo frame.
     //============================================================================================================
     void Update() {
-        
-        CompareTrackedPosition();
+        instance.CriarFormas();
+        CompararPosicao();
     }
 
 
@@ -101,29 +96,28 @@ public class Fase1 : MonoBehaviour {
                 game = true;
             }
         }
-
         textoPontosAmarelos.text = "Pontos: " + Utils.pontosTimeAmarelo;
         textoPontosVerdes.text = "Pontos: " + Utils.pontosTimeVerde;
     }
 
 
     //============================================================================================================
-    // void clearScene()
+    // void LimparFormas()
     //
     // A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
     //============================================================================================================
-    void clearScene() {
+    void LimparFormas() {
         for (int i = quantiaMaxima; i < quantiaMaxima; i--) {
             Destroy(this.gameObject);
         }
     }
 
     //============================================================================================================
-    // public bool IsColliding(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
+    // public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
     //
     // Confere a posição dos objetos.
     //============================================================================================================
-    public bool IsColliding(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2) {
+    public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2) {
         if(posX1 < (posX2 + (width2 / 2)) || posX2< (posX1 + (width1 / 2)) || posY1 < (posY2 + (height2 / 2)) || posY2 < (posY1 + (height1 / 2))) {
             return true;
         } else {
@@ -133,20 +127,20 @@ public class Fase1 : MonoBehaviour {
     }
 
     //===================================================================================================
-    // void CompareTrackedPosition()
+    // void CompararPosicao()
     //
     // Realiza a comparação de posição dos objetos rastreados com as formas presentes na tela. Caso a
     // posição seja a mesma a forma é destruída. A comparação é feita caso a posição seja maior.
     // (Atualmente o controle de comparação é realizado utilizando a posição fornecida pela Unity.
     // Precisa ser alterado).
     //===================================================================================================
-    public void CompareTrackedPosition() {
-        List<ObjetosRastreados> listaRastreados = Utils.listaRastreados; // A lista de objetos rastreados
-        List<GameObject> listaFormas = Utils.listaFormas; // A lista de objetos rastreados
+    public void CompararPosicao() {
+        List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
+        List<GameObject> listaFormas = instance.GetListaFormas(); // A lista de objetos rastreados
 
         for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
             for(int j = 0; j < Utils.listaFormas.Count; i++) { // 
-                if(IsColliding(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1, 2,3, 4)) {
+                if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1, 2,3, 4)) {
                     if(listaRastreados[i].GetAssinatura() == 2) {
                         listaFormas[j].GetComponent<Forma>().DestroiForma();
                         yellowHUD.transform.localScale = new Vector3(9, 1.24f, 1);
@@ -159,4 +153,6 @@ public class Fase1 : MonoBehaviour {
             }
         }
     }
+
+
 }
