@@ -27,12 +27,12 @@ public class Fase1 : MonoBehaviour {
     public GameObject formaBase;
 
     //============================================================================================================
-     /// <summary>
-     /// Start() é chamada antes do update do primeiro frame.
-     /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
-     /// definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
-     /// uma função que faz a criação de clones do prefab Forma.
-     /// </summary>
+    /// <summary>
+    /// Start() é chamada antes do update do primeiro frame.
+    /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
+    /// definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
+    /// uma função que faz a criação de clones do prefab Forma.
+    /// </summary>
     //============================================================================================================
     void Start() {
         Esperar(5);
@@ -126,7 +126,6 @@ public class Fase1 : MonoBehaviour {
     public void CompararPosicao() {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
         List<GameObject> listaFormas = instance.GetListaFormas(); // A lista de objetos rastreados
-
         for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
             for(int j = 0; j < Utils.listaFormas.Count; i++) { // 
                 if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1, 2,3, 4)) {
@@ -142,6 +141,4 @@ public class Fase1 : MonoBehaviour {
             }
         }
     }
-
-
 }

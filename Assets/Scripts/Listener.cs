@@ -30,7 +30,7 @@ public class Listener : MonoBehaviour {
         List<ObjetosRastreados> dadosRastreados = new List<ObjetosRastreados>();
         if(dados != null) { 
             while(dados.Count > 6){
-                ObjetosRastreados rastreado = new ObjetosRastreados(utils.ToInt(dados[0]), utils.ToInt(dados[1]), utils.ToInt(dados[2]), utils.ToInt(dados[3]), utils.ToInt(dados[4]), utils.ToInt(dados[5]));
+                ObjetosRastreados rastreado = new ObjetosRastreados(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]));
                 Debug.Log(rastreado.ToString());
                 for(int i = 0; i < dadosRastreados.Count; i++){
                     if(dadosRastreados[i].GetID() == rastreado.GetID()){

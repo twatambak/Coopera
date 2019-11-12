@@ -17,17 +17,9 @@ public class Forma : MonoBehaviour {
     /// <summary> Direção de movimentação no eixo Y </summary>
     float dirY = 0.1f; // 
     /// <summary> Velocidade de movimentação </summary>
-    float vel = 0; // 
+    float vel = instance.GetVelocidadeFormas(); // 
     /// <summary> Tamanho da Forma </summary>
-    float tam = 1f;
-
-    //==========================================================================================================//
-    /// <summary>
-    /// Chamada no início da classe.
-    /// </summary>
-    //==========================================================================================================//
-    void Start() {}
-
+    float tam = instance.GetTamanhoFormas();
 
     //==========================================================================================================//
     /// <summary>

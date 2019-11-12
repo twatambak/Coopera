@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 35781431}
   - component: {fileID: 35781430}
   m_Layer: 0
-  m_Name: Right Wall
+  m_Name: Borda Direita
   m_TagString: Vertical
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,77 +212,6 @@ Transform:
   m_Father: {fileID: 1696407569}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &227079186
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1506620288}
-    m_Modifications:
-    - target: {fileID: 128384, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_Name
-      value: SerialController
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.0425043
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.2475207
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.149903
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11442534, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: reconnectionDelay
-      value: 2500
-      objectReference: {fileID: 0}
-    - target: {fileID: 11442534, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
-      propertyPath: messageListener
-      value: 
-      objectReference: {fileID: 722854296}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
---- !u!4 &227079187 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 405068, guid: a65acf0cbf56b80419f74ebf0bc845f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 227079186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &263589324
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +317,7 @@ GameObject:
   - component: {fileID: 508028818}
   - component: {fileID: 508028821}
   m_Layer: 0
-  m_Name: Green Team HUD
+  m_Name: HUD Verde
   m_TagString: Horizontal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -562,25 +491,6 @@ Transform:
   m_Father: {fileID: 1506620288}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &722854296 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 128384, guid: a65acf0cbf56b80419f74ebf0bc845f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 227079186}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &722854297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722854296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0fc6ce779dc00944b403c8e1b883bf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  utils: {fileID: 0}
 --- !u!1 &913918688
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +570,7 @@ GameObject:
   - component: {fileID: 960772639}
   - component: {fileID: 960772638}
   m_Layer: 0
-  m_Name: Left Wall
+  m_Name: Borda Esquerda
   m_TagString: Vertical
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,7 +662,7 @@ GameObject:
   - component: {fileID: 1092412544}
   - component: {fileID: 1092412543}
   m_Layer: 0
-  m_Name: Divisor HUD
+  m_Name: HUD Central
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,7 +754,7 @@ GameObject:
   - component: {fileID: 1132299888}
   - component: {fileID: 1132299887}
   m_Layer: 0
-  m_Name: Yellow Team HUD
+  m_Name: HUD Amarelo
   m_TagString: Horizontal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -985,11 +895,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e391bc26988e434995a7df4f2f98102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utils: {fileID: 7850262239510704118}
   textoPontosVerdes: {fileID: 1645804330}
   textoPontosAmarelos: {fileID: 1508108362}
-  yellowHUD: {fileID: 1132299886}
-  greenHUD: {fileID: 508028816}
+  amareloHUD: {fileID: 1132299886}
+  verdeHUD: {fileID: 508028816}
   formaBase: {fileID: 7903402880027064089, guid: eb3e28ebd898a5746a3a537ef6e8e5f7,
     type: 3}
 --- !u!4 &1506620288
@@ -1008,7 +917,6 @@ Transform:
   - {fileID: 2120798510}
   - {fileID: 1696407569}
   - {fileID: 1382671890}
-  - {fileID: 227079187}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1024,7 +932,7 @@ GameObject:
   - component: {fileID: 1508108363}
   - component: {fileID: 1508108362}
   m_Layer: 5
-  m_Name: Yellow Points Label
+  m_Name: Label Pontos Amarelos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1101,7 +1009,7 @@ GameObject:
   - component: {fileID: 1645804331}
   - component: {fileID: 1645804330}
   m_Layer: 5
-  m_Name: Green Points Label
+  m_Name: Label Pontos Verdes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,7 +1084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1696407569}
   m_Layer: 0
-  m_Name: Walls
+  m_Name: Bordas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1312,7 +1220,7 @@ GameObject:
   - component: {fileID: 2065320016}
   - component: {fileID: 2065320015}
   m_Layer: 0
-  m_Name: Bottom Wall
+  m_Name: Borda Abaixo
   m_TagString: Horizontal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1559,15 +1467,3 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b10fc5308fa8eb441a1fe665dfc44675, type: 3}
---- !u!114 &7850262239510704118 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3348633168333354126, guid: b10fc5308fa8eb441a1fe665dfc44675,
-    type: 3}
-  m_PrefabInstance: {fileID: 7850262239510704117}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1041f7cba7b9324ab377df1a399051d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
