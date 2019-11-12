@@ -28,9 +28,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     Material material;
     /// <summary> Cores das novas formas. </summary>
     public static Color novaCor;
-    /// <summary> Velocidade das formas. Valor obtido através do CSV de configuração. Posição [4] a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    /// <summary> Velocidade das formas. Valor obtido através do CSV de configuração. Posição (4) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int vel;
-    /// <summary> Tamanho das formas. Valor obtido através do CSV de configuração. Posição [6] a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    /// <summary> Tamanho das formas. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int tam;
 
     //==========================================================================================================//
@@ -97,7 +97,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a velocidade das formas.
+     /// Retorna o tamanho das formas.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
@@ -250,7 +250,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona o valor passado aos pontos do time verded.
+     /// Adiciona o valor passado aos pontos do time verde.
      /// </summary>
     //==========================================================================================================//
     public void AddPontosVerdes(int pontos) {

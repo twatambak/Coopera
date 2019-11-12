@@ -3,82 +3,72 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-/*****************************************************************************************************************
-    A classe Fase1 é responsável pelo funcionamento geral do jogo.
-
-    -={ ATRIBUTOS }=-
-        -> Utils utils = 
-        -> Text textoPontosVerdes = 
-        -> Text pontosTimeAmarelo = o 
-        -> GameObject forma = o 
-        -> GameObject novaForma = a nova forma que será gerada.
-        -> int quantiaAtual = a quantidade atual de formas.
-        -> int quantiaMaxima = a quantidade máxima de formas.
-        -> List<GameObject> listaFormas = a lista de formas já criadas.
-        -> Material material = o material para cor das formas.
-        -> int pontosTimeAmarelo = os pontos do time amarelo.
-        -> int pontosTimeVerde = os pontos do time verde.
-        -> Color novaCor = a nova cor das formas.
-        -> bool game = booleano representando o funcionamento do jogo.
-        -> GameObject yellowHUD = o GameObject representando a barra de HUD do time amarelo.
-        -> GameObject greenHUD = o GameObject representando a barra de HUD do time verde.
-
-    -={ MÉTODOS }=-
-        -> void CreateForms()
-        -> IEnumerator Wait(int time)
-        -> void LimparFormas()
-        -> public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
-        -> public void CompararPosicao() 
-*****************************************************************************************************************/
+/************************************************************************************************************/
+ /// <summary>
+ /// A classe Fase1 é responsável pelo funcionamento geral do jogo.
+ /// </summary>
+/************************************************************************************************************/
 public class Fase1 : MonoBehaviour {
+    /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
-    public Utils utils; // Extensão da classe de utilidades, contém funções auxiliares.
-    public Text textoPontosVerdes; // Texto de exibição dos pontos do time verde.
+    /// <summary> Texto de exibição de pontos do time verde. </summary>
+    public Text textoPontosVerdes;
+    /// <summary> Texto de exibição de pontos do time amarelo. </summary>
     public Text textoPontosAmarelos; // Texto de exibição dos pontos do time amarelo.
+    /// <summary> Quantia máxima de formas. Seu valor é carregado pela função de leitura <see cref="Utils.LoadCSV(int)"/> do arquivo de configuração. </summary>
     int quantiaMaxima;
-    public static bool game = false;
-    public GameObject yellowHUD;
-    public GameObject greenHUD;
+    /// <summary> Booleano que define o funcionamento do jogo. </summary>
+    bool game;
+    /// <summary> HUD referente ao time amarelo. </summary>
+    public GameObject amareloHUD;
+    /// <summary> HUD referente ao time verde. </summary>
+    public GameObject verdeHUD;
+    /// <summary> A <see cref="Forma"/> base para criação das formas de alvo. </summary>
     public GameObject formaBase;
 
     //============================================================================================================
-    // void Start()
-    // Start() é chamada antes do update do primeiro frame.
-    // Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
-    // definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
-    // uma função que faz a criação de clones do prefab Forma.
+     /// <summary>
+     /// Start() é chamada antes do update do primeiro frame.
+     /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
+     /// definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
+     /// uma função que faz a criação de clones do prefab Forma.
+     /// </summary>
     //============================================================================================================
     void Start() {
-        Wait(5);
+        Esperar(5);
         quantiaMaxima = instance.GetMaximoFormas();
     }
 
 
     //============================================================================================================
-    // void Update()
-    // 
-    // Responsável por atualizar o jogo a cada novo frame.
+     /// <summary>
+     /// Responsável por atualizar o jogo a cada novo frame.
+     /// </summary>
     //============================================================================================================
     void Update() {
-        instance.CriarFormas(formaBase);
-        CompararPosicao();
+        if (game) {
+            instance.CriarFormas(formaBase);
+            CompararPosicao();
+        }
     }
 
     //============================================================================================================
-    // IEnumerator Wait(int time)
-    //
-    // Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
+     /// <summary>
+     /// Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
+     /// </summary>
+     /// <param name="time"></param>
+     /// <returns></returns>
     //============================================================================================================
-    IEnumerator Wait(int time) {
+    IEnumerator Esperar(int time) {
         yield return new WaitForSeconds(time);
     }
 
 
     //============================================================================================================
-    // OnGUI()
-    //
-    // Gerencia o início do jogo através das condições de ativamento de um botão e cria as labels
-    // de informação de pontos.
+     /// <summary>
+     /// Gerencia o início do jogo através das condições de ativamento de um botão e cria as labels
+     /// de informação de pontos.
+     /// </summary>
     //============================================================================================================
     void OnGUI() {
         if (!game) {
@@ -92,9 +82,9 @@ public class Fase1 : MonoBehaviour {
 
 
     //============================================================================================================
-    // void LimparFormas()
-    //
-    // A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
+     /// <summary>
+     ///  A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
+     /// </summary>
     //============================================================================================================
     void LimparFormas() {
         for (int i = quantiaMaxima; i < quantiaMaxima; i--) {
@@ -103,9 +93,18 @@ public class Fase1 : MonoBehaviour {
     }
 
     //============================================================================================================
-    // public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2)
-    //
-    // Confere a posição dos objetos.
+     /// <summary>
+     /// Confere a posição dos objetos.
+     /// </summary>
+     /// <param name="posX1"></param>
+     /// <param name="posY1"></param>
+     /// <param name="width1"></param>
+     /// <param name="height1"></param>
+     /// <param name="posX2"></param>
+     /// <param name="posY2"></param>
+     /// <param name="width2"></param>
+     /// <param name="height2"></param>
+     /// <returns></returns>
     //============================================================================================================
     public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2) {
         if(posX1 < (posX2 + (width2 / 2)) || posX2< (posX1 + (width1 / 2)) || posY1 < (posY2 + (height2 / 2)) || posY2 < (posY1 + (height1 / 2))) {
@@ -117,12 +116,12 @@ public class Fase1 : MonoBehaviour {
     }
 
     //===================================================================================================
-    // void CompararPosicao()
-    //
-    // Realiza a comparação de posição dos objetos rastreados com as formas presentes na tela. Caso a
-    // posição seja a mesma a forma é destruída. A comparação é feita caso a posição seja maior.
-    // (Atualmente o controle de comparação é realizado utilizando a posição fornecida pela Unity.
-    // Precisa ser alterado).
+     /// <summary>
+     /// Realiza a comparação de posição dos objetos rastreados com as formas presentes na tela. Caso a
+     /// posição seja a mesma a forma é destruída. A comparação é feita caso a posição seja maior.
+     /// (Atualmente o controle de comparação é realizado utilizando a posição fornecida pela Unity.
+     /// Precisa ser alterado).
+     /// </summary>
     //===================================================================================================
     public void CompararPosicao() {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
@@ -133,7 +132,7 @@ public class Fase1 : MonoBehaviour {
                 if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1, 2,3, 4)) {
                     if(listaRastreados[i].GetAssinatura() == 2) {
                         listaFormas[j].GetComponent<Forma>().DestroiForma();
-                        yellowHUD.transform.localScale = new Vector3(9, 1.24f, 1);
+                        amareloHUD.transform.localScale = new Vector3(9, 1.24f, 1);
                     }
 
                     if(listaRastreados[i].GetAssinatura() == 3) {

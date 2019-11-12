@@ -43,7 +43,7 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de formas.
+     /// Retorna o tamanho das formas.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
@@ -51,7 +51,7 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de objetos rastreados.
+     /// Retorna a lista de formas.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
@@ -59,11 +59,18 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a quantidade atual de formas.
+     /// Retorna a lista de objetos rastreados.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
     List<ObjetosRastreados> GetListaRastreados();
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna a quantidade atual de formas.
+     /// </summary>
+    //==========================================================================================================//
+    int GetQuantiaAtualFormas();
 
     //==========================================================================================================//
      /// <summary>
@@ -72,8 +79,9 @@ interface InterfaceUtils {
      /// recebidas por essa função.
      /// </summary>
      /// <param name="dados"></param>
+     /// <returns></returns>
     //==========================================================================================================//
-    int GetQuantiaAtualFormas();
+    void UpdateListaRastreados(List<ObjetosRastreados> dados);
 
     //==========================================================================================================//
      /// <summary>
@@ -82,7 +90,7 @@ interface InterfaceUtils {
      /// <param name="texto"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    void UpdateListaRastreados(List<ObjetosRastreados> dados);
+    int ToInt(string texto);
 
     //==========================================================================================================//
      /// <summary>
@@ -90,7 +98,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="scene"></param>
     //==========================================================================================================//
-    int ToInt(string texto);
+    void GoToScene(string scene);
 
     //==========================================================================================================//
      /// <summary>
@@ -98,19 +106,11 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="formaBase"></param>
     //==========================================================================================================//
-    void GoToScene(string scene);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Adiciona a Forma recebida na lista de formas.
-     /// </summary>
-     /// <param name="forma"></param>
-    //==========================================================================================================//
     void CriarFormas(GameObject formaBase);
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove a Forma recebida da lista de formas.
+     /// Adiciona a Forma recebida na lista de formas.
      /// </summary>
      /// <param name="forma"></param>
     //==========================================================================================================//
@@ -147,7 +147,7 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona o valor passado aos pontos do time verded.
+     /// Adiciona o valor passado aos pontos do time verde.
      /// </summary>
     //==========================================================================================================//
     void AddPontosVerdes(int pontos);

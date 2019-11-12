@@ -36,7 +36,7 @@ public class SerialController : MonoBehaviour
     public GameObject messageListener;
 
     [Tooltip("After an error in the serial communication, or an unsuccessful " +
-             "connect, how many milliseconds we should Wait.")]
+             "connect, how many milliseconds we should Esperar.")]
     public int reconnectionDelay = 1000;
 
     [Tooltip("Maximum number of unread dados messages in the queue. " +

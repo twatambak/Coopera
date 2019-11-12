@@ -8,7 +8,7 @@ using UnityEngine;
  /// </summary>
 /************************************************************************************************************/
 public class Forma : MonoBehaviour {
-    /// <summary> Instância de utils  </summary>
+    /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
     /// <summary> Partículas de destruição </summary>
     public GameObject particulas;
@@ -22,13 +22,17 @@ public class Forma : MonoBehaviour {
     float tam = 1f;
 
     //==========================================================================================================//
-    // void Start()
+    /// <summary>
+    /// Chamada no início da classe.
+    /// </summary>
     //==========================================================================================================//
     void Start() {}
 
 
     //==========================================================================================================//
-    // void Update()
+    /// <summary>
+    /// Chamada a cada novo frame. Chama a função de movimentação da forma <see cref="Movimentar()">.
+    /// </summary>
     //==========================================================================================================//
     void Update() {
         Movimentar();
@@ -45,9 +49,10 @@ public class Forma : MonoBehaviour {
     }
 
     //==========================================================================================================//
-    // void DestroiForma(GameObject forma)
-    //
-    // Recebe uma Forma e a destrói.
+     /// <summary>
+     /// Recebe uma Forma e a destrói.
+     /// </summary>
+     /// <param name="forma"></param>
     //==========================================================================================================//
     public void DestroiForma(GameObject forma) {
         if(Utils.quantiaAtual > 0) {
@@ -59,9 +64,9 @@ public class Forma : MonoBehaviour {
     }
 
     //============================================================================================================
-    // void DestroiForma()
-    //
-    // Destrói a forma atual.
+     /// <summary>
+     ///  Destrói a forma atual.
+     /// </summary>
     //============================================================================================================
     public void DestroiForma() {
         if(Utils.quantiaAtual > 0){
@@ -73,14 +78,15 @@ public class Forma : MonoBehaviour {
     }
 
     //==========================================================================================================//
-    // void OnCollisionEnter(Collision outro)
-    //
-    // OnCollisionEnter(Collision outro) é chamada quando há colisão entre objetos.
-    // A função verifica a tag do objeto com o qual está havendo colisão. Dependendo do objeto, é
-    // aplicada a direção inversa ao eixo relacionado a essa colisão. Quando a colisão acontece com
-    // um GameObject com a tag "Vertical" a direção X é invertida, quando a colisão acontece com um
-    // GameObject com a tag "Horizontal" a direção de Y é invertida, e quando a colisão acontece com
-    // outra Forma ambas as direções são invertidas.
+     /// <summary>
+     /// A função é chamada quando há colisão entre objetos.
+     /// A função verifica a tag do objeto com o qual está havendo colisão. Dependendo do objeto, é
+     /// aplicada a direção inversa ao eixo relacionado a essa colisão. Quando a colisão acontece com
+     /// um GameObject com a tag "Vertical" a direção X é invertida, quando a colisão acontece com um
+     /// GameObject com a tag "Horizontal" a direção de Y é invertida, e quando a colisão acontece com
+     /// outra Forma ambas as direções são invertidas.
+     /// </summary>
+     /// <param name="outro"></param>
     //==========================================================================================================//
     void OnCollisionEnter(Collision outro) {
         if(outro.gameObject.tag == "Vertical") {
@@ -95,10 +101,11 @@ public class Forma : MonoBehaviour {
 
 
     //==========================================================================================================//
-    // void OnMouseDown()
-    // OnMouseDown() é chamada quando o objeto é clicado.
-    // A função verifica a quantia de elementos na cena e caso essa quantia seja maior do que 0, o
-    // objeto que foi clicado é destruído.
+    /// <summary>
+     /// É chamada quando o objeto é clicado.
+     /// A função verifica a quantia de elementos na cena e caso essa quantia seja maior do que 0, o
+     /// objeto que foi clicado é destruído.
+     /// </summary>
     //==========================================================================================================//
     void OnMouseDown() {
         if(instance.GetQuantiaAtualFormas() > 0) {

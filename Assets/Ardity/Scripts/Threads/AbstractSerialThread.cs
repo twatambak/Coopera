@@ -155,7 +155,7 @@ public abstract class AbstractSerialThread
                     // disregard of the port's status
                     CloseDevice();
 
-                    // Don't attempt to reconnect just yet, Wait some
+                    // Don't attempt to reconnect just yet, Esperar some
                     // user-defined time. It is OK to sleep here as this is not
                     // Unity's thread, this doesn't affect frame-rate
                     // throughput.
