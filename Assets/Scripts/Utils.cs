@@ -180,7 +180,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         quantiaAtual = GetQuantiaAtualFormas();
         vel = GetVelocidadeFormas();
         tam = GetTamanhoFormas();
-        if (quantiaAtual < quantiaMaxima) {            for(int i = 0; i < quantiaMaxima; i++) {
+        if (quantiaAtual < quantiaMaxima) {
+            for(int i = 0; i < quantiaMaxima; i++) {
                 if(quantiaAtual < quantiaMaxima) {
                     novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
                     novaForma = Instantiate(formaBase) as GameObject;

@@ -22,9 +22,9 @@ public class Forma : MonoBehaviour {
     float tam = instance.GetTamanhoFormas();
 
     //==========================================================================================================//
-    /// <summary>
-    /// Chamada a cada novo frame. Chama a função de movimentação da forma <see cref="Movimentar()">.
-    /// </summary>
+     /// <summary>
+     /// Chamada a cada novo frame. Chama a função de movimentação da forma <see cref="Movimentar()">.
+     /// </summary>
     //==========================================================================================================//
     void Update() {
         Movimentar();

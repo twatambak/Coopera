@@ -56,7 +56,7 @@ public class Listener : MonoBehaviour {
      /// a função updateArduinoTrackedData() contida dentro da classe Utils é chamada passando como parâmetro a 
      /// função createTrackedList(), a qual retorna uma lista contendo os objetos que foram rastreados.
      /// </summary>
-     /// <param name="msg"></param>
+     /// <param name="msg"> A mensagem recebida pela porta serial arduino. </param>
     //============================================================================================================
     void OnMessageArrived(string msg) {
         if(msg != null) {

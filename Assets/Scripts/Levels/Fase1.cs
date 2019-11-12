@@ -56,8 +56,8 @@ public class Fase1 : MonoBehaviour {
      /// <summary>
      /// Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
      /// </summary>
-     /// <param name="time"></param>
-     /// <returns></returns>
+     /// <param name="time"> A quantia de tempo do delay. </param>
+     /// <returns> Retorna o tempo da corrotina. </returns>
     //============================================================================================================
     IEnumerator Esperar(int time) {
         yield return new WaitForSeconds(time);
@@ -96,14 +96,14 @@ public class Fase1 : MonoBehaviour {
      /// <summary>
      /// Confere a posição dos objetos.
      /// </summary>
-     /// <param name="posX1"></param>
-     /// <param name="posY1"></param>
-     /// <param name="width1"></param>
-     /// <param name="height1"></param>
-     /// <param name="posX2"></param>
-     /// <param name="posY2"></param>
-     /// <param name="width2"></param>
-     /// <param name="height2"></param>
+     /// <param name="posX1"> A posição X do primeiro objeto. </param>
+     /// <param name="posY1"> A posição Y do primeiro objeto. </param>
+     /// <param name="width1"> A largura do primeiro objeto. </param> 
+     /// <param name="height1"> A altura do primeiro objeto. </param>
+     /// <param name="posX2"> A posição X do segundo objeto. </param>
+     /// <param name="posY2"> A posição Y do segundo objeto. </param>
+     /// <param name="width2"> A largura do segundo objeto. </param>
+     /// <param name="height2"> A altura do segundo objeto. </param>
      /// <returns></returns>
     //============================================================================================================
     public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2) {
