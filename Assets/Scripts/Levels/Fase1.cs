@@ -14,7 +14,7 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Texto de exibição de pontos do time verde. </summary>
     public Text textoPontosVerdes;
     /// <summary> Texto de exibição de pontos do time amarelo. </summary>
-    public Text textoPontosAmarelos; // Texto de exibição dos pontos do time amarelo.
+    public Text textoPontosAmarelos;
     /// <summary> Quantia máxima de formas. Seu valor é carregado pela função de leitura <see cref="Utils.LoadCSV(int)"/> do arquivo de configuração. </summary>
     int quantiaMaxima;
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
