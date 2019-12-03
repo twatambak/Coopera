@@ -218,7 +218,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     public void AddListaRastreados(ObjetosRastreados rastreado) {
-        listaRastreados.Add(rastreado);
         for(int i = 0; i < listaRastreados.Count; i++){
             if(listaRastreados[i].GetID() == rastreado.GetID()){
                 listaRastreados[i] = rastreado;

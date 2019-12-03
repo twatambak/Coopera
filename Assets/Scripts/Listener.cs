@@ -26,17 +26,18 @@ public class Listener : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    void CriaObjetosRastreados(){
+    void CriaObjetosRastreados(List<string> dados){
         if(dados != null) { 
-            while(dados.Count > 7){
+            while(dados.Count >= 7){
                 ObjetosRastreados rastreado = new ObjetosRastreados(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
                 Debug.Log(rastreado.ToString());
                 if(rastreado != null) {
                     instance.AddListaRastreados(rastreado);
+                    for(int i = 6; i >= 0; i--) { 
+                        dados.RemoveAt(i);
+                    }
                 }
-                for(int i = 6; i >= 0; i--) { 
-                    dados.RemoveAt(i);
-                }
+
             }
         }
     }
@@ -59,7 +60,7 @@ public class Listener : MonoBehaviour {
                 dados.Add(item);
             }
         }
-        CriaObjetosRastreados();
+        CriaObjetosRastreados(dados);
     }
 
 
