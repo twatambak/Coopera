@@ -32,7 +32,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     int vel;
     /// <summary> Tamanho das formas. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int tam;
-    public static Camera cam;
+
     //==========================================================================================================//
      /// <summary>
      /// Retorna uma instância de Utils.
@@ -257,7 +257,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         pontosTimeVerde += pontos;
     }
 
-    public Vector3 Viewport(Vector3 posicao) {
+    public Vector3 Viewport(Vector3 posicao, Camera cam) {
         cam = GetComponent<Camera>();
         Vector3 novaPosicao = cam.ViewportToWorldPoint(posicao);
         return novaPosicao;

@@ -25,7 +25,7 @@ public class Fase1 : MonoBehaviour {
     public GameObject verdeHUD;
     /// <summary> A <see cref="Forma"/> base para criação das formas de alvo. </summary>
     public GameObject formaBase;
-
+    public Camera cam;
     //============================================================================================================
     /// <summary>
     /// Start() é chamada antes do update do primeiro frame.
@@ -49,7 +49,6 @@ public class Fase1 : MonoBehaviour {
         if (game) {
             instance.CriarFormas(formaBase);
             CompararPosicao();
-            Camera();
         }
     }
 
@@ -93,14 +92,6 @@ public class Fase1 : MonoBehaviour {
         }
     }
 
-    
-    void Camera() {
-        camera = GetComponent<Camera>();
-        posicao = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(posicao, 0.1F);
-    } 
-
     //============================================================================================================
      /// <summary>
      /// Confere a posição dos objetos.
@@ -117,8 +108,10 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     public bool VerificarAcerto(float posX1, float posY1, float width1, float height1, float posX2, float posY2, float width2, float height2) {
         Vector3 posicao = new Vector3(posX2, posY2, 0);
-        Vector3 viewPos = instance.Viewport(posicao);
+        Vector3 viewPos = instance.Viewport(posicao, cam);
+        Debug.Log("RASTREADO | PosX: " + viewPos.x + " / PosY: " + viewPos.y);
         if(posX1 < (viewPos.x + (width2 / 2)) || viewPos.x < (posX1 + (width1 / 2)) || posY1 < (viewPos.y + (height2 / 2)) || viewPos.y < (posY1 + (height1 / 2))) { // (posX1 < (posX2 + (width2 / 2)) || posX2 < (posX1 + (width1 / 2)) || posY1 < (posY2 + (height2 / 2)) || posY2 < (posY1 + (height1 / 2)))
+            Debug.Log("Acertou:");
             return true;
         } else {
             return false;
