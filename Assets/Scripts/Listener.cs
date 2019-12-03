@@ -39,7 +39,7 @@ public class Listener : MonoBehaviour {
                         dadosRastreados.Add(rastreado);
                     }
                 }
-                for(int i = 5; i < 0; i--) { 
+                for(int i = 5; i > 0; i--) { 
                     dados.RemoveAt(i);
                 }
             }

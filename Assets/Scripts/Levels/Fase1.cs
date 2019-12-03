@@ -49,6 +49,7 @@ public class Fase1 : MonoBehaviour {
         if (game) {
             instance.CriarFormas(formaBase);
             CompararPosicao();
+            Camera();
         }
     }
 
@@ -92,6 +93,14 @@ public class Fase1 : MonoBehaviour {
         }
     }
 
+    
+    void Camera() {
+        camera = GetComponent<Camera>();
+        posicao = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(posicao, 0.1F);
+    } 
+
     //============================================================================================================
      /// <summary>
      /// Confere a posição dos objetos.
@@ -106,8 +115,10 @@ public class Fase1 : MonoBehaviour {
      /// <param name="height2"> A altura do segundo objeto. </param>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(int posX1, int posY1, int width1, int height1, int posX2, int posY2, int width2, int height2) {
-        if(posX1 < (posX2 + (width2 / 2)) || posX2< (posX1 + (width1 / 2)) || posY1 < (posY2 + (height2 / 2)) || posY2 < (posY1 + (height1 / 2))) {
+    public bool VerificarAcerto(float posX1, float posY1, float width1, float height1, float posX2, float posY2, float width2, float height2) {
+        Vector3 posicao = new Vector3(posX2, posY2, 0);
+        Vector3 viewPos = instance.Viewport(posicao);
+        if(posX1 < (viewPos.x + (width2 / 2)) || viewPos.x < (posX1 + (width1 / 2)) || posY1 < (viewPos.y + (height2 / 2)) || viewPos.y < (posY1 + (height1 / 2))) { // (posX1 < (posX2 + (width2 / 2)) || posX2 < (posX1 + (width1 / 2)) || posY1 < (posY2 + (height2 / 2)) || posY2 < (posY1 + (height1 / 2)))
             return true;
         } else {
             return false;
@@ -127,8 +138,8 @@ public class Fase1 : MonoBehaviour {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
         List<GameObject> listaFormas = instance.GetListaFormas(); // A lista de objetos rastreados
         for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
-            for(int j = 0; j < Utils.listaFormas.Count; i++) { // 
-                if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1, 2,3, 4)) {
+            for(int j = 0; j < Utils.listaFormas.Count; i++) { 
+                if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y)) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
                     if(listaRastreados[i].GetAssinatura() == 2) {
                         listaFormas[j].GetComponent<Forma>().DestroiForma();
                         amareloHUD.transform.localScale = new Vector3(9, 1.24f, 1);

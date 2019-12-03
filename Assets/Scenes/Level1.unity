@@ -269,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11442534, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
       propertyPath: reconnectionDelay
-      value: 2500
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 11442534, guid: a65acf0cbf56b80419f74ebf0bc845f4, type: 3}
       propertyPath: messageListener
@@ -990,6 +990,7 @@ MonoBehaviour:
   verdeHUD: {fileID: 508028816}
   formaBase: {fileID: 7903402880027064089, guid: eb3e28ebd898a5746a3a537ef6e8e5f7,
     type: 3}
+  camera: {fileID: 519420031}
 --- !u!4 &1506620288
 Transform:
   m_ObjectHideFlags: 0

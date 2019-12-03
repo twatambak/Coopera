@@ -151,5 +151,7 @@ interface InterfaceUtils {
      /// </summary>
     //==========================================================================================================//
     void AddPontosVerdes(int pontos);
+
+    Vector3 Viewport(Vector3 posicao);
 }
 
