@@ -124,6 +124,12 @@ interface InterfaceUtils {
     //==========================================================================================================//
     void RemoveListaFormas(GameObject forma);
 
+    void AddListaRastreados(ObjetosRastreados rastreado);
+
+    void RemoveListaRastreados(ObjetosRastreados rastreado);
+
+    void RemoveRastreadosAntigos();
+
     //==========================================================================================================//
      /// <summary>
      /// Acrescenta uma unidade da quantia atual de formas.

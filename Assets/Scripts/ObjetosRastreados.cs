@@ -20,7 +20,7 @@ public class ObjetosRastreados {
     int largura;
     /// <summary> Altura do objeto rastreado. </summary>
     int altura;
-
+    int idade;
     //============================================================================================================
     /// <summary>
     /// Construtor da classe de objetos rastreados.
@@ -32,13 +32,14 @@ public class ObjetosRastreados {
     /// <param name="largura"> Largura do objeto rastreado identificado pela PixyCam. </param>
     /// <param name="altura"> Altura do objeto rastreado identificado pela PixyCam. </param>
     //============================================================================================================
-    public ObjetosRastreados(int id, int assinatura, int x, int y, int largura, int altura) {
+    public ObjetosRastreados(int id, int assinatura, int x, int y, int largura, int altura, int idade) {
         this.id = id;
         this.assinatura = assinatura;
         this.x = x;
         this.y = y;
         this.largura = largura;
         this.altura = altura;
+        this.idade = idade;
     }
 
     //============================================================================================================
@@ -101,6 +102,10 @@ public class ObjetosRastreados {
         return altura;
     }
 
+    public int GetIdade() {
+        return idade;
+    }
+
     //============================================================================================================
      /// <summary>
      /// Exibe as informações da classe de objeto rastreado.
@@ -108,7 +113,7 @@ public class ObjetosRastreados {
      /// <returns></returns>
     //============================================================================================================
     public override string ToString() {
-        string texto = "ID: " + id + "| Assinatura: " + assinatura + "| X: " + x + "| Y: " + y + "| Width: " + largura + "| Height: " + altura;
+        string texto = "ID: " + id + "| Assinatura: " + assinatura + "| X: " + x + "| Y: " + y + "| Width: " + largura + "| Height: " + altura + "| Age: " + idade;
         return texto;
     }
 }

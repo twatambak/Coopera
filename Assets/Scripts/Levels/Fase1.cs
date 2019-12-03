@@ -49,6 +49,7 @@ public class Fase1 : MonoBehaviour {
         if (game) {
             instance.CriarFormas(formaBase);
             CompararPosicao();
+            instance.RemoveRastreadosAntigos();
         }
     }
 

@@ -26,25 +26,19 @@ public class Listener : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    List<ObjetosRastreados> CriaObjetosRastreados(){
-        List<ObjetosRastreados> dadosRastreados = new List<ObjetosRastreados>();
+    void CriaObjetosRastreados(){
         if(dados != null) { 
-            while(dados.Count > 6){
-                ObjetosRastreados rastreado = new ObjetosRastreados(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]));
+            while(dados.Count > 7){
+                ObjetosRastreados rastreado = new ObjetosRastreados(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
                 Debug.Log(rastreado.ToString());
-                for(int i = 0; i < dadosRastreados.Count; i++){
-                    if(dadosRastreados[i].GetID() == rastreado.GetID()){
-                        dadosRastreados[i] = rastreado;
-                    } else {
-                        dadosRastreados.Add(rastreado);
-                    }
+                if(rastreado != null) {
+                    instance.AddListaRastreados(rastreado);
                 }
-                for(int i = 5; i >= 0; i--) { 
+                for(int i = 6; i >= 0; i--) { 
                     dados.RemoveAt(i);
                 }
             }
         }
-        return dadosRastreados;
     }
 
 
@@ -65,7 +59,7 @@ public class Listener : MonoBehaviour {
                 dados.Add(item);
             }
         }
-        instance.UpdateListaRastreados(CriaObjetosRastreados());
+        CriaObjetosRastreados();
     }
 
 
