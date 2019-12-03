@@ -26,6 +26,7 @@ public class Fase1 : MonoBehaviour {
     /// <summary> A <see cref="Forma"/> base para criação das formas de alvo. </summary>
     public GameObject formaBase;
     public Camera cam;
+
     //============================================================================================================
     /// <summary>
     /// Start() é chamada antes do update do primeiro frame.
@@ -49,7 +50,8 @@ public class Fase1 : MonoBehaviour {
         if (game) {
             instance.CriarFormas(formaBase);
             CompararPosicao();
-            //instance.RemoveRastreadosAntigos();
+            instance.RemoveRastreadosAntigos();
+
         }
     }
 
@@ -108,10 +110,10 @@ public class Fase1 : MonoBehaviour {
      /// <returns></returns>
     //============================================================================================================
     public bool VerificarAcerto(float posX1, float posY1, float width1, float height1, float posX2, float posY2, float width2, float height2) {
-        Vector3 posicao = new Vector3(posX2, posY2, 0);
+        Vector3 posicao = new Vector3(posX2, posY2, cam.nearClipPlane);
         Vector3 viewPos = instance.Viewport(posicao, cam);
-        Debug.Log("RASTREADO | PosX: " + viewPos.x + " / PosY: " + viewPos.y);
-        if(posX1 < (viewPos.x + (width2 / 2)) || viewPos.x < (posX1 + (width1 / 2)) || posY1 < (viewPos.y + (height2 / 2)) || viewPos.y < (posY1 + (height1 / 2))) { // (posX1 < (posX2 + (width2 / 2)) || posX2 < (posX1 + (width1 / 2)) || posY1 < (posY2 + (height2 / 2)) || posY2 < (posY1 + (height1 / 2)))
+        //Debug.Log("RASTREADO | PosX: " + viewPos.x + " / PosY: " + viewPos.y);
+        if(posX1 < (viewPos.x + (width2 / 2)) || viewPos.x < (posX1 + (width1 / 2)) || posY1 < (viewPos.y + (height2 / 2)) || viewPos.y < (posY1 + (height1 / 2))) { // 
             Debug.Log("Acertou:");
             return true;
         } else {
@@ -131,18 +133,21 @@ public class Fase1 : MonoBehaviour {
     public void CompararPosicao() {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
         List<GameObject> listaFormas = instance.GetListaFormas(); // A lista de objetos rastreados
-        for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
-            for(int j = 0; j < Utils.listaFormas.Count; i++) { 
-                if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y)) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
-                    if(listaRastreados[i].GetAssinatura() == 2) {
-                        listaFormas[j].GetComponent<Forma>().DestroiForma();
-                        amareloHUD.transform.localScale = new Vector3(9, 1.24f, 1);
-                    }
+        if(listaRastreados != null && listaFormas != null) {
+            Debug.Log("wow");
+            for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
+                for(int j = 0; j < listaFormas.Count; j++) { 
+                    if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y)) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
+                        if(listaRastreados[i].GetAssinatura() == 2) {
+                            listaFormas[j].GetComponent<Forma>().DestroiForma();
+                        }
 
-                    if(listaRastreados[i].GetAssinatura() == 3) {
-                        Utils.listaFormas[j].GetComponent<Forma>().DestroiForma();
+                        if(listaRastreados[i].GetAssinatura() == 3) {
+                            listaFormas[j].GetComponent<Forma>().DestroiForma();
+                        }
                     }
                 }
+                instance.RemoveListaRastreados(listaRastreados[i]);
             }
         }
     }

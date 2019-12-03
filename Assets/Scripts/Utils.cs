@@ -218,13 +218,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     public void AddListaRastreados(ObjetosRastreados rastreado) {
-        for(int i = 0; i < listaRastreados.Count; i++){
-            if(listaRastreados[i].GetID() == rastreado.GetID()){
-                listaRastreados[i] = rastreado;
-            } else {
-                listaRastreados.Add(rastreado);
-            }
-        }
+        listaRastreados.Add(rastreado);
+        Debug.Log("Tam: " + GetListaRastreados().Count);
     }
 
     public void RemoveListaRastreados(ObjetosRastreados rastreado) {
@@ -280,8 +275,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     public Vector3 Viewport(Vector3 posicao, Camera cam) {
-        cam = GetComponent<Camera>();
-        Vector3 novaPosicao = cam.ViewportToWorldPoint(posicao);
+        Vector3 novaPosicao = cam.GetComponent<Camera>().ViewportToWorldPoint(posicao);
         return novaPosicao;
     }
 }
