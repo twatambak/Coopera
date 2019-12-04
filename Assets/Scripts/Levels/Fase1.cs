@@ -112,7 +112,7 @@ public class Fase1 : MonoBehaviour {
     public bool VerificarAcerto(float posX1, float posY1, float width1, float height1, float posX2, float posY2, float width2, float height2) {
         Vector3 posicao = new Vector3(posX2, posY2, cam.nearClipPlane);
         Vector3 viewPos = instance.Viewport(posicao, cam);
-        //Debug.Log("RASTREADO | PosX: " + viewPos.x + " / PosY: " + viewPos.y);
+        Debug.Log("COMPARAÇÃO -> Forma(" + viewPos.x + ", " + viewPos.y + ") | Rastreio(" + posX1 + ", " + posY1 + ")");
         if(posX1 < (viewPos.x + (width2 / 2)) || viewPos.x < (posX1 + (width1 / 2)) || posY1 < (viewPos.y + (height2 / 2)) || viewPos.y < (posY1 + (height1 / 2))) { // 
             Debug.Log("Acertou:");
             return true;
