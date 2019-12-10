@@ -293,14 +293,53 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Realiza o viewport.
+     /// Realiza o viewport da posição no "mundo real" para o jogo.
      /// </summary>
      /// <param name="posicao"></param>
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================// 
-    public Vector3 Viewport(Vector3 posicao, Camera cam) {
+    public Vector3 ViewportPixyParaJogo(Vector3 posicao, Camera cam) {
         Vector3 novaPosicao = cam.GetComponent<Camera>().WorldToViewportPoint(posicao);
+        return novaPosicao;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <param name="cam"></param>
+     /// <returns></returns>
+    //==========================================================================================================// 
+    public Vector3 ViewportJogoParaPixy(Vector3 posicao, Camera cam) {
+        Vector3 novaPosicao = cam.GetComponent<Camera>().ViewportToWorldPoint(posicao);
+        return novaPosicao;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <param name="cam"></param>
+     /// <returns></returns>
+    //==========================================================================================================// 
+    public Vector3 ViewportPixyTela(Vector3 posicao, Camera cam) {
+        Vector3 novaPosicao = cam.GetComponent<Camera>().WorldToScreenPoint(posicao);
+        return novaPosicao;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <param name="cam"></param>
+     /// <returns></returns>
+    //==========================================================================================================// 
+    public Vector3 ViewportJogoTela(Vector3 posicao, Camera cam) {
+        Vector3 novaPosicao = cam.GetComponent<Camera>().ViewportToScreenPoint(posicao);
         return novaPosicao;
     }
 }

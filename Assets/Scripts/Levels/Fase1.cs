@@ -100,28 +100,28 @@ public class Fase1 : MonoBehaviour {
      /// <summary>
      /// Confere a posição dos objetos.
      /// </summary>
-     /// <param name="posX1"> A posição X do primeiro objeto. </param>
-     /// <param name="posY1"> A posição Y do primeiro objeto. </param>
-     /// <param name="width1"> A largura do primeiro objeto. </param> 
-     /// <param name="height1"> A altura do primeiro objeto. </param>
-     /// <param name="posX2"> A posição X do segundo objeto. </param>
-     /// <param name="posY2"> A posição Y do segundo objeto. </param>
-     /// <param name="width2"> A largura do segundo objeto. </param>
-     /// <param name="height2"> A altura do segundo objeto. </param>
+     /// <param name="rX"> A posição X do primeiro objeto. </param>
+     /// <param name="rY"> A posição Y do primeiro objeto. </param>
+     /// <param name="rL"> A largura do primeiro objeto. </param> 
+     /// <param name="rA"> A altura do primeiro objeto. </param>
+     /// <param name="fX"> A posição X do segundo objeto. </param>
+     /// <param name="fY"> A posição Y do segundo objeto. </param>
+     /// <param name="fL"> A largura do segundo objeto. </param>
+     /// <param name="fA"> A altura do segundo objeto. </param>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(float posX1, float posY1, float width1, float height1, float posX2, float posY2, float width2, float height2) {
-        Vector3 posicao = new Vector3(posX1, posY1, 0);
-        Vector3 viewPos = instance.Viewport(posicao, cam);
-        
-        if(viewPos.x == posX2 || viewPos.y == posY2) { // viewPos.x < (posX2 + (width2 / 2)) || posX2 < (viewPos.x + (width1 / 2)) || viewPos.y < (posY2 + (height2 / 2)) || posY2 < (viewPos.y + (height1 / 2))
-            Debug.Log("ACERTOU -> Rastreio(" + viewPos.x + "; " + viewPos.y + ") | Forma(" + posX2 + "; " + posY2 + ")");
+    public bool VerificarAcerto(float rX, float rY, float rL, float rA, float fX, float fY, float fL, float fA) {
+        Vector3 rastreio = new Vector3(rX, rY, 0);
+        Vector3 portRastreio = instance.ViewportPixyTela(rastreio, cam); // instance.ViewportPixyParaJogo(rastreio, cam)
+        Vector3 forma = new Vector3(fX, fY, 0);
+        Vector3 portForma = instance.ViewportJogoTela(forma, cam);
+        if(portRastreio.x < (portForma.x / 10) || portForma.x < (portRastreio.x / 10) || portRastreio.y < (portForma.y / 10) || portForma.y < (portRastreio.y / 10)) {
+            Debug.Log("ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
             return true;
         } else {
-            Debug.Log("NÃO ACERTOU -> Rastreio(" + viewPos.x + "; " + viewPos.y + ") | Forma(" + posX2 + "; " + posY2 + ")");
+            Debug.Log("NÃO ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
             return false;
         }
-
     }
 
     //===================================================================================================
@@ -168,7 +168,7 @@ public class Fase1 : MonoBehaviour {
         if(listaRastreados != null) {  
             for (int i = 0; i < listaRastreados.Count; i++) {
                 Vector3 posicao = new Vector3(listaRastreados[i].GetX(), listaRastreados[i].GetY(), 0);
-                viewPos = instance.Viewport(posicao, cam);
+                viewPos = instance.ViewportPixyParaJogo(posicao, cam);
                 novaForma = Instantiate(identificador) as GameObject;
                 novaForma.transform.position = new Vector2(viewPos.x, viewPos.y);
                 novaForma.transform.localScale = new Vector3(listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1);

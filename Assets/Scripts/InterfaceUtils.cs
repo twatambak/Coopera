@@ -173,6 +173,28 @@ interface InterfaceUtils {
     //==========================================================================================================//
     void AddPontosVerdes(int pontos);
 
-    Vector3 Viewport(Vector3 posicao, Camera cam);
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport da posição no "mundo real" para o jogo.
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <param name="cam"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    Vector3 ViewportPixyParaJogo(Vector3 posicao, Camera cam);
+
+    //==========================================================================================================//
+    /// <summary>
+    /// Realiza o viewport da posição no jogo para o "mundo real".
+    /// </summary>
+    /// <param name="posicao"></param>
+    /// <param name="cam"></param>
+    /// <returns></returns>
+    //==========================================================================================================// 
+    Vector3 ViewportJogoParaPixy(Vector3 posicao, Camera cam);
+
+    Vector3 ViewportPixyTela(Vector3 posicao, Camera cam);
+
+    Vector3 ViewportJogoTela(Vector3 posicao, Camera cam);
 }
 

@@ -20,7 +20,9 @@ public class ObjetosRastreados {
     int largura;
     /// <summary> Altura do objeto rastreado. </summary>
     int altura;
+    /// <summary> A idade em frames do objeto rastreado. </summary>
     int idade;
+
     //============================================================================================================
     /// <summary>
     /// Construtor da classe de objetos rastreados.
