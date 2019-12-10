@@ -124,10 +124,25 @@ interface InterfaceUtils {
     //==========================================================================================================//
     void RemoveListaFormas(GameObject forma);
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona o objeto passado na lista de objetos rastreados.
+     /// </summary>
+     /// <param name="rastreado"></param>
+    //==========================================================================================================//
     void AddListaRastreados(ObjetosRastreados rastreado);
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Remove o objeto passado da lista de rastreados.
+     /// </summary>
+     /// <param name="rastreado"></param>
+    //==========================================================================================================//
     void RemoveListaRastreados(ObjetosRastreados rastreado);
 
+    /// <summary>
+    /// Remove os 
+    /// </summary>
     void RemoveRastreadosAntigos();
 
     //==========================================================================================================//

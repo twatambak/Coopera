@@ -25,15 +25,18 @@ public class Fase1 : MonoBehaviour {
     public GameObject verdeHUD;
     /// <summary> A <see cref="Forma"/> base para criação das formas de alvo. </summary>
     public GameObject formaBase;
+    /// <summary> Objeto de base para o identificador da forma de identificação dos objetos rastreados. </summary>
+    public GameObject identificador;
+    /// <summary> Câmera do jogo. </summary>
     public Camera cam;
 
     //============================================================================================================
-    /// <summary>
-    /// Start() é chamada antes do update do primeiro frame.
-    /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
-    /// definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
-    /// uma função que faz a criação de clones do prefab Forma.
-    /// </summary>
+     /// <summary>
+     /// Start() é chamada antes do update do primeiro frame.
+     /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
+     /// definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
+     /// uma função que faz a criação de clones do prefab Forma.
+     /// </summary>
     //============================================================================================================
     void Start() {
         Esperar(5);
@@ -48,10 +51,10 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Update() {
         if (game) {
+            //IdentificadorRastreados();
             instance.CriarFormas(formaBase);
             CompararPosicao();
             instance.RemoveRastreadosAntigos();
-
         }
     }
 
@@ -65,7 +68,6 @@ public class Fase1 : MonoBehaviour {
     IEnumerator Esperar(int time) {
         yield return new WaitForSeconds(time);
     }
-
 
     //============================================================================================================
      /// <summary>
@@ -82,7 +84,6 @@ public class Fase1 : MonoBehaviour {
         textoPontosAmarelos.text = "Pontos: " + Utils.pontosTimeAmarelo;
         textoPontosVerdes.text = "Pontos: " + Utils.pontosTimeVerde;
     }
-
 
     //============================================================================================================
      /// <summary>
@@ -110,13 +111,14 @@ public class Fase1 : MonoBehaviour {
      /// <returns></returns>
     //============================================================================================================
     public bool VerificarAcerto(float posX1, float posY1, float width1, float height1, float posX2, float posY2, float width2, float height2) {
-        Vector3 posicao = new Vector3(posX2, posY2, cam.nearClipPlane);
+        Vector3 posicao = new Vector3(posX1, posY1, 0);
         Vector3 viewPos = instance.Viewport(posicao, cam);
-        Debug.Log("COMPARAÇÃO -> Forma(" + viewPos.x + ", " + viewPos.y + ") | Rastreio(" + posX1 + ", " + posY1 + ")");
-        if(posX1 < (viewPos.x + (width2 / 2)) || viewPos.x < (posX1 + (width1 / 2)) || posY1 < (viewPos.y + (height2 / 2)) || viewPos.y < (posY1 + (height1 / 2))) { // 
-            Debug.Log("Acertou:");
+        
+        if(viewPos.x == posX2 || viewPos.y == posY2) { // viewPos.x < (posX2 + (width2 / 2)) || posX2 < (viewPos.x + (width1 / 2)) || viewPos.y < (posY2 + (height2 / 2)) || posY2 < (viewPos.y + (height1 / 2))
+            Debug.Log("ACERTOU -> Rastreio(" + viewPos.x + "; " + viewPos.y + ") | Forma(" + posX2 + "; " + posY2 + ")");
             return true;
         } else {
+            Debug.Log("NÃO ACERTOU -> Rastreio(" + viewPos.x + "; " + viewPos.y + ") | Forma(" + posX2 + "; " + posY2 + ")");
             return false;
         }
 
@@ -148,6 +150,31 @@ public class Fase1 : MonoBehaviour {
                     }
                 }
                 instance.RemoveListaRastreados(listaRastreados[i]);
+            }
+        }
+    }
+
+    //===================================================================================================
+     /// <summary>
+     /// Desenha na tela a posição onde o objeto rastreadi está em relação a tela e ao "mundo real".
+     /// </summary>
+    //===================================================================================================
+    public void IdentificadorRastreados() {
+        List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados();
+        Vector3 viewPos;
+        GameObject novaForma;
+        Material material;
+        Color novaCor;
+        if(listaRastreados != null) {  
+            for (int i = 0; i < listaRastreados.Count; i++) {
+                Vector3 posicao = new Vector3(listaRastreados[i].GetX(), listaRastreados[i].GetY(), 0);
+                viewPos = instance.Viewport(posicao, cam);
+                novaForma = Instantiate(identificador) as GameObject;
+                novaForma.transform.position = new Vector2(viewPos.x, viewPos.y);
+                novaForma.transform.localScale = new Vector3(listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1);
+                novaCor = new Vector4(230, 0, 226);
+                material = novaForma.GetComponent<Renderer>().material;
+                material.color = novaCor;
             }
         }
     }

@@ -217,15 +217,32 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         listaFormas.Remove(forma);
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona o objeto passado à lista de objetos rastreados.
+     /// </summary>
+     /// <param name="rastreado"></param>
+    //==========================================================================================================//
     public void AddListaRastreados(ObjetosRastreados rastreado) {
         listaRastreados.Add(rastreado);
         Debug.Log("Tam: " + GetListaRastreados().Count);
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Remove o objeto passado da lista de objetos rastreados.s
+     /// </summary>
+     /// <param name="rastreado"></param>
+    //==========================================================================================================//
     public void RemoveListaRastreados(ObjetosRastreados rastreado) {
         listaRastreados.Remove(rastreado);
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Remove os objetos rastreados antigos que tenham uma idade maior do que 30 frames.
+     /// </summary>
+    //==========================================================================================================//
     public void RemoveRastreadosAntigos() {
         for (int i = 0; i < listaRastreados.Count; i++) {
             if(listaRastreados[i].GetIdade() > 30) {
@@ -274,8 +291,16 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         pontosTimeVerde += pontos;
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport.
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <param name="cam"></param>
+     /// <returns></returns>
+    //==========================================================================================================// 
     public Vector3 Viewport(Vector3 posicao, Camera cam) {
-        Vector3 novaPosicao = cam.GetComponent<Camera>().ViewportToWorldPoint(posicao);
+        Vector3 novaPosicao = cam.GetComponent<Camera>().WorldToViewportPoint(posicao);
         return novaPosicao;
     }
 }

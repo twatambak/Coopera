@@ -102,6 +102,12 @@ public class ObjetosRastreados {
         return altura;
     }
 
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a idade do objeto rastreado.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
     public int GetIdade() {
         return idade;
     }

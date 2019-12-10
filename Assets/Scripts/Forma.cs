@@ -93,7 +93,7 @@ public class Forma : MonoBehaviour {
 
 
     //==========================================================================================================//
-    /// <summary>
+     /// <summary>
      /// É chamada quando o objeto é clicado.
      /// A função verifica a quantia de elementos na cena e caso essa quantia seja maior do que 0, o
      /// objeto que foi clicado é destruído.
