@@ -112,10 +112,10 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     public bool VerificarAcerto(float rX, float rY, float rL, float rA, float fX, float fY, float fL, float fA) {
         Vector3 rastreio = new Vector3(rX, rY, 0);
-        Vector3 portRastreio = instance.ViewportPixyTela(rastreio, cam); // instance.ViewportPixyParaJogo(rastreio, cam)
+        Vector3 portRastreio = rastreio; // instance.ViewportPixyParaJogo(rastreio, cam)
         Vector3 forma = new Vector3(fX, fY, 0);
-        Vector3 portForma = instance.ViewportJogoTela(forma, cam);
-        if(portRastreio.x < (portForma.x / 10) || portForma.x < (portRastreio.x / 10) || portRastreio.y < (portForma.y / 10) || portForma.y < (portRastreio.y / 10)) {
+        Vector3 portForma = instance.ViewportManualJogoMundo(forma);
+        if(portRastreio.x == portForma.x || portForma.y == portRastreio.y) {
             Debug.Log("ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
             return true;
         } else {

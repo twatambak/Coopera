@@ -352,12 +352,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
 
     public Vector3 ViewportManualJogoMundo(Vector3 posicao) {
-        Vector3 resultado = new Vector3(RegraTres(posicao.x, 8, 300), RegraTres(posicao.y, 8, 300), posicao.z);
+        Vector3 resultado = new Vector3(RegraTres(posicao.x, 8, 300), RegraTres(posicao.y, -4, 200), posicao.z);
         return resultado;
     }
 
     public Vector3 ViewportManualMundoJogo(Vector3 posicao) {
-        Vector3 resultado = new Vector3(RegraTres(posicao.x, 300, 8), RegraTres(posicao.y, 300, 8), posicao.z);
+        Vector3 resultado = new Vector3(RegraTres(posicao.x, 300, 8), RegraTres(posicao.y, 200, -4), posicao.z);
         return resultado;
     }
 }
