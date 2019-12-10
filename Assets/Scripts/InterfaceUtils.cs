@@ -196,5 +196,11 @@ interface InterfaceUtils {
     Vector3 ViewportPixyTela(Vector3 posicao, Camera cam);
 
     Vector3 ViewportJogoTela(Vector3 posicao, Camera cam);
+
+    float RegraTres(float valor, float valorConhecido, float resultadoConhecido);
+
+    Vector3 ViewportManualJogoMundo(Vector3 posicao);
+
+    Vector3 ViewportManualMundoJogo(Vector3 posicao);
 }
 

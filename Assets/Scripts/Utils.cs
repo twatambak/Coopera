@@ -291,6 +291,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         pontosTimeVerde += pontos;
     }
 
+    public float RegraTres(float valor, float valorConhecido, float resultadoConhecido) {
+        float resul;
+        resul = (valor * resultadoConhecido) / valorConhecido;
+        return resul;
+    }
+
     //==========================================================================================================//
      /// <summary>
      /// Realiza o viewport da posição no "mundo real" para o jogo.
@@ -341,5 +347,17 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public Vector3 ViewportJogoTela(Vector3 posicao, Camera cam) {
         Vector3 novaPosicao = cam.GetComponent<Camera>().ViewportToScreenPoint(posicao);
         return novaPosicao;
+    }
+
+
+
+    public Vector3 ViewportManualJogoMundo(Vector3 posicao) {
+        Vector3 resultado = new Vector3(RegraTres(posicao.x, 8, 300), RegraTres(posicao.y, 8, 300), posicao.z);
+        return resultado;
+    }
+
+    public Vector3 ViewportManualMundoJogo(Vector3 posicao) {
+        Vector3 resultado = new Vector3(RegraTres(posicao.x, 300, 8), RegraTres(posicao.y, 300, 8), posicao.z);
+        return resultado;
     }
 }
