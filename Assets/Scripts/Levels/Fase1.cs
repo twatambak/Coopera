@@ -29,7 +29,8 @@ public class Fase1 : MonoBehaviour {
     public GameObject identificador;
     /// <summary> Câmera do jogo. </summary>
     public Camera cam;
-
+    public GameObject teste;
+    
     //============================================================================================================
      /// <summary>
      /// Start() é chamada antes do update do primeiro frame.
@@ -39,7 +40,6 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void Start() {
-        Esperar(5);
         quantiaMaxima = instance.GetMaximoFormas();
     }
 
@@ -52,9 +52,10 @@ public class Fase1 : MonoBehaviour {
     void Update() {
         if (game) {
             //IdentificadorRastreados();
-            instance.CriarFormas(formaBase);
-            CompararPosicao();
-            instance.RemoveRastreadosAntigos();
+            //instance.CriarFormas(formaBase);
+            //CompararPosicao();
+            //instance.RemoveRastreadosAntigos();
+            PrintarPosicao();
         }
     }
 
@@ -112,10 +113,10 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     public bool VerificarAcerto(float rX, float rY, float rL, float rA, float fX, float fY, float fL, float fA) {
         Vector3 rastreio = new Vector3(rX, rY, 0);
-        Vector3 portRastreio = rastreio; // instance.ViewportPixyParaJogo(rastreio, cam)
+        Vector3 portRastreio = instance.ViewportPixyParaJogo(rastreio, cam); // instance.ViewportManualMundoJogo(rastreio)
         Vector3 forma = new Vector3(fX, fY, 0);
-        Vector3 portForma = instance.ViewportManualJogoMundo(forma);
-        if(portRastreio.x == portForma.x || portForma.y == portRastreio.y) {
+        Vector3 portForma = forma;
+        if(portRastreio.x == portForma.x || portForma.y == portRastreio.y || portRastreio.x == portForma.y || portForma.x == portRastreio.y) {
             Debug.Log("ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
             return true;
         } else {
@@ -177,5 +178,12 @@ public class Fase1 : MonoBehaviour {
                 material.color = novaCor;
             }
         }
+    }
+
+    void PrintarPosicao() {
+        Vector3 posi = new Vector3(teste.transform.localPosition.x, teste.transform.localPosition.y, teste.transform.localPosition.z);
+        Vector3 newPosi = instance.ViewportManualJogoMundo(posi, cam);
+        Debug.Log("TESTE - POSIÇÃO JOGO ==> (X " + posi.x + ", Y " + posi.y + " )");
+        Debug.Log("TESTE - POSIÇÃO VIEWPORT ==> (X " + newPosi.x + ", Y " + newPosi.y + " )");
     }
 }

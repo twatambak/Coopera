@@ -236,6 +236,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void RemoveListaRastreados(ObjetosRastreados rastreado) {
         listaRastreados.Remove(rastreado);
+        Debug.Log("Tam: " + GetListaRastreados().Count);
     }
 
     //==========================================================================================================//
@@ -245,10 +246,16 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void RemoveRastreadosAntigos() {
         for (int i = 0; i < listaRastreados.Count; i++) {
-            if(listaRastreados[i].GetIdade() > 30) {
+            if(listaRastreados[i].GetIdade() > 500) {
                 RemoveListaRastreados(listaRastreados[i]);
             }
         }
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public void LimparRastreados() {
+        listaRastreados.Clear();
     }
 
     //==========================================================================================================//
@@ -291,6 +298,15 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         pontosTimeVerde += pontos;
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Executa regra de três.
+     /// </summary>
+     /// <param name="valor"></param>
+     /// <param name="valorConhecido"></param>
+     /// <param name="resultadoConhecido"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
     public float RegraTres(float valor, float valorConhecido, float resultadoConhecido) {
         float resul;
         resul = (valor * resultadoConhecido) / valorConhecido;
@@ -349,15 +365,27 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         return novaPosicao;
     }
 
-
-
-    public Vector3 ViewportManualJogoMundo(Vector3 posicao) {
-        Vector3 resultado = new Vector3(RegraTres(posicao.x, 8, 300), RegraTres(posicao.y, -4, 200), posicao.z);
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport (manualmente) da posição do jogo para o mundo real.
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 ViewportManualJogoMundo(Vector3 posicao, Camera cam) {
+        Vector3 resultado = new Vector3(RegraTres(posicao.x, cam.pixelWidth, 300), RegraTres(posicao.y, cam.pixelHeight, 200), posicao.z);
         return resultado;
     }
 
-    public Vector3 ViewportManualMundoJogo(Vector3 posicao) {
-        Vector3 resultado = new Vector3(RegraTres(posicao.x, 300, 8), RegraTres(posicao.y, 200, -4), posicao.z);
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport (manualmente) da posição do mundo real para o jogo.
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 ViewportManualMundoJogo(Vector3 posicao, Camera cam) {
+        Vector3 resultado = new Vector3(RegraTres(posicao.x, 300, cam.pixelWidth), RegraTres(posicao.y, 200, cam.pixelHeight), posicao.z);
         return resultado;
     }
 }

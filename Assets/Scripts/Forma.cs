@@ -102,8 +102,6 @@ public class Forma : MonoBehaviour {
     void OnMouseDown() {
         if(instance.GetQuantiaAtualFormas() > 0) {
             Destroy(this.gameObject);
-            //particulas.GetComponent<ParticleSystem>().startColor = this.GetComponent<Renderer>().material.color;
-            //Instantiate(particulas, this.transform.position, this.transform.rotation);
             instance.RemoveListaFormas(this.gameObject);
             instance.RemoveQuantiaAtual();
             instance.AddPontosAmarelos(1);

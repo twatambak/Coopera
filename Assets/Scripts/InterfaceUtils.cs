@@ -140,9 +140,11 @@ interface InterfaceUtils {
     //==========================================================================================================//
     void RemoveListaRastreados(ObjetosRastreados rastreado);
 
-    /// <summary>
-    /// Remove os 
-    /// </summary>
+    //==========================================================================================================//
+     /// <summary>
+     /// Remove os 
+     /// </summary>
+    //==========================================================================================================//
     void RemoveRastreadosAntigos();
 
     //==========================================================================================================//
@@ -193,14 +195,55 @@ interface InterfaceUtils {
     //==========================================================================================================// 
     Vector3 ViewportJogoParaPixy(Vector3 posicao, Camera cam);
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <param name="cam"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
     Vector3 ViewportPixyTela(Vector3 posicao, Camera cam);
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <param name="cam"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
     Vector3 ViewportJogoTela(Vector3 posicao, Camera cam);
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Executa regra de três.
+     /// </summary>
+     /// <param name="valor"></param>
+     /// <param name="valorConhecido"></param>
+     /// <param name="resultadoConhecido"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
     float RegraTres(float valor, float valorConhecido, float resultadoConhecido);
 
-    Vector3 ViewportManualJogoMundo(Vector3 posicao);
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport (manualmente) da posição do jogo para o mundo real.
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    Vector3 ViewportManualJogoMundo(Vector3 posicao, Camera cam);
 
-    Vector3 ViewportManualMundoJogo(Vector3 posicao);
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o viewport (manualmente) da posição do mundo real para o jogo.
+     /// </summary>
+     /// <param name="posicao"></param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    Vector3 ViewportManualMundoJogo(Vector3 posicao, Camera cam);
+
+    void LimparRastreados();
 }
 

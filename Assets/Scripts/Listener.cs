@@ -32,8 +32,11 @@ public class Listener : MonoBehaviour {
                 ObjetosRastreados rastreado = new ObjetosRastreados(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
                 Debug.Log(rastreado.ToString());
                 instance.AddListaRastreados(rastreado);
+                instance.RemoveRastreadosAntigos();
                 dados.Clear();
             }
+        } else {
+            instance.LimparRastreados();
         }
     }
 
@@ -55,8 +58,8 @@ public class Listener : MonoBehaviour {
             foreach(var item in vetorStringSerial){
                 dados.Add(item);
             }
+            CriaObjetosRastreados();
         }
-        CriaObjetosRastreados();
     }
 
 
