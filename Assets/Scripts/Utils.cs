@@ -361,7 +361,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 ViewportPixyJogo_PontoEsquerda(ObjetosRastreados objeto) {
+    public Vector3 ViewportPixyJogo_PontoEsquerda(ObjetosRastreados objeto) {
         Vector3 posY = OrigemEsquerdaRastreado(objeto);
         Vector3 conversao = ViewportPixyJogo_Vetor(posY);
         return conversao;

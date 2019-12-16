@@ -52,10 +52,10 @@ public class Fase1 : MonoBehaviour {
     void Update() {
         if (game) {
             //IdentificadorRastreados();
-            //instance.CriarFormas(formaBase);
-            //CompararPosicao();
-            //instance.RemoveRastreadosAntigos();
-            PrintarPosicao();
+            instance.CriarFormas(formaBase);
+            CompararPosicao();
+            instance.RemoveRastreadosAntigos();
+            //PrintarPosicao();
         }
     }
 
@@ -112,9 +112,11 @@ public class Fase1 : MonoBehaviour {
      /// <returns></returns>
     //============================================================================================================
     public bool VerificarAcerto(GameObject forma, ObjetosRastreados rastreio) {
+        Vector3 baseRastreio = instance.RetornaVetorRastreio(rastreio);
+        Vector3 baseForma = instance.RetornaVetorForma(forma);
         Vector3 portRastreio = instance.RetornaVetorRastreio(rastreio);
-        Vector3 portForma = forma;
-        if(portRastreio.x == portForma.x || portForma.y == portRastreio.y || portRastreio.x == portForma.y || portForma.x == portRastreio.y) {
+        Vector3 portForma = instance.RetornaVetorForma(forma);
+        if (instance.VerificaColisao(forma, rastreio)) {
             Debug.Log("ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
             return true;
         } else {
@@ -138,7 +140,7 @@ public class Fase1 : MonoBehaviour {
             Debug.Log("wow");
             for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaFormas.Count; j++) { 
-                    if(VerificarAcerto()) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
+                    if(VerificarAcerto(listaFormas[j], listaRastreados[i])) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
                         if(listaRastreados[i].GetAssinatura() == 2) {
                             listaFormas[j].GetComponent<Forma>().DestroiForma();
                         }
@@ -158,6 +160,7 @@ public class Fase1 : MonoBehaviour {
      /// Desenha na tela a posição onde o objeto rastreadi está em relação a tela e ao "mundo real".
      /// </summary>
     //===================================================================================================
+    /**
     public void IdentificadorRastreados() {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados();
         Vector3 viewPos;
@@ -167,7 +170,7 @@ public class Fase1 : MonoBehaviour {
         if(listaRastreados != null) {  
             for (int i = 0; i < listaRastreados.Count; i++) {
                 Vector3 posicao = new Vector3(listaRastreados[i].GetX(), listaRastreados[i].GetY(), 0);
-                viewPos = instance.ViewportUnity_MundoJogo(posicao, cam);
+                viewPos = instance.Viewpoe(posicao, cam);
                 novaForma = Instantiate(identificador) as GameObject;
                 novaForma.transform.position = new Vector2(viewPos.x, viewPos.y);
                 novaForma.transform.localScale = new Vector3(listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1);
@@ -183,5 +186,5 @@ public class Fase1 : MonoBehaviour {
         Vector3 newPosi = instance.ViewportManual_JogoMundo(posi, cam);
         Debug.Log("TESTE - POSIÇÃO JOGO ==> (X " + posi.x + ", Y " + posi.y + " )");
         Debug.Log("TESTE - POSIÇÃO VIEWPORT ==> (X " + newPosi.x + ", Y " + newPosi.y + " )");
-    }
+    }**/
 }
