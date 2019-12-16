@@ -419,9 +419,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public Boolean VerificaColisao(Vector3 rastreioEsq, Vector3 rastreioDir, Vector3 formaEsq, Vector3 formaDir) { 
         if((rastreioEsq.x > formaDir.x) || (rastreioDir.x < formaEsq.x) || (rastreioEsq.y > formaDir.y) || (rastreioDir.y < formaEsq.y)) {
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 

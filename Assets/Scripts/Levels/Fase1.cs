@@ -112,15 +112,23 @@ public class Fase1 : MonoBehaviour {
      /// <returns></returns>
     //============================================================================================================
     public bool VerificarAcerto(GameObject forma, ObjetosRastreados rastreio) {
-        Vector3 baseRastreio = instance.RetornaVetorRastreio(rastreio);
-        Vector3 baseForma = instance.RetornaVetorForma(forma);
-        Vector3 portRastreio = instance.RetornaVetorRastreio(rastreio);
-        Vector3 portForma = instance.RetornaVetorForma(forma);
+        Vector3 centroRastreio = instance.RetornaVetorRastreio(rastreio);
+        Vector3 centroForma = instance.RetornaVetorForma(forma);
+        Vector3 rastreioDir = instance.ViewportPixyJogo_PontoDireita(rastreio);
+        Vector3 rastreioEsq = instance.ViewportPixyJogo_PontoEsquerda(rastreio);
+        Vector3 formaDir = instance.OrigemDireitaForma(forma);
+        Vector3 formaEsq = instance.OrigemEsquerdaForma(forma);
         if (instance.VerificaColisao(forma, rastreio)) {
-            Debug.Log("ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
+            Debug.Log("ACERTOU (Base) -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
+            Debug.Log("ACERTOU (Esquerda) -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("ACERTOU (Direita) -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
+            Debug.Log("------------------------------------------------------------------------------");
             return true;
         } else {
-            Debug.Log("NÃO ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
+            Debug.Log("NÃO ACERTOU (Base) -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
+            Debug.Log("NÃO ACERTOU (Esquerda) -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("NÃO ACERTOU (Direita) -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
+            Debug.Log("------------------------------------------------------------------------------");
             return false;
         }
     }
