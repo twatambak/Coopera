@@ -113,7 +113,7 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     public bool VerificarAcerto(float rX, float rY, float rL, float rA, float fX, float fY, float fL, float fA) {
         Vector3 rastreio = new Vector3(rX, rY, 0);
-        Vector3 portRastreio = instance.ViewportPixyParaJogo(rastreio, cam); // instance.ViewportManualMundoJogo(rastreio)
+        Vector3 portRastreio = instance.ViewportUnity_MundoJogo(rastreio, cam); // instance.ViewportManual_MundoJogo(rastreio)
         Vector3 forma = new Vector3(fX, fY, 0);
         Vector3 portForma = forma;
         if(portRastreio.x == portForma.x || portForma.y == portRastreio.y || portRastreio.x == portForma.y || portForma.x == portRastreio.y) {
@@ -169,7 +169,7 @@ public class Fase1 : MonoBehaviour {
         if(listaRastreados != null) {  
             for (int i = 0; i < listaRastreados.Count; i++) {
                 Vector3 posicao = new Vector3(listaRastreados[i].GetX(), listaRastreados[i].GetY(), 0);
-                viewPos = instance.ViewportPixyParaJogo(posicao, cam);
+                viewPos = instance.ViewportUnity_MundoJogo(posicao, cam);
                 novaForma = Instantiate(identificador) as GameObject;
                 novaForma.transform.position = new Vector2(viewPos.x, viewPos.y);
                 novaForma.transform.localScale = new Vector3(listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1);
@@ -182,7 +182,7 @@ public class Fase1 : MonoBehaviour {
 
     void PrintarPosicao() {
         Vector3 posi = new Vector3(teste.transform.localPosition.x, teste.transform.localPosition.y, teste.transform.localPosition.z);
-        Vector3 newPosi = instance.ViewportManualJogoMundo(posi, cam);
+        Vector3 newPosi = instance.ViewportManual_JogoMundo(posi, cam);
         Debug.Log("TESTE - POSIÇÃO JOGO ==> (X " + posi.x + ", Y " + posi.y + " )");
         Debug.Log("TESTE - POSIÇÃO VIEWPORT ==> (X " + newPosi.x + ", Y " + newPosi.y + " )");
     }

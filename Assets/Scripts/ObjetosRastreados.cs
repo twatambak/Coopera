@@ -24,15 +24,15 @@ public class ObjetosRastreados {
     int idade;
 
     //============================================================================================================
-    /// <summary>
-    /// Construtor da classe de objetos rastreados.
-    /// </summary>
-    /// <param name="id"> ID do objeto rastreado identificado pela PixyCam. </param>
-    /// <param name="assinatura"> Assinatura de cor do objeto rastreado identificado pela PixyCam. </param>
-    /// <param name="x"> Posição X do objeto rastreado identificado pela PixyCam. </param>
-    /// <param name="y"> Posição Y do objeto rastreado identificado pela PixyCam. </param>
-    /// <param name="largura"> Largura do objeto rastreado identificado pela PixyCam. </param>
-    /// <param name="altura"> Altura do objeto rastreado identificado pela PixyCam. </param>
+     /// <summary>
+     /// Construtor da classe de objetos rastreados.
+     /// </summary>
+     /// <param name="id"> ID do objeto rastreado identificado pela PixyCam. </param>
+     /// <param name="assinatura"> Assinatura de cor do objeto rastreado identificado pela PixyCam. </param>
+     /// <param name="x"> Posição X do objeto rastreado identificado pela PixyCam. </param>
+     /// <param name="y"> Posição Y do objeto rastreado identificado pela PixyCam. </param>
+     /// <param name="largura"> Largura do objeto rastreado identificado pela PixyCam. </param>
+     /// <param name="altura"> Altura do objeto rastreado identificado pela PixyCam. </param>
     //============================================================================================================
     public ObjetosRastreados(int id, int assinatura, int x, int y, int largura, int altura, int idade) {
         this.id = id;

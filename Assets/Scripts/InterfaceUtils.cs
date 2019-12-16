@@ -183,7 +183,7 @@ interface InterfaceUtils {
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 ViewportPixyParaJogo(Vector3 posicao, Camera cam);
+    Vector3 ViewportUnity_MundoJogo(Vector3 posicao, Camera cam);
 
     //==========================================================================================================//
     /// <summary>
@@ -193,7 +193,7 @@ interface InterfaceUtils {
     /// <param name="cam"></param>
     /// <returns></returns>
     //==========================================================================================================// 
-    Vector3 ViewportJogoParaPixy(Vector3 posicao, Camera cam);
+    Vector3 ViewportUnity_JogoMundo(Vector3 posicao, Camera cam);
 
     //==========================================================================================================//
      /// <summary>
@@ -203,7 +203,7 @@ interface InterfaceUtils {
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 ViewportPixyTela(Vector3 posicao, Camera cam);
+    Vector3 ViewportUnity_MundoTela(Vector3 posicao, Camera cam);
 
     //==========================================================================================================//
      /// <summary>
@@ -213,7 +213,7 @@ interface InterfaceUtils {
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 ViewportJogoTela(Vector3 posicao, Camera cam);
+    Vector3 ViewportUnity_JogoTela(Vector3 posicao, Camera cam);
 
     //==========================================================================================================//
      /// <summary>
@@ -233,7 +233,7 @@ interface InterfaceUtils {
      /// <param name="posicao"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 ViewportManualJogoMundo(Vector3 posicao, Camera cam);
+    Vector3 ViewportManual_JogoMundo(Vector3 posicao, Camera cam);
 
     //==========================================================================================================//
      /// <summary>
@@ -242,8 +242,49 @@ interface InterfaceUtils {
      /// <param name="posicao"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 ViewportManualMundoJogo(Vector3 posicao, Camera cam);
+    Vector3 ViewportManual_MundoJogo(Vector3 posicao, Camera cam);
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Limpa os objetos rastreados pela PixyCam.
+     /// </summary>
+    //==========================================================================================================//
     void LimparRastreados();
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto X central da forma (localizado no canto superior direito da forma).
+     /// </summary>
+     /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    Vector3 CentroXForma(GameObject forma);
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto Y central da forma (localizado no canto inferior esquerdo da forma).
+     /// </summary>
+     /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    Vector3 CentroYForma(GameObject forma);
+
+    //==========================================================================================================//
+    /// <summary>
+    /// Retorna o ponto X central do objeto rastreado (localizado no canto superior direito do objeto rastreado).
+    /// </summary>
+    /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central X. </param>
+    /// <returns></returns>
+    //==========================================================================================================//
+    Vector3 CentroXRastreado(ObjetosRastreados rastreio);
+
+    //==========================================================================================================//
+     7/// <summary>
+     /// Retorna o ponto Y central do objeto rastreado (localizado no canto inferior esquerdo do objeto rastreado).
+     /// </summary>
+     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central Y. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    Vector3 CentroYRastreado(ObjetosRastreados rastreio);
 }
 

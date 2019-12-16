@@ -137,11 +137,11 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// A função recebe uma lista de ObjetosRastreados, refente aos objetos rastreados. A lista (listaRastreados) dentro da
-     /// classe atual (Utils), armazena todos os blocos rastreados. Essa lista é atualizada com as informações
-     /// recebidas por essa função.
+     /// A função recebe uma lista de ObjetosRastreados, refente aos objetos rastreados. A lista (listaRastreados) 
+     /// dentro da classe atual (Utils), armazena todos os blocos rastreados. Essa lista é atualizada com as 
+     /// informações recebidas por essa função.
      /// </summary>
-     /// <param name="dados"></param>
+     /// <param name="dados"> Lista de dados de objetos rastreados. </param>
     //==========================================================================================================//
     public void UpdateListaRastreados(List<ObjetosRastreados> dados) {
         listaRastreados = dados;
@@ -253,6 +253,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Limpa os objetos rastreados pela PixyCam.
+     /// </summary>
     //==========================================================================================================//
     public void LimparRastreados() {
         listaRastreados.Clear();
@@ -315,77 +318,199 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Realiza o viewport da posição no "mundo real" para o jogo.
+     /// Realiza o viewport (Unity) da posição no "mundo real" para o jogo.
      /// </summary>
      /// <param name="posicao"></param>
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================// 
-    public Vector3 ViewportPixyParaJogo(Vector3 posicao, Camera cam) {
+    public Vector3 ViewportUnity_MundoJogo(Vector3 posicao, Camera cam) {
         Vector3 novaPosicao = cam.GetComponent<Camera>().WorldToViewportPoint(posicao);
         return novaPosicao;
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// Realiza o viewport (Unity) da posição no jogo para o "mundo real".
      /// </summary>
      /// <param name="posicao"></param>
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================// 
-    public Vector3 ViewportJogoParaPixy(Vector3 posicao, Camera cam) {
+    public Vector3 ViewportUnity_JogoMundo(Vector3 posicao, Camera cam) {
         Vector3 novaPosicao = cam.GetComponent<Camera>().ViewportToWorldPoint(posicao);
         return novaPosicao;
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// Realiza o viewport (Unity) da posição no mundo real para a pixy.
      /// </summary>
      /// <param name="posicao"></param>
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================// 
-    public Vector3 ViewportPixyTela(Vector3 posicao, Camera cam) {
+    public Vector3 ViewportUnity_MundoTela(Vector3 posicao, Camera cam) {
         Vector3 novaPosicao = cam.GetComponent<Camera>().WorldToScreenPoint(posicao);
         return novaPosicao;
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Realiza o viewport da posição no jogo para o "mundo real".
+     /// Realiza o viewport (Unity) da posição no jogo para o "mundo real".
      /// </summary>
      /// <param name="posicao"></param>
      /// <param name="cam"></param>
      /// <returns></returns>
     //==========================================================================================================// 
-    public Vector3 ViewportJogoTela(Vector3 posicao, Camera cam) {
+    public Vector3 ViewportUnity_JogoTela(Vector3 posicao, Camera cam) {
         Vector3 novaPosicao = cam.GetComponent<Camera>().ViewportToScreenPoint(posicao);
         return novaPosicao;
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Realiza o viewport (manualmente) da posição do jogo para o mundo real.
+     /// Realiza o viewport (manual) da posição do jogo para o mundo real.
      /// </summary>
      /// <param name="posicao"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 ViewportManualJogoMundo(Vector3 posicao, Camera cam) {
+    public Vector3 ViewportManual_JogoMundo(Vector3 posicao, Camera cam) {
         Vector3 resultado = new Vector3(RegraTres(posicao.x, cam.pixelWidth, 300), RegraTres(posicao.y, cam.pixelHeight, 200), posicao.z);
         return resultado;
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Realiza o viewport (manualmente) da posição do mundo real para o jogo.
+     /// Realiza o viewport (manual) da posição do mundo real para o jogo.
      /// </summary>
      /// <param name="posicao"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 ViewportManualMundoJogo(Vector3 posicao, Camera cam) {
+    public Vector3 ViewportManual_MundoJogo(Vector3 posicao, Camera cam) {
         Vector3 resultado = new Vector3(RegraTres(posicao.x, 300, cam.pixelWidth), RegraTres(posicao.y, 200, cam.pixelHeight), posicao.z);
         return resultado;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Converte o ponto X (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
+     /// do jogo.
+     /// </summary>
+     /// <param name="x"> O ponto X central do objeto rastreado. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public float ViewportAtualizado_ConverteXPixyJogo(float x) {
+        float convX = ((16 * (300 - x)) / 300) - 8;
+        return convX;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Converte o ponto Y (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
+     /// do jogo.
+     /// </summary>
+     /// <param name="y"> O ponto y central do objeto rastreado. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public float ViewportAtualizado_ConverteYPixyJogo(float y) {
+        float convY = ((8 * (200 - y)) / 200) - 4;
+        return convY;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza a conversão do vetor recebido para o sistema de coordenadas do jogo.
+     /// </summary>
+     /// <param name="conv"> O vetor a ser convertido. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 ViewportAtualizado_ConverteVetorPixyJogo(Vector3 conv) {
+        Vector3 converte = new Vector3(ViewportAtualizado_ConverteXPixyJogo(conv.x), ViewportAtualizado_ConverteYPixyJogo(conv.y), conv.z);
+        return converte;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto X (localizado no canto superior
+     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
+     /// </summary>
+     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 ViewportAtualizado_PontoXPixyJogo(ObjetosRastreados objeto) {
+        Vector3 posX = CentroXRastreado(objeto);
+        Vector3 conversao = ViewportAtualizado_ConverteVetorPixyJogo(posX);
+        return conversao;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto Y (localizado no canto superior
+     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
+     /// </summary>
+     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 ViewportAtualizado_PontoYPixyJogo(ObjetosRastreados objeto) {
+        Vector3 posY = CentroYRastreado(objeto);
+        Vector3 conversao = ViewportAtualizado_ConverteVetorPixyJogo(posY);
+        return conversao;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto X central da forma (localizado no canto superior direito da forma).
+     /// </summary>
+     /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 CentroXForma(GameObject forma) {
+        Vector3 pos = new Vector3(((forma.transform.localPosition.x / 2) + forma.transform.localScale.x), (forma.transform.localPosition.y / 2), forma.transform.localPosition.z);
+        return pos;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto Y central da forma (localizado no canto inferior esquerdo da forma).
+     /// </summary>
+     /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 CentroYForma(GameObject forma) {
+        Vector3 pos = new Vector3((forma.transform.localPosition.x / 2), ((forma.transform.localPosition.y / 2) + forma.transform.localScale.y), forma.transform.localPosition.z);
+        return pos;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto X central do objeto rastreado (localizado no canto superior direito do objeto rastreado).
+     /// </summary>
+     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central X. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 CentroXRastreado(ObjetosRastreados rastreio) {
+        Vector3 pos = new Vector3((rastreio.GetX() + rastreio.GetLargura()), rastreio.GetY(), 0);
+        return pos;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto Y central do objeto rastreado (localizado no canto inferior esquerdo do objeto rastreado).
+     /// </summary>
+     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central Y. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 CentroYRastreado(ObjetosRastreados rastreio) {
+        Vector3 pos = new Vector3(rastreio.GetX(), (rastreio.GetY() + rastreio.GetAltura()), 0);
+        return pos;
+    }
+
+    public Boolean Colisao(Vector3 rastreioEsq, Vector3 rastreioDir, Vector3 formaEsq, Vector3 formaDir) { 
+        if((rastreioEsq.x > formaDir.x) || (rastreioDir.x < formaEsq.x) || (rastreioEsq.y > formaDir.y) || (rastreioDir.y < formaEsq.y)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
