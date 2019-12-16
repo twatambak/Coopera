@@ -116,8 +116,8 @@ public class Fase1 : MonoBehaviour {
         Vector3 centroForma = instance.RetornaVetorForma(forma);
         Vector3 rastreioDir = instance.ViewportPixyJogo_PontoDireita(rastreio);
         Vector3 rastreioEsq = instance.ViewportPixyJogo_PontoEsquerda(rastreio);
-        Vector3 formaDir = instance.OrigemDireitaForma(forma);
-        Vector3 formaEsq = instance.OrigemEsquerdaForma(forma);
+        Vector3 formaDir = instance.PontoDireitaForma(forma);
+        Vector3 formaEsq = instance.PontoEsquerdaForma(forma);
         if (instance.VerificaColisao(forma, rastreio)) {
             Debug.Log("ACERTOU (Base) -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
             Debug.Log("ACERTOU (Esquerda) -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");

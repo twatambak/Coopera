@@ -238,7 +238,7 @@ interface InterfaceUtils {
      /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 OrigemDireitaForma(GameObject forma);
+    Vector3 PontoDireitaForma(GameObject forma);
 
     //==========================================================================================================//
      /// <summary>
@@ -247,7 +247,7 @@ interface InterfaceUtils {
      /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 OrigemEsquerdaForma(GameObject forma);
+    Vector3 PontoEsquerdaForma(GameObject forma);
 
     //==========================================================================================================//
      /// <summary>
@@ -256,7 +256,7 @@ interface InterfaceUtils {
      /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central X. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 OrigemDireitaRastreado(ObjetosRastreados rastreio);
+    Vector3 PontoDireitaRastreado(ObjetosRastreados rastreio);
 
     //==========================================================================================================//
      /// <summary>
@@ -265,7 +265,7 @@ interface InterfaceUtils {
      /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central Y. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 OrigemEsquerdaRastreado(ObjetosRastreados rastreio);
+    Vector3 PontoEsquerdaRastreado(ObjetosRastreados rastreio);
 
     //==========================================================================================================//
     //==========================================================================================================//

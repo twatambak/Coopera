@@ -348,8 +348,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public Vector3 ViewportPixyJogo_PontoDireita(ObjetosRastreados objeto) {
-        Vector3 posX = OrigemDireitaRastreado(objeto);
+        Vector3 posX = PontoDireitaRastreado(objeto);
         Vector3 conversao = ViewportPixyJogo_Vetor(posX);
+        //Vector3 conv = ViewportPixyJogo_Vetor(RetornaVetorRastreio(objeto));
+        //Vector3 conversao = PontoDireitaRastreado(conv, objeto.GetAltura());
         return conversao;
     }
 
@@ -362,8 +364,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public Vector3 ViewportPixyJogo_PontoEsquerda(ObjetosRastreados objeto) {
-        Vector3 posY = OrigemEsquerdaRastreado(objeto);
+        Vector3 posY = PontoEsquerdaRastreado(objeto);
         Vector3 conversao = ViewportPixyJogo_Vetor(posY);
+        //Vector3 conv = ViewportPixyJogo_Vetor(RetornaVetorRastreio(objeto));
+        //Vector3 conversao = PontoEsquerdaRastreado(conv, objeto.GetAltura());
         return conversao;
     }
 
@@ -374,7 +378,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 OrigemDireitaForma(GameObject forma) {
+    public Vector3 PontoDireitaForma(GameObject forma) {
         Vector3 pos = new Vector3(((forma.transform.localPosition.x / 2) + forma.transform.localScale.x), (forma.transform.localPosition.y / 2), forma.transform.localPosition.z);
         return pos;
     }
@@ -386,7 +390,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 OrigemEsquerdaForma(GameObject forma) {
+    public Vector3 PontoEsquerdaForma(GameObject forma) {
         Vector3 pos = new Vector3((forma.transform.localPosition.x / 2), ((forma.transform.localPosition.y / 2) + forma.transform.localScale.y), forma.transform.localPosition.z);
         return pos;
     }
@@ -398,7 +402,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central X. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 OrigemDireitaRastreado(ObjetosRastreados rastreio) {
+    public Vector3 PontoDireitaRastreado(ObjetosRastreados rastreio) {
         Vector3 pos = new Vector3((rastreio.GetX() + rastreio.GetLargura()), rastreio.GetY(), 0);
         return pos;
     }
@@ -410,18 +414,42 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central Y. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 OrigemEsquerdaRastreado(ObjetosRastreados rastreio) {
+    public Vector3 PontoEsquerdaRastreado(ObjetosRastreados rastreio) {
         Vector3 pos = new Vector3(rastreio.GetX(), (rastreio.GetY() + rastreio.GetAltura()), 0);
+        return pos;
+    }
+
+        //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto X central do objeto rastreado (localizado no canto superior direito do objeto rastreado).
+     /// </summary>
+     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central X. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 PontoDireitaRastreado(Vector3 conv, float tam) {
+        Vector3 pos = new Vector3((conv.x + tam), conv.y, conv.z);
+        return pos;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto Y central do objeto rastreado (localizado no canto inferior esquerdo do objeto rastreado).
+     /// </summary>
+     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central Y. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector3 PontoEsquerdaRastreado(Vector3 conv, float tam) {
+        Vector3 pos = new Vector3((conv.x + tam), conv.y, conv.z);
         return pos;
     }
 
     //==========================================================================================================//
     //==========================================================================================================//
-    public Boolean VerificaColisao(Vector3 rastreioEsq, Vector3 rastreioDir, Vector3 formaEsq, Vector3 formaDir) { 
-        if((rastreioEsq.x > formaDir.x) || (rastreioDir.x < formaEsq.x) || (rastreioEsq.y > formaDir.y) || (rastreioDir.y < formaEsq.y)) {
-            return true;
-        } else {
+    public Boolean VerificaColisao(Vector3 rastreioEsq, Vector3 rastreioDir, Vector3 formaEsq, Vector3 formaDir) {
+        if (rastreioDir.x < formaEsq.x || formaDir.x < rastreioEsq.x || rastreioDir.y < formaEsq.y || formaDir.y < rastreioEsq.y) { // Não há colisão
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -430,8 +458,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public Boolean VerificaColisao(GameObject forma, ObjetosRastreados rastreio) {
         Vector3 rastreioPontoDir = ViewportPixyJogo_PontoDireita(rastreio);
         Vector3 rastreioPontoEsq = ViewportPixyJogo_PontoEsquerda(rastreio);
-        Vector3 formaPontoDir = OrigemDireitaForma(forma);
-        Vector3 formaPontoEsq = OrigemEsquerdaForma(forma);
+        Vector3 formaPontoDir = PontoDireitaForma(forma);
+        Vector3 formaPontoEsq = PontoEsquerdaForma(forma);
         return (VerificaColisao(rastreioPontoDir, rastreioPontoEsq, formaPontoDir, formaPontoEsq));
     }
 
