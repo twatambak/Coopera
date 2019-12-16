@@ -111,10 +111,8 @@ public class Fase1 : MonoBehaviour {
      /// <param name="fA"> A altura do segundo objeto. </param>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(float rX, float rY, float rL, float rA, float fX, float fY, float fL, float fA) {
-        Vector3 rastreio = new Vector3(rX, rY, 0);
-        Vector3 portRastreio = instance.ViewportUnity_MundoJogo(rastreio, cam); // instance.ViewportManual_MundoJogo(rastreio)
-        Vector3 forma = new Vector3(fX, fY, 0);
+    public bool VerificarAcerto(GameObject forma, ObjetosRastreados rastreio) {
+        Vector3 portRastreio = instance.RetornaVetorRastreio(rastreio);
         Vector3 portForma = forma;
         if(portRastreio.x == portForma.x || portForma.y == portRastreio.y || portRastreio.x == portForma.y || portForma.x == portRastreio.y) {
             Debug.Log("ACERTOU -> Rastreio(" + portRastreio.x + "; " + portRastreio.y + ") | Forma(" + portForma.x + "; " + portForma.y + ")");
@@ -140,7 +138,7 @@ public class Fase1 : MonoBehaviour {
             Debug.Log("wow");
             for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaFormas.Count; j++) { 
-                    if(VerificarAcerto(listaRastreados[i].GetX(), listaRastreados[i].GetY(), listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y)) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
+                    if(VerificarAcerto()) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
                         if(listaRastreados[i].GetAssinatura() == 2) {
                             listaFormas[j].GetComponent<Forma>().DestroiForma();
                         }
