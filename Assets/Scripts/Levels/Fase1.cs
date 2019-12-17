@@ -101,14 +101,6 @@ public class Fase1 : MonoBehaviour {
      /// <summary>
      /// Confere a posição dos objetos.
      /// </summary>
-     /// <param name="rX"> A posição X do primeiro objeto. </param>
-     /// <param name="rY"> A posição Y do primeiro objeto. </param>
-     /// <param name="rL"> A largura do primeiro objeto. </param> 
-     /// <param name="rA"> A altura do primeiro objeto. </param>
-     /// <param name="fX"> A posição X do segundo objeto. </param>
-     /// <param name="fY"> A posição Y do segundo objeto. </param>
-     /// <param name="fL"> A largura do segundo objeto. </param>
-     /// <param name="fA"> A altura do segundo objeto. </param>
      /// <returns></returns>
     //============================================================================================================
     public bool VerificarAcerto(GameObject forma, ObjetosRastreados rastreio) {
@@ -168,31 +160,34 @@ public class Fase1 : MonoBehaviour {
      /// Desenha na tela a posição onde o objeto rastreadi está em relação a tela e ao "mundo real".
      /// </summary>
     //===================================================================================================
-    /**
-    public void IdentificadorRastreados() {
+    /**public void IdentificadorRastreados() {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados();
-        Vector3 viewPos;
+        Vector3 pontoEsq;
+        Vector3 pontoDir;
         GameObject novaForma;
         Material material;
         Color novaCor;
         if(listaRastreados != null) {  
             for (int i = 0; i < listaRastreados.Count; i++) {
                 Vector3 posicao = new Vector3(listaRastreados[i].GetX(), listaRastreados[i].GetY(), 0);
-                viewPos = instance.Viewpoe(posicao, cam);
+                pontoEsq = instance.PontoEsquerdaRastreado(listaRastreados[i]);
+                pontoDir = instance.PontoDireitaRastreado(listaRastreados[i]);
                 novaForma = Instantiate(identificador) as GameObject;
-                novaForma.transform.position = new Vector2(viewPos.x, viewPos.y);
+                novaForma.transform.position = new Vector2(pontoEsq.x, pontoEsq.y);
                 novaForma.transform.localScale = new Vector3(listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1);
                 novaCor = new Vector4(230, 0, 226);
                 material = novaForma.GetComponent<Renderer>().material;
                 material.color = novaCor;
             }
         }
-    }
+    }**/
 
     void PrintarPosicao() {
-        Vector3 posi = new Vector3(teste.transform.localPosition.x, teste.transform.localPosition.y, teste.transform.localPosition.z);
-        Vector3 newPosi = instance.ViewportManual_JogoMundo(posi, cam);
-        Debug.Log("TESTE - POSIÇÃO JOGO ==> (X " + posi.x + ", Y " + posi.y + " )");
-        Debug.Log("TESTE - POSIÇÃO VIEWPORT ==> (X " + newPosi.x + ", Y " + newPosi.y + " )");
-    }**/
+        Vector3 baseTeste = new Vector3(teste.transform.localPosition.x, teste.transform.localPosition.y, teste.transform.localPosition.z);
+        Vector3 testeEsq = instance.PontoEsquerdaForma(teste);
+        Vector3 testeDir = instance.PontoDireitaForma(teste);
+        Debug.Log("TESTE - POSIÇÃO JOGO ==> (X " + baseTeste.x + ", Y " + baseTeste.y + " )");
+        Debug.Log("TESTE - POSIÇÃO VIEWPORT ESQUERDA ==> (X " + testeEsq.x + ", Y " + testeEsq.y + " )");
+        Debug.Log("TESTE - POSIÇÃO VIEWPORT DIREITA ==> (X " + testeDir.x + ", Y " + testeDir.y + " )");
+    }
 }
