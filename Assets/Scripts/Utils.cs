@@ -139,6 +139,18 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+    //==========================================================================================================//
+    public int GetTamanhoListaRastreados() {
+        return listaRastreados.Count;
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public void ExibeTamanhoListaRastreados() {
+        Debug.Log("Tamanho da Lista de Rastreados: " + GetTamanhoListaRastreados());
+    }
+
+    //==========================================================================================================//
      /// <summary>
      /// A função recebe uma lista de ObjetosRastreados, refente aos objetos rastreados. A lista (listaRastreados) 
      /// dentro da classe atual (Utils), armazena todos os blocos rastreados. Essa lista é atualizada com as 
@@ -227,8 +239,21 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="rastreado"></param>
     //==========================================================================================================//
     public void AddListaRastreados(ObjetosRastreados rastreado) {
-        listaRastreados.Add(rastreado);
-        Debug.Log("Tam: " + GetListaRastreados().Count);
+        if(listaRastreados.Count != 0) {
+            for(int i = 0; i < listaRastreados.Count; i++) {
+                Debug.Log(rastreado);
+                if (listaRastreados[i].GetID() == rastreado.GetID()) {
+                    listaRastreados[i] = rastreado;
+                    ExibeTamanhoListaRastreados();
+                } else {
+                    listaRastreados.Add(rastreado);
+                    ExibeTamanhoListaRastreados();
+                }
+            }
+        } else {
+            listaRastreados.Add(rastreado);
+            ExibeTamanhoListaRastreados();
+        }
     }
 
     //==========================================================================================================//
@@ -239,7 +264,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void RemoveListaRastreados(ObjetosRastreados rastreado) {
         listaRastreados.Remove(rastreado);
-        Debug.Log("Tam: " + GetListaRastreados().Count);
     }
 
     //==========================================================================================================//
@@ -313,7 +337,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public float ViewportPixyJogo_ConverteX(float x) {
-        float convX = ((16 * (300 - x)) / 300) - 8;
+        //float convX = ((16 * (315 - x)) / 315) - 8;
+        float convX = ((x * 16) / 300) - 8;
         return convX;
     }
 
@@ -326,7 +351,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public float ViewportPixyJogo_ConverteY(float y) {
-        float convY = ((8 * (200 - y)) / 200) - 4;
+        float convY = ((7 * ((215 - y) / 215)) - 4);
         return convY;
     }
 
@@ -353,8 +378,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public Vector3 ViewportPixyJogo_PontoDireita(ObjetosRastreados objeto) {
         Vector3 posX = PontoDireitaRastreado(objeto);
         Vector3 conversao = ViewportPixyJogo_Vetor(posX);
-        //Vector3 conv = ViewportPixyJogo_Vetor(RetornaVetorRastreio(objeto));
-        //Vector3 conversao = PontoDireitaRastreado(conv, objeto.GetAltura());
         return conversao;
     }
 
@@ -369,8 +392,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public Vector3 ViewportPixyJogo_PontoEsquerda(ObjetosRastreados objeto) {
         Vector3 posY = PontoEsquerdaRastreado(objeto);
         Vector3 conversao = ViewportPixyJogo_Vetor(posY);
-        //Vector3 conv = ViewportPixyJogo_Vetor(RetornaVetorRastreio(objeto));
-        //Vector3 conversao = PontoEsquerdaRastreado(conv, objeto.GetAltura());
         return conversao;
     }
 
@@ -406,8 +427,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public Vector3 PontoDireitaRastreado(ObjetosRastreados rastreio) {
-        //Vector3 pos = new Vector3((rastreio.GetX() + rastreio.GetLargura()), (rastreio.GetY() - rastreio.GetAltura()), 0);
-        Vector3 pos = new Vector3(((rastreio.GetX() / 2) + (rastreio.GetLargura() / 2)), ((rastreio.GetY() / 2) - (rastreio.GetAltura() / 2)), 0);
+        Vector3 pos = new Vector3((rastreio.GetX() + rastreio.GetLargura()), (rastreio.GetY()), 0);
+        //Vector3 pos = new Vector3(((rastreio.GetX()) + (rastreio.GetLargura() / 2)), ((rastreio.GetY()) - (rastreio.GetAltura() / 2)), 0);
         return pos;
     }
 
@@ -419,8 +440,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public Vector3 PontoEsquerdaRastreado(ObjetosRastreados rastreio) {
-        //Vector3 pos = new Vector3((rastreio.GetX() - rastreio.GetLargura()), (rastreio.GetY() + rastreio.GetAltura()), 0);
-        Vector3 pos = new Vector3(((rastreio.GetX() / 2) - (rastreio.GetLargura() / 2)), ((rastreio.GetY() / 2) + (rastreio.GetAltura() / 2)), 0);
+        Vector3 pos = new Vector3((rastreio.GetX()), (rastreio.GetY() + rastreio.GetAltura()), 0);
+        //Vector3 pos = new Vector3(((rastreio.GetX() / 2) - (rastreio.GetLargura() / 2)), ((rastreio.GetY() / 2) + (rastreio.GetAltura() / 2)), 0);
         return pos;
     }
 
@@ -432,8 +453,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="tam"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 PontoDireitaRastreado(Vector3 conv, float tam) {
-        Vector3 pos = new Vector3((conv.x + tam), conv.y, conv.z);
+    public Vector3 PontoDireitaRastreado(Vector3 conv, float larg, float alt) {
+        Vector3 pos = new Vector3(((conv.x / 2) + (larg / 2)), ((conv.y / 2) - (alt / 2)), 0);
         return pos;
     }
 
@@ -445,8 +466,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="tam"></param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector3 PontoEsquerdaRastreado(Vector3 conv, float tam) {
-        Vector3 pos = new Vector3((conv.x + tam), conv.y, conv.z);
+    public Vector3 PontoEsquerdaRastreado(Vector3 conv, float larg, float alt) {
+        Vector3 pos = new Vector3(((conv.x / 2) - (larg / 2)), ((conv.y / 2) + (alt / 2)), 0);
         return pos;
     }
 
@@ -483,7 +504,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         Vector3 rastreioPontoEsq = ViewportPixyJogo_PontoEsquerda(rastreio);
         Vector3 formaPontoDir = PontoDireitaForma(forma);
         Vector3 formaPontoEsq = PontoEsquerdaForma(forma);
-        return (VerificaColisao(rastreioPontoDir, rastreioPontoEsq, formaPontoDir, formaPontoEsq));
+        return (VerificaColisao(rastreioPontoEsq, rastreioPontoDir, formaPontoEsq, formaPontoDir));
     }
 
     //==========================================================================================================//

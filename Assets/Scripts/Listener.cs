@@ -30,9 +30,7 @@ public class Listener : MonoBehaviour {
         if(dados != null) { 
             while(dados.Count >= 7){
                 ObjetosRastreados rastreado = new ObjetosRastreados(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
-                Debug.Log(rastreado.ToString());
                 instance.AddListaRastreados(rastreado);
-                instance.RemoveRastreadosAntigos();
                 dados.Clear();
             }
         } else {
@@ -52,7 +50,7 @@ public class Listener : MonoBehaviour {
     //==========================================================================================================//
     void OnMessageArrived(string msg) {
         if(msg != null) {
-            Debug.Log(msg);
+            //Debug.Log(msg);
             vetorStringSerial = msg.Split('|');
             foreach(var item in vetorStringSerial){
                 dados.Add(item);

@@ -16,6 +16,18 @@ public class ObjetosRastreados {
     int x;
     /// <summary> Posição Y do objeto rastreado. </summary>
     int y;
+    /// <summary> Posição X do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
+    int inicioX;
+    /// <summary> Posição Y do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
+    int inicioY;
+    /// <summary> Vetor de posição do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
+    Vector2 posicaoInicio;
+    /// <summary> Posição X do final da BoundingBox (posição localizada no canto superior direito). </summary>
+    int fimX;
+    /// <summary> Posição Y do final da BoundingBox (posição localizada no canto superior direito). </summary>
+    int fimY;
+    /// <summary> Vetor de posição do final da BoundingBox (posição localizada no canto superior direito). </summary>
+    Vector2 posicaoFinal;
     /// <summary> Largura do objeto rastreado. </summary>
     int largura;
     /// <summary> Altura do objeto rastreado. </summary>
@@ -121,7 +133,7 @@ public class ObjetosRastreados {
      /// <returns></returns>
     //============================================================================================================
     public override string ToString() {
-        string texto = "ID: " + id + "| Assinatura: " + assinatura + "| X: " + x + "| Y: " + y + "| Width: " + largura + "| Height: " + altura + "| Age: " + idade;
+        string texto = "OBJETO RASTREADO (ID " + id + ") => " + "Assinatura: " + assinatura + " | X: " + x + " | Y: " + y + " | Largura: " + largura + " | Altura: " + altura + "| Frames: " + idade;
         return texto;
     }
 }

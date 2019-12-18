@@ -72,6 +72,10 @@ interface InterfaceUtils {
     //==========================================================================================================//
     int GetQuantiaAtualFormas();
 
+    int GetTamanhoListaRastreados();
+
+    void ExibeTamanhoListaRastreados();
+
     //==========================================================================================================//
      /// <summary>
      /// A função recebe uma lista de ObjetosRastreados, refente aos objetos rastreados. A lista (listaRastreados) dentro da
