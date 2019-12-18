@@ -29,6 +29,7 @@ public class Fase1 : MonoBehaviour {
     public GameObject identificador;
     /// <summary> Câmera do jogo. </summary>
     public Camera cam;
+    /// <summary> Teste. </summary>
     public GameObject teste;
     
     //============================================================================================================
@@ -51,7 +52,6 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Update() {
         if (game) {
-            //IdentificadorRastreados();
             instance.CriarFormas(formaBase);
             CompararPosicao();
             instance.RemoveRastreadosAntigos();
@@ -137,10 +137,9 @@ public class Fase1 : MonoBehaviour {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
         List<GameObject> listaFormas = instance.GetListaFormas(); // A lista de objetos rastreados
         if(listaRastreados != null && listaFormas != null) {
-            Debug.Log("wow");
             for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaFormas.Count; j++) { 
-                    if(VerificarAcerto(listaFormas[j], listaRastreados[i])) { // listaFormas[j].transform.position.x, listaFormas[j].transform.position.y, listaFormas[j].transform.localScale.x, listaFormas[j].transform.localScale.y
+                    if(VerificarAcerto(listaFormas[j], listaRastreados[i])) { 
                         if(listaRastreados[i].GetAssinatura() == 2) {
                             listaFormas[j].GetComponent<Forma>().DestroiForma();
                         }
@@ -155,33 +154,8 @@ public class Fase1 : MonoBehaviour {
         }
     }
 
-    //===================================================================================================
-     /// <summary>
-     /// Desenha na tela a posição onde o objeto rastreadi está em relação a tela e ao "mundo real".
-     /// </summary>
-    //===================================================================================================
-    /**public void IdentificadorRastreados() {
-        List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados();
-        Vector3 pontoEsq;
-        Vector3 pontoDir;
-        GameObject novaForma;
-        Material material;
-        Color novaCor;
-        if(listaRastreados != null) {  
-            for (int i = 0; i < listaRastreados.Count; i++) {
-                Vector3 posicao = new Vector3(listaRastreados[i].GetX(), listaRastreados[i].GetY(), 0);
-                pontoEsq = instance.PontoEsquerdaRastreado(listaRastreados[i]);
-                pontoDir = instance.PontoDireitaRastreado(listaRastreados[i]);
-                novaForma = Instantiate(identificador) as GameObject;
-                novaForma.transform.position = new Vector2(pontoEsq.x, pontoEsq.y);
-                novaForma.transform.localScale = new Vector3(listaRastreados[i].GetLargura(), listaRastreados[i].GetAltura(), 1);
-                novaCor = new Vector4(230, 0, 226);
-                material = novaForma.GetComponent<Renderer>().material;
-                material.color = novaCor;
-            }
-        }
-    }**/
 
+        
     void PrintarPosicao() {
         Vector3 baseTeste = new Vector3(teste.transform.localPosition.x, teste.transform.localPosition.y, teste.transform.localPosition.z);
         Vector3 testeEsq = instance.PontoEsquerdaForma(teste);

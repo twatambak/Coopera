@@ -15,7 +15,7 @@ public class Listener : MonoBehaviour {
     /// <summary> Lista de dados do arduino.  </summary>
     List<string> dados = new List<string>();
 
-    //============================================================================================================
+    //==========================================================================================================//
      /// <summary>
      /// Cria os objetos que estão sendo rastreados utilizando das informações contidas nos quatro primeiros
      /// elementos da lista que recebeu os dados dos objetos rastreados pelo arduino. As informações dos dados do
@@ -25,7 +25,7 @@ public class Listener : MonoBehaviour {
      /// grupo de elemntos a serem analisados representam outro bloco rastreado. 
      /// </summary>
      /// <returns></returns>
-    //============================================================================================================
+    //==========================================================================================================//
     void CriaObjetosRastreados(){
         if(dados != null) { 
             while(dados.Count >= 7){
@@ -40,8 +40,7 @@ public class Listener : MonoBehaviour {
         }
     }
 
-
-    //============================================================================================================
+    //==========================================================================================================//
      /// <summary>
      /// Verifica se a mensagem recebida pela porta serial não é nula. Caso não seja, separa a mensagem em partes
      /// utilizando como base de separação o carácter informado (|). Cada item separado da mensagem recebida é
@@ -50,7 +49,7 @@ public class Listener : MonoBehaviour {
      /// função createTrackedList(), a qual retorna uma lista contendo os objetos que foram rastreados.
      /// </summary>
      /// <param name="msg"> A mensagem recebida pela porta serial arduino. </param>
-    //============================================================================================================
+    //==========================================================================================================//
     void OnMessageArrived(string msg) {
         if(msg != null) {
             Debug.Log(msg);
@@ -62,14 +61,13 @@ public class Listener : MonoBehaviour {
         }
     }
 
-
-    //============================================================================================================
+    //==========================================================================================================//
      /// <summary>
      /// Verifica se a conexão foi efetuada com sucesso ou não. Executa um comando no terminal informando o status
      /// da conexão.
      /// </summary>
      /// <param name="success"></param>
-    //============================================================================================================
+    //==========================================================================================================//
     void OnConnectionEvent(bool success){
       Debug.Log(success ? "Device Connected" : "Device disconnected");
     }
