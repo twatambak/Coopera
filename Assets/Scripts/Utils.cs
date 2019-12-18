@@ -406,7 +406,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public Vector3 PontoDireitaRastreado(ObjetosRastreados rastreio) {
-        Vector3 pos = new Vector3((rastreio.GetX() + rastreio.GetLargura()), (rastreio.GetY() - rastreio.GetAltura()), 0);
+        //Vector3 pos = new Vector3((rastreio.GetX() + rastreio.GetLargura()), (rastreio.GetY() - rastreio.GetAltura()), 0);
+        Vector3 pos = new Vector3(((rastreio.GetX() / 2) + (rastreio.GetLargura() / 2)), ((rastreio.GetY() / 2) - (rastreio.GetAltura() / 2)), 0);
         return pos;
     }
 
@@ -418,7 +419,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <returns></returns>
     //==========================================================================================================//
     public Vector3 PontoEsquerdaRastreado(ObjetosRastreados rastreio) {
-        Vector3 pos = new Vector3((rastreio.GetX() - rastreio.GetLargura()), (rastreio.GetY() + rastreio.GetAltura()), 0);
+        //Vector3 pos = new Vector3((rastreio.GetX() - rastreio.GetLargura()), (rastreio.GetY() + rastreio.GetAltura()), 0);
+        Vector3 pos = new Vector3(((rastreio.GetX() / 2) - (rastreio.GetLargura() / 2)), ((rastreio.GetY() / 2) + (rastreio.GetAltura() / 2)), 0);
         return pos;
     }
 

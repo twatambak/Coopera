@@ -108,18 +108,24 @@ public class Fase1 : MonoBehaviour {
         Vector3 centroForma = instance.RetornaVetorForma(forma);
         Vector3 rastreioDir = instance.ViewportPixyJogo_PontoDireita(rastreio);
         Vector3 rastreioEsq = instance.ViewportPixyJogo_PontoEsquerda(rastreio);
+        Vector3 rastreioSemViewportEsq = instance.PontoEsquerdaRastreado(rastreio);
+        Vector3 rastreioSemViewportDir = instance.PontoDireitaRastreado(rastreio);
         Vector3 formaDir = instance.PontoDireitaForma(forma);
         Vector3 formaEsq = instance.PontoEsquerdaForma(forma);
         if (instance.VerificaColisao(forma, rastreio)) {
-            Debug.Log("ACERTOU (Base) -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
-            Debug.Log("ACERTOU (Esquerda) -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
-            Debug.Log("ACERTOU (Direita) -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
+            Debug.Log("ACERTOU (Base) NO SECO -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
+            Debug.Log("ACERTOU (Esquerda) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportEsq.x + "; " + rastreioSemViewportEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("ACERTOU (Direita) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportDir.x + "; " + rastreioSemViewportDir.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("ACERTOU (Esquerda) COM VIEWPORT -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("ACERTOU (Direita) COM VIEWPORT -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
             Debug.Log("------------------------------------------------------------------------------");
             return true;
         } else {
-            Debug.Log("NÃO ACERTOU (Base) -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
-            Debug.Log("NÃO ACERTOU (Esquerda) -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
-            Debug.Log("NÃO ACERTOU (Direita) -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
+            Debug.Log("NÃO ACERTOU (Base) NO SECO -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
+            Debug.Log("NÃO ACERTOU (Esquerda) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportEsq.x + "; " + rastreioSemViewportEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("NÃO ACERTOU (Direita) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportDir.x + "; " + rastreioSemViewportDir.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("NÃO ACERTOU (Esquerda) COM VIEWPORT -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
+            Debug.Log("NÃO ACERTOU (Direita) COM VIEWPORT -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
             Debug.Log("------------------------------------------------------------------------------");
             return false;
         }
