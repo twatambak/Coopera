@@ -129,8 +129,8 @@ public class Fase1 : MonoBehaviour {
             Debug.Log("NÃO ACERTOU (Direita) COM VIEWPORT -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
             Debug.Log("------------------------------------------------------------------------------");
             PrintarPosicao();
-            return false;
         }
+        return false;
     }
 
     //===================================================================================================

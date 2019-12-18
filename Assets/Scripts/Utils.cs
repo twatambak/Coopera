@@ -328,72 +328,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         pontosTimeVerde += pontos;
     }
 
-    //==========================================================================================================//
-     /// <summary>
-     /// Converte o ponto X (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
-     /// do jogo.
-     /// </summary>
-     /// <param name="x"> O ponto X do objeto rastreado. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public float ViewportPixyJogo_ConverteX(float x) {
-        //float convX = ((16 * (315 - x)) / 315) - 8;
-        float convX = ((x * 16) / 300) - 8;
-        return convX;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Converte o ponto Y (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
-     /// do jogo.
-     /// </summary>
-     /// <param name="y"> O ponto y central do objeto rastreado. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public float ViewportPixyJogo_ConverteY(float y) {
-        float convY = ((7 * ((215 - y) / 215)) - 4);
-        return convY;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Realiza a conversão do vetor recebido para o sistema de coordenadas do jogo.
-     /// </summary>
-     /// <param name="conv"> O vetor a ser convertido. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 ViewportPixyJogo_Vetor(Vector3 conv) {
-        Vector3 converte = new Vector3(ViewportPixyJogo_ConverteX(conv.x), ViewportPixyJogo_ConverteY(conv.y), conv.z);
-        return converte;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto X (localizado no canto superior
-     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
-     /// </summary>
-     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 ViewportPixyJogo_PontoDireita(ObjetosRastreados objeto) {
-        Vector3 posX = PontoDireitaRastreado(objeto);
-        Vector3 conversao = ViewportPixyJogo_Vetor(posX);
-        return conversao;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto Y (localizado no canto superior
-     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
-     /// </summary>
-     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 ViewportPixyJogo_PontoEsquerda(ObjetosRastreados objeto) {
-        Vector3 posY = PontoEsquerdaRastreado(objeto);
-        Vector3 conversao = ViewportPixyJogo_Vetor(posY);
-        return conversao;
-    }
 
     //==========================================================================================================//
      /// <summary>
@@ -416,58 +350,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public Vector3 PontoEsquerdaForma(GameObject forma) {
         Vector3 pos = new Vector3(((forma.transform.localPosition.x / 2) - (forma.transform.localScale.x / 2)), ((forma.transform.localPosition.y / 2) + (forma.transform.localScale.y / 2)), forma.transform.localPosition.z);
-        return pos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto X central do objeto rastreado (localizado no canto superior direito do objeto rastreado).
-     /// </summary>
-     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central X. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 PontoDireitaRastreado(ObjetosRastreados rastreio) {
-        Vector3 pos = new Vector3((rastreio.GetX() + rastreio.GetLargura()), (rastreio.GetY()), 0);
-        //Vector3 pos = new Vector3(((rastreio.GetX()) + (rastreio.GetLargura() / 2)), ((rastreio.GetY()) - (rastreio.GetAltura() / 2)), 0);
-        return pos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto Y central do objeto rastreado (localizado no canto inferior esquerdo do objeto rastreado).
-     /// </summary>
-     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central Y. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 PontoEsquerdaRastreado(ObjetosRastreados rastreio) {
-        Vector3 pos = new Vector3((rastreio.GetX()), (rastreio.GetY() + rastreio.GetAltura()), 0);
-        //Vector3 pos = new Vector3(((rastreio.GetX() / 2) - (rastreio.GetLargura() / 2)), ((rastreio.GetY() / 2) + (rastreio.GetAltura() / 2)), 0);
-        return pos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto X central do objeto rastreado (localizado no canto superior direito do objeto rastreado).
-     /// </summary>
-     /// <param name="conv"></param>
-     /// <param name="tam"></param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 PontoDireitaRastreado(Vector3 conv, float larg, float alt) {
-        Vector3 pos = new Vector3(((conv.x / 2) + (larg / 2)), ((conv.y / 2) - (alt / 2)), 0);
-        return pos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto Y central do objeto rastreado (localizado no canto inferior esquerdo do objeto rastreado).
-     /// </summary>
-     /// <param name="conv"></param>
-     /// <param name="tam"></param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 PontoEsquerdaRastreado(Vector3 conv, float larg, float alt) {
-        Vector3 pos = new Vector3(((conv.x / 2) - (larg / 2)), ((conv.y / 2) + (alt / 2)), 0);
         return pos;
     }
 

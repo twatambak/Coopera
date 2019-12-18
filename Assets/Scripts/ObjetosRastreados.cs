@@ -9,31 +9,25 @@ using UnityEngine;
 /************************************************************************************************************/
 public class ObjetosRastreados {
     /// <summary> ID do objeto rastreado. </summary>
-    int id;
+    float id;
     /// <summary> Assinatura de cor do objeto rastreado. </summary>
-    int assinatura;
+    float assinatura;
     /// <summary> Posição X do objeto rastreado. </summary>
-    int x;
+    float x;
     /// <summary> Posição Y do objeto rastreado. </summary>
-    int y;
-    /// <summary> Posição X do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
-    int inicioX;
-    /// <summary> Posição Y do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
-    int inicioY;
+    float y;
+    /// <summary> Vetor de posição de origem original do objeto rastreado. </summary>
+    Vector2 posicaoOriginal;
     /// <summary> Vetor de posição do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
     Vector2 posicaoInicio;
-    /// <summary> Posição X do final da BoundingBox (posição localizada no canto superior direito). </summary>
-    int fimX;
-    /// <summary> Posição Y do final da BoundingBox (posição localizada no canto superior direito). </summary>
-    int fimY;
     /// <summary> Vetor de posição do final da BoundingBox (posição localizada no canto superior direito). </summary>
     Vector2 posicaoFinal;
     /// <summary> Largura do objeto rastreado. </summary>
-    int largura;
+    float largura;
     /// <summary> Altura do objeto rastreado. </summary>
-    int altura;
+    float altura;
     /// <summary> A idade em frames do objeto rastreado. </summary>
-    int idade;
+    float idade;
 
     //============================================================================================================
      /// <summary>
@@ -46,7 +40,7 @@ public class ObjetosRastreados {
      /// <param name="largura"> Largura do objeto rastreado identificado pela PixyCam. </param>
      /// <param name="altura"> Altura do objeto rastreado identificado pela PixyCam. </param>
     //============================================================================================================
-    public ObjetosRastreados(int id, int assinatura, int x, int y, int largura, int altura, int idade) {
+    public ObjetosRastreados(float id, float assinatura, float x, float y, float largura, float altura, float idade) {
         this.id = id;
         this.assinatura = assinatura;
         this.x = x;
@@ -54,6 +48,7 @@ public class ObjetosRastreados {
         this.largura = largura;
         this.altura = altura;
         this.idade = idade;
+        this.posicaoOriginal = new Vector2(x, y);
     }
 
     //============================================================================================================
@@ -62,7 +57,7 @@ public class ObjetosRastreados {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public int GetID() {
+    public float GetID() {
         return id;
     }
 
@@ -72,7 +67,7 @@ public class ObjetosRastreados {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public int GetAssinatura() {
+    public float GetAssinatura() {
         return assinatura;
     }
 
@@ -82,7 +77,7 @@ public class ObjetosRastreados {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public int GetX() {
+    public float GetX() {
         return x;
     }
 
@@ -92,7 +87,7 @@ public class ObjetosRastreados {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public int GetY() {
+    public float GetY() {
         return y;
     }
 
@@ -102,7 +97,7 @@ public class ObjetosRastreados {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public int GetLargura() {
+    public float GetLargura() {
         return largura;
     }
 
@@ -112,7 +107,7 @@ public class ObjetosRastreados {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public int GetAltura() {
+    public float GetAltura() {
         return altura;
     }
 
@@ -122,8 +117,74 @@ public class ObjetosRastreados {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public int GetIdade() {
+    public float GetIdade() {
         return idade;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Converte o ponto X (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
+     /// do jogo.
+     /// </summary>
+     /// <param name="x"> O ponto X do objeto rastreado. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public float ConverteX(float x) {
+        float convX = ((x * 16) / 300) - 8;
+        return convX;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Converte o ponto Y (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
+     /// do jogo.
+     /// </summary>
+     /// <param name="y"> O ponto y central do objeto rastreado. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public float ConverteY(float y) {
+        float convY = ((7 * ((215 - y) / 215)) - 4);
+        return convY;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza a conversão do vetor recebido para o sistema de coordenadas do jogo.
+     /// </summary>
+     /// <param name="conv"> O vetor a ser convertido. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector2 ConverteVetor(Vector2 conv) {
+        Vector2 converte = new Vector2(ConverteX(conv.x), ConverteY(conv.y));
+        return converte;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto X (localizado no canto superior
+     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
+     /// </summary>
+     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public void PontoInicio() {
+        Vector2 posX = new Vector2((x + largura), y);
+        Vector2 conversao = ConverteVetor(posX);
+        posicaoInicio = conversao;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto Y (localizado no canto superior
+     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
+     /// </summary>
+     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public void PontoFinal() {
+        Vector2 posY = new Vector2(x, (y + altura));
+        Vector2 conversao = ConverteVetor(posY);
+        posicaoFinal = conversao;
     }
 
     //============================================================================================================

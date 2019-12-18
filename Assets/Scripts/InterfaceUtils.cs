@@ -188,55 +188,6 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Converte o ponto X (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
-     /// do jogo.
-     /// </summary>
-     /// <param name="x"> O ponto X central do objeto rastreado. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    float ViewportPixyJogo_ConverteX(float x);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Converte o ponto Y (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
-     /// do jogo.
-     /// </summary>
-     /// <param name="y"> O ponto y central do objeto rastreado. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    float ViewportPixyJogo_ConverteY(float y);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Realiza a conversão do vetor recebido para o sistema de coordenadas do jogo.
-     /// </summary>
-     /// <param name="conv"> O vetor a ser convertido. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    Vector3 ViewportPixyJogo_Vetor(Vector3 conv);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto X (localizado no canto superior
-     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
-     /// </summary>
-     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    Vector3 ViewportPixyJogo_PontoDireita(ObjetosRastreados objeto);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto Y (localizado no canto superior
-     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
-     /// </summary>
-     /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    Vector3 ViewportPixyJogo_PontoEsquerda(ObjetosRastreados objeto);
-
-    //==========================================================================================================//
-     /// <summary>
      /// Retorna o ponto X central da forma (localizado no canto superior direito da forma).
      /// </summary>
      /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
