@@ -328,31 +328,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         pontosTimeVerde += pontos;
     }
 
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto X central da forma (localizado no canto superior direito da forma).
-     /// </summary>
-     /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 PontoDireitaForma(GameObject forma) {
-        Vector3 pos = new Vector3(((forma.transform.localPosition.x / 2) + (forma.transform.localScale.x / 2)), ((forma.transform.localPosition.y / 2) - (forma.transform.localScale.y / 2)), forma.transform.localPosition.z);
-        return pos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto Y central da forma (localizado no canto inferior esquerdo da forma).
-     /// </summary>
-     /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector3 PontoEsquerdaForma(GameObject forma) {
-        Vector3 pos = new Vector3(((forma.transform.localPosition.x / 2) - (forma.transform.localScale.x / 2)), ((forma.transform.localPosition.y / 2) + (forma.transform.localScale.y / 2)), forma.transform.localPosition.z);
-        return pos;
-    }
-
     //==========================================================================================================//
      /// <summary>
      /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
@@ -364,7 +339,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="formaDir"> O ponto a direita da BoundingBox da forma.</param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(Vector3 rastreioEsq, Vector3 rastreioDir, Vector3 formaEsq, Vector3 formaDir) {
+    public Boolean VerificaColisao(Vector2 rastreioEsq, Vector2 rastreioDir, Vector2 formaEsq, Vector2 formaDir) {
         if (rastreioDir.x < formaEsq.x || formaDir.x < rastreioEsq.x || rastreioDir.y < formaEsq.y || formaDir.y < rastreioEsq.y) { // Não há colisão
             return false;
         } else {
@@ -382,23 +357,13 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
     public Boolean VerificaColisao(GameObject forma, ObjetosRastreados rastreio) {
-        Vector3 rastreioPontoDir = ViewportPixyJogo_PontoDireita(rastreio);
-        Vector3 rastreioPontoEsq = ViewportPixyJogo_PontoEsquerda(rastreio);
-        Vector3 formaPontoDir = PontoDireitaForma(forma);
-        Vector3 formaPontoEsq = PontoEsquerdaForma(forma);
-        return (VerificaColisao(rastreioPontoEsq, rastreioPontoDir, formaPontoEsq, formaPontoDir));
+        Vector2 rastreio_posicaoInicio = rastreio.GetPontoInicial();
+        Vector2 rastreio_posicaoFinal = rastreio.GetPontoFinal();
+        Vector2 forma_posicaoInicio = PontoInicialForma(forma);
+        Vector2 forma_posicaoFinal =  PontoFinalForma(forma);
+        return (VerificaColisao(rastreio_posicaoInicio, rastreio_posicaoFinal, forma_posicaoInicio, forma_posicaoFinal));
     }
 
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o vetor da posição central do objeto rastreado.
-     /// </summary>
-     /// <param name="rastreio"> O objeto rastreado ao qual se deseja retornar o vetor da posição central. </param>
-     /// <returns> Vetor da posição central do objeto rastreado. </returns>
-    //==========================================================================================================//
-    public Vector3 RetornaVetorRastreio(ObjetosRastreados rastreio) {
-        return (new Vector3(rastreio.GetX(), rastreio.GetY(), 0));
-    }
 
     //==========================================================================================================//
      /// <summary>

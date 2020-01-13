@@ -13,9 +13,9 @@ public class Forma : MonoBehaviour {
     /// <summary> Partículas de destruição </summary>
     public GameObject particulas;
     /// <summary> Direção de movimentação no eixo X </summary>
-    float dirX = 0.1f; // 
+    float dirX = 0.1f;  
     /// <summary> Direção de movimentação no eixo Y </summary>
-    float dirY = 0.1f; // 
+    float dirY = 0.1f; 
     /// <summary> Velocidade de movimentação </summary>
     float vel = instance.GetVelocidadeFormas(); // 
     /// <summary> Tamanho da Forma </summary>

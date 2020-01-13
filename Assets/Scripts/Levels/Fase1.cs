@@ -110,7 +110,7 @@ public class Fase1 : MonoBehaviour {
         Vector3 rastreioSemViewportEsq = instance.PontoEsquerdaRastreado(rastreio);
         Vector3 rastreioSemViewportDir = instance.PontoDireitaRastreado(rastreio);
         Vector3 formaDir = instance.PontoDireitaForma(forma);
-        Vector3 formaEsq = instance.PontoEsquerdaForma(forma);
+        Vector3 formaEsq = instance.PontoFinalForma(forma);
         if (instance.VerificaColisao(forma, rastreio)) {
             Debug.Log("ACERTOU (Base) NO SECO -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
             Debug.Log("Tamanho Bola Pixy => Largura: " + rastreio.GetLargura() + "| Altura: " + rastreio.GetAltura());
@@ -167,7 +167,7 @@ public class Fase1 : MonoBehaviour {
         
     void PrintarPosicao() {
         Vector3 baseTeste = new Vector3(teste.transform.localPosition.x, teste.transform.localPosition.y, teste.transform.localPosition.z);
-        Vector3 testeEsq = instance.PontoEsquerdaForma(teste);
+        Vector3 testeEsq = instance.PontoFinalForma(teste);
         Vector3 testeDir = instance.PontoDireitaForma(teste);
         Debug.Log("TESTE - POSIÇÃO JOGO ==> (X " + baseTeste.x + ", Y " + baseTeste.y + " )");
         Debug.Log("TESTE - POSIÇÃO VIEWPORT ESQUERDA ==> (X " + testeEsq.x + ", Y " + testeEsq.y + " )");

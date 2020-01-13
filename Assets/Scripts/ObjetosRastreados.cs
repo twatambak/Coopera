@@ -17,11 +17,11 @@ public class ObjetosRastreados {
     /// <summary> Posição Y do objeto rastreado. </summary>
     float y;
     /// <summary> Vetor de posição de origem original do objeto rastreado. </summary>
-    Vector2 posicaoOriginal;
+    Vector2 pontoOrigem;
     /// <summary> Vetor de posição do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
-    Vector2 posicaoInicio;
+    Vector2 pontoInicial;
     /// <summary> Vetor de posição do final da BoundingBox (posição localizada no canto superior direito). </summary>
-    Vector2 posicaoFinal;
+    Vector2 pontoFinal;
     /// <summary> Largura do objeto rastreado. </summary>
     float largura;
     /// <summary> Altura do objeto rastreado. </summary>
@@ -48,7 +48,9 @@ public class ObjetosRastreados {
         this.largura = largura;
         this.altura = altura;
         this.idade = idade;
-        this.posicaoOriginal = new Vector2(x, y);
+        pontoOrigem = new Vector2(x, y);
+        pontoInicial = PontoInicial();
+        pontoFinal = PontoFinal();
     }
 
     //============================================================================================================
@@ -122,6 +124,24 @@ public class ObjetosRastreados {
     }
 
     //==========================================================================================================//
+    //==========================================================================================================//
+    public Vector2 GetPontoOrigem() {
+        return pontoOrigem;
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public Vector2 GetPontoInicial() {
+        return pontoInicial;
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public Vector2 GetPontoFinal() {
+        return pontoFinal;
+    }
+    
+    //==========================================================================================================//
      /// <summary>
      /// Converte o ponto X (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
      /// do jogo.
@@ -167,10 +187,10 @@ public class ObjetosRastreados {
      /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public void PontoInicio() {
-        Vector2 posX = new Vector2((x + largura), y);
-        Vector2 conversao = ConverteVetor(posX);
-        posicaoInicio = conversao;
+    public Vector2 PontoInicial() {
+        Vector2 pos = new Vector2((x + largura), y);
+        Vector2 conversao = ConverteVetor(pos);
+        return conversao;
     }
 
     //==========================================================================================================//
@@ -181,10 +201,10 @@ public class ObjetosRastreados {
      /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public void PontoFinal() {
-        Vector2 posY = new Vector2(x, (y + altura));
-        Vector2 conversao = ConverteVetor(posY);
-        posicaoFinal = conversao;
+    public Vector2 PontoFinal() {
+        Vector2 pos = new Vector2(x, (y + altura));
+        Vector2 conversao = ConverteVetor(pos);
+        return conversao;
     }
 
     //============================================================================================================

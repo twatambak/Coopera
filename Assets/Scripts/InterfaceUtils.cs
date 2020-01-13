@@ -202,25 +202,7 @@ interface InterfaceUtils {
      /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    Vector3 PontoEsquerdaForma(GameObject forma);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto X central do objeto rastreado (localizado no canto superior direito do objeto rastreado).
-     /// </summary>
-     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central X. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    Vector3 PontoDireitaRastreado(ObjetosRastreados rastreio);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto Y central do objeto rastreado (localizado no canto inferior esquerdo do objeto rastreado).
-     /// </summary>
-     /// <param name="rastreio"> O objeto rastreado ao qual se deseja saber o ponto central Y. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    Vector3 PontoEsquerdaRastreado(ObjetosRastreados rastreio);
+    Vector3 PontoFinalForma(GameObject forma);
 
     //==========================================================================================================//
     //==========================================================================================================//
@@ -229,10 +211,6 @@ interface InterfaceUtils {
     //==========================================================================================================//
     //==========================================================================================================//
     Boolean VerificaColisao(GameObject forma, ObjetosRastreados rastreio);
-
-    //==========================================================================================================//
-    //==========================================================================================================//
-    Vector3 RetornaVetorRastreio(ObjetosRastreados rastreio);
 
     //==========================================================================================================//
     //==========================================================================================================//
