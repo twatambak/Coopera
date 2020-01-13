@@ -7,7 +7,7 @@ using UnityEngine;
  /// A classe Forma é responsável por definir as variáveis e comportamentos das formas presentes nas fases.
  /// </summary>
 /************************************************************************************************************/
-public class Forma : MonoBehaviour {
+public class Forma : MonoBehaviour, ClasseForma {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
     /// <summary> Partículas de destruição </summary>

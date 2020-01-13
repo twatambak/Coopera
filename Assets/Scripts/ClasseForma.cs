@@ -37,6 +37,8 @@ public class ClasseForma {
         vel = instance.GetVelocidadeFormas();
         dirX = 0.1f;
         dirY = 0.1f;
+        pontoInicial = PontoInicial();
+        pontoFinal = PontoFinal();
     }
 
     //============================================================================================================
@@ -106,7 +108,7 @@ public class ClasseForma {
      /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector2 PontoInicialForma() {
+    public Vector2 PontoInicial() {
         Vector2 pos = new Vector2(((x / 2) + (x / 2)), ((y / 2) - (y / 2)));
         return pos;
     }
@@ -118,7 +120,7 @@ public class ClasseForma {
      /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Vector2 PontoFinalForma() {
+    public Vector2 PontoFinal() {
         Vector2 pos = new Vector2(((x / 2) - (x / 2)), ((y / 2) + (y / 2)));
         return pos;
     }
