@@ -16,6 +16,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public static List<ObjetosRastreados> listaRastreados = new List<ObjetosRastreados>();
     /// <summary> Lista de formas geradas pelo jogo. </summary>
     public static List<GameObject> listaFormas = new List<GameObject>();
+    /// <summary> Lista de formas geradas pelo jogo. </summary>
+    public static List<ClasseForma> listaClasseFormas = new List<ClasseForma>();
     /// <summary> Quantidade atual de formas presentes na tela. </summary>
     public static int quantiaAtual;
     /// <summary> Quantia de pontos do time amarelo. </summary>
@@ -129,6 +131,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+    //==========================================================================================================//
+    public List<ClasseForma> GetListaClasseFormas() {
+        return listaClasseFormas;
+    }
+
+    //==========================================================================================================//
      /// <summary>
      /// Retorna a quantidade atual de formas.
      /// </summary>
@@ -204,13 +212,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
                     novaForma.transform.localScale = new Vector3(tam, tam, tam);
                     material = novaForma.GetComponent<Renderer>().material;
                     material.color = novaCor;
+                    ClasseForma classe = new ClasseForma(novaForma);
+                    AddListaClasseFormas(classe);
                     AddListaFormas(novaForma);
                     AddQuantiaAtual();
                 }
             }
         }
     }
-
 
     //==========================================================================================================//
      /// <summary>
@@ -233,6 +242,30 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+    //==========================================================================================================//
+    public void AddListaClasseFormas(ClasseForma forma) {
+        listaClasseFormas.Add(forma);
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public void RemoveListaClasseFormas(ClasseForma forma) {
+        listaClasseFormas.Remove(forma);
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public void RemoveListaClasseFormas(GameObject forma) {
+        if(listaClasseFormas.Count > 0) {
+            for(int i = 0; i < listaClasseFormas.Count; i++) { 
+                if(listaClasseFormas[i].GetObjetoBase() == forma) {
+                    listaClasseFormas.RemoveAt(i);
+                }
+            }
+        }
+    }
+
+    //==========================================================================================================//
      /// <summary>
      /// Adiciona o objeto passado à lista de objetos rastreados.
      /// </summary>
@@ -242,7 +275,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         if(listaRastreados.Count != 0) {
             for(int i = 0; i < listaRastreados.Count; i++) {
                 Debug.Log(rastreado);
-                if (listaRastreados[i].GetID() == rastreado.GetID()) {
+                if(listaRastreados[i].GetID() == rastreado.GetID()) {
                     listaRastreados[i] = rastreado;
                     ExibeTamanhoListaRastreados();
                 } else {
@@ -333,14 +366,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
      /// dos dois objetos.
      /// </summary>
-     /// <param name="rastreioEsq"> O ponto a esquerda da BoundingBox do objeto rastreado. </param>
-     /// <param name="rastreioDir"> O ponto a direita da BoundingBox do objeto rastreado. </param>
-     /// <param name="formaEsq"> O ponto a esquerda da BoundingBox da forma.</param>
-     /// <param name="formaDir"> O ponto a direita da BoundingBox da forma.</param>
+     /// <param name="rastreioPosInicial"> O ponto a esquerda da BoundingBox do objeto rastreado. </param>
+     /// <param name="rastreioPosFinal"> O ponto a direita da BoundingBox do objeto rastreado. </param>
+     /// <param name="formaPosInicial"> O ponto a esquerda da BoundingBox da forma.</param>
+     /// <param name="formaPosFinal"> O ponto a direita da BoundingBox da forma.</param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(Vector2 rastreioEsq, Vector2 rastreioDir, Vector2 formaEsq, Vector2 formaDir) {
-        if (rastreioDir.x < formaEsq.x || formaDir.x < rastreioEsq.x || rastreioDir.y < formaEsq.y || formaDir.y < rastreioEsq.y) { // Não há colisão
+    public Boolean VerificaColisao(Vector2 rastreioPosInicial, Vector2 rastreioPosFinal, Vector2 formaPosInicial, Vector2 formaPosFinal) {
+        if (rastreioPosFinal.x < formaPosInicial.x || formaPosFinal.x < rastreioPosInicial.x || rastreioPosFinal.y < formaPosInicial.y || formaPosFinal.y < rastreioPosInicial.y) { // Não há colisão
             return false;
         } else {
             return true;
@@ -350,29 +383,17 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     /// <summary>
     /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
-    /// <seealso cref="VerificaColisao(Vector3, Vector3, Vector3, Vector3)"/> para realizar essa verificação.
+    /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
     /// </summary>
     /// <param name="forma"> A forma que deseja ser verificada se houve colisão. </param>
     /// <param name="rastreio"> O objeti rastreado que deseja ser verificado se houve colisão. </param>
     /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(GameObject forma, ObjetosRastreados rastreio) {
+    public Boolean VerificaColisao(ClasseForma forma, ObjetosRastreados rastreio) {
         Vector2 rastreio_posicaoInicio = rastreio.GetPontoInicial();
         Vector2 rastreio_posicaoFinal = rastreio.GetPontoFinal();
-        Vector2 forma_posicaoInicio = PontoInicialForma(forma);
-        Vector2 forma_posicaoFinal =  PontoFinalForma(forma);
+        Vector2 forma_posicaoInicio = forma.GetPontoInicial();
+        Vector2 forma_posicaoFinal = forma.GetPontoFinal();
         return (VerificaColisao(rastreio_posicaoInicio, rastreio_posicaoFinal, forma_posicaoInicio, forma_posicaoFinal));
-    }
-
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o vetor da posição central da forma.
-     /// </summary>
-     /// <param name="forma"> A forma ao qual se deseja retornar o vetor da posição central. </param>
-     /// <returns> Vetor da posição central da forma. </returns>
-    //==========================================================================================================//
-    public Vector3 RetornaVetorForma(GameObject forma) {
-        return forma.transform.localPosition;
     }
 }

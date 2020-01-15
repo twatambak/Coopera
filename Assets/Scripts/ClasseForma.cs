@@ -25,6 +25,8 @@ public class ClasseForma {
     float dirY = 0.1f;
     /// <summary> Velocidade de movimentação </summary>
     float vel;
+    /// <summary> Velocidade de movimentação </summary>
+    Color cor;
 
     //============================================================================================================
     //============================================================================================================
@@ -37,6 +39,7 @@ public class ClasseForma {
         vel = instance.GetVelocidadeFormas();
         dirX = 0.1f;
         dirY = 0.1f;
+        cor = objetoBase.GetComponent<Renderer>().material.color;
         pontoInicial = PontoInicial();
         pontoFinal = PontoFinal();
     }

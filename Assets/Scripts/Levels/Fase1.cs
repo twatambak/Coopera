@@ -102,15 +102,7 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(GameObject forma, ObjetosRastreados rastreio) {
-        Vector3 centroRastreio = instance.RetornaVetorRastreio(rastreio);
-        Vector3 centroForma = instance.RetornaVetorForma(forma);
-        Vector3 rastreioDir = instance.ViewportPixyJogo_PontoDireita(rastreio);
-        Vector3 rastreioEsq = instance.ViewportPixyJogo_PontoEsquerda(rastreio);
-        Vector3 rastreioSemViewportEsq = instance.PontoEsquerdaRastreado(rastreio);
-        Vector3 rastreioSemViewportDir = instance.PontoDireitaRastreado(rastreio);
-        Vector3 formaDir = instance.PontoDireitaForma(forma);
-        Vector3 formaEsq = instance.PontoFinalForma(forma);
+    public bool VerificarAcerto(ClasseForma forma, ObjetosRastreados rastreio) {
         if (instance.VerificaColisao(forma, rastreio)) {
             Debug.Log("ACERTOU (Base) NO SECO -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
             Debug.Log("Tamanho Bola Pixy => Largura: " + rastreio.GetLargura() + "| Altura: " + rastreio.GetAltura());
@@ -143,17 +135,21 @@ public class Fase1 : MonoBehaviour {
     //===================================================================================================
     public void CompararPosicao() {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
-        List<GameObject> listaFormas = instance.GetListaFormas(); // A lista de objetos rastreados
+        List<ClasseForma> listaFormas = instance.GetListaClasseFormas(); // A lista de objetos rastreados
         if(listaRastreados != null && listaFormas != null) {
             for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaFormas.Count; j++) { 
                     if(VerificarAcerto(listaFormas[j], listaRastreados[i])) { 
                         if(listaRastreados[i].GetAssinatura() == 2) {
-                            listaFormas[j].GetComponent<Forma>().DestroiForma();
+                            listaFormas[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
+                            instance.AddPontosAmarelos(1);
+                            listaFormas.RemoveAt(j);
                         }
 
                         if(listaRastreados[i].GetAssinatura() == 3) {
-                            listaFormas[j].GetComponent<Forma>().DestroiForma();
+                            instance.AddPontosVerdes(1);
+                            listaFormas[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
+                            listaFormas.RemoveAt(j);
                         }
                     }
                 }
@@ -161,16 +157,5 @@ public class Fase1 : MonoBehaviour {
                 instance.ExibeTamanhoListaRastreados();
             }
         }
-    }
-
-
-        
-    void PrintarPosicao() {
-        Vector3 baseTeste = new Vector3(teste.transform.localPosition.x, teste.transform.localPosition.y, teste.transform.localPosition.z);
-        Vector3 testeEsq = instance.PontoFinalForma(teste);
-        Vector3 testeDir = instance.PontoDireitaForma(teste);
-        Debug.Log("TESTE - POSIÇÃO JOGO ==> (X " + baseTeste.x + ", Y " + baseTeste.y + " )");
-        Debug.Log("TESTE - POSIÇÃO VIEWPORT ESQUERDA ==> (X " + testeEsq.x + ", Y " + testeEsq.y + " )");
-        Debug.Log("TESTE - POSIÇÃO VIEWPORT DIREITA ==> (X " + testeDir.x + ", Y " + testeDir.y + " )");
     }
 }
