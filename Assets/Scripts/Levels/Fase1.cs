@@ -104,23 +104,12 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     public bool VerificarAcerto(ClasseForma forma, ObjetosRastreados rastreio) {
         if (instance.VerificaColisao(forma, rastreio)) {
-            Debug.Log("ACERTOU (Base) NO SECO -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
-            Debug.Log("Tamanho Bola Pixy => Largura: " + rastreio.GetLargura() + "| Altura: " + rastreio.GetAltura());
-            Debug.Log("ACERTOU (Esquerda) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportEsq.x + "; " + rastreioSemViewportEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
-            Debug.Log("ACERTOU (Direita) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportDir.x + "; " + rastreioSemViewportDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
-            Debug.Log("ACERTOU (Esquerda) COM VIEWPORT -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
-            Debug.Log("ACERTOU (Direita) COM VIEWPORT -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
-            PrintarPosicao();
+            Debug.Log("ACERTOU");
             Debug.Log("------------------------------------------------------------------------------");
             return true;
         } else {
-            Debug.Log("NÃO ACERTOU (Base) NO SECO -> Rastreio(" + centroRastreio.x + "; " + centroRastreio.y + ") | Forma(" + centroForma.x + "; " + centroForma.y + ")");
-            Debug.Log("NÃO ACERTOU (Esquerda) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportEsq.x + "; " + rastreioSemViewportEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
-            Debug.Log("NÃO ACERTOU (Direita) SEM VIEWPORT -> Rastreio(" + rastreioSemViewportDir.x + "; " + rastreioSemViewportDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
-            Debug.Log("NÃO ACERTOU (Esquerda) COM VIEWPORT -> Rastreio(" + rastreioEsq.x + "; " + rastreioEsq.y + ") | Forma(" + formaEsq.x + "; " + formaEsq.y + ")");
-            Debug.Log("NÃO ACERTOU (Direita) COM VIEWPORT -> Rastreio(" + rastreioDir.x + "; " + rastreioDir.y + ") | Forma(" + formaDir.x + "; " + formaDir.y + ")");
+            Debug.Log("NÃO ACERTOU");
             Debug.Log("------------------------------------------------------------------------------");
-            PrintarPosicao();
         }
         return false;
     }

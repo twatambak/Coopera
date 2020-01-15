@@ -64,6 +64,7 @@ public class Forma : MonoBehaviour {
         if(Utils.quantiaAtual > 0){
             Destroy(this.gameObject);
             instance.RemoveListaFormas(this.gameObject);
+            instance.RemoveListaClasseFormas(this.gameObject);
             instance.RemoveQuantiaAtual();
             instance.AddPontosAmarelos(1);
         }
@@ -103,6 +104,7 @@ public class Forma : MonoBehaviour {
         if(instance.GetQuantiaAtualFormas() > 0) {
             Destroy(this.gameObject);
             instance.RemoveListaFormas(this.gameObject);
+            instance.RemoveListaClasseFormas(this.gameObject);
             instance.RemoveQuantiaAtual();
             instance.AddPontosAmarelos(1);
         }
