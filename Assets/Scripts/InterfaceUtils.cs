@@ -29,7 +29,7 @@ interface InterfaceUtils {
      /// Retorna a quantidade máxima de alvos possíveis. Essa informação está disponível na posição 1 (com o vetor
      /// iniciando em 0) do arquivo CSV.
      /// </summary>
-     /// <returns> Retorna a quantidade máxima possível para os alvos. </returns>
+     /// <returns> A quantidade máxima possível para os alvos. </returns>
     //==========================================================================================================//
     int CSVGetMaximoAlvos();
 
@@ -38,7 +38,7 @@ interface InterfaceUtils {
      /// Retorna a velocidade dos alvos. Essa informação está disponível na posição 3 (com o vetor iniciando em 0)
      /// do arquivo CSV.
      /// </summary>
-     /// <returns> Ret </returns>
+     /// <returns> A velocidade de movimento dos alvos. </returns>
     //==========================================================================================================//
     int CSVGetVelocidadeAlvos();
 
@@ -47,7 +47,7 @@ interface InterfaceUtils {
      /// Retorna o tamanho dos alvos. Essa informação está disponível na posição 5 (com o vetor iniciando em 0)
      /// do arquivo CSV. 
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
     int CSVGetTamanhoAlvos();
 
@@ -55,7 +55,7 @@ interface InterfaceUtils {
      /// <summary>
      /// Retorna a lista de alvos.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> A lista de alvos armazenados. </returns>
     //==========================================================================================================//
     List<GameObject> GetListaAlvos();
 
@@ -63,7 +63,7 @@ interface InterfaceUtils {
      /// <summary>
      /// Retorna a lista de bolas.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> A lista de bolas rastreadas pela PixyCam. </returns>
     //==========================================================================================================//
     List<Bola> GetListaBolas();
 
@@ -86,7 +86,7 @@ interface InterfaceUtils {
      /// <summary>
      /// Retorna o tamanho da lista de bolas.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O tamanho da lista de bolas. Atua também como a quantidade atual de bolas. </returns>
     //==========================================================================================================//
     int GetTamanhoListaBolas();
 
@@ -110,8 +110,8 @@ interface InterfaceUtils {
      /// <summary>
      /// Converte uma string para int.
      /// </summary>
-     /// <param name="texto"></param>
-     /// <returns></returns>
+     /// <param name="texto"> O texto a ser convertido. </param>
+     /// <returns> O resultado da conversão do texto. </returns>
     //==========================================================================================================//
     int ToInt(string texto);
 
@@ -119,80 +119,80 @@ interface InterfaceUtils {
      /// <summary>
      /// Recebe o nome de uma cena e redireciona a essa cena.
      /// </summary>
-     /// <param name="scene"></param>
+     /// <param name="scene"> O nome da cena a qual se deseja ir. </param>
     //==========================================================================================================//
     void GoToScene(string scene);
 
     //==========================================================================================================//
      /// <summary>
-     /// Cria as formas a serem acertadas pelo jogador.
+     /// Cria os alvos. a serem acertadas pelo jogador.
      /// </summary>
-     /// <param name="formaBase"></param>
+     /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
     //==========================================================================================================//
-    void CriarFormas(GameObject formaBase);
+    void CriarAlvos(GameObject baseAlvo);
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona a Forma recebida na lista de formas.
+     /// Adiciona o alvo recebido na lista de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="alvo"> O alvo a ser adicionado na respectiva lista. </param>
     //==========================================================================================================//
-    void AddListaFormas(GameObject forma);
+    void AddListaAlvos(GameObject alvo);
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove a Forma recebida da lista de formas.
+     /// Remove o alvo recebido da lista de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="alvo"> O alvo a ser removido da respectiva lista. </param>
     //==========================================================================================================//
-    void RemoveListaFormas(GameObject forma);
+    void RemoveListaAlvos(GameObject alvo);
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona a classe de forma-alvo passada na lista de classe para forma-alvo.
+     /// Adiciona a classe alvo passada na lista de classe de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="alvo"> A classe alvo a ser adicionada na respectiva lista. </param>
     //==========================================================================================================//
-    void AddListaClasseFormas(ClasseForma forma);
+    void AddListaClasseAlvos(ClasseAlvo alvo);
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove a classe de forma-alvo passada na lista de classe para forma-alvo.
+     /// Remove o alvo recebido da lista de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="alvo"> O alvo a ser removido da respectiva lista. </param>
     //==========================================================================================================//
-    void RemoveListaClasseFormas(ClasseForma forma);
+    void RemoveListaClasseAlvos(ClasseAlvo alvo);
 
     //==========================================================================================================//
      /// <summary>
-     /// 
+     /// Remove o GameObject alvo passada da lista de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="forma"> O GameObject que representa a classe alvo. </param>
     //==========================================================================================================//
     void RemoveListaClasseFormas(GameObject forma);
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona o objeto passado na lista de objetos rastreados.
+     /// Adiciona a bola passada na lista de bolas.
      /// </summary>
-     /// <param name="rastreado"></param>
+     /// <param name="bola"> A bola rastreada pela Pixy a ser adicionada na lista. </param>
     //==========================================================================================================//
-    void AddListaRastreados(ObjetosRastreados rastreado);
+    void AddListaBolas(Bola bola);
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove o objeto passado da lista de rastreados.
+     /// Remove a bola da lista de bolas.
      /// </summary>
-     /// <param name="rastreado"></param>
+     /// <param name="bola"> A bola a ser removida da lista. </param>
     //==========================================================================================================//
-    void RemoveListaRastreados(ObjetosRastreados rastreado);
+    void RemoveListaBolas(ObjetosRastreados rastreado);
 
     //==========================================================================================================//
      /// <summary>
-     /// Limpa os objetos rastreados pela PixyCam.
+     /// Limpa as bolas rastreadas pela PixyCam.
      /// </summary>
     //==========================================================================================================//
-    void LimparRastreados();
+    void LimpaListaBolas();
 
     //==========================================================================================================//
     /// <summary>

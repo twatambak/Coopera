@@ -82,9 +82,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
      /// <summary>
      /// Retorna a quantidade máxima de alvos possíveis. Essa informação está disponível na posição 1 (com o vetor
-     /// iniciando em 0) do arquivo. CSV.
+     /// iniciando em 0) do arquivo CSV.
      /// </summary>
-     /// <returns> Retorna a quantidade máxima possível para os alvos. </returns>
+     /// <returns> A quantidade máxima possível para os alvos. </returns>
     //==========================================================================================================//
     public int CSVGetMaximoAlvos() {
         return (ToInt(LoadCSV(2)));
@@ -93,9 +93,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
      /// <summary>
      /// Retorna a velocidade dos alvos. Essa informação está disponível na posição 3 (com o vetor iniciando em 0)
-     /// do arquvio CSV.
+     /// do arquivo CSV.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> A velocidade de movimento dos alvos. </returns>
     //==========================================================================================================//
     public int CSVGetVelocidadeAlvos() {
         return (ToInt(LoadCSV(4)));
@@ -104,9 +104,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
      /// <summary>
      /// Retorna o tamanho dos alvos. Essa informação está disponível na posição 5 (com o vetor iniciando em 0)
-     /// do arquvio CSV. 
+     /// do arquivo CSV. 
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
     public int CSVGetTamanhoAlvos() {
         return (ToInt(LoadCSV(6)));
@@ -116,7 +116,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Retorna a lista de alvos.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> A lista de alvos armazenados. </returns>
     //==========================================================================================================//
     public List<GameObject> GetListaAlvos() {
         return listaAlvos;
@@ -126,7 +126,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Retorna a lista de bolas.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> A lista de bolas rastreadas pela PixyCam. </returns>
     //==========================================================================================================//
     public List<Bola> GetListaBolas() {
         return listaBolas;
@@ -156,7 +156,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Retorna o tamanho da lista de bolas.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O tamanho da lista de bolas. Atua também como a quantidade atual de bolas. </returns>
     //==========================================================================================================//
     public int GetTamanhoListaBolas() {
         return listaBolas.Count;
@@ -186,8 +186,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Converte uma string para int.
      /// </summary>
-     /// <param name="texto"> Texto a ser convertido. </param>
-     /// <returns></returns>
+     /// <param name="texto"> O texto a ser convertido. </param>
+     /// <returns> O resultado da conversão do texto. </returns>
     //==========================================================================================================//
     public int ToInt(string texto) {
         return System.Int32.Parse(texto);
@@ -197,7 +197,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Recebe o nome de uma cena e redireciona a essa cena.
      /// </summary>
-     /// <param name="scene"></param>
+     /// <param name="scene"> O nome da cena a qual se deseja ir. </param>
     //==========================================================================================================//
     public void GoToScene(string scene){
       SceneManager.LoadScene(scene);
@@ -205,9 +205,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Cria as formas a serem acertadas pelo jogador.
+     /// Cria os alvos. a serem acertadas pelo jogador.
      /// </summary>
-     /// <param name="baseAlvo"></param>
+     /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
     //==========================================================================================================//
     public void CriarAlvos(GameObject baseAlvo) {
         GameObject novoAlvo;
@@ -237,27 +237,27 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Adiciona o alvo recebido na lista de alvos.
      /// </summary>
-     /// <param name="alvo"></param>
+     /// <param name="alvo"> O alvo a ser adicionado na respectiva lista. </param>
     //==========================================================================================================//
     public void AddListaAlvos(GameObject alvo) {
         listaAlvos.Add(alvo);
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Remove o alvo recebido da lista de alvos.
-     /// </summary>
-     /// <param name="alvo"></param>
+    /// <summary>
+    /// Remove o alvo recebido da lista de alvos.
+    /// </summary>
+    /// <param name="alvo"> O alvo a ser removido da respectiva lista. </param>
     //==========================================================================================================//
     public void RemoveListaAlvos(GameObject alvo) {
         listaAlvos.Remove(alvo);
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Adiciona a classe alvo passada na lista de classe de alvos.
-     /// </summary>
-     /// <param name="alvo"></param>
+    /// <summary>
+    /// Adiciona a classe alvo passada na lista de classe de alvos.
+    /// </summary>
+    /// <param name="alvo"> A classe alvo a ser adicionada na respectiva lista. </param>
     //==========================================================================================================//
     public void AddListaClasseAlvo(ClasseAlvo alvo) {
         listaClasseAlvos.Add(alvo);
@@ -267,7 +267,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Remove a classe alvo passada da lista de classe de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="alvo"> Remove a classe alvo passada da lista. </param>
     //==========================================================================================================//
     public void RemoveListaClasseAlvos(ClasseAlvo alvo) {
         listaClasseAlvos.Remove(forma);
@@ -275,9 +275,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove a GameObject alvo passada da lista de alvos.
+     /// Remove o GameObject alvo passado da lista de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="forma"> O GameObject que representa a classe alvo. </param>
     //==========================================================================================================//
     public void RemoveListaClasseAlvos(GameObject alvo) {
         if(listaClasseAlvos.Count > 0) {
@@ -291,9 +291,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona o objeto passado à lista de objetos rastreados.
+     /// Adiciona a bola passada na lista de bolas.
      /// </summary>
-     /// <param name="bola"></param>
+     /// <param name="bola"> A bola rastreada pela Pixy a ser adicionada na lista. </param>
     //==========================================================================================================//
     public void AddListaBolas(Bola bola) {
         if(listaBolas.Count != 0) {
@@ -315,9 +315,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove o objeto passado da lista de objetos rastreados.s
+     /// Remove a bola da lista de bolas.
      /// </summary>
-     /// <param name="rastreado"></param>
+     /// <param name="bola"> A bola a ser removida da lista. </param>
     //==========================================================================================================//
     public void RemoveListaBolas(Bola bola) {
         listaBolas.Remove(bola);
