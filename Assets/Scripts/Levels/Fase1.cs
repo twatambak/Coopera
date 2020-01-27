@@ -30,7 +30,7 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Câmera do jogo. </summary>
     public Camera cam;
     /// <summary> Teste. </summary>
-    public GameObject teste;
+    public Button botao;
     
     //============================================================================================================
      /// <summary>
@@ -41,6 +41,7 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void Start() {
+        game = false;
         // Recebe a quantidade máxima de alvos possíveis.
         maxAlvos = instance.CSVGetMaximoAlvos();
     }
@@ -68,8 +69,9 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void OnGUI() {
+
         if (!game) {
-            if (GUI.Button(new Rect(220, 150, 200, 50), "JOGAR")) {
+            if (botao) {
                 game = true;
             }
         }

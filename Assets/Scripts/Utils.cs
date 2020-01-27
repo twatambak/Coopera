@@ -13,11 +13,11 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static Utils instance = null;
     /// <summary> Lista das bolas rastreadas pela PixyCam. </summary>
-    public static List<Bola> listaBolas = new List<Bola>();
+    public List<Bola> listaBolas = new List<Bola>();
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
-    public static List<GameObject> listaAlvos = new List<GameObject>();
+    public List<GameObject> listaAlvos = new List<GameObject>();
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
-    public static List<ClasseAlvo> listaClasseAlvos = new List<ClasseAlvo>();
+    public List<ClasseAlvo> listaClasseAlvos = new List<ClasseAlvo>();
     /// <summary> Quantidade atual de alvos presentes na tela. </summary>
     public static int qtdAlvos;
     /// <summary> Quantia de pontos do time amarelo. </summary>

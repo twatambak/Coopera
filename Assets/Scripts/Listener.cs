@@ -31,7 +31,7 @@ public class Listener : MonoBehaviour {
             while(dados.Count >= 7){
                 Bola bola = new Bola(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
                 instance.AddListaBolas(bola);
-                instance.CriaQuadrado(bola);
+                //instance.CriaQuadrado(bola);
                 dados.Clear();
             }
         } else {
