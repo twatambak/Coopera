@@ -7,7 +7,7 @@ using UnityEngine;
  /// A classe ObjetosRastreados está ligada ao gerenciamento dos objetos reconhecidos pela PixyCam.
  /// </summary>
 /************************************************************************************************************/
-public class ObjetosRastreados {
+public class Bola {
     /// <summary> ID do objeto rastreado. </summary>
     float id;
     /// <summary> Assinatura de cor do objeto rastreado. </summary>
@@ -40,7 +40,7 @@ public class ObjetosRastreados {
      /// <param name="largura"> Largura do objeto rastreado identificado pela PixyCam. </param>
      /// <param name="altura"> Altura do objeto rastreado identificado pela PixyCam. </param>
     //============================================================================================================
-    public ObjetosRastreados(float id, float assinatura, float x, float y, float largura, float altura, float idade) {
+    public Bola(float id, float assinatura, float x, float y, float largura, float altura, float idade) {
         this.id = id;
         this.assinatura = assinatura;
         this.x = x;
@@ -55,7 +55,7 @@ public class ObjetosRastreados {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o ID do objeto rastreado.
+     /// Retorna o ID da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -65,7 +65,7 @@ public class ObjetosRastreados {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a assinatura de cor do objeto rastreado.
+     /// Retorna a assinatura de cor da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -75,7 +75,7 @@ public class ObjetosRastreados {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a posição X do objeto rastreado.
+     /// Retorna a posição X da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -85,7 +85,7 @@ public class ObjetosRastreados {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a posição Y do objeto rastreado.
+     /// Retorna a posição Y da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -95,7 +95,7 @@ public class ObjetosRastreados {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a largura do objeto rastreado.
+     /// Retorna a largura da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -105,7 +105,7 @@ public class ObjetosRastreados {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a altura do objeto rastreado.
+     /// Retorna a altura da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -115,7 +115,7 @@ public class ObjetosRastreados {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a idade do objeto rastreado.
+     /// Retorna a idade (tempo que está sendo rastreada) da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -124,18 +124,30 @@ public class ObjetosRastreados {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto de origem da bola.
+     /// </summary>
+     /// <returns></returns>
     //==========================================================================================================//
     public Vector2 GetPontoOrigem() {
         return pontoOrigem;
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto inicial da bola.
+     /// </summary>
+     /// <returns></returns>
     //==========================================================================================================//
     public Vector2 GetPontoInicial() {
         return pontoInicial;
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto final da bola.
+     /// </summary>
+     /// <returns></returns>
     //==========================================================================================================//
     public Vector2 GetPontoFinal() {
         return pontoFinal;
@@ -146,7 +158,7 @@ public class ObjetosRastreados {
      /// Converte o ponto X (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
      /// do jogo.
      /// </summary>
-     /// <param name="x"> O ponto X do objeto rastreado. </param>
+     /// <param name="x"> O ponto X da bola. </param>
      /// <returns></returns>
     //==========================================================================================================//
     public float ConverteX(float x) {
@@ -159,7 +171,7 @@ public class ObjetosRastreados {
      /// Converte o ponto Y (localizado dentro do sistema de coordenadas da PixyCam) para o sistema de coordendas
      /// do jogo.
      /// </summary>
-     /// <param name="y"> O ponto y central do objeto rastreado. </param>
+     /// <param name="y"> O ponto y da bola </param>
      /// <returns></returns>
     //==========================================================================================================//
     public float ConverteY(float y) {
@@ -182,13 +194,13 @@ public class ObjetosRastreados {
     //==========================================================================================================//
      /// <summary>
      /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto X (localizado no canto superior
-     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
+     /// direito) da bola rastreada pela PixyCam para o sistema de coordenadas do jogo.
      /// </summary>
      /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
      /// <returns></returns>
     //==========================================================================================================//
     public Vector2 PontoInicial() {
-        Vector2 pos = new Vector2((x + largura), y);
+        Vector2 pos = new Vector2(x, (y + altura));
         Vector2 conversao = ConverteVetor(pos);
         return conversao;
     }
@@ -196,25 +208,36 @@ public class ObjetosRastreados {
     //==========================================================================================================//
      /// <summary>
      /// Realiza o Viewport (o porte das coordenadas) para o BoundingBox do ponto Y (localizado no canto superior
-     /// direito) do objeto rastreado pela PixyCam para o sistema de coordenadas do jogo.
+     /// direito) da bola rastreada pela PixyCam para o sistema de coordenadas do jogo.
      /// </summary>
      /// <param name="objeto"> O objeto ao qual deseja-se ser feito o viewport. </param>
      /// <returns></returns>
     //==========================================================================================================//
     public Vector2 PontoFinal() {
-        Vector2 pos = new Vector2(x, (y + altura));
+        Vector2 pos = new Vector2((x + largura), y);
         Vector2 conversao = ConverteVetor(pos);
         return conversao;
     }
 
     //============================================================================================================
      /// <summary>
-     /// Exibe as informações da classe de objeto rastreado.
+     /// Retorna o ponto de origem da bola convertido.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public Vector2 OrigemConvertida() {
+        Vector2 origem = ConverteVetor(GetPontoOrigem());
+        return origem;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Exibe as informações da classe da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
     public override string ToString() {
-        string texto = "OBJETO RASTREADO (ID " + id + ") => " + "Assinatura: " + assinatura + " | X: " + x + " | Y: " + y + " | Largura: " + largura + " | Altura: " + altura + "| Frames: " + idade;
+        string texto = "BOLA => Posição Original(" + GetPontoOrigem().x + " | " + GetPontoOrigem().y + ") => Posição Inicial(" + GetPontoInicial().x + " | " + GetPontoInicial().y + ") => Posição Final(" + GetPontoFinal().x + " | " + GetPontoFinal().y + ")";
         return texto;
     }
 }

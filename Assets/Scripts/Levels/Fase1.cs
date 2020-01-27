@@ -25,7 +25,7 @@ public class Fase1 : MonoBehaviour {
     public GameObject verdeHUD;
     /// <summary> A <see cref="Forma"/> base para criação das formas de alvo. </summary>
     public GameObject formaBase;
-    /// <summary> Objeto de base para o identificador da forma de identificação dos objetos rastreados. </summary>
+    /// <summary> Objeto de base para o identificador da alvo de identificação dos objetos rastreados. </summary>
     public GameObject identificador;
     /// <summary> Câmera do jogo. </summary>
     public Camera cam;
@@ -41,6 +41,7 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void Start() {
+        // Recebe a quantidade máxima de formas possíveis.
         quantiaMaxima = instance.GetMaximoFormas();
     }
 
@@ -51,22 +52,13 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void Update() {
+        // "Game" é uma variável que define o funcionamento do jogo. Caso ela esteja setada como FALSE o jogo não prossegue.
         if (game) {
+            // Chama a função de criação das formas passando a alvo base pública passada na engine.
             instance.CriarFormas(formaBase);
+            // Chama a função para comparar as posições da alvo-alvo e da bola rastreada.
             CompararPosicao();
-            //PrintarPosicao();
         }
-    }
-
-    //============================================================================================================
-     /// <summary>
-     /// Faz com que o programa tenha um delay relativo ao tempo informado na chamada da função.
-     /// </summary>
-     /// <param name="time"> A quantia de tempo do delay. </param>
-     /// <returns> Retorna o tempo da corrotina. </returns>
-    //============================================================================================================
-    IEnumerator Esperar(int time) {
-        yield return new WaitForSeconds(time);
     }
 
     //============================================================================================================
@@ -87,58 +79,51 @@ public class Fase1 : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     ///  A função é chamada para destruir todas as formas presentes na cena e assim limpar a tela.
-     /// </summary>
-    //============================================================================================================
-    void LimparFormas() {
-        for (int i = quantiaMaxima; i < quantiaMaxima; i--) {
-            Destroy(this.gameObject);
-        }
-    }
-
-    //============================================================================================================
-     /// <summary>
      /// Confere a posição dos objetos.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(ClasseForma forma, ObjetosRastreados rastreio) {
-        if (instance.VerificaColisao(forma, rastreio)) {
+    public bool VerificarAcerto(ClasseForma alvo, ObjetosRastreados rastreio) {
+        if (instance.VerificaColisao(alvo, rastreio)) {
             Debug.Log("ACERTOU");
+            Debug.Log(alvo);
+            Debug.Log(rastreio);
             Debug.Log("------------------------------------------------------------------------------");
             return true;
         } else {
             Debug.Log("NÃO ACERTOU");
+            Debug.Log(alvo);
+            Debug.Log(rastreio);
             Debug.Log("------------------------------------------------------------------------------");
+            return false;
         }
-        return false;
     }
 
     //===================================================================================================
      /// <summary>
      /// Realiza a comparação de posição dos objetos rastreados com as formas presentes na tela. Caso a
-     /// posição seja a mesma a forma é destruída. A comparação é feita caso a posição seja maior.
+     /// posição seja a mesma a alvo é destruída. A comparação é feita caso a posição seja maior.
      /// (Atualmente o controle de comparação é realizado utilizando a posição fornecida pela Unity.
      /// Precisa ser alterado).
      /// </summary>
     //===================================================================================================
     public void CompararPosicao() {
         List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
-        List<ClasseForma> listaFormas = instance.GetListaClasseFormas(); // A lista de objetos rastreados
-        if(listaRastreados != null && listaFormas != null) {
+        List<ClasseAlvo> listaAlvos = instance.GetListaClasseFormas(); // A lista de objetos rastreados
+        if(listaRastreados != null && listaAlvos != null) {
             for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
-                for(int j = 0; j < listaFormas.Count; j++) { 
-                    if(VerificarAcerto(listaFormas[j], listaRastreados[i])) { 
+                for(int j = 0; j < listaAlvos.Count; j++) { 
+                    if(VerificarAcerto(listaAlvos[j], listaRastreados[i])) { 
                         if(listaRastreados[i].GetAssinatura() == 2) {
-                            listaFormas[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
+                            listaAlvos[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
                             instance.AddPontosAmarelos(1);
-                            listaFormas.RemoveAt(j);
+                            listaAlvos.RemoveAt(j);
                         }
 
                         if(listaRastreados[i].GetAssinatura() == 3) {
                             instance.AddPontosVerdes(1);
-                            listaFormas[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
-                            listaFormas.RemoveAt(j);
+                            listaAlvos[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
+                            listaAlvos.RemoveAt(j);
                         }
                     }
                 }

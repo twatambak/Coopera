@@ -12,20 +12,20 @@ using UnityEngine.SceneManagement;
 public class Utils : MonoBehaviour, InterfaceUtils {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static Utils instance = null;
-    /// <summary> Lista dos objetos rastreados pela PixyCam. </summary>
-    public static List<ObjetosRastreados> listaRastreados = new List<ObjetosRastreados>();
+    /// <summary> Lista das bolas rastreadas pela PixyCam. </summary>
+    public static List<Bola> listaBolas = new List<Bola>();
     /// <summary> Lista de formas geradas pelo jogo. </summary>
-    public static List<GameObject> listaFormas = new List<GameObject>();
+    public static List<GameObject> listaAlvos = new List<GameObject>();
     /// <summary> Lista de formas geradas pelo jogo. </summary>
-    public static List<ClasseForma> listaClasseFormas = new List<ClasseForma>();
+    public static List<ClasseAlvo> listaClasseAlvos = new List<ClasseAlvo>();
     /// <summary> Quantidade atual de formas presentes na tela. </summary>
-    public static int quantiaAtual;
+    public static int qtdAlvos;
     /// <summary> Quantia de pontos do time amarelo. </summary>
     public static int pontosTimeAmarelo;
     /// <summary> Quantia de pontos do time verde. </summary>
     public static int pontosTimeVerde;
     /// <summary> Forma base. </summary>
-    public Forma forma;
+    public Alvo alvo;
     /// <summary> Material de base utilizado para alterar a cor das formas conforme elas são criadas. </summary>
     Material material;
     /// <summary> Cores das novas formas. </summary>
@@ -34,6 +34,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     int vel;
     /// <summary> Tamanho das formas. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int tam;
+
+    public GameObject identificadores;
+    public List<GameObject> listaIdentificadores = new List<GameObject>();
 
     //==========================================================================================================//
      /// <summary>
@@ -79,45 +82,45 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a quantidade máxima de formas possíveis. Essa informação está disponível na posição 1 (com o vetor
+     /// Retorna a quantidade máxima de alvos possíveis. Essa informação está disponível na posição 1 (com o vetor
      /// iniciando em 0) do arquvio CSV.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public int GetMaximoFormas() {
+    public int CSVGetMaximoAlvos() {
         return (ToInt(LoadCSV(2)));
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a velocidade das formas. Essa informação está disponível na posição 3 (com o vetor iniciando em 0)
+     /// Retorna a velocidade dos alvos. Essa informação está disponível na posição 3 (com o vetor iniciando em 0)
      /// do arquvio CSV.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public int GetVelocidadeFormas() {
+    public int CSVGetVelocidadeAlvos() {
         return (ToInt(LoadCSV(4)));
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna o tamanho das formas. Essa informação está disponível na posição 5 (com o vetor iniciando em 0)
+     /// Retorna o tamanho dos alvos. Essa informação está disponível na posição 5 (com o vetor iniciando em 0)
      /// do arquvio CSV. 
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public int GetTamanhoFormas() {
+    public int CSVGetTamanhoAlvos() {
         return (ToInt(LoadCSV(6)));
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de formas.
+     /// Retorna a lista de alvos.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public List<GameObject> GetListaFormas() {
-        return listaFormas;
+    public List<GameObject> GetListaAlvos() {
+        return listaAlvos;
     }
 
     //==========================================================================================================//
@@ -126,14 +129,18 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public List<ObjetosRastreados> GetListaRastreados() {
-        return listaRastreados;
+    public List<Bola> GetListaBolas() {
+        return listaBolas;
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna a lista de classes da alvo.
+     /// </summary>
+     /// <returns></returns>
     //==========================================================================================================//
-    public List<ClasseForma> GetListaClasseFormas() {
-        return listaClasseFormas;
+    public List<ClasseAlvo> GetListaClasseAlvos() {
+        return listaClasseAlvos;
     }
 
     //==========================================================================================================//
@@ -142,17 +149,24 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public int GetQuantiaAtualFormas() {
-        return quantiaAtual;
+    public int GetQuantidadeAlvos() {
+        return qtdAlvos;
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o tamanho da lista de rastreados.
+     /// </summary>
+     /// <returns></returns>
     //==========================================================================================================//
     public int GetTamanhoListaRastreados() {
-        return listaRastreados.Count;
+        return listaBolas.Count;
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Exibe o tamanho da lista de rastreados.
+     /// </summary>
     //==========================================================================================================//
     public void ExibeTamanhoListaRastreados() {
         Debug.Log("Tamanho da Lista de Rastreados: " + GetTamanhoListaRastreados());
@@ -167,7 +181,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="dados"> Lista de dados de objetos rastreados. </param>
     //==========================================================================================================//
     public void UpdateListaRastreados(List<ObjetosRastreados> dados) {
-        listaRastreados = dados;
+        listaBolas = dados;
     }
 
     //==========================================================================================================//
@@ -195,27 +209,27 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Cria as formas a serem acertadas pelo jogador.
      /// </summary>
-     /// <param name="formaBase"></param>
+     /// <param name="baseAlvo"></param>
     //==========================================================================================================//
-    public void CriarFormas(GameObject formaBase) {
-        GameObject novaForma;
-        int quantiaMaxima = GetMaximoFormas();
-        quantiaAtual = GetQuantiaAtualFormas();
-        vel = GetVelocidadeFormas();
-        tam = GetTamanhoFormas();
-        if (quantiaAtual < quantiaMaxima) {
-            for(int i = 0; i < quantiaMaxima; i++) {
-                if(quantiaAtual < quantiaMaxima) {
+    public void CriarAlvos(GameObject baseAlvo) {
+        GameObject novoAlvo;
+        int maxAlvos = CSVGetMaximoAlvos();
+        qtdAlvos = GetQuantidadeAlvos();
+        vel = CSVGetVelocidadeAlvos();
+        tam = CSVGetTamanhoAlvos();
+        if (qtdAlvos < maxAlvos) {
+            for(int i = 0; i < maxAlvos; i++) {
+                if(qtdAlvos < maxAlvos) {
                     novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
-                    novaForma = Instantiate(formaBase) as GameObject;
-                    novaForma.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
-                    novaForma.transform.localScale = new Vector3(tam, tam, tam);
-                    material = novaForma.GetComponent<Renderer>().material;
+                    novoAlvo = Instantiate(baseAlvo) as GameObject;
+                    novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
+                    novoAlvo.transform.localScale = new Vector3(tam, tam, tam);
+                    material = novoAlvo.GetComponent<Renderer>().material;
                     material.color = novaCor;
-                    ClasseForma classe = new ClasseForma(novaForma);
+                    ClasseAlvo classe = new ClasseAlvo(novoAlvo);
                     AddListaClasseFormas(classe);
-                    AddListaFormas(novaForma);
-                    AddQuantiaAtual();
+                    AddListaAlvos(novoAlvo);
+                    AddQuantidadeAlvos();
                 }
             }
         }
@@ -223,43 +237,55 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona a Forma recebida na lista de formas.
+     /// Adiciona o alvo recebido na lista de alvos.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="alvo"></param>
     //==========================================================================================================//
-    public void AddListaFormas(GameObject forma) {
-        listaFormas.Add(forma);
+    public void AddListaAlvos(GameObject alvo) {
+        listaAlvos.Add(alvo);
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove a Forma recebida da lista de formas.
+     /// Remove o alvo recebido da lista de alvos.
+     /// </summary>
+     /// <param name="alvo"></param>
+    //==========================================================================================================//
+    public void RemoveListaAlvos(GameObject alvo) {
+        listaAlvos.Remove(alvo);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona a classe alvo passada na lista de classe de alvos.
+     /// </summary>
+     /// <param name="alvo"></param>
+    //==========================================================================================================//
+    public void AddListaClasseAlvo(ClasseAlvo alvo) {
+        listaClasseAlvos.Add(alvo);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Remove a classe alvo passada da lista de classe de alvos.
      /// </summary>
      /// <param name="forma"></param>
     //==========================================================================================================//
-    public void RemoveListaFormas(GameObject forma) {
-        listaFormas.Remove(forma);
+    public void RemoveListaClasseAlvos(ClasseAlvo alvo) {
+        listaClasseAlvos.Remove(forma);
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Remove a GameObject alvo passada da lista de alvos.
+     /// </summary>
+     /// <param name="forma"></param>
     //==========================================================================================================//
-    public void AddListaClasseFormas(ClasseForma forma) {
-        listaClasseFormas.Add(forma);
-    }
-
-    //==========================================================================================================//
-    //==========================================================================================================//
-    public void RemoveListaClasseFormas(ClasseForma forma) {
-        listaClasseFormas.Remove(forma);
-    }
-
-    //==========================================================================================================//
-    //==========================================================================================================//
-    public void RemoveListaClasseFormas(GameObject forma) {
-        if(listaClasseFormas.Count > 0) {
-            for(int i = 0; i < listaClasseFormas.Count; i++) { 
-                if(listaClasseFormas[i].GetObjetoBase() == forma) {
-                    listaClasseFormas.RemoveAt(i);
+    public void RemoveListaClasseAlvos(GameObject alvo) {
+        if(listaClasseAlvos.Count > 0) {
+            for(int i = 0; i < listaClasseAlvos.Count; i++) { 
+                if(listaClasseAlvos[i].GetObjetoBase() == alvo) {
+                    listaClasseAlvos.RemoveAt(i);
                 }
             }
         }
@@ -272,19 +298,19 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="rastreado"></param>
     //==========================================================================================================//
     public void AddListaRastreados(ObjetosRastreados rastreado) {
-        if(listaRastreados.Count != 0) {
-            for(int i = 0; i < listaRastreados.Count; i++) {
+        if(listaBolas.Count != 0) {
+            for(int i = 0; i < listaBolas.Count; i++) {
                 Debug.Log(rastreado);
-                if(listaRastreados[i].GetID() == rastreado.GetID()) {
-                    listaRastreados[i] = rastreado;
+                if(listaBolas[i].GetID() == rastreado.GetID()) {
+                    listaBolas[i] = rastreado;
                     ExibeTamanhoListaRastreados();
                 } else {
-                    listaRastreados.Add(rastreado);
+                    listaBolas.Add(rastreado);
                     ExibeTamanhoListaRastreados();
                 }
             }
         } else {
-            listaRastreados.Add(rastreado);
+            listaBolas.Add(rastreado);
             ExibeTamanhoListaRastreados();
         }
     }
@@ -296,20 +322,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="rastreado"></param>
     //==========================================================================================================//
     public void RemoveListaRastreados(ObjetosRastreados rastreado) {
-        listaRastreados.Remove(rastreado);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove os objetos rastreados antigos que tenham uma idade maior do que 30 frames.
-     /// </summary>
-    //==========================================================================================================//
-    public void RemoveRastreadosAntigos() {
-        for (int i = 0; i < listaRastreados.Count; i++) {
-            if(listaRastreados[i].GetIdade() > 500) {
-                RemoveListaRastreados(listaRastreados[i]);
-            }
-        }
+        listaBolas.Remove(rastreado);
     }
 
     //==========================================================================================================//
@@ -318,7 +331,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
     //==========================================================================================================//
     public void LimparRastreados() {
-        listaRastreados.Clear();
+        listaBolas.Clear();
     }
 
     //==========================================================================================================//
@@ -326,20 +339,20 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// Acrescenta uma unidade da quantia atual de formas.
      /// </summary>
     //==========================================================================================================//
-    public void AddQuantiaAtual() {
-        if (quantiaAtual < GetMaximoFormas()) {
-            quantiaAtual++;
+    public void AddQuantidadeAlvos() {
+        if (qtdAlvos < CSVGetMaximoAlvos()) {
+            qtdAlvos++;
         }
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove uma unidade da quantia atual de formas.
+     /// Remove uma unidade da quantia atual de alvos.
      /// </summary>
     //==========================================================================================================//
-    public void RemoveQuantiaAtual() { 
-        if(quantiaAtual > 0) {
-            quantiaAtual--;
+    public void RemoveQuantidadeAlvos() { 
+        if(qtdAlvos > 0) {
+            qtdAlvos--;
         }
     }
 
@@ -366,14 +379,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
      /// dos dois objetos.
      /// </summary>
-     /// <param name="rastreioPosInicial"> O ponto a esquerda da BoundingBox do objeto rastreado. </param>
-     /// <param name="rastreioPosFinal"> O ponto a direita da BoundingBox do objeto rastreado. </param>
-     /// <param name="formaPosInicial"> O ponto a esquerda da BoundingBox da forma.</param>
-     /// <param name="formaPosFinal"> O ponto a direita da BoundingBox da forma.</param>
+     /// <param name="rastreioInicial"> O ponto a esquerda da BoundingBox do objeto rastreado. </param>
+     /// <param name="rastreioFinal"> O ponto a direita da BoundingBox do objeto rastreado. </param>
+     /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox da alvo.</param>
+     /// <param name="alvoFinal"> O ponto a direita da BoundingBox da alvo.</param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(Vector2 rastreioPosInicial, Vector2 rastreioPosFinal, Vector2 formaPosInicial, Vector2 formaPosFinal) {
-        if (rastreioPosFinal.x < formaPosInicial.x || formaPosFinal.x < rastreioPosInicial.x || rastreioPosFinal.y < formaPosInicial.y || formaPosFinal.y < rastreioPosInicial.y) { // Não há colisão
+    public Boolean VerificaColisao(Vector2 rastreioInicial, Vector2 rastreioFinal, Vector2 alvoInicial, Vector2 alvoFinal) {
+        if (rastreioFinal.x < alvoInicial.x || alvoFinal.x < rastreioInicial.x || rastreioFinal.y < alvoInicial.y || alvoFinal.y < rastreioInicial.y) { // Não há colisão
             return false;
         } else {
             return true;
@@ -385,15 +398,36 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
     /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
     /// </summary>
-    /// <param name="forma"> A forma que deseja ser verificada se houve colisão. </param>
+    /// <param name="alvo"> A alvo que deseja ser verificada se houve colisão. </param>
     /// <param name="rastreio"> O objeti rastreado que deseja ser verificado se houve colisão. </param>
     /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(ClasseForma forma, ObjetosRastreados rastreio) {
-        Vector2 rastreio_posicaoInicio = rastreio.GetPontoInicial();
-        Vector2 rastreio_posicaoFinal = rastreio.GetPontoFinal();
-        Vector2 forma_posicaoInicio = forma.GetPontoInicial();
-        Vector2 forma_posicaoFinal = forma.GetPontoFinal();
-        return (VerificaColisao(rastreio_posicaoInicio, rastreio_posicaoFinal, forma_posicaoInicio, forma_posicaoFinal));
+    public Boolean VerificaColisao(ClasseAlvo alvo, ObjetosRastreados rastreio) {
+        Vector2 rastreioInicial = rastreio.GetPontoInicial();
+        Vector2 rastreioFinal = rastreio.GetPontoFinal();
+        Vector2 alvoInicial = alvo.GetPontoInicial();
+        Vector2 alvoFinal = alvo.GetPontoFinal();
+        Boolean colidiu = VerificaColisao(rastreioInicial, rastreioFinal, alvoInicial, alvoFinal);
+        return colidiu;
     }
+
+    public void CriaQuadrado(ObjetosRastreados rastreio) {
+        GameObject identificador;
+        float largura = rastreio.GetPontoFinal().x - rastreio.GetPontoInicial().x;
+        float altura = rastreio.GetPontoFinal().y - rastreio.GetPontoInicial().y;
+        for(int i = 0; i < listaBolas.Count; i++) {
+            identificador = Instantiate(identificadores) as GameObject;
+            identificador.transform.position = rastreio.OrigemConvertida();
+            identificador.transform.localScale = new Vector2(largura, altura);
+            AddIdentificador(identificador);
+        }
+    }
+    
+    public void AddIdentificador(GameObject identificador) {
+        listaIdentificadores.Add(identificador);
+    }
+ 
+    public void MovimentaIdentificador() { 
+    }
+
 }

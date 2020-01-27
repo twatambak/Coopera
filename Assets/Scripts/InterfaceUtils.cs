@@ -66,6 +66,10 @@ interface InterfaceUtils {
     List<ObjetosRastreados> GetListaRastreados();
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna a lista de classe de formas.
+     /// </summary>
+     /// <returns></returns>
     //==========================================================================================================//
     List<ClasseForma> GetListaClasseFormas();
 
@@ -77,10 +81,17 @@ interface InterfaceUtils {
     int GetQuantiaAtualFormas();
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o tamanho da lista de rastreados.
+     /// </summary>
+     /// <returns></returns>
     //==========================================================================================================//
     int GetTamanhoListaRastreados();
 
     //==========================================================================================================//
+     /// <summary>
+     /// Exibe o tamanho da lista de rastreados.
+     /// </summary>
     //==========================================================================================================//
     void ExibeTamanhoListaRastreados();
 
@@ -137,14 +148,26 @@ interface InterfaceUtils {
     void RemoveListaFormas(GameObject forma);
 
     //==========================================================================================================//
+     /// <summary>
+     /// Adiciona a classe de forma-alvo passada na lista de classe para forma-alvo.
+     /// </summary>
+     /// <param name="forma"></param>
     //==========================================================================================================//
     void AddListaClasseFormas(ClasseForma forma);
 
     //==========================================================================================================//
+     /// <summary>
+     /// Remove a classe de forma-alvo passada na lista de classe para forma-alvo.
+     /// </summary>
+     /// <param name="forma"></param>
     //==========================================================================================================//
     void RemoveListaClasseFormas(ClasseForma forma);
 
     //==========================================================================================================//
+     /// <summary>
+     /// 
+     /// </summary>
+     /// <param name="forma"></param>
     //==========================================================================================================//
     void RemoveListaClasseFormas(GameObject forma);
 
@@ -163,13 +186,6 @@ interface InterfaceUtils {
      /// <param name="rastreado"></param>
     //==========================================================================================================//
     void RemoveListaRastreados(ObjetosRastreados rastreado);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove os 
-     /// </summary>
-    //==========================================================================================================//
-    void RemoveRastreadosAntigos();
 
     //==========================================================================================================//
      /// <summary>
@@ -207,11 +223,28 @@ interface InterfaceUtils {
     void AddPontosVerdes(int pontos);
 
     //==========================================================================================================//
+     /// <summary>
+     /// Verifica a colisão entre as posições do viewport.
+     /// </summary>
+     /// <param name="rastreioPosInicial"></param>
+     /// <param name="rastreioPosFinal"></param>
+     /// <param name="formaPosInicial"></param>
+     /// <param name="formaPosFinal"></param>
+     /// <returns></returns>
     //==========================================================================================================//
     Boolean VerificaColisao(Vector2 rastreioPosInicial, Vector2 rastreioPosFinal, Vector2 formaPosInicial, Vector2 formaPosFinal);
 
     //==========================================================================================================//
+     /// <summary>
+     /// Verifica colisão entre a forma-alvo e o objeto rastreado.
+     /// </summary>
+     /// <param name="forma"></param>
+     /// <param name="rastreio"></param>
+     /// <returns></returns>
     //==========================================================================================================//
     Boolean VerificaColisao(ClasseForma forma, ObjetosRastreados rastreio);
+
+    void CriaQuadrado(ObjetosRastreados rastreio);
+    void MovimentaIdentificador();
 }
 

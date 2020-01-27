@@ -4,10 +4,10 @@ using UnityEngine;
 
 /************************************************************************************************************/
  /// <summary>
- /// A classe Forma é responsável por definir as variáveis e comportamentos das formas presentes nas fases.
+ /// A classe Alvo é responsável por definir as variáveis e comportamentos das formas presentes nas fases.
  /// </summary>
 /************************************************************************************************************/
-public class Forma : MonoBehaviour {
+public class Alvo : MonoBehaviour {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
     /// <summary> Partículas de destruição </summary>
@@ -18,7 +18,7 @@ public class Forma : MonoBehaviour {
     float dirY = 0.1f; 
     /// <summary> Velocidade de movimentação </summary>
     float vel = instance.GetVelocidadeFormas(); // 
-    /// <summary> Tamanho da Forma </summary>
+    /// <summary> Tamanho da Alvo </summary>
     float tam = instance.GetTamanhoFormas();
 
     //==========================================================================================================//
@@ -42,7 +42,7 @@ public class Forma : MonoBehaviour {
 
     //==========================================================================================================//
      /// <summary>
-     /// Recebe uma Forma e a destrói.
+     /// Recebe uma Alvo e a destrói.
      /// </summary>
      /// <param name="forma"></param>
     //==========================================================================================================//
@@ -77,7 +77,7 @@ public class Forma : MonoBehaviour {
      /// aplicada a direção inversa ao eixo relacionado a essa colisão. Quando a colisão acontece com
      /// um GameObject com a tag "Vertical" a direção X é invertida, quando a colisão acontece com um
      /// GameObject com a tag "Horizontal" a direção de Y é invertida, e quando a colisão acontece com
-     /// outra Forma ambas as direções são invertidas.
+     /// outra Alvo ambas as direções são invertidas.
      /// </summary>
      /// <param name="outro"></param>
     //==========================================================================================================//
@@ -86,7 +86,7 @@ public class Forma : MonoBehaviour {
             dirX *= -1;
         } else if(outro.gameObject.tag == "Horizontal") {
             dirY *= -1;
-        } else if(outro.gameObject.tag == "Forma"){
+        } else if(outro.gameObject.tag == "Alvo"){
             dirX *= -1;
             dirY *= -1;
         }
@@ -101,12 +101,13 @@ public class Forma : MonoBehaviour {
      /// </summary>
     //==========================================================================================================//
     void OnMouseDown() {
-        if(instance.GetQuantiaAtualFormas() > 0) {
+        /*if(instance.GetQuantiaAtualFormas() > 0) {
             Destroy(this.gameObject);
             instance.RemoveListaFormas(this.gameObject);
             instance.RemoveListaClasseFormas(this.gameObject);
             instance.RemoveQuantiaAtual();
             instance.AddPontosAmarelos(1);
-        }
+        }*/
+        Debug.Log(this);
     }
 }
