@@ -5,15 +5,15 @@ using UnityEngine;
 public class ClasseAlvo {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
-    /// <summary> Objeto base para a forma alvo. </summary>
+    /// <summary> Objeto base para o alvo. </summary>
     GameObject objetoBase;
     /// <summary> Ponto X da posição de origem. </summary>
     float x;
     /// <summary> Ponto Y da posição de origem. </summary>
     float y;
-    /// <summary> Tamanho da Forma </summary>
+    /// <summary> Tamanho do alvo </summary>
     float tam;
-    /// <summary> Tamanho da Forma </summary>
+    /// <summary> Tamanho do alvo. </summary>
     Vector2 pontoOrigem;
     /// <summary> Posição inicial do viewport (localizada no canto esquerdo inferior do objeto). </summary>
     Vector2 pontoInicial;
@@ -32,17 +32,17 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Construtor da classe para a forma-alvo.
+     /// Construtor da classe para o alvo.
      /// </summary>
-     /// <param name="objetoBase"> O objeto a ser usado de base para criação da forma-alvo. </param>
+     /// <param name="objetoBase"> O objeto a ser usado de base para criação do alvo. </param>
     //============================================================================================================
     public ClasseAlvo(GameObject objetoBase) {
         this.objetoBase = objetoBase;
         x = objetoBase.transform.localPosition.x;
         y = objetoBase.transform.localPosition.y;
         pontoOrigem = new Vector2(x, y);
-        tam = instance.GetTamanhoFormas();
-        vel = instance.GetVelocidadeFormas();
+        tam = instance.CSVGetTamanhoAlvos();
+        vel = instance.CSVGetVelocidadeAlvos();
         dirX = 0.1f;
         dirY = 0.1f;
         cor = objetoBase.GetComponent<Renderer>().material.color;
@@ -52,7 +52,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o objeto base que cria a forma-alvo. 
+     /// Retorna o objeto base que cria o alvo. 
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -62,7 +62,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o ponto central X original da forma-alvo.
+     /// Retorna o ponto central X original do alvo.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -72,7 +72,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o ponto central Y original da forma-alvo.
+     /// Retorna o ponto central Y original do alvo.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -82,7 +82,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o tamanho da forma-alvo.
+     /// Retorna o tamanho do alvo.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -92,7 +92,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a posição central original da forma-alvo.
+     /// Retorna a posição central original do alvo.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -102,7 +102,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o ponto inicial do viewport da forma-alvo. O ponto é localizado no canto esquerdo inferior.
+     /// Retorna o ponto inicial do viewport do alvo. O ponto é localizado no canto esquerdo inferior.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -112,7 +112,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o ponto final do viewport da forma-alvo. O ponto é localizado no canto direito superior.
+     /// Retorna o ponto final do viewport do alvo. O ponto é localizado no canto direito superior.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -122,7 +122,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a direção de movimento no eixo X da forma-alvo.
+     /// Retorna a direção de movimento no eixo X do alvo.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -132,7 +132,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a direção de movimento no eixo X da forma-alvo.
+     /// Retorna a direção de movimento no eixo X do alvo.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -142,7 +142,7 @@ public class ClasseAlvo {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a velocidade de movimento da forma-alvo.
+     /// Retorna a velocidade de movimento do alvo.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -152,9 +152,9 @@ public class ClasseAlvo {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna o ponto X central da forma (localizado no canto superior direito da forma).
+     /// Retorna o ponto X central do alvo (localizado no canto superior direito da alvo).
      /// </summary>
-     /// <param name="forma"> A forma a ser reconhecido o ponto central X. </param>
+     /// <param name="alvo"> O alvo a ser reconhecido o ponto central X. </param>
      /// <returns></returns>
     //==========================================================================================================//
     public Vector2 PontoInicial() {
@@ -164,9 +164,9 @@ public class ClasseAlvo {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna o ponto Y central da forma (localizado no canto inferior esquerdo da forma).
+     /// Retorna o ponto Y central do alvo (localizado no canto inferior esquerdo do alvo).
      /// </summary>
-     /// <param name="forma"> A forma a ser reconhecido o ponto central Y. </param>
+     /// <param name="alvo"> O alvo a ser reconhecido o ponto central Y. </param>
      /// <returns></returns>
     //==========================================================================================================//
     public Vector2 PontoFinal() {
@@ -181,7 +181,7 @@ public class ClasseAlvo {
      /// <returns></returns>
     //==========================================================================================================//
     public override string ToString() {
-        string texto = "FORMA-ALVO => Posição Original(" + GetPontoOrigem().x + " | " + GetPontoOrigem().y + ") => Posição Inicial(" + GetPontoInicial().x + " | " + GetPontoInicial().y + ") => Posição Final(" + GetPontoFinal().x + " | " + GetPontoFinal().y + ")";
+        string texto = "ALVO => Posição Original(" + GetPontoOrigem().x + " | " + GetPontoOrigem().y + ") => Posição Inicial(" + GetPontoInicial().x + " | " + GetPontoInicial().y + ") => Posição Final(" + GetPontoFinal().x + " | " + GetPontoFinal().y + ")";
         return texto;
     }
 }

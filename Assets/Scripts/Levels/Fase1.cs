@@ -15,16 +15,16 @@ public class Fase1 : MonoBehaviour {
     public Text textoPontosVerdes;
     /// <summary> Texto de exibição de pontos do time amarelo. </summary>
     public Text textoPontosAmarelos;
-    /// <summary> Quantia máxima de formas. Seu valor é carregado pela função de leitura <see cref="Utils.LoadCSV(int)"/> do arquivo de configuração. </summary>
-    int quantiaMaxima;
+    /// <summary> Quantia máxima de alvos. Seu valor é carregado pela função de leitura <see cref="Utils.LoadCSV(int)"/> do arquivo de configuração. </summary>
+    int maxAlvos;
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
     bool game;
     /// <summary> HUD referente ao time amarelo. </summary>
     public GameObject amareloHUD;
     /// <summary> HUD referente ao time verde. </summary>
     public GameObject verdeHUD;
-    /// <summary> A <see cref="Forma"/> base para criação das formas de alvo. </summary>
-    public GameObject formaBase;
+    /// <summary> A <see cref="Alvo"/> base para criação das alvos de alvo. </summary>
+    public GameObject baseAlvo;
     /// <summary> Objeto de base para o identificador da alvo de identificação dos objetos rastreados. </summary>
     public GameObject identificador;
     /// <summary> Câmera do jogo. </summary>
@@ -36,13 +36,13 @@ public class Fase1 : MonoBehaviour {
      /// <summary>
      /// Start() é chamada antes do update do primeiro frame.
      /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
-     /// definição para as variáveis correspondentes a quantidade de formas na fase, além de chamar
-     /// uma função que faz a criação de clones do prefab Forma.
+     /// definição para as variáveis correspondentes a quantidade de alvos na fase, além de chamar
+     /// uma função que faz a criação de clones do prefab Alvo.
      /// </summary>
     //============================================================================================================
     void Start() {
-        // Recebe a quantidade máxima de formas possíveis.
-        quantiaMaxima = instance.GetMaximoFormas();
+        // Recebe a quantidade máxima de alvos possíveis.
+        maxAlvos = instance.CSVGetMaximoAlvos();
     }
 
 
@@ -54,8 +54,8 @@ public class Fase1 : MonoBehaviour {
     void Update() {
         // "Game" é uma variável que define o funcionamento do jogo. Caso ela esteja setada como FALSE o jogo não prossegue.
         if (game) {
-            // Chama a função de criação das formas passando a alvo base pública passada na engine.
-            instance.CriarFormas(formaBase);
+            // Chama a função de criação das alvos passando a alvo base pública passada na engine.
+            instance.CriarAlvos(baseAlvo);
             // Chama a função para comparar as posições da alvo-alvo e da bola rastreada.
             CompararPosicao();
         }
@@ -83,17 +83,17 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(ClasseForma alvo, ObjetosRastreados rastreio) {
-        if (instance.VerificaColisao(alvo, rastreio)) {
+    public bool VerificarAcerto(ClasseAlvo alvo, Bola bola) {
+        if (instance.VerificaColisao(alvo, bola)) {
             Debug.Log("ACERTOU");
             Debug.Log(alvo);
-            Debug.Log(rastreio);
+            Debug.Log(bola);
             Debug.Log("------------------------------------------------------------------------------");
             return true;
         } else {
             Debug.Log("NÃO ACERTOU");
             Debug.Log(alvo);
-            Debug.Log(rastreio);
+            Debug.Log(bola);
             Debug.Log("------------------------------------------------------------------------------");
             return false;
         }
@@ -101,34 +101,34 @@ public class Fase1 : MonoBehaviour {
 
     //===================================================================================================
      /// <summary>
-     /// Realiza a comparação de posição dos objetos rastreados com as formas presentes na tela. Caso a
+     /// Realiza a comparação de posição dos objetos rastreados com as alvos presentes na tela. Caso a
      /// posição seja a mesma a alvo é destruída. A comparação é feita caso a posição seja maior.
      /// (Atualmente o controle de comparação é realizado utilizando a posição fornecida pela Unity.
      /// Precisa ser alterado).
      /// </summary>
     //===================================================================================================
     public void CompararPosicao() {
-        List<Bola> listaBolas = instance.GetListaRastreados(); // A lista de objetos rastreados
-        List<ClasseAlvo> listaAlvos = instance.GetListaClasseFormas(); // A lista de objetos rastreados
+        List<Bola> listaBolas = instance.GetListaBolas(); // A lista de objetos rastreados
+        List<ClasseAlvo> listaAlvos = instance.GetListaClasseAlvos(); // A lista de objetos rastreados
         if(listaBolas != null && listaAlvos != null) {
             for (int i = 0; i < listaBolas.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaAlvos.Count; j++) { 
                     if(VerificarAcerto(listaAlvos[j], listaBolas[i])) { 
                         if(listaBolas[i].GetAssinatura() == 2) {
-                            listaAlvos[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
+                            listaAlvos[j].GetObjetoBase().GetComponent<Alvo>().DestroiAlvo();
                             instance.AddPontosAmarelos(1);
                             listaAlvos.RemoveAt(j);
                         }
 
                         if(listaBolas[i].GetAssinatura() == 3) {
                             instance.AddPontosVerdes(1);
-                            listaAlvos[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
+                            listaAlvos[j].GetObjetoBase().GetComponent<Alvo>().DestroiAlvo();
                             listaAlvos.RemoveAt(j);
                         }
                     }
                 }
-                instance.RemoveListaRastreados(listaBolas[i]);
-                instance.ExibeTamanhoListaRastreados();
+                instance.RemoveListaBolas(listaBolas[i]);
+                instance.PrintTamanhoListaBolas();
             }
         }
     }

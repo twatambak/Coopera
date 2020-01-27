@@ -14,25 +14,25 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     static Utils instance = null;
     /// <summary> Lista das bolas rastreadas pela PixyCam. </summary>
     public static List<Bola> listaBolas = new List<Bola>();
-    /// <summary> Lista de formas geradas pelo jogo. </summary>
+    /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public static List<GameObject> listaAlvos = new List<GameObject>();
-    /// <summary> Lista de formas geradas pelo jogo. </summary>
+    /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public static List<ClasseAlvo> listaClasseAlvos = new List<ClasseAlvo>();
-    /// <summary> Quantidade atual de formas presentes na tela. </summary>
+    /// <summary> Quantidade atual de alvos presentes na tela. </summary>
     public static int qtdAlvos;
     /// <summary> Quantia de pontos do time amarelo. </summary>
     public static int pontosTimeAmarelo;
     /// <summary> Quantia de pontos do time verde. </summary>
     public static int pontosTimeVerde;
-    /// <summary> Forma base. </summary>
+    /// <summary> Alvo base. </summary>
     public Alvo alvo;
-    /// <summary> Material de base utilizado para alterar a cor das formas conforme elas são criadas. </summary>
+    /// <summary> Material de base utilizado para alterar a cor das alvos conforme elas são criadas. </summary>
     Material material;
-    /// <summary> Cores das novas formas. </summary>
+    /// <summary> Cores das novas alvos. </summary>
     public static Color novaCor;
-    /// <summary> Velocidade das formas. Valor obtido através do CSV de configuração. Posição (4) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    /// <summary> Velocidade das alvos. Valor obtido através do CSV de configuração. Posição (4) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int vel;
-    /// <summary> Tamanho das formas. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    /// <summary> Tamanho das alvos. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int tam;
 
     public GameObject identificadores;
@@ -225,7 +225,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
                     material = novoAlvo.GetComponent<Renderer>().material;
                     material.color = novaCor;
                     ClasseAlvo classe = new ClasseAlvo(novoAlvo);
-                    AddListaClasseFormas(classe);
+                    AddListaClasseAlvos(classe);
                     AddListaAlvos(novoAlvo);
                     AddQuantidadeAlvos();
                 }
@@ -259,7 +259,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// </summary>
     /// <param name="alvo"> A classe alvo a ser adicionada na respectiva lista. </param>
     //==========================================================================================================//
-    public void AddListaClasseAlvo(ClasseAlvo alvo) {
+    public void AddListaClasseAlvos(ClasseAlvo alvo) {
         listaClasseAlvos.Add(alvo);
     }
 
@@ -270,14 +270,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="alvo"> Remove a classe alvo passada da lista. </param>
     //==========================================================================================================//
     public void RemoveListaClasseAlvos(ClasseAlvo alvo) {
-        listaClasseAlvos.Remove(forma);
+        listaClasseAlvos.Remove(alvo);
     }
 
     //==========================================================================================================//
      /// <summary>
      /// Remove o GameObject alvo passado da lista de alvos.
      /// </summary>
-     /// <param name="forma"> O GameObject que representa a classe alvo. </param>
+     /// <param name="alvo"> O GameObject que representa a classe alvo. </param>
     //==========================================================================================================//
     public void RemoveListaClasseAlvos(GameObject alvo) {
         if(listaClasseAlvos.Count > 0) {
@@ -334,7 +334,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Acrescenta uma unidade da quantia atual de formas.
+     /// Aumenta em 1 a quantidade de alvos.
      /// </summary>
     //==========================================================================================================//
     public void AddQuantidadeAlvos() {
@@ -345,7 +345,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove uma unidade da quantia atual de alvos.
+     /// Subtrai em 1 a quantidade de alvos.
      /// </summary>
     //==========================================================================================================//
     public void RemoveQuantidadeAlvos() { 
@@ -358,6 +358,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Adiciona o valor passado aos pontos do time amarelo.
      /// </summary>
+     /// <param name="pontos"> Valor a ser adicionado aos pontos do time amarelo. </param>
     //==========================================================================================================//
     public void AddPontosAmarelos(int pontos) {
         pontosTimeAmarelo += pontos;
@@ -367,6 +368,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Adiciona o valor passado aos pontos do time verde.
      /// </summary>
+     /// <param name="pontos"> Valor a ser adicionado aos pontos do time verde. </param>
     //==========================================================================================================//
     public void AddPontosVerdes(int pontos) {
         pontosTimeVerde += pontos;
@@ -381,7 +383,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="bolaFinal"> O ponto a direita da BoundingBox da bola. </param>
      /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox do alvo.</param>
      /// <param name="alvoFinal"> O ponto a direita da BoundingBox do alvo.</param>
-     /// <returns></returns>
+     /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
     public Boolean VerificaColisao(Vector2 bolaInicial, Vector2 bolaFinal, Vector2 alvoInicial, Vector2 alvoFinal) {
         if (bolaFinal.x < alvoInicial.x || alvoFinal.x < bolaInicial.x || bolaFinal.y < alvoInicial.y || alvoFinal.y < bolaInicial.y) { // Não há colisão
@@ -409,6 +411,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         return colidiu;
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Cria um quadrado de identificação para a visualização da posição bola rastreada em função do jogo.
+     /// </summary>
+     /// <param name="bola"> A bola base para a criação do quadrado. </param>
+    //==========================================================================================================//
     public void CriaQuadrado(Bola bola) {
         GameObject identificador;
         float largura = bola.GetPontoFinal().x - bola.GetPontoInicial().x;
@@ -420,12 +428,15 @@ public class Utils : MonoBehaviour, InterfaceUtils {
             AddIdentificador(identificador);
         }
     }
-    
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona um quadrado identificador à lista de identificadores.
+     /// </summary>
+     /// <param name="identificador"> O identificador a ser adicionado na lista. </param>
+    //==========================================================================================================//
     public void AddIdentificador(GameObject identificador) {
         listaIdentificadores.Add(identificador);
-    }
- 
-    public void MovimentaIdentificador() { 
     }
 
 }

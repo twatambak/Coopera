@@ -167,9 +167,9 @@ interface InterfaceUtils {
      /// <summary>
      /// Remove o GameObject alvo passada da lista de alvos.
      /// </summary>
-     /// <param name="forma"> O GameObject que representa a classe alvo. </param>
+     /// <param name="alvo"> O GameObject que representa a classe alvo. </param>
     //==========================================================================================================//
-    void RemoveListaClasseFormas(GameObject forma);
+    void RemoveListaClasseAlvos(GameObject alvo);
 
     //==========================================================================================================//
      /// <summary>
@@ -185,7 +185,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="bola"> A bola a ser removida da lista. </param>
     //==========================================================================================================//
-    void RemoveListaBolas(ObjetosRastreados rastreado);
+    void RemoveListaBolas(Bola bola);
 
     //==========================================================================================================//
      /// <summary>
@@ -195,23 +195,24 @@ interface InterfaceUtils {
     void LimpaListaBolas();
 
     //==========================================================================================================//
-    /// <summary>
-    /// Acrescenta uma unidade da quantia atual de formas.
-    /// </summary>
+     /// <summary>
+     /// Aumenta em 1 a quantidade de alvos.
+     /// </summary>
     //==========================================================================================================//
-    void AddQuantiaAtual();
+    void AddQuantidadeAlvos();
 
     //==========================================================================================================//
      /// <summary>
-     /// Remove uma unidade da quantia atual de formas.
+     /// Subtrai em 1 a quantidade de alvos.
      /// </summary>
     //==========================================================================================================//
-    void RemoveQuantiaAtual();
+    void RemoveQuantidadeAlvos();
 
     //==========================================================================================================//
      /// <summary>
      /// Adiciona o valor passado aos pontos do time amarelo.
      /// </summary>
+     /// <param name="pontos"> Valor a ser adicionado aos pontos do time amarelo. </param>
     //==========================================================================================================//
     void AddPontosAmarelos(int pontos);
 
@@ -219,32 +220,41 @@ interface InterfaceUtils {
      /// <summary>
      /// Adiciona o valor passado aos pontos do time verde.
      /// </summary>
+     /// <param name="pontos"> Valor a ser adicionado aos pontos do time verde. </param>
     //==========================================================================================================//
     void AddPontosVerdes(int pontos);
 
     //==========================================================================================================//
      /// <summary>
-     /// Verifica a colisão entre as posições do viewport.
+     /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
+     /// dos dois objetos.
      /// </summary>
-     /// <param name="rastreioPosInicial"></param>
-     /// <param name="rastreioPosFinal"></param>
-     /// <param name="formaPosInicial"></param>
-     /// <param name="formaPosFinal"></param>
-     /// <returns></returns>
+     /// <param name="bolaInicial"> O ponto a esquerda da BoundingBox da bola. </param>
+     /// <param name="bolaFinal"> O ponto a direita da BoundingBox da bola. </param>
+     /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox do alvo.</param>
+     /// <param name="alvoFinal"> O ponto a direita da BoundingBox do alvo.</param>
+     /// <returns> Booleano informando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    Boolean VerificaColisao(Vector2 rastreioPosInicial, Vector2 rastreioPosFinal, Vector2 formaPosInicial, Vector2 formaPosFinal);
+    Boolean VerificaColisao(Vector2 bolaInicial, Vector2 bolaFinal, Vector2 alvoInicial, Vector2 alvoFinal);
 
     //==========================================================================================================//
      /// <summary>
-     /// Verifica colisão entre a forma-alvo e o objeto rastreado.
+     /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
+     /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
      /// </summary>
-     /// <param name="forma"></param>
-     /// <param name="rastreio"></param>
-     /// <returns></returns>
+     /// <param name="alvo"> A alvo que deseja ser verificada se houve colisão. </param>
+     /// <param name="bola"> A bola que deseja ser verificada se houve colisão. </param>
+     /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    Boolean VerificaColisao(ClasseForma forma, ObjetosRastreados rastreio);
+    Boolean VerificaColisao(ClasseAlvo alvo, Bola bola);
 
-    void CriaQuadrado(ObjetosRastreados rastreio);
-    void MovimentaIdentificador();
+    //==========================================================================================================//
+    /// <summary>
+    /// Cria um quadrado de identificação para a visualização da posição bola rastreada em função do jogo.
+    /// </summary>
+    /// <param name="bola"> A bola base para a criação do quadrado. </param>
+    //==========================================================================================================//
+    void CriaQuadrado(Bola bola);
+
 }
 

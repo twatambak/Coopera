@@ -29,13 +29,13 @@ public class Listener : MonoBehaviour {
     void CriaObjetosRastreados(){
         if(dados != null) { 
             while(dados.Count >= 7){
-                ObjetosRastreados rastreado = new ObjetosRastreados(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
-                instance.AddListaRastreados(rastreado);
-                instance.CriaQuadrado(rastreado);
+                Bola bola = new Bola(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
+                instance.AddListaBolas(bola);
+                instance.CriaQuadrado(bola);
                 dados.Clear();
             }
         } else {
-            instance.LimparRastreados();
+            instance.LimpaListaBolas();
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 /************************************************************************************************************/
  /// <summary>
- /// A classe Alvo é responsável por definir as variáveis e comportamentos das formas presentes nas fases.
+ /// A classe Alvo é responsável por definir as variáveis e comportamentos dos alvos presentes nas fases.
  /// </summary>
 /************************************************************************************************************/
 public class Alvo : MonoBehaviour {
@@ -17,13 +17,13 @@ public class Alvo : MonoBehaviour {
     /// <summary> Direção de movimentação no eixo Y </summary>
     float dirY = 0.1f; 
     /// <summary> Velocidade de movimentação </summary>
-    float vel = instance.GetVelocidadeFormas(); // 
+    float vel = instance.CSVGetVelocidadeAlvos(); // 
     /// <summary> Tamanho da Alvo </summary>
-    float tam = instance.GetTamanhoFormas();
+    float tam = instance.CSVGetTamanhoAlvos();
 
     //==========================================================================================================//
      /// <summary>
-     /// Chamada a cada novo frame. Chama a função de movimentação da forma <see cref="Movimentar()">.
+     /// Chamada a cada novo frame. Chama a função de movimentação da alvo <see cref="Movimentar()">.
      /// </summary>
     //==========================================================================================================//
     void Update() {
@@ -32,7 +32,7 @@ public class Alvo : MonoBehaviour {
 
     //==========================================================================================================//
      /// <summary>
-     /// Responsável por gerenciar o movimento da forma.
+     /// Responsável por gerenciar o movimento do alvo.
      /// </summary>
     //==========================================================================================================//
     public void Movimentar() {
@@ -42,31 +42,31 @@ public class Alvo : MonoBehaviour {
 
     //==========================================================================================================//
      /// <summary>
-     /// Recebe uma Alvo e a destrói.
+     /// Recebe uma alvo e a destrói.
      /// </summary>
-     /// <param name="forma"></param>
+     /// <param name="alvo"></param>
     //==========================================================================================================//
-    public void DestroiForma(GameObject forma) {
-        if(Utils.quantiaAtual > 0) {
-            Destroy(forma);
-            instance.RemoveListaFormas(forma);
-            instance.RemoveQuantiaAtual();
+    public void DestroiAlvo(GameObject alvo) {
+        if(instance.GetQuantidadeAlvos() > 0) {
+            instance.RemoveListaAlvos(alvo);
+            instance.RemoveQuantidadeAlvos();
             instance.AddPontosAmarelos(1);
+            Destroy(alvo);
         }
     }
 
     //============================================================================================================
      /// <summary>
-     ///  Destrói a forma atual.
+     ///  Destrói a alvo atual.
      /// </summary>
     //============================================================================================================
-    public void DestroiForma() {
-        if(Utils.quantiaAtual > 0){
-            Destroy(this.gameObject);
-            instance.RemoveListaFormas(this.gameObject);
-            instance.RemoveListaClasseFormas(this.gameObject);
-            instance.RemoveQuantiaAtual();
+    public void DestroiAlvo() {
+        if(instance.GetQuantidadeAlvos() > 0){
+            instance.RemoveListaAlvos(this.gameObject);
+            instance.RemoveListaClasseAlvos(this.gameObject);
+            instance.RemoveQuantidadeAlvos();
             instance.AddPontosAmarelos(1);
+            Destroy(this.gameObject);
         }
     }
 
@@ -101,13 +101,7 @@ public class Alvo : MonoBehaviour {
      /// </summary>
     //==========================================================================================================//
     void OnMouseDown() {
-        /*if(instance.GetQuantiaAtualFormas() > 0) {
-            Destroy(this.gameObject);
-            instance.RemoveListaFormas(this.gameObject);
-            instance.RemoveListaClasseFormas(this.gameObject);
-            instance.RemoveQuantiaAtual();
-            instance.AddPontosAmarelos(1);
-        }*/
-        Debug.Log(this);
+        DestroiAlvo();
+        //Debug.Log(this);
     }
 }
