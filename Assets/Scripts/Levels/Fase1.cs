@@ -108,26 +108,26 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //===================================================================================================
     public void CompararPosicao() {
-        List<ObjetosRastreados> listaRastreados = instance.GetListaRastreados(); // A lista de objetos rastreados
+        List<Bola> listaBolas = instance.GetListaRastreados(); // A lista de objetos rastreados
         List<ClasseAlvo> listaAlvos = instance.GetListaClasseFormas(); // A lista de objetos rastreados
-        if(listaRastreados != null && listaAlvos != null) {
-            for (int i = 0; i < listaRastreados.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
+        if(listaBolas != null && listaAlvos != null) {
+            for (int i = 0; i < listaBolas.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaAlvos.Count; j++) { 
-                    if(VerificarAcerto(listaAlvos[j], listaRastreados[i])) { 
-                        if(listaRastreados[i].GetAssinatura() == 2) {
+                    if(VerificarAcerto(listaAlvos[j], listaBolas[i])) { 
+                        if(listaBolas[i].GetAssinatura() == 2) {
                             listaAlvos[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
                             instance.AddPontosAmarelos(1);
                             listaAlvos.RemoveAt(j);
                         }
 
-                        if(listaRastreados[i].GetAssinatura() == 3) {
+                        if(listaBolas[i].GetAssinatura() == 3) {
                             instance.AddPontosVerdes(1);
                             listaAlvos[j].GetObjetoBase().GetComponent<Forma>().DestroiForma();
                             listaAlvos.RemoveAt(j);
                         }
                     }
                 }
-                instance.RemoveListaRastreados(listaRastreados[i]);
+                instance.RemoveListaRastreados(listaBolas[i]);
                 instance.ExibeTamanhoListaRastreados();
             }
         }

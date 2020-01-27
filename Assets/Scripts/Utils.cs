@@ -54,15 +54,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// A função LoadCSV(int id) é utilizada para retornar um valor de configuração presente
-     /// no CSV de configurações. As configurações do CSV estão ligadas tanto a propriedades da fase
-     /// quanto da conexão com o arduino. Ao se escolher a posição referente ao valor de configuração
-     /// lembrar-se que o id está sendo decrementado no início da função. Isso é feito para que a
-     /// primeira posição relacionada aos valores seja 1. Os valores de configuração estão sempre
-     /// dispostos em posições pares exceto 0.
+     /// A função é utilizada para retornar um valor de configuração presente no CSV de configurações. As 
+     /// configurações do CSV estão ligadas tanto a propriedades da fase quanto da conexão com o arduino. Ao se 
+     /// escolher a posição referente ao valor de configuração lembre que o id está sendo decrementado no início 
+     /// da função. Isso é feito para que a primeira posição relacionada aos valores seja 1. Os valores de 
+     /// configuração estão sempre dispostos em posições pares exceto 0.
      /// </summary>
-     /// <param name="id"></param>
-     /// <returns></returns>
+     /// <param name="id"> O ID da informação a ser recuperada no CSV. </param>
+     /// <returns> O valor de configuração obtido de retorno no CSV. </returns>
     //==========================================================================================================//
     public string LoadCSV(int id) {
         id--;
@@ -83,9 +82,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
      /// <summary>
      /// Retorna a quantidade máxima de alvos possíveis. Essa informação está disponível na posição 1 (com o vetor
-     /// iniciando em 0) do arquvio CSV.
+     /// iniciando em 0) do arquivo. CSV.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> Retorna a quantidade máxima possível para os alvos. </returns>
     //==========================================================================================================//
     public int CSVGetMaximoAlvos() {
         return (ToInt(LoadCSV(2)));
@@ -125,7 +124,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de objetos rastreados.
+     /// Retorna a lista de bolas.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
@@ -145,7 +144,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a quantidade atual de formas.
+     /// Retorna a quantidade atual de alvos.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
@@ -155,40 +154,39 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna o tamanho da lista de rastreados.
+     /// Retorna o tamanho da lista de bolas.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public int GetTamanhoListaRastreados() {
+    public int GetTamanhoListaBolas() {
         return listaBolas.Count;
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Exibe o tamanho da lista de rastreados.
+     /// Exibe o tamanho da lista de bolas.
      /// </summary>
     //==========================================================================================================//
-    public void ExibeTamanhoListaRastreados() {
-        Debug.Log("Tamanho da Lista de Rastreados: " + GetTamanhoListaRastreados());
+    public void PrintTamanhoListaBolas() {
+        Debug.Log("Tamanho da Lista de Bolas: " + GetTamanhoListaBolas());
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// A função recebe uma lista de ObjetosRastreados, refente aos objetos rastreados. A lista (listaRastreados) 
-     /// dentro da classe atual (Utils), armazena todos os blocos rastreados. Essa lista é atualizada com as 
-     /// informações recebidas por essa função.
+     /// A função recebe uma lista de bolas. A lista dentro da classe atual armazena todos os blocos rastreados. 
+     /// Essa lista é atualizada com as informações recebidas por essa função.
      /// </summary>
-     /// <param name="dados"> Lista de dados de objetos rastreados. </param>
+     /// <param name="dados"> Lista de dados de bolas. </param>
     //==========================================================================================================//
-    public void UpdateListaRastreados(List<ObjetosRastreados> dados) {
+    public void UpdateListaBolas(List<Bola> dados) {
         listaBolas = dados;
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Converte uma string para inteiro.
+     /// Converte uma string para int.
      /// </summary>
-     /// <param name="texto"></param>
+     /// <param name="texto"> Texto a ser convertido. </param>
      /// <returns></returns>
     //==========================================================================================================//
     public int ToInt(string texto) {
@@ -295,23 +293,23 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <summary>
      /// Adiciona o objeto passado à lista de objetos rastreados.
      /// </summary>
-     /// <param name="rastreado"></param>
+     /// <param name="bola"></param>
     //==========================================================================================================//
-    public void AddListaRastreados(ObjetosRastreados rastreado) {
+    public void AddListaBolas(Bola bola) {
         if(listaBolas.Count != 0) {
             for(int i = 0; i < listaBolas.Count; i++) {
-                Debug.Log(rastreado);
-                if(listaBolas[i].GetID() == rastreado.GetID()) {
-                    listaBolas[i] = rastreado;
-                    ExibeTamanhoListaRastreados();
+                Debug.Log(bola);
+                if(listaBolas[i].GetID() == bola.GetID()) {
+                    listaBolas[i] = bola;
+                    PrintTamanhoListaBolas();
                 } else {
-                    listaBolas.Add(rastreado);
-                    ExibeTamanhoListaRastreados();
+                    listaBolas.Add(bola);
+                    PrintTamanhoListaBolas();
                 }
             }
         } else {
-            listaBolas.Add(rastreado);
-            ExibeTamanhoListaRastreados();
+            listaBolas.Add(bola);
+            PrintTamanhoListaBolas();
         }
     }
 
@@ -321,16 +319,16 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
      /// <param name="rastreado"></param>
     //==========================================================================================================//
-    public void RemoveListaRastreados(ObjetosRastreados rastreado) {
-        listaBolas.Remove(rastreado);
+    public void RemoveListaBolas(Bola bola) {
+        listaBolas.Remove(bola);
     }
 
     //==========================================================================================================//
      /// <summary>
-     /// Limpa os objetos rastreados pela PixyCam.
+     /// Limpa as bolas rastreadas pela PixyCam.
      /// </summary>
     //==========================================================================================================//
-    public void LimparRastreados() {
+    public void LimpaListaBolas() {
         listaBolas.Clear();
     }
 
@@ -379,14 +377,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
      /// dos dois objetos.
      /// </summary>
-     /// <param name="rastreioInicial"> O ponto a esquerda da BoundingBox do objeto rastreado. </param>
-     /// <param name="rastreioFinal"> O ponto a direita da BoundingBox do objeto rastreado. </param>
-     /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox da alvo.</param>
-     /// <param name="alvoFinal"> O ponto a direita da BoundingBox da alvo.</param>
+     /// <param name="bolaInicial"> O ponto a esquerda da BoundingBox da bola. </param>
+     /// <param name="bolaFinal"> O ponto a direita da BoundingBox da bola. </param>
+     /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox do alvo.</param>
+     /// <param name="alvoFinal"> O ponto a direita da BoundingBox do alvo.</param>
      /// <returns></returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(Vector2 rastreioInicial, Vector2 rastreioFinal, Vector2 alvoInicial, Vector2 alvoFinal) {
-        if (rastreioFinal.x < alvoInicial.x || alvoFinal.x < rastreioInicial.x || rastreioFinal.y < alvoInicial.y || alvoFinal.y < rastreioInicial.y) { // Não há colisão
+    public Boolean VerificaColisao(Vector2 bolaInicial, Vector2 bolaFinal, Vector2 alvoInicial, Vector2 alvoFinal) {
+        if (bolaFinal.x < alvoInicial.x || alvoFinal.x < bolaInicial.x || bolaFinal.y < alvoInicial.y || alvoFinal.y < bolaInicial.y) { // Não há colisão
             return false;
         } else {
             return true;
@@ -394,30 +392,30 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
-    /// <summary>
-    /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
-    /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
-    /// </summary>
-    /// <param name="alvo"> A alvo que deseja ser verificada se houve colisão. </param>
-    /// <param name="rastreio"> O objeti rastreado que deseja ser verificado se houve colisão. </param>
-    /// <returns> Booleano indicando se houve ou não colisão. </returns>
+     /// <summary>
+     /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
+     /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
+     /// </summary>
+     /// <param name="alvo"> A alvo que deseja ser verificada se houve colisão. </param>
+     /// <param name="bola"> O objeti rastreado que deseja ser verificado se houve colisão. </param>
+     /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(ClasseAlvo alvo, ObjetosRastreados rastreio) {
-        Vector2 rastreioInicial = rastreio.GetPontoInicial();
-        Vector2 rastreioFinal = rastreio.GetPontoFinal();
+    public Boolean VerificaColisao(ClasseAlvo alvo, Bola bola) {
+        Vector2 bolaInicial = bola.GetPontoInicial();
+        Vector2 bolaFinal = bola.GetPontoFinal();
         Vector2 alvoInicial = alvo.GetPontoInicial();
         Vector2 alvoFinal = alvo.GetPontoFinal();
-        Boolean colidiu = VerificaColisao(rastreioInicial, rastreioFinal, alvoInicial, alvoFinal);
+        Boolean colidiu = VerificaColisao(bolaInicial, bolaFinal, alvoInicial, alvoFinal);
         return colidiu;
     }
 
-    public void CriaQuadrado(ObjetosRastreados rastreio) {
+    public void CriaQuadrado(Bola bola) {
         GameObject identificador;
-        float largura = rastreio.GetPontoFinal().x - rastreio.GetPontoInicial().x;
-        float altura = rastreio.GetPontoFinal().y - rastreio.GetPontoInicial().y;
+        float largura = bola.GetPontoFinal().x - bola.GetPontoInicial().x;
+        float altura = bola.GetPontoFinal().y - bola.GetPontoInicial().y;
         for(int i = 0; i < listaBolas.Count; i++) {
             identificador = Instantiate(identificadores) as GameObject;
-            identificador.transform.position = rastreio.OrigemConvertida();
+            identificador.transform.position = bola.OrigemConvertida();
             identificador.transform.localScale = new Vector2(largura, altura);
             AddIdentificador(identificador);
         }

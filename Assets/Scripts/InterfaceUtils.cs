@@ -13,102 +13,102 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// A função LoadCSV(int id) é utilizada para retornar um valor de configuração presente
-     /// no CSV de configurações. As configurações do CSV estão ligadas tanto a propriedades da fase
-     /// quanto da conexão com o arduino. Ao se escolher a posição referente ao valor de configuração
-     /// lembrar-se que o id está sendo decrementado no início da função. Isso é feito para que a
-     /// primeira posição relacionada aos valores seja 1. Os valores de configuração estão sempre
-     /// dispostos em posições pares exceto 0.
+     /// A função é utilizada para retornar um valor de configuração presente no CSV de configurações. As 
+     /// configurações do CSV estão ligadas tanto a propriedades da fase quanto da conexão com o arduino. Ao se 
+     /// escolher a posição referente ao valor de configuração lembre que o id está sendo decrementado no início 
+     /// da função. Isso é feito para que a primeira posição relacionada aos valores seja 1. Os valores de 
+     /// configuração estão sempre dispostos em posições pares exceto 0.
      /// </summary>
-     /// <param name="id"></param>
-     /// <returns></returns>
+     /// <param name="id"> O ID da informação a ser recuperada no CSV. </param>
+     /// <returns> O valor de configuração obtido de retorno no CSV. </returns>
     //==========================================================================================================//
     string LoadCSV(int id);
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a quantidade máxima de formas possíveis.
+     /// Retorna a quantidade máxima de alvos possíveis. Essa informação está disponível na posição 1 (com o vetor
+     /// iniciando em 0) do arquivo CSV.
+     /// </summary>
+     /// <returns> Retorna a quantidade máxima possível para os alvos. </returns>
+    //==========================================================================================================//
+    int CSVGetMaximoAlvos();
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna a velocidade dos alvos. Essa informação está disponível na posição 3 (com o vetor iniciando em 0)
+     /// do arquivo CSV.
+     /// </summary>
+     /// <returns> Ret </returns>
+    //==========================================================================================================//
+    int CSVGetVelocidadeAlvos();
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o tamanho dos alvos. Essa informação está disponível na posição 5 (com o vetor iniciando em 0)
+     /// do arquivo CSV. 
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    int GetMaximoFormas();
+    int CSVGetTamanhoAlvos();
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a velocidade das formas.
+     /// Retorna a lista de alvos.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    int GetVelocidadeFormas();
+    List<GameObject> GetListaAlvos();
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna o tamanho das formas.
+     /// Retorna a lista de bolas.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    int GetTamanhoFormas();
+    List<Bola> GetListaBolas();
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de formas.
+     /// Retorna a lista de classe de alvos.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    List<GameObject> GetListaFormas();
+    List<ClasseAlvo> GetListaClasseAlvos();
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de objetos rastreados.
+     /// Retorna a quantidade atual de alvos.
+     /// </summary>
+    //==========================================================================================================//
+    int GetQuantidadeAlvos();
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o tamanho da lista de bolas.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    List<ObjetosRastreados> GetListaRastreados();
+    int GetTamanhoListaBolas();
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de classe de formas.
-     /// </summary>
-     /// <returns></returns>
-    //==========================================================================================================//
-    List<ClasseForma> GetListaClasseFormas();
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna a quantidade atual de formas.
+     /// Exibe o tamanho da lista de bolas.
      /// </summary>
     //==========================================================================================================//
-    int GetQuantiaAtualFormas();
+    void PrintTamanhoListaBolas();
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna o tamanho da lista de rastreados.
+     /// A função recebe uma lista de bolas. A lista dentro da classe atual armazena todos os blocos rastreados. 
+     /// Essa lista é atualizada com as informações recebidas por essa função.
      /// </summary>
-     /// <returns></returns>
+     /// <param name="dados"> Lista de dados de bolas. </param>
     //==========================================================================================================//
-    int GetTamanhoListaRastreados();
+    void UpdateListaBolas(List<Bola> dados);
 
     //==========================================================================================================//
      /// <summary>
-     /// Exibe o tamanho da lista de rastreados.
-     /// </summary>
-    //==========================================================================================================//
-    void ExibeTamanhoListaRastreados();
-
-    //==========================================================================================================//
-     /// <summary>
-     /// A função recebe uma lista de ObjetosRastreados, refente aos objetos rastreados. A lista (listaRastreados) dentro da
-     /// classe atual (Utils), armazena todos os blocos rastreados. Essa lista é atualizada com as informações
-     /// recebidas por essa função.
-     /// </summary>
-     /// <param name="dados"></param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    void UpdateListaRastreados(List<ObjetosRastreados> dados);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Converte uma string para inteiro.
+     /// Converte uma string para int.
      /// </summary>
      /// <param name="texto"></param>
      /// <returns></returns>
