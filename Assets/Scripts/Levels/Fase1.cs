@@ -32,17 +32,19 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Teste. </summary>
     public Button botao;
     
+    public int tamListaAlvos;
+    public int tamListaBolas;
+
     //============================================================================================================
-     /// <summary>
-     /// Start() é chamada antes do update do primeiro frame.
-     /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
-     /// definição para as variáveis correspondentes a quantidade de alvos na fase, além de chamar
-     /// uma função que faz a criação de clones do prefab Alvo.
-     /// </summary>
+    /// <summary>
+    /// Start() é chamada antes do update do primeiro frame.
+    /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
+    /// definição para as variáveis correspondentes a quantidade de alvos na fase, além de chamar
+    /// uma função que faz a criação de clones do prefab Alvo.
+    /// </summary>
     //============================================================================================================
     void Start() {
         game = false;
-        // Recebe a quantidade máxima de alvos possíveis.
         maxAlvos = instance.CSVGetMaximoAlvos();
     }
 
@@ -53,12 +55,11 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void Update() {
-        // "Game" é uma variável que define o funcionamento do jogo. Caso ela esteja setada como FALSE o jogo não prossegue.
-        if (game) {
-            // Chama a função de criação das alvos passando a alvo base pública passada na engine.
+        if(game) {
             instance.CriarAlvos(baseAlvo);
-            // Chama a função para comparar as posições da alvo-alvo e da bola rastreada.
             CompararPosicao();
+            tamListaAlvos = instance.GetTamanhoListaAlvos();
+            tamListaBolas = instance.GetListaBolas().Count;
         }
     }
 
@@ -129,7 +130,6 @@ public class Fase1 : MonoBehaviour {
                     }
                 }
                 instance.RemoveListaBolas(listaBolas[i]);
-                instance.PrintTamanhoListaBolas();
             }
         }
     }

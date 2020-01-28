@@ -61,6 +61,14 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
+     /// Retorna o tamanho da lista de alvos.
+     /// </summary>
+     /// <returns> O tamanho da lista de alvos. </returns>
+    //==========================================================================================================//
+    int GetTamanhoListaAlvos();
+
+    //==========================================================================================================//
+     /// <summary>
      /// Retorna a lista de bolas.
      /// </summary>
      /// <returns> A lista de bolas rastreadas pela PixyCam. </returns>
@@ -81,13 +89,6 @@ interface InterfaceUtils {
      /// <returns> O tamanho da lista de bolas. Atua também como a quantidade atual de bolas. </returns>
     //==========================================================================================================//
     int GetTamanhoListaBolas();
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Exibe o tamanho da lista de bolas.
-     /// </summary>
-    //==========================================================================================================//
-    void PrintTamanhoListaBolas();
 
     //==========================================================================================================//
      /// <summary>

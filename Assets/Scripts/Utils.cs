@@ -16,25 +16,24 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public List<Bola> listaBolas = new List<Bola>();
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public List<GameObject> listaAlvos = new List<GameObject>();
+    /// <summary> Lista de identificadores das bolas rastreadas. </summary>
+    public List<GameObject> listaIdentificadores = new List<GameObject>();
     /// <summary> Quantidade atual de alvos presentes na tela. </summary>
-    public static int qtdAlvos;
+    public int qtdAlvos;
     /// <summary> Quantia de pontos do time amarelo. </summary>
     public static int pontosTimeAmarelo;
     /// <summary> Quantia de pontos do time verde. </summary>
     public static int pontosTimeVerde;
-    /// <summary> Alvo base. </summary>
-    public Alvo alvo;
-    /// <summary> Material de base utilizado para alterar a cor das alvos conforme elas são criadas. </summary>
-    Material material;
-    /// <summary> Cores das novas alvos. </summary>
+    /// <summary> Identificador de posição da bola rastreada. </summary>
+    public GameObject identificadores;
+    /// <summary> Cores dos novos alvos. </summary>
     public static Color novaCor;
     /// <summary> Velocidade das alvos. Valor obtido através do CSV de configuração. Posição (4) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int vel;
     /// <summary> Tamanho das alvos. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int tam;
-
-    public GameObject identificadores;
-    public List<GameObject> listaIdentificadores = new List<GameObject>();
+    /// <summary> Material de base utilizado para alterar a cor das alvos conforme elas são criadas. </summary>
+    Material material;
 
     //==========================================================================================================//
      /// <summary>
@@ -122,6 +121,16 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
+     /// Retorna o tamanho da lista de alvos.
+     /// </summary>
+     /// <returns> O tamanho da lista de alvos. </returns>
+    //==========================================================================================================//
+    public int GetTamanhoListaAlvos() {
+        return listaAlvos.Count;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
      /// Retorna a lista de bolas.
      /// </summary>
      /// <returns> A lista de bolas rastreadas pela PixyCam. </returns>
@@ -148,15 +157,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public int GetTamanhoListaBolas() {
         return listaBolas.Count;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Exibe o tamanho da lista de bolas.
-     /// </summary>
-    //==========================================================================================================//
-    public void PrintTamanhoListaBolas() {
-        Debug.Log("Tamanho da Lista de Bolas: " + GetTamanhoListaBolas());
     }
 
     //==========================================================================================================//
@@ -246,20 +246,19 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="bola"> A bola rastreada pela Pixy a ser adicionada na lista. </param>
     //==========================================================================================================//
     public void AddListaBolas(Bola bola) {
-        if(listaBolas.Count != 0) {
+        Debug.Log(bola);
+        if(listaBolas.Count > 0) {
             for(int i = 0; i < listaBolas.Count; i++) {
-                Debug.Log(bola);
                 if(listaBolas[i].GetID() == bola.GetID()) {
                     listaBolas[i] = bola;
-                    PrintTamanhoListaBolas();
+                    Debug.Log("Bola já existe.");
                 } else {
                     listaBolas.Add(bola);
-                    PrintTamanhoListaBolas();
                 }
             }
         } else {
             listaBolas.Add(bola);
-            PrintTamanhoListaBolas();
+            Debug.Log("Bola não existe.");
         }
     }
 
@@ -288,7 +287,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
     //==========================================================================================================//
     public void AddQuantidadeAlvos() {
-        if (qtdAlvos < CSVGetMaximoAlvos()) {
+        if(qtdAlvos < CSVGetMaximoAlvos()) {
             qtdAlvos++;
         }
     }

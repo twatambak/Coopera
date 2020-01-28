@@ -203,11 +203,11 @@ public class Alvo : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     public void DestroiAlvo() {
-        if(instance.GetQuantidadeAlvos() > 0){
+        if(instance.GetQuantidadeAlvos() > 0) {
+            Destroy(this.gameObject);
             instance.RemoveListaAlvos(this.gameObject);
             instance.RemoveQuantidadeAlvos();
             instance.AddPontosAmarelos(1);
-            Destroy(this.gameObject);
         }
     }
 
