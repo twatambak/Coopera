@@ -209,5 +209,7 @@ interface InterfaceUtils {
     Boolean VerificaColisao(GameObject alvo, Bola bola);
 
     List<GameObject> GetListaIdentificadores();
+    void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade);
+    void AddListaIdentificadores(GameObject identificador);
 }
 

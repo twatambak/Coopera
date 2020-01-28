@@ -210,12 +210,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
         GameObject novoIdenti;
         novoIdenti = Instantiate(baseIdenti) as GameObject;
-        novoIdenti.transform.position = new Vector2(novoIdenti.GetComponent<Identificador>.GetPontoOrigemConvertido());
-        novoIdenti.transform.localScale = new Vector3(tam, tam, tam);
-        material = novoAlvo.GetComponent<Renderer>().material;
-        material.color = novaCor;
-        AddListaAlvos(novoAlvo);
-
+        novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
+        novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);
+        AddListaIdentificadores(novoIdenti);
     }
 
    
@@ -363,8 +360,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         return listaIdentificadores;
     }
 
-    public void AddIdentificador() {
-
+    public void AddListaIdentificadores(GameObject identificador) {
+        listaIdentificadores.Add(identificador);
     }
 
 }

@@ -28,8 +28,12 @@ public class Identificador : MonoBehaviour {
     public Vector2 pontoFinal;
     /// <summary> Largura do objeto rastreado. </summary>
     public float largura;
+    /// <summary> Largura do objeto rastreado. </summary>
+    public float larguraConvertida;
     /// <summary> Altura do objeto rastreado. </summary>
     public float altura;
+    /// <summary> Altura do objeto rastreado. </summary>
+    public float alturaConvertida;
     /// <summary> A idade em frames do objeto rastreado. </summary>
     public float idade;
 
@@ -39,12 +43,13 @@ public class Identificador : MonoBehaviour {
         pontoOrigem = new Vector2(x, y);
         List<GameObject> identificadores = instance.GetListaIdentificadores();
         for(int i = 0; i < identificadores.Count; i++) {
-            if(identificadores[i].GetComponent<Identificador>.GetID() == this.GetID()) {
-                identificadores[i].GetComponent<Identificador>.SetX(this.x);
-                identificadores[i].GetComponent<Identificador>.SetY(this.y);
-                identificadores[i].GetComponent<Identificador>.SetPontoOrigem(this.GetPontoOrigem());
-                identificadores[i].GetComponent<Identificador>.SetPontoInicial(this.GetPontoInicial());
-                identificadores[i].GetComponent<Identificador>.SetPontoFinal(this.GetPontoFinal());
+            if(identificadores[i].GetComponent<Identificador>().GetID() == this.GetID()) {
+                identificadores[i].GetComponent<Identificador>().SetX(this.x);
+                identificadores[i].GetComponent<Identificador>().SetY(this.y);
+                identificadores[i].GetComponent<Identificador>().SetPontoOrigem(this.GetPontoOrigem());
+                identificadores[i].GetComponent<Identificador>().SetPontoOrigemConvertido();
+                identificadores[i].GetComponent<Identificador>().SetPontoInicial(this.GetPontoInicial());
+                identificadores[i].GetComponent<Identificador>().SetPontoFinal(this.GetPontoFinal());
             }
         }
 
@@ -92,12 +97,8 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
-     /// <summary>
-     /// Retorna a assinatura de cor da bola.
-     /// </summary>
-     /// <returns></returns>
     //============================================================================================================
-    public void GetAssinatura(float assinatura) {
+    public void SetAssinatura(float assinatura) {
         this.assinatura = assinatura;
     }
 
@@ -129,7 +130,7 @@ public class Identificador : MonoBehaviour {
 
     //============================================================================================================
     //============================================================================================================
-    public void SetY() {
+    public void SetY(float y) {
         this.y = y;
     }
 
@@ -144,6 +145,29 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+    //============================================================================================================
+    public void SetLargura(float largura) {
+        this.largura = largura;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a largura da bola.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetLarguraConvertida() {
+        SetLarguraConvertida();
+        return larguraConvertida;
+    }
+
+    //============================================================================================================
+    //============================================================================================================
+    public void SetLarguraConvertida() {
+        this.larguraConvertida = pontoFinal.x - pontoInicial.x;
+    }
+
+    //============================================================================================================
      /// <summary>
      /// Retorna a altura da bola.
      /// </summary>
@@ -154,6 +178,29 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+    //============================================================================================================
+    public void SetAltura(float altura) {
+        this.altura = altura;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a altura da bola.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetAlturaConvertida() {
+        SetAlturaConvertida();
+        return altura;
+    }
+
+    //============================================================================================================
+    //============================================================================================================
+    public void SetAlturaConvertida() {
+        this.alturaConvertida = pontoFinal.y - pontoInicial.y;
+    }
+
+    //============================================================================================================
      /// <summary>
      /// Retorna a idade (tempo que está sendo rastreada) da bola.
      /// </summary>
@@ -161,6 +208,12 @@ public class Identificador : MonoBehaviour {
     //============================================================================================================
     public float GetIdade() {
         return idade;
+    }
+
+    //============================================================================================================
+    //============================================================================================================
+    public void SetIdade(float idade) {
+        this.idade = idade;
     }
 
     //==========================================================================================================//
@@ -175,8 +228,21 @@ public class Identificador : MonoBehaviour {
 
     //==========================================================================================================//
     //==========================================================================================================//
+    public void SetPontoOrigem(Vector2 pontoOrigem) {
+        this.pontoOrigem = pontoOrigem;
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
     public Vector2 GetPontoOrigemConvertido() {
-        return (ConverteVetor(pontoOrigem));
+        SetPontoOrigemConvertido();
+        return pontoOrigemConvertido;
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public void SetPontoOrigemConvertido() {
+        this.pontoOrigemConvertido = ConverteVetor(pontoOrigem);
     }
 
     //==========================================================================================================//
@@ -190,6 +256,12 @@ public class Identificador : MonoBehaviour {
     }
 
     //==========================================================================================================//
+    //==========================================================================================================//
+    public void SetPontoInicial(Vector2 pontoInicial) {
+        this.pontoInicial = pontoInicial;
+    }
+
+    //==========================================================================================================//
      /// <summary>
      /// Retorna o ponto final da bola.
      /// </summary>
@@ -199,18 +271,6 @@ public class Identificador : MonoBehaviour {
         return pontoFinal;
     }
  
-    //==========================================================================================================//
-    //==========================================================================================================//
-    public void SetPontoOrigem(Vector2 pontoOrigem) {
-        this.pontoOrigem = pontoOrigem;
-    }
-
-    //==========================================================================================================//
-    //==========================================================================================================//
-    public void GetPontoInicial(Vector2 pontoInicial) {
-        this.pontoInicial = pontoInicial;
-    }
-
     //==========================================================================================================//
     //==========================================================================================================//
     public void SetPontoFinal(Vector2 pontoFinal) {
@@ -283,16 +343,6 @@ public class Identificador : MonoBehaviour {
         return conversao;
     }
 
-    //============================================================================================================
-     /// <summary>
-     /// Retorna o ponto de origem da bola convertido.
-     /// </summary>
-     /// <returns></returns>
-    //============================================================================================================
-    public Vector2 OrigemConvertida() {
-        Vector2 origem = ConverteVetor(GetPontoOrigem());
-        return origem;
-    }
 
     //============================================================================================================
      /// <summary>
