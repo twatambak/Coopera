@@ -14,18 +14,16 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     static Utils instance = null;
     /// <summary> Lista das bolas rastreadas pela PixyCam. </summary>
     public static List<Bola> listaBolas = new List<Bola>();
+    /// <summary> Lista dos IDENTIFICADORES rastreados pela PixyCam. </summary>
+    public static List<GameObject> listaIdentificadores = new List<GameObject>();
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public static List<GameObject> listaAlvos = new List<GameObject>();
-    /// <summary> Lista de identificadores das bolas rastreadas. </summary>
-    public static List<GameObject> listaIdentificadores = new List<GameObject>();
     /// <summary> Quantidade atual de alvos presentes na tela. </summary>
     public static int qtdAlvos;
     /// <summary> Quantia de pontos do time amarelo. </summary>
     public static int pontosTimeAmarelo;
     /// <summary> Quantia de pontos do time verde. </summary>
     public static int pontosTimeVerde;
-    /// <summary> Identificador de posição da bola rastreada. </summary>
-    public GameObject identificadores;
     /// <summary> Cores dos novos alvos. </summary>
     public static Color novaCor;
     /// <summary> Velocidade das alvos. Valor obtido através do CSV de configuração. Posição (4) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
@@ -208,10 +206,24 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Adiciona o alvo recebido na lista de alvos.
-     /// </summary>
-     /// <param name="alvo"> O alvo a ser adicionado na respectiva lista. </param>
+    //==========================================================================================================//
+    public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
+        GameObject novoIdenti;
+        novoIdenti = Instantiate(baseIdenti) as GameObject;
+        novoIdenti.transform.position = new Vector2(novoIdenti.GetComponent<Identificador>.GetPontoOrigemConvertido());
+        novoIdenti.transform.localScale = new Vector3(tam, tam, tam);
+        material = novoAlvo.GetComponent<Renderer>().material;
+        material.color = novaCor;
+        AddListaAlvos(novoAlvo);
+
+    }
+
+   
+    //==========================================================================================================//
+    /// <summary>
+    /// Adiciona o alvo recebido na lista de alvos.
+    /// </summary>
+    /// <param name="alvo"> O alvo a ser adicionado na respectiva lista. </param>
     //==========================================================================================================//
     public void AddListaAlvos(GameObject alvo) {
         listaAlvos.Add(alvo);
@@ -347,32 +359,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         return colidiu;
     }
 
-    //==========================================================================================================//
-     /// <summary>
-     /// Cria um quadrado de identificação para a visualização da posição bola rastreada em função do jogo.
-     /// </summary>
-     /// <param name="bola"> A bola base para a criação do quadrado. </param>
-    //==========================================================================================================//
-    public void CriaQuadrado(Bola bola) {
-        GameObject identificador;
-        float largura = bola.GetPontoFinal().x - bola.GetPontoInicial().x;
-        float altura = bola.GetPontoFinal().y - bola.GetPontoInicial().y;
-        for(int i = 0; i < listaBolas.Count; i++) {
-            identificador = Instantiate(identificadores) as GameObject;
-            identificador.transform.position = bola.OrigemConvertida();
-            identificador.transform.localScale = new Vector2(largura, altura);
-            AddIdentificador(identificador);
-        }
+    public List<GameObject> GetListaIdentificadores() {
+        return listaIdentificadores;
     }
 
-    //==========================================================================================================//
-     /// <summary>
-     /// Adiciona um quadrado identificador à lista de identificadores.
-     /// </summary>
-     /// <param name="identificador"> O identificador a ser adicionado na lista. </param>
-    //==========================================================================================================//
-    public void AddIdentificador(GameObject identificador) {
-        listaIdentificadores.Add(identificador);
+    public void AddIdentificador() {
+
     }
 
 }

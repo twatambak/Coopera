@@ -208,13 +208,6 @@ interface InterfaceUtils {
     //==========================================================================================================//
     Boolean VerificaColisao(GameObject alvo, Bola bola);
 
-    //==========================================================================================================//
-    /// <summary>
-    /// Cria um quadrado de identificação para a visualização da posição bola rastreada em função do jogo.
-    /// </summary>
-    /// <param name="bola"> A bola base para a criação do quadrado. </param>
-    //==========================================================================================================//
-    void CriaQuadrado(Bola bola);
-
+    List<GameObject> GetListaIdentificadores();
 }
 
