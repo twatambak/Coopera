@@ -22,7 +22,7 @@ public class Listener : MonoBehaviour {
      /// bloco rastreado são armazendas em estruturas de quatro elementos, por isso escolhemos os quatro primeiros
      /// elementos da lista para a criação do bloco rastreado dentro da Unity. Os quatro elementos são: ID, assinatura
      /// posição X e posição Y. Após adicioná-los removemos os quatro primeiros elementos da lista. Assim, o próximo
-     /// grupo de elemntos a serem analisados representam outro bloco rastreado. 
+     /// grupo de elementos a serem analisados representam outro bloco rastreado. 
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//

@@ -88,13 +88,11 @@ public class Fase1 : MonoBehaviour {
     public bool VerificarAcerto(GameObject alvo, Bola bola) {
         if (instance.VerificaColisao(alvo, bola)) {
             Debug.Log("ACERTOU");
-            Debug.Log(alvo);
             Debug.Log(bola);
             Debug.Log("------------------------------------------------------------------------------");
             return true;
         } else {
             Debug.Log("NÃO ACERTOU");
-            Debug.Log(alvo);
             Debug.Log(bola);
             Debug.Log("------------------------------------------------------------------------------");
             return false;

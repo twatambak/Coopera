@@ -250,7 +250,7 @@ public class Alvo : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    public override string ToString() {
+    public string Texto() {
         string texto = "ALVO => Posição Original(" + GetPontoOrigem().x + " | " + GetPontoOrigem().y + ") => Posição Inicial(" + GetPontoInicial().x + " | " + GetPontoInicial().y + ") => Posição Final(" + GetPontoFinal().x + " | " + GetPontoFinal().y + ")";
         return texto;
     }
