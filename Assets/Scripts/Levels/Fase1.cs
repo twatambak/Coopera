@@ -59,7 +59,7 @@ public class Fase1 : MonoBehaviour {
             instance.CriarAlvos(baseAlvo);
             CompararPosicao();
             tamListaAlvos = instance.GetQuantidadeAlvos();
-            tamListaBolas = instance.GetListaBolas().Count;
+            tamListaBolas = instance.GetTamanhoListaBolas();
         }
     }
 

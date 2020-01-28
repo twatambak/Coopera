@@ -241,10 +241,7 @@ public class Alvo : MonoBehaviour {
      /// </summary>
     //==========================================================================================================//
     void OnMouseDown() {
-        Destroy(this.gameObject);
-        instance.RemoveListaAlvos(this.gameObject);
-        instance.RemoveQuantidadeAlvos();
-        instance.AddPontosAmarelos(1);
+        DestroiAlvo();
     }
 
     //==========================================================================================================//
