@@ -34,7 +34,7 @@ public class Listener : MonoBehaviour {
                 dados.Clear();
             }
         } else {
-            //instance.LimpaListaBolas();
+            instance.LimpaListaBolas();
         }
     }
 

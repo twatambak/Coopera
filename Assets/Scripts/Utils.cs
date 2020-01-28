@@ -161,17 +161,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// A função recebe uma lista de bolas. A lista dentro da classe atual armazena todos os blocos rastreados. 
-     /// Essa lista é atualizada com as informações recebidas por essa função.
-     /// </summary>
-     /// <param name="dados"> Lista de dados de bolas. </param>
-    //==========================================================================================================//
-    public void UpdateListaBolas(List<Bola> dados) {
-        listaBolas = dados;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
      /// Converte uma string para int.
      /// </summary>
      /// <param name="texto"> O texto a ser convertido. </param>
@@ -246,10 +235,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="bola"> A bola rastreada pela Pixy a ser adicionada na lista. </param>
     //==========================================================================================================//
     public void AddListaBolas(Bola bola) {
-        Debug.Log(bola);
+        //Debug.Log(bola);
         if(listaBolas.Count > 0) {
             for(int i = 0; i < listaBolas.Count; i++) {
-                if(listaBolas[i].GetID() == bola.GetID()) {
+                if(listaBolas[i].GetID() == bola.GetID() || listaBolas[i].GetPontoOrigem() == bola.GetPontoOrigem()) {
                     listaBolas[i] = bola;
                 } else {
                     listaBolas.Add(bola);

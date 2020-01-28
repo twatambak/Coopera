@@ -92,15 +92,6 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// A função recebe uma lista de bolas. A lista dentro da classe atual armazena todos os blocos rastreados. 
-     /// Essa lista é atualizada com as informações recebidas por essa função.
-     /// </summary>
-     /// <param name="dados"> Lista de dados de bolas. </param>
-    //==========================================================================================================//
-    void UpdateListaBolas(List<Bola> dados);
-
-    //==========================================================================================================//
-     /// <summary>
      /// Converte uma string para int.
      /// </summary>
      /// <param name="texto"> O texto a ser convertido. </param>
