@@ -26,16 +26,15 @@ public class Listener : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
-    void CriaObjetosRastreados(){
+    void ArmazenaBolasRastreadas(){
         if(dados != null) { 
             while(dados.Count >= 7){
                 Bola bola = new Bola(instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
                 instance.AddListaBolas(bola);
-                //instance.CriaQuadrado(bola);
                 dados.Clear();
             }
         } else {
-            instance.LimpaListaBolas();
+            //instance.LimpaListaBolas();
         }
     }
 
@@ -51,12 +50,11 @@ public class Listener : MonoBehaviour {
     //==========================================================================================================//
     void OnMessageArrived(string msg) {
         if(msg != null) {
-            //Debug.Log(msg);
             vetorStringSerial = msg.Split('|');
             foreach(var item in vetorStringSerial){
                 dados.Add(item);
             }
-            CriaObjetosRastreados();
+            ArmazenaBolasRastreadas();
         }
     }
 

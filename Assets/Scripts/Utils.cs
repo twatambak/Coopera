@@ -213,7 +213,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
                     material = novoAlvo.GetComponent<Renderer>().material;
                     material.color = novaCor;
                     AddListaAlvos(novoAlvo);
-                    AddQuantidadeAlvos();
                 }
             }
         }
@@ -227,6 +226,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void AddListaAlvos(GameObject alvo) {
         listaAlvos.Add(alvo);
+        AddQuantidadeAlvos();
     }
 
     //==========================================================================================================//
@@ -251,14 +251,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
             for(int i = 0; i < listaBolas.Count; i++) {
                 if(listaBolas[i].GetID() == bola.GetID()) {
                     listaBolas[i] = bola;
-                    Debug.Log("Bola já existe.");
                 } else {
                     listaBolas.Add(bola);
                 }
             }
         } else {
             listaBolas.Add(bola);
-            Debug.Log("Bola não existe.");
         }
     }
 

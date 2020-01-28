@@ -58,7 +58,7 @@ public class Fase1 : MonoBehaviour {
         if(game) {
             instance.CriarAlvos(baseAlvo);
             CompararPosicao();
-            tamListaAlvos = instance.GetTamanhoListaAlvos();
+            tamListaAlvos = instance.GetQuantidadeAlvos();
             tamListaBolas = instance.GetListaBolas().Count;
         }
     }
@@ -115,7 +115,8 @@ public class Fase1 : MonoBehaviour {
         if(listaBolas != null && listaAlvos != null) {
             for (int i = 0; i < listaBolas.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaAlvos.Count; j++) { 
-                    if(VerificarAcerto(listaAlvos[j], listaBolas[i])) { 
+                    if(VerificarAcerto(listaAlvos[j], listaBolas[i])) {
+                        Debug.Log("A");
                         if(listaBolas[i].GetAssinatura() == 2) {
                             listaAlvos[j].GetComponent<Alvo>().DestroiAlvo();
                             instance.AddPontosAmarelos(1);
@@ -129,7 +130,6 @@ public class Fase1 : MonoBehaviour {
                         }
                     }
                 }
-                instance.RemoveListaBolas(listaBolas[i]);
             }
         }
     }

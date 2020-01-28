@@ -1083,8 +1083,8 @@ MonoBehaviour:
     type: 3}
   cam: {fileID: 519420031}
   botao: {fileID: 1745410988}
-  tamListaBolas: 0
   tamListaAlvos: 0
+  tamListaBolas: 0
 --- !u!4 &1506620288
 Transform:
   m_ObjectHideFlags: 0
