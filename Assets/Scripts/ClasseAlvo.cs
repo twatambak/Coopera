@@ -27,8 +27,6 @@ public class ClasseAlvo {
     float vel;
     /// <summary> Velocidade de movimentação </summary>
     Color cor;
-    /// <summary> ID de identificação. </summary>
-    int id;
 
     //============================================================================================================
      /// <summary>

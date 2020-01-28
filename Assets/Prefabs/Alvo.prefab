@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 967042834533993803}
   - component: {fileID: 8512417875904783704}
   m_Layer: 0
-  m_Name: Form
+  m_Name: Alvo
   m_TagString: Forma
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -106,11 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41de35fa4cf3464cbd508ebe4adb076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particulas: {fileID: 1625705721856338625, guid: 088076700fb2b984a8fa2dae6cec447b,
-    type: 3}
-  novaForma: {fileID: 555834837231948907, guid: 11d59ff89edce3948bd5c4cfa56d767c,
-    type: 3}
-  forma: {fileID: 555834837231948907, guid: 11d59ff89edce3948bd5c4cfa56d767c, type: 3}
+  particulas: {fileID: 0}
 --- !u!54 &8512417875904783704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,9 +116,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7903402880027064089}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 6
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

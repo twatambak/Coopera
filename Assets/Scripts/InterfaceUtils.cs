@@ -69,14 +69,6 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de classe de alvos.
-     /// </summary>
-     /// <returns></returns>
-    //==========================================================================================================//
-    List<ClasseAlvo> GetListaClasseAlvos();
-
-    //==========================================================================================================//
-     /// <summary>
      /// Retorna a quantidade atual de alvos.
      /// </summary>
     //==========================================================================================================//
@@ -149,30 +141,6 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona a classe alvo passada na lista de classe de alvos.
-     /// </summary>
-     /// <param name="alvo"> A classe alvo a ser adicionada na respectiva lista. </param>
-    //==========================================================================================================//
-    void AddListaClasseAlvos(ClasseAlvo alvo);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove o alvo recebido da lista de alvos.
-     /// </summary>
-     /// <param name="alvo"> O alvo a ser removido da respectiva lista. </param>
-    //==========================================================================================================//
-    void RemoveListaClasseAlvos(ClasseAlvo alvo);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove o GameObject alvo passada da lista de alvos.
-     /// </summary>
-     /// <param name="alvo"> O GameObject que representa a classe alvo. </param>
-    //==========================================================================================================//
-    void RemoveListaClasseAlvos(GameObject alvo);
-
-    //==========================================================================================================//
-     /// <summary>
      /// Adiciona a bola passada na lista de bolas.
      /// </summary>
      /// <param name="bola"> A bola rastreada pela Pixy a ser adicionada na lista. </param>
@@ -242,11 +210,11 @@ interface InterfaceUtils {
      /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
      /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
      /// </summary>
-     /// <param name="alvo"> A alvo que deseja ser verificada se houve colisão. </param>
+     /// <param name="alvo"> O alvo que deseja ser verificada se houve colisão. </param>
      /// <param name="bola"> A bola que deseja ser verificada se houve colisão. </param>
      /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    Boolean VerificaColisao(ClasseAlvo alvo, Bola bola);
+    Boolean VerificaColisao(GameObject alvo, Bola bola);
 
     //==========================================================================================================//
     /// <summary>

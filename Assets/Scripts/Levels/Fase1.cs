@@ -18,7 +18,7 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Quantia máxima de alvos. Seu valor é carregado pela função de leitura <see cref="Utils.LoadCSV(int)"/> do arquivo de configuração. </summary>
     int maxAlvos;
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
-    bool game;
+    public bool game;
     /// <summary> HUD referente ao time amarelo. </summary>
     public GameObject amareloHUD;
     /// <summary> HUD referente ao time verde. </summary>
@@ -69,9 +69,8 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void OnGUI() {
-
-        if (!game) {
-            if (botao) {
+        if(!game) {
+            if(Botao()) {
                 game = true;
             }
         }
@@ -85,7 +84,7 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(ClasseAlvo alvo, Bola bola) {
+    public bool VerificarAcerto(GameObject alvo, Bola bola) {
         if (instance.VerificaColisao(alvo, bola)) {
             Debug.Log("ACERTOU");
             Debug.Log(alvo);
@@ -111,20 +110,20 @@ public class Fase1 : MonoBehaviour {
     //===================================================================================================
     public void CompararPosicao() {
         List<Bola> listaBolas = instance.GetListaBolas(); // A lista de objetos rastreados
-        List<ClasseAlvo> listaAlvos = instance.GetListaClasseAlvos(); // A lista de objetos rastreados
+        List<GameObject> listaAlvos = instance.GetListaAlvos(); // A lista de objetos rastreados
         if(listaBolas != null && listaAlvos != null) {
             for (int i = 0; i < listaBolas.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaAlvos.Count; j++) { 
                     if(VerificarAcerto(listaAlvos[j], listaBolas[i])) { 
                         if(listaBolas[i].GetAssinatura() == 2) {
-                            listaAlvos[j].GetObjetoBase().GetComponent<Alvo>().DestroiAlvo();
+                            listaAlvos[j].GetComponent<Alvo>().DestroiAlvo();
                             instance.AddPontosAmarelos(1);
                             listaAlvos.RemoveAt(j);
                         }
 
                         if(listaBolas[i].GetAssinatura() == 3) {
                             instance.AddPontosVerdes(1);
-                            listaAlvos[j].GetObjetoBase().GetComponent<Alvo>().DestroiAlvo();
+                            listaAlvos[j].GetComponent<Alvo>().DestroiAlvo();
                             listaAlvos.RemoveAt(j);
                         }
                     }
@@ -133,5 +132,15 @@ public class Fase1 : MonoBehaviour {
                 instance.PrintTamanhoListaBolas();
             }
         }
+    }
+
+    //===================================================================================================
+     /// <summary>
+     /// 
+     /// </summary>
+     /// <returns></returns>
+    //===================================================================================================
+    public bool Botao() {
+        return true;
     }
 }

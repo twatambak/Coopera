@@ -10,24 +10,166 @@ using UnityEngine;
 public class Alvo : MonoBehaviour {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
-    /// <summary> Partículas de destruição </summary>
-    public GameObject particulas;
+    /// <summary> Ponto X da posição de origem. </summary>
+    public float x;
+    /// <summary> Ponto Y da posição de origem. </summary>
+    public float y;
     /// <summary> Direção de movimentação no eixo X </summary>
-    float dirX = 0.1f;  
+    public float dirX;  
     /// <summary> Direção de movimentação no eixo Y </summary>
-    float dirY = 0.1f; 
+    public float dirY;
     /// <summary> Velocidade de movimentação </summary>
-    float vel = instance.CSVGetVelocidadeAlvos(); // 
+    public float vel;
     /// <summary> Tamanho da Alvo </summary>
-    float tam = instance.CSVGetTamanhoAlvos();
+    public float tam;
+    /// <summary> Ponto de origem do alvo. </summary>
+    public Vector2 pontoOrigem;
+    /// <summary> Posição inicial do viewport (localizada no canto esquerdo inferior do objeto). </summary>
+    public Vector2 pontoInicial;
+    /// <summary> Posição final do viewport (localizada no canto direito superior do objeto). </summary>
+    public Vector2 pontoFinal;
+    /// <summary> A cor do alvo. </summary>
+    public Color cor;
 
     //==========================================================================================================//
      /// <summary>
-     /// Chamada a cada novo frame. Chama a função de movimentação da alvo <see cref="Movimentar()">.
+     /// Define as configurações iniciais do alvo.
      /// </summary>
+    //==========================================================================================================//
+    void Start() {
+        dirX = 0.1f;
+        dirY = 0.1f;
+        vel = instance.CSVGetVelocidadeAlvos();
+        tam = instance.CSVGetTamanhoAlvos();
+        cor = this.GetComponent<Renderer>().material.color;
+    }
+
+    //==========================================================================================================//
+    /// <summary>
+    /// Chamada a cada novo frame. Chama a função de movimentação da alvo <see cref="Movimentar()">.
+    /// </summary>
     //==========================================================================================================//
     void Update() {
         Movimentar();
+        pontoOrigem = this.transform.localPosition;
+        x = this.transform.localPosition.x;
+        y = this.transform.localPosition.y;
+        pontoInicial = PontoInicial();
+        pontoFinal = PontoFinal();
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna o ponto central X original do alvo.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetX() {
+        return x;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna o ponto central Y original do alvo.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetY() {
+        return y;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna o tamanho do alvo.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetTam() {
+        return tam;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a posição central original do alvo.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public Vector2 GetPontoOrigem() {
+        return pontoOrigem;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna o ponto inicial do viewport do alvo. O ponto é localizado no canto esquerdo inferior.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public Vector2 GetPontoInicial() {
+        return pontoInicial;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna o ponto final do viewport do alvo. O ponto é localizado no canto direito superior.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public Vector2 GetPontoFinal() {
+        return pontoFinal;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a direção de movimento no eixo X do alvo.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetDirX() {
+        return dirX;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a direção de movimento no eixo X do alvo.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetDirY() {
+        return dirY;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a velocidade de movimento do alvo.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetVel() {
+        return vel;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto X central do alvo (localizado no canto superior direito da alvo).
+     /// </summary>
+     /// <param name="alvo"> O alvo a ser reconhecido o ponto central X. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector2 PontoInicial() {
+        Vector2 pos = new Vector2((x / 2) - tam, (y / 2) + tam);
+        return pos;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto Y central do alvo (localizado no canto inferior esquerdo do alvo).
+     /// </summary>
+     /// <param name="alvo"> O alvo a ser reconhecido o ponto central Y. </param>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public Vector2 PontoFinal() {
+        Vector2 pos = new Vector2((x / 2) + tam, (y / 2) - tam);
+        return pos;
     }
 
     //==========================================================================================================//
@@ -63,7 +205,6 @@ public class Alvo : MonoBehaviour {
     public void DestroiAlvo() {
         if(instance.GetQuantidadeAlvos() > 0){
             instance.RemoveListaAlvos(this.gameObject);
-            instance.RemoveListaClasseAlvos(this.gameObject);
             instance.RemoveQuantidadeAlvos();
             instance.AddPontosAmarelos(1);
             Destroy(this.gameObject);
@@ -86,12 +227,11 @@ public class Alvo : MonoBehaviour {
             dirX *= -1;
         } else if(outro.gameObject.tag == "Horizontal") {
             dirY *= -1;
-        } else if(outro.gameObject.tag == "Alvo"){
+        } else if(outro.gameObject.tag == "Forma"){
             dirX *= -1;
             dirY *= -1;
         }
     }
-
 
     //==========================================================================================================//
      /// <summary>
@@ -102,6 +242,16 @@ public class Alvo : MonoBehaviour {
     //==========================================================================================================//
     void OnMouseDown() {
         DestroiAlvo();
-        //Debug.Log(this);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// ToString
+     /// </summary>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public override string ToString() {
+        string texto = "ALVO => Posição Original(" + GetPontoOrigem().x + " | " + GetPontoOrigem().y + ") => Posição Inicial(" + GetPontoInicial().x + " | " + GetPontoInicial().y + ") => Posição Final(" + GetPontoFinal().x + " | " + GetPontoFinal().y + ")";
+        return texto;
     }
 }

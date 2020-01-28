@@ -16,8 +16,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public List<Bola> listaBolas = new List<Bola>();
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public List<GameObject> listaAlvos = new List<GameObject>();
-    /// <summary> Lista de alvos geradas pelo jogo. </summary>
-    public List<ClasseAlvo> listaClasseAlvos = new List<ClasseAlvo>();
     /// <summary> Quantidade atual de alvos presentes na tela. </summary>
     public static int qtdAlvos;
     /// <summary> Quantia de pontos do time amarelo. </summary>
@@ -134,16 +132,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de classes da alvo.
-     /// </summary>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public List<ClasseAlvo> GetListaClasseAlvos() {
-        return listaClasseAlvos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
      /// Retorna a quantidade atual de alvos.
      /// </summary>
      /// <returns></returns>
@@ -224,8 +212,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
                     novoAlvo.transform.localScale = new Vector3(tam, tam, tam);
                     material = novoAlvo.GetComponent<Renderer>().material;
                     material.color = novaCor;
-                    ClasseAlvo classe = new ClasseAlvo(novoAlvo);
-                    AddListaClasseAlvos(classe);
                     AddListaAlvos(novoAlvo);
                     AddQuantidadeAlvos();
                 }
@@ -251,42 +237,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void RemoveListaAlvos(GameObject alvo) {
         listaAlvos.Remove(alvo);
-    }
-
-    //==========================================================================================================//
-    /// <summary>
-    /// Adiciona a classe alvo passada na lista de classe de alvos.
-    /// </summary>
-    /// <param name="alvo"> A classe alvo a ser adicionada na respectiva lista. </param>
-    //==========================================================================================================//
-    public void AddListaClasseAlvos(ClasseAlvo alvo) {
-        listaClasseAlvos.Add(alvo);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove a classe alvo passada da lista de classe de alvos.
-     /// </summary>
-     /// <param name="alvo"> Remove a classe alvo passada da lista. </param>
-    //==========================================================================================================//
-    public void RemoveListaClasseAlvos(ClasseAlvo alvo) {
-        listaClasseAlvos.Remove(alvo);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove o GameObject alvo passado da lista de alvos.
-     /// </summary>
-     /// <param name="alvo"> O GameObject que representa a classe alvo. </param>
-    //==========================================================================================================//
-    public void RemoveListaClasseAlvos(GameObject alvo) {
-        if(listaClasseAlvos.Count > 0) {
-            for(int i = 0; i < listaClasseAlvos.Count; i++) { 
-                if(listaClasseAlvos[i].GetObjetoBase() == alvo) {
-                    listaClasseAlvos.RemoveAt(i);
-                }
-            }
-        }
     }
 
     //==========================================================================================================//
@@ -398,15 +348,15 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
      /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
      /// </summary>
-     /// <param name="alvo"> A alvo que deseja ser verificada se houve colisão. </param>
-     /// <param name="bola"> O objeti rastreado que deseja ser verificado se houve colisão. </param>
+     /// <param name="alvo"> O alvo que deseja ser verificada se houve colisão. </param>
+     /// <param name="bola"> O objeto rastreado que deseja ser verificado se houve colisão. </param>
      /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(ClasseAlvo alvo, Bola bola) {
+    public Boolean VerificaColisao(GameObject alvo, Bola bola) {
         Vector2 bolaInicial = bola.GetPontoInicial();
         Vector2 bolaFinal = bola.GetPontoFinal();
-        Vector2 alvoInicial = alvo.GetPontoInicial();
-        Vector2 alvoFinal = alvo.GetPontoFinal();
+        Vector2 alvoInicial = alvo.GetComponent<Alvo>().GetPontoInicial();
+        Vector2 alvoFinal = alvo.GetComponent <Alvo>().GetPontoFinal();
         Boolean colidiu = VerificaColisao(bolaInicial, bolaFinal, alvoInicial, alvoFinal);
         return colidiu;
     }
