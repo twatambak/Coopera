@@ -324,14 +324,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
      /// dos dois objetos.
      /// </summary>
-     /// <param name="bolaInicial"> O ponto a esquerda da BoundingBox da bola. </param>
-     /// <param name="bolaFinal"> O ponto a direita da BoundingBox da bola. </param>
+     /// <param name="identificadorInicial"> O ponto a esquerda da BoundingBox da bola. </param>
+     /// <param name="identificadorFinal"> O ponto a direita da BoundingBox da bola. </param>
      /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox do alvo.</param>
      /// <param name="alvoFinal"> O ponto a direita da BoundingBox do alvo.</param>
      /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(Vector2 bolaInicial, Vector2 bolaFinal, Vector2 alvoInicial, Vector2 alvoFinal) {
-        if (bolaFinal.x < alvoInicial.x || alvoFinal.x < bolaInicial.x || bolaFinal.y < alvoInicial.y || alvoFinal.y < bolaInicial.y) { // Não há colisão
+    public Boolean VerificaColisao(Vector2 identificadorInicial, Vector2 identificadorFinal, Vector2 alvoInicial, Vector2 alvoFinal) {
+        if(identificadorFinal.x < alvoInicial.x || alvoFinal.x < identificadorInicial.x || identificadorFinal.y < alvoInicial.y || alvoFinal.y < identificadorInicial.y) { // Não há colisão
             return false;
         } else {
             return true;
@@ -344,15 +344,15 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
      /// </summary>
      /// <param name="alvo"> O alvo que deseja ser verificada se houve colisão. </param>
-     /// <param name="bola"> O objeto rastreado que deseja ser verificado se houve colisão. </param>
+     /// <param name="identificador"> O objeto rastreado que deseja ser verificado se houve colisão. </param>
      /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(GameObject alvo, Bola bola) {
-        Vector2 bolaInicial = bola.GetPontoInicial();
-        Vector2 bolaFinal = bola.GetPontoFinal();
+    public Boolean VerificaColisao(GameObject alvo, GameObject identificador) {
+        Vector2 identificadorInicial = identificador.GetComponent<Identificador>().GetPontoInicial();
+        Vector2 identificadorFinal = identificador.GetComponent<Identificador>().GetPontoFinal();
         Vector2 alvoInicial = alvo.GetComponent<Alvo>().GetPontoInicial();
         Vector2 alvoFinal = alvo.GetComponent <Alvo>().GetPontoFinal();
-        Boolean colidiu = VerificaColisao(bolaInicial, bolaFinal, alvoInicial, alvoFinal);
+        Boolean colidiu = VerificaColisao(identificadorInicial, identificadorFinal, alvoInicial, alvoFinal);
         return colidiu;
     }
 
@@ -362,6 +362,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     public void AddListaIdentificadores(GameObject identificador) {
         listaIdentificadores.Add(identificador);
+    }
+
+    public void RemoveListaIdentificadores(GameObject identificador) {
+        listaIdentificadores.Remove(identificador);
     }
 
     public int GetTamanhoListaIdentificadores() {

@@ -195,7 +195,7 @@ interface InterfaceUtils {
      /// <param name="alvoFinal"> O ponto a direita da BoundingBox do alvo.</param>
      /// <returns> Booleano informando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    Boolean VerificaColisao(Vector2 bolaInicial, Vector2 bolaFinal, Vector2 alvoInicial, Vector2 alvoFinal);
+    Boolean VerificaColisao(Vector2 identificadorInicial, Vector2 identificadorFinal, Vector2 alvoInicial, Vector2 alvoFinal);
 
     //==========================================================================================================//
      /// <summary>
@@ -206,11 +206,12 @@ interface InterfaceUtils {
      /// <param name="bola"> A bola que deseja ser verificada se houve colisão. </param>
      /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    Boolean VerificaColisao(GameObject alvo, Bola bola);
+    Boolean VerificaColisao(GameObject alvo, GameObject identificador);
 
     List<GameObject> GetListaIdentificadores();
     void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade);
     void AddListaIdentificadores(GameObject identificador);
     int GetTamanhoListaIdentificadores();
+    void RemoveListaIdentificadores(GameObject identificador);
 }
 

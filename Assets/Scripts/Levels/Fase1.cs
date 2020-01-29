@@ -87,18 +87,21 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
-    public bool VerificarAcerto(GameObject alvo, Bola bola) {
-        if (instance.VerificaColisao(alvo, bola)) {
-            Debug.Log("ACERTOU");
-            Debug.Log(bola);
-            Debug.Log("------------------------------------------------------------------------------");
+    public bool VerificarAcerto(GameObject alvo, GameObject identificador) {
+        /*if (instance.VerificaColisao(alvo, identificador)) {
+            //Debug.Log("ACERTOU");
+            //Debug.Log("------------------------------------------------------------------------------");
+            instance.RemoveListaIdentificadores(identificador);
+            Destroy(identificador);
             return true;
         } else {
-            Debug.Log("NÃO ACERTOU");
-            Debug.Log(bola);
-            Debug.Log("------------------------------------------------------------------------------");
+            //Debug.Log("NÃO ACERTOU");
+            //Debug.Log("------------------------------------------------------------------------------");
+            instance.RemoveListaIdentificadores(identificador);
+            Destroy(identificador);
             return false;
-        }
+        }*/
+        return true;
     }
 
     //===================================================================================================
@@ -110,20 +113,20 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //===================================================================================================
     public void CompararPosicao() {
-        List<Bola> listaBolas = instance.GetListaBolas(); // A lista de objetos rastreados
+        /*List<GameObject> listaIdentificadores = instance.GetListaIdentificadores(); // A lista de objetos rastreados
         List<GameObject> listaAlvos = instance.GetListaAlvos(); // A lista de objetos rastreados
-        if(listaBolas != null && listaAlvos != null) {
-            for (int i = 0; i < listaBolas.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
+        if(listaIdentificadores != null && listaAlvos != null) {
+            for (int i = 0; i < listaIdentificadores.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
                 for(int j = 0; j < listaAlvos.Count; j++) { 
-                    if(VerificarAcerto(listaAlvos[j], listaBolas[i])) {
+                    if(VerificarAcerto(listaAlvos[j], listaIdentificadores[i])) {
                         Debug.Log("A");
-                        if(listaBolas[i].GetAssinatura() == 2) {
+                        if(listaIdentificadores[i].GetComponent<Identificador>().GetAssinatura() == 2) {
                             listaAlvos[j].GetComponent<Alvo>().DestroiAlvo();
                             instance.AddPontosAmarelos(1);
                             listaAlvos.RemoveAt(j);
                         }
 
-                        if(listaBolas[i].GetAssinatura() == 3) {
+                        if(listaIdentificadores[i].GetComponent<Identificador>().GetAssinatura() == 3) {
                             instance.AddPontosVerdes(1);
                             listaAlvos[j].GetComponent<Alvo>().DestroiAlvo();
                             listaAlvos.RemoveAt(j);
@@ -131,7 +134,7 @@ public class Fase1 : MonoBehaviour {
                     }
                 }
             }
-        }
+        }*/
     }
 
     //===================================================================================================

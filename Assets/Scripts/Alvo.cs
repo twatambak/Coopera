@@ -202,12 +202,11 @@ public class Alvo : MonoBehaviour {
      ///  Destrói a alvo atual.
      /// </summary>
     //============================================================================================================
-    public void DestroiAlvo() {
+    public void Destroi() {
         if(instance.GetQuantidadeAlvos() > 0) {
             Destroy(this.gameObject);
             instance.RemoveListaAlvos(this.gameObject);
             instance.RemoveQuantidadeAlvos();
-            instance.AddPontosAmarelos(1);
         }
     }
 
@@ -230,6 +229,10 @@ public class Alvo : MonoBehaviour {
         } else if(outro.gameObject.tag == "Forma"){
             dirX *= -1;
             dirY *= -1;
+        } else if (outro.gameObject.tag == "Identificador") {
+            instance.AddPontosAmarelos(1);
+            this.Destroi();
+            outro.gameObject.GetComponent<Identificador>().Destroi();
         }
     }
 
@@ -241,7 +244,7 @@ public class Alvo : MonoBehaviour {
      /// </summary>
     //==========================================================================================================//
     void OnMouseDown() {
-        DestroiAlvo();
+        Destroi();
     }
 
     //==========================================================================================================//

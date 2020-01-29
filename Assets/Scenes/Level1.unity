@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fc6ce779dc00944b403c8e1b883bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseIdentificador: {fileID: 3305811147916004552, guid: 7480544934a1dc540ab08631c1be5e91,
+  baseIdentificador: {fileID: 2722417567351715414, guid: 7480544934a1dc540ab08631c1be5e91,
     type: 3}
 --- !u!1 &913918688
 GameObject:
@@ -1081,12 +1081,13 @@ MonoBehaviour:
   verdeHUD: {fileID: 508028816}
   baseAlvo: {fileID: 7903402880027064089, guid: eb3e28ebd898a5746a3a537ef6e8e5f7,
     type: 3}
-  identificador: {fileID: 5385019370402619097, guid: 7480544934a1dc540ab08631c1be5e91,
+  identificador: {fileID: 2722417567351715414, guid: 7480544934a1dc540ab08631c1be5e91,
     type: 3}
   cam: {fileID: 519420031}
   botao: {fileID: 1745410988}
   tamListaAlvos: 0
   tamListaBolas: 0
+  tamListaIdentificadores: 0
 --- !u!4 &1506620288
 Transform:
   m_ObjectHideFlags: 0
