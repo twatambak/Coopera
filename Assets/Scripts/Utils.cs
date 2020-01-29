@@ -64,7 +64,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         string line = null;
         string[] separatedLine = null;
         List<string> data = new List<string>();
-
         while ((line = stream.ReadLine()) != null) {
             separatedLine = line.Split('|');
             foreach (var item in separatedLine) {
@@ -210,6 +209,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
         GameObject novoIdenti;
         novoIdenti = Instantiate(baseIdenti) as GameObject;
+        novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura, idade);
         novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
         novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);
         AddListaIdentificadores(novoIdenti);
@@ -362,6 +362,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     public void AddListaIdentificadores(GameObject identificador) {
         listaIdentificadores.Add(identificador);
+    }
+
+    public int GetTamanhoListaIdentificadores() {
+        return listaIdentificadores.Count;
     }
 
 }

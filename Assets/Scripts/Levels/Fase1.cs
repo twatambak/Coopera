@@ -34,6 +34,7 @@ public class Fase1 : MonoBehaviour {
     
     public int tamListaAlvos;
     public int tamListaBolas;
+    public int tamListaIdentificadores;
 
     //============================================================================================================
     /// <summary>
@@ -60,6 +61,7 @@ public class Fase1 : MonoBehaviour {
             CompararPosicao();
             tamListaAlvos = instance.GetQuantidadeAlvos();
             tamListaBolas = instance.GetTamanhoListaBolas();
+            tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
         }
     }
 

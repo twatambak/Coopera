@@ -37,13 +37,21 @@ public class Identificador : MonoBehaviour {
     /// <summary> A idade em frames do objeto rastreado. </summary>
     public float idade;
 
+    void Start() {
+        
+    }
+
     //============================================================================================================
     //============================================================================================================
     void Update() {
-        pontoOrigem = new Vector2(x, y);
-        List<GameObject> identificadores = instance.GetListaIdentificadores();
-        for(int i = 0; i < identificadores.Count; i++) {
-            if(identificadores[i].GetComponent<Identificador>().GetID() == this.GetID()) {
+        x = this.transform.localPosition.x;
+        y = this.transform.localPosition.y;
+        pontoInicial = PontoInicial();
+        pontoFinal = PontoFinal();
+        pontoOrigem = new Vector2(this.transform.localPosition.x, this.transform.localPosition.y);
+        
+        /*for (int i = 0; i < identificadores.Count; i++) {
+            if (identificadores[i].GetComponent<Identificador>().GetID() == this.GetID()) {
                 identificadores[i].GetComponent<Identificador>().SetX(this.x);
                 identificadores[i].GetComponent<Identificador>().SetY(this.y);
                 identificadores[i].GetComponent<Identificador>().SetPontoOrigem(this.GetPontoOrigem());
@@ -51,9 +59,9 @@ public class Identificador : MonoBehaviour {
                 identificadores[i].GetComponent<Identificador>().SetPontoInicial(this.GetPontoInicial());
                 identificadores[i].GetComponent<Identificador>().SetPontoFinal(this.GetPontoFinal());
             }
-        }
+        }*/
 
-    }
+    }    
 
     //============================================================================================================
     //============================================================================================================
@@ -191,7 +199,7 @@ public class Identificador : MonoBehaviour {
     //============================================================================================================
     public float GetAlturaConvertida() {
         SetAlturaConvertida();
-        return altura;
+        return alturaConvertida;
     }
 
     //============================================================================================================
