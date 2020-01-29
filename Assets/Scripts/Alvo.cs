@@ -190,7 +190,6 @@ public class Alvo : MonoBehaviour {
     //==========================================================================================================//
     public void DestroiAlvo(GameObject alvo) {
         if(instance.GetQuantidadeAlvos() > 0) {
-            instance.RemoveListaAlvos(alvo);
             instance.RemoveQuantidadeAlvos();
             instance.AddPontosAmarelos(1);
             Destroy(alvo);
@@ -204,9 +203,8 @@ public class Alvo : MonoBehaviour {
     //============================================================================================================
     public void Destroi() {
         if(instance.GetQuantidadeAlvos() > 0) {
-            instance.RemoveQuantidadeAlvos();
-            Destroy(this.gameObject);
             instance.RemoveListaAlvos(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 
@@ -231,12 +229,12 @@ public class Alvo : MonoBehaviour {
             dirY *= -1;
         } else if (outro.gameObject.tag == "Identificador") {
             this.Destroi();
-            outro.gameObject.GetComponent<Identificador>().Destroi();
             if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSVGetAssinaturaAmarela()) {
                 instance.AddPontosAmarelos(1);
             } else if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSVGetAssinaturaVerde()){
                 instance.AddPontosVerdes(1);
             }
+            outro.gameObject.GetComponent<Identificador>().Destroi();
         } else {
             outro.gameObject.GetComponent<Identificador>().Destroi();
         }

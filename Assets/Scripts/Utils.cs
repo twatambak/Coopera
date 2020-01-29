@@ -12,8 +12,6 @@ using UnityEngine.SceneManagement;
 public class Utils : MonoBehaviour, InterfaceUtils {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static Utils instance = null;
-    /// <summary> Lista das bolas rastreadas pela PixyCam. </summary>
-    public static List<Bola> listaBolas = new List<Bola>();
     /// <summary> Lista dos IDENTIFICADORES rastreados pela PixyCam. </summary>
     public static List<GameObject> listaIdentificadores = new List<GameObject>();
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
@@ -32,8 +30,11 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     int tam;
     /// <summary> Material de base utilizado para alterar a cor das alvos conforme elas são criadas. </summary>
     Material material;
+    /// <summary> Cores dos novos alvos. </summary>
     int assinaturaAmarela;
+    /// <summary> Cores dos novos alvos. </summary>
     int assinaturaVerde;
+
     //==========================================================================================================//
      /// <summary>
      /// Retorna uma instância de Utils.
@@ -141,32 +142,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de bolas.
-     /// </summary>
-     /// <returns> A lista de bolas rastreadas pela PixyCam. </returns>
-    //==========================================================================================================//
-    public List<Bola> GetListaBolas() {
-        return listaBolas;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
      /// Retorna a quantidade atual de alvos.
      /// </summary>
      /// <returns></returns>
     //==========================================================================================================//
     public int GetQuantidadeAlvos() {
         return qtdAlvos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o tamanho da lista de bolas.
-     /// </summary>
-     /// <returns> O tamanho da lista de bolas. Atua também como a quantidade atual de bolas. </returns>
-    //==========================================================================================================//
-    public int GetTamanhoListaBolas() {
-        return listaBolas.Count;
     }
 
     //==========================================================================================================//
@@ -228,7 +209,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         AddListaIdentificadores(novoIdenti);
     }
 
-   
     //==========================================================================================================//
     /// <summary>
     /// Adiciona o alvo recebido na lista de alvos.
@@ -236,8 +216,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <param name="alvo"> O alvo a ser adicionado na respectiva lista. </param>
     //==========================================================================================================//
     public void AddListaAlvos(GameObject alvo) {
-        listaAlvos.Add(alvo);
-        AddQuantidadeAlvos();
+        if(GetQuantidadeAlvos() < CSVGetMaximoAlvos()) {
+            listaAlvos.Add(alvo);
+            AddQuantidadeAlvos();
+        }
     }
 
     //==========================================================================================================//
@@ -247,47 +229,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <param name="alvo"> O alvo a ser removido da respectiva lista. </param>
     //==========================================================================================================//
     public void RemoveListaAlvos(GameObject alvo) {
-        listaAlvos.Remove(alvo);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Adiciona a bola passada na lista de bolas.
-     /// </summary>
-     /// <param name="bola"> A bola rastreada pela Pixy a ser adicionada na lista. </param>
-    //==========================================================================================================//
-    public void AddListaBolas(Bola bola) {
-        //Debug.Log(bola);
-        if(listaBolas.Count > 0) {
-            for(int i = 0; i < listaBolas.Count; i++) {
-                if(listaBolas[i].GetID() == bola.GetID() || listaBolas[i].GetPontoOrigem() == bola.GetPontoOrigem()) {
-                    listaBolas[i] = bola;
-                } else {
-                    listaBolas.Add(bola);
-                }
-            }
-        } else {
-            listaBolas.Add(bola);
+        if(GetQuantidadeAlvos() > 0) {
+            listaAlvos.Remove(alvo);
+            qtdAlvos--;
         }
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove a bola da lista de bolas.
-     /// </summary>
-     /// <param name="bola"> A bola a ser removida da lista. </param>
-    //==========================================================================================================//
-    public void RemoveListaBolas(Bola bola) {
-        listaBolas.Remove(bola);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Limpa as bolas rastreadas pela PixyCam.
-     /// </summary>
-    //==========================================================================================================//
-    public void LimpaListaBolas() {
-        listaBolas.Clear();
     }
 
     //==========================================================================================================//
@@ -296,7 +241,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
     //==========================================================================================================//
     public void AddQuantidadeAlvos() {
-        if(qtdAlvos < CSVGetMaximoAlvos()) {
+        if(GetQuantidadeAlvos() < CSVGetMaximoAlvos()) {
             qtdAlvos++;
         }
     }
@@ -307,7 +252,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
     //==========================================================================================================//
     public void RemoveQuantidadeAlvos() { 
-        if(qtdAlvos > 0) {
+        if(GetQuantidadeAlvos() > 0) {
             qtdAlvos--;
         }
     }
@@ -333,56 +278,26 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
-     /// dos dois objetos.
-     /// </summary>
-     /// <param name="identificadorInicial"> O ponto a esquerda da BoundingBox da bola. </param>
-     /// <param name="identificadorFinal"> O ponto a direita da BoundingBox da bola. </param>
-     /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox do alvo.</param>
-     /// <param name="alvoFinal"> O ponto a direita da BoundingBox do alvo.</param>
-     /// <returns> Booleano indicando se houve ou não colisão. </returns>
     //==========================================================================================================//
-    public Boolean VerificaColisao(Vector2 identificadorInicial, Vector2 identificadorFinal, Vector2 alvoInicial, Vector2 alvoFinal) {
-        if(identificadorFinal.x < alvoInicial.x || alvoFinal.x < identificadorInicial.x || identificadorFinal.y < alvoInicial.y || alvoFinal.y < identificadorInicial.y) { // Não há colisão
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
-     /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
-     /// </summary>
-     /// <param name="alvo"> O alvo que deseja ser verificada se houve colisão. </param>
-     /// <param name="identificador"> O objeto rastreado que deseja ser verificado se houve colisão. </param>
-     /// <returns> Booleano indicando se houve ou não colisão. </returns>
-    //==========================================================================================================//
-    public Boolean VerificaColisao(GameObject alvo, GameObject identificador) {
-        Vector2 identificadorInicial = identificador.GetComponent<Identificador>().GetPontoInicial();
-        Vector2 identificadorFinal = identificador.GetComponent<Identificador>().GetPontoFinal();
-        Vector2 alvoInicial = alvo.GetComponent<Alvo>().GetPontoInicial();
-        Vector2 alvoFinal = alvo.GetComponent <Alvo>().GetPontoFinal();
-        Boolean colidiu = VerificaColisao(identificadorInicial, identificadorFinal, alvoInicial, alvoFinal);
-        return colidiu;
-    }
-
     public List<GameObject> GetListaIdentificadores() {
         return listaIdentificadores;
     }
 
+    //==========================================================================================================//
+    //==========================================================================================================//
     public void AddListaIdentificadores(GameObject identificador) {
         listaIdentificadores.Add(identificador);
     }
 
+    //==========================================================================================================//
+    //==========================================================================================================//
     public void RemoveListaIdentificadores(GameObject identificador) {
         listaIdentificadores.Remove(identificador);
     }
 
+    //==========================================================================================================//
+    //==========================================================================================================//
     public int GetTamanhoListaIdentificadores() {
         return listaIdentificadores.Count;
     }
-
 }

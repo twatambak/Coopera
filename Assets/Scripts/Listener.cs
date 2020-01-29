@@ -10,6 +10,7 @@ using UnityEngine;
 public class Listener : MonoBehaviour {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
+    /// <summary> Cores dos novos alvos. </summary>
     public GameObject baseIdentificador;
     /// <summary> Vetor de string contendo as informações recebidas pelo serial.  </summary>
     string[] vetorStringSerial = null;
@@ -33,8 +34,6 @@ public class Listener : MonoBehaviour {
                 instance.CriarIdentificadores(baseIdentificador, instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[5]), instance.ToInt(dados[6]));
                 dados.Clear();
             }
-        } else {
-            instance.LimpaListaBolas();
         }
     }
 

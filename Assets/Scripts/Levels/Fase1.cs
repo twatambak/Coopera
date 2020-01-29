@@ -15,8 +15,6 @@ public class Fase1 : MonoBehaviour {
     public Text textoPontosVerdes;
     /// <summary> Texto de exibição de pontos do time amarelo. </summary>
     public Text textoPontosAmarelos;
-    /// <summary> Quantia máxima de alvos. Seu valor é carregado pela função de leitura <see cref="Utils.LoadCSV(int)"/> do arquivo de configuração. </summary>
-    int maxAlvos;
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
     public bool game;
     /// <summary> HUD referente ao time amarelo. </summary>
@@ -27,39 +25,28 @@ public class Fase1 : MonoBehaviour {
     public GameObject baseAlvo;
     /// <summary> Objeto de base para o identificador da alvo de identificação dos objetos rastreados. </summary>
     public GameObject identificador;
-    /// <summary> Câmera do jogo. </summary>
-    public Camera cam;
     /// <summary> Teste. </summary>
     public Button botao;
-    
+    /// <summary> Teste. </summary>
+    public int quantAlvos;
+    /// <summary> Teste. </summary>
     public int tamListaAlvos;
-    public int tamListaBolas;
+    /// <summary> Teste. </summary>s
     public int tamListaIdentificadores;
 
     //============================================================================================================
-    /// <summary>
-    /// Start() é chamada antes do update do primeiro frame.
-    /// Ao ser chamada, a função carrega os valores contidos no CSV de configurações e realiza a
-    /// definição para as variáveis correspondentes a quantidade de alvos na fase, além de chamar
-    /// uma função que faz a criação de clones do prefab Alvo.
-    /// </summary>
     //============================================================================================================
     void Start() {
         game = false;
-        maxAlvos = instance.CSVGetMaximoAlvos();
     }
 
-
     //============================================================================================================
-     /// <summary>
-     /// Responsável por atualizar o jogo a cada novo frame.
-     /// </summary>
     //============================================================================================================
     void Update() {
         if(game) {
             instance.CriarAlvos(baseAlvo);
-            tamListaAlvos = instance.GetQuantidadeAlvos();
-            tamListaBolas = instance.GetTamanhoListaBolas();
+            quantAlvos = instance.GetQuantidadeAlvos();
+            tamListaAlvos = instance.GetTamanhoListaAlvos();
             tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
         }
     }

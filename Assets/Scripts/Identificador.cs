@@ -37,10 +37,6 @@ public class Identificador : MonoBehaviour {
     /// <summary> A idade em frames do objeto rastreado. </summary>
     public float idade;
 
-    void Start() {
-        
-    }
-
     //============================================================================================================
     //============================================================================================================
     void Update() {
@@ -351,7 +347,7 @@ public class Identificador : MonoBehaviour {
     }
 
     public void Destroi() {
-        if(instance.GetTamanhoListaIdentificadores() >= 0) {
+        if(instance.GetTamanhoListaIdentificadores() > 0) {
             instance.RemoveListaIdentificadores(this.gameObject);
             Destroy(this.gameObject);
         }

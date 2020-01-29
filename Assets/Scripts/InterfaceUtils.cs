@@ -70,13 +70,6 @@ interface InterfaceUtils {
     //==========================================================================================================//
     int GetTamanhoListaAlvos();
 
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna a lista de bolas.
-     /// </summary>
-     /// <returns> A lista de bolas rastreadas pela PixyCam. </returns>
-    //==========================================================================================================//
-    List<Bola> GetListaBolas();
 
     //==========================================================================================================//
      /// <summary>
@@ -84,14 +77,6 @@ interface InterfaceUtils {
      /// </summary>
     //==========================================================================================================//
     int GetQuantidadeAlvos();
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o tamanho da lista de bolas.
-     /// </summary>
-     /// <returns> O tamanho da lista de bolas. Atua também como a quantidade atual de bolas. </returns>
-    //==========================================================================================================//
-    int GetTamanhoListaBolas();
 
     //==========================================================================================================//
      /// <summary>
@@ -136,29 +121,6 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Adiciona a bola passada na lista de bolas.
-     /// </summary>
-     /// <param name="bola"> A bola rastreada pela Pixy a ser adicionada na lista. </param>
-    //==========================================================================================================//
-    void AddListaBolas(Bola bola);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove a bola da lista de bolas.
-     /// </summary>
-     /// <param name="bola"> A bola a ser removida da lista. </param>
-    //==========================================================================================================//
-    void RemoveListaBolas(Bola bola);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Limpa as bolas rastreadas pela PixyCam.
-     /// </summary>
-    //==========================================================================================================//
-    void LimpaListaBolas();
-
-    //==========================================================================================================//
-     /// <summary>
      /// Aumenta em 1 a quantidade de alvos.
      /// </summary>
     //==========================================================================================================//
@@ -186,30 +148,6 @@ interface InterfaceUtils {
      /// <param name="pontos"> Valor a ser adicionado aos pontos do time verde. </param>
     //==========================================================================================================//
     void AddPontosVerdes(int pontos);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna se houve colisão entre dois objetos. Para tal, ele utiliza dos vetores que compõem a BoundingBox
-     /// dos dois objetos.
-     /// </summary>
-     /// <param name="bolaInicial"> O ponto a esquerda da BoundingBox da bola. </param>
-     /// <param name="bolaFinal"> O ponto a direita da BoundingBox da bola. </param>
-     /// <param name="alvoInicial"> O ponto a esquerda da BoundingBox do alvo.</param>
-     /// <param name="alvoFinal"> O ponto a direita da BoundingBox do alvo.</param>
-     /// <returns> Booleano informando se houve ou não colisão. </returns>
-    //==========================================================================================================//
-    Boolean VerificaColisao(Vector2 identificadorInicial, Vector2 identificadorFinal, Vector2 alvoInicial, Vector2 alvoFinal);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Verifica a colisão entre dois objetos passados como parâmetros. Para tal ele utiliza da função
-     /// <seealso cref="VerificaColisao(Vector2, Vector2, Vector2, Vector2)"/> para realizar essa verificação.
-     /// </summary>
-     /// <param name="alvo"> O alvo que deseja ser verificada se houve colisão. </param>
-     /// <param name="bola"> A bola que deseja ser verificada se houve colisão. </param>
-     /// <returns> Booleano indicando se houve ou não colisão. </returns>
-    //==========================================================================================================//
-    Boolean VerificaColisao(GameObject alvo, GameObject identificador);
 
     List<GameObject> GetListaIdentificadores();
     void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade);
