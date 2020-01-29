@@ -51,6 +51,9 @@ interface InterfaceUtils {
     //==========================================================================================================//
     int CSVGetTamanhoAlvos();
 
+    int CSVGetAssinaturaAmarela();
+    int CSVGetAssinaturaVerde();
+
     //==========================================================================================================//
      /// <summary>
      /// Retorna a lista de alvos.

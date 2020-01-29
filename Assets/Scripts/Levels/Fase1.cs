@@ -58,7 +58,6 @@ public class Fase1 : MonoBehaviour {
     void Update() {
         if(game) {
             instance.CriarAlvos(baseAlvo);
-            CompararPosicao();
             tamListaAlvos = instance.GetQuantidadeAlvos();
             tamListaBolas = instance.GetTamanhoListaBolas();
             tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
@@ -79,62 +78,6 @@ public class Fase1 : MonoBehaviour {
         }
         textoPontosAmarelos.text = "Pontos: " + Utils.pontosTimeAmarelo;
         textoPontosVerdes.text = "Pontos: " + Utils.pontosTimeVerde;
-    }
-
-    //============================================================================================================
-     /// <summary>
-     /// Confere a posição dos objetos.
-     /// </summary>
-     /// <returns></returns>
-    //============================================================================================================
-    public bool VerificarAcerto(GameObject alvo, GameObject identificador) {
-        /*if (instance.VerificaColisao(alvo, identificador)) {
-            //Debug.Log("ACERTOU");
-            //Debug.Log("------------------------------------------------------------------------------");
-            instance.RemoveListaIdentificadores(identificador);
-            Destroy(identificador);
-            return true;
-        } else {
-            //Debug.Log("NÃO ACERTOU");
-            //Debug.Log("------------------------------------------------------------------------------");
-            instance.RemoveListaIdentificadores(identificador);
-            Destroy(identificador);
-            return false;
-        }*/
-        return true;
-    }
-
-    //===================================================================================================
-     /// <summary>
-     /// Realiza a comparação de posição dos objetos rastreados com as alvos presentes na tela. Caso a
-     /// posição seja a mesma a alvo é destruída. A comparação é feita caso a posição seja maior.
-     /// (Atualmente o controle de comparação é realizado utilizando a posição fornecida pela Unity.
-     /// Precisa ser alterado).
-     /// </summary>
-    //===================================================================================================
-    public void CompararPosicao() {
-        /*List<GameObject> listaIdentificadores = instance.GetListaIdentificadores(); // A lista de objetos rastreados
-        List<GameObject> listaAlvos = instance.GetListaAlvos(); // A lista de objetos rastreados
-        if(listaIdentificadores != null && listaAlvos != null) {
-            for (int i = 0; i < listaIdentificadores.Count; i++) { // Estrutura que percorre todos os elementos da lista de objetos rastreados
-                for(int j = 0; j < listaAlvos.Count; j++) { 
-                    if(VerificarAcerto(listaAlvos[j], listaIdentificadores[i])) {
-                        Debug.Log("A");
-                        if(listaIdentificadores[i].GetComponent<Identificador>().GetAssinatura() == 2) {
-                            listaAlvos[j].GetComponent<Alvo>().DestroiAlvo();
-                            instance.AddPontosAmarelos(1);
-                            listaAlvos.RemoveAt(j);
-                        }
-
-                        if(listaIdentificadores[i].GetComponent<Identificador>().GetAssinatura() == 3) {
-                            instance.AddPontosVerdes(1);
-                            listaAlvos[j].GetComponent<Alvo>().DestroiAlvo();
-                            listaAlvos.RemoveAt(j);
-                        }
-                    }
-                }
-            }
-        }*/
     }
 
     //===================================================================================================

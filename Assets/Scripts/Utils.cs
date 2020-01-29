@@ -32,7 +32,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     int tam;
     /// <summary> Material de base utilizado para alterar a cor das alvos conforme elas são criadas. </summary>
     Material material;
-
+    int assinaturaAmarela;
+    int assinaturaVerde;
     //==========================================================================================================//
      /// <summary>
      /// Retorna uma instância de Utils.
@@ -104,6 +105,18 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public int CSVGetTamanhoAlvos() {
         return (ToInt(LoadCSV(6)));
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public int CSVGetAssinaturaAmarela() {
+        return (ToInt(LoadCSV(8)));
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public int CSVGetAssinaturaVerde() {
+        return (ToInt(LoadCSV(10)));
     }
 
     //==========================================================================================================//
