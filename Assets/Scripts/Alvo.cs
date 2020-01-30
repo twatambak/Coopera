@@ -232,7 +232,8 @@ public class Alvo : MonoBehaviour {
         } else if (outro.gameObject.tag == "Identificador") {
             this.Destroi();
             //outro.gameObject.GetComponent<Identificador>().Destroi();
-            instance.LimparIdentificadores();
+            outro.gameObject.transform.position = new Vector3(2000, 2000, 1);
+            //instance.LimparIdentificadores();
             if (outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaAmarela()) {
                 instance.AddPontosAmarelos(1);
             } else if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaVerde()){

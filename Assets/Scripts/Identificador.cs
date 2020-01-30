@@ -43,11 +43,8 @@ public class Identificador : MonoBehaviour {
         List<GameObject> identificadores = instance.GetListaIdentificadores();
         for (int i = 0; i < identificadores.Count; i++) {
             if(identificadores[i].GetComponent<Identificador>().GetID() == this.GetID()) {
-                identificadores[i].GetComponent<Identificador>().SetX(this.transform.localPosition.x);
-                identificadores[i].GetComponent<Identificador>().SetY(this.transform.localPosition.y);
-                identificadores[i].GetComponent<Identificador>().SetPontoInicial();
-                identificadores[i].GetComponent<Identificador>().SetPontoFinal();
-                identificadores[i].GetComponent<Identificador>().SetPontoOrigem();
+                identificadores[i] = this.gameObject;
+                identificadores[i].GetComponent<Identificador>().Bola(this.id, this.assinatura, this.x, this.y, this.largura, this.altura, this.idade);
             } else {
                 x = this.transform.localPosition.x;
                 y = this.transform.localPosition.y;
@@ -68,6 +65,9 @@ public class Identificador : MonoBehaviour {
         this.largura = largura;
         this.altura = altura;
         this.idade = idade;
+        pontoOrigem = new Vector2(x, y);
+        pontoInicial = PontoInicial();
+        pontoFinal = PontoFinal();
     }
 
     //============================================================================================================
@@ -344,9 +344,7 @@ public class Identificador : MonoBehaviour {
     }
 
     public void Destroi() {
-        if(instance.GetTamanhoListaIdentificadores() > 0) {
-            instance.RemoveIdentificador(this.gameObject);
-        }
+        instance.RemoveIdentificador(this.gameObject);
     }
 
     //============================================================================================================

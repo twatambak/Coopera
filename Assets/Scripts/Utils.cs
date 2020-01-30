@@ -191,10 +191,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="identificador"> O GameObject a ser removido na lista de identificadores. </param>
     //==========================================================================================================//
     public void RemoveIdentificador(GameObject identificador) {
-        if(GetTamanhoListaIdentificadores() > 0) {
-            listaIdentificadores.Remove(identificador);
-            Destroy(identificador);
-        }
+        listaIdentificadores.Remove(identificador);
+        Destroy(identificador);
     }
 
     //==========================================================================================================//
@@ -215,6 +213,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
         GameObject novoIdenti;
+        //novoIdenti = baseIdenti; // Para caso queira ser só um
         novoIdenti = Instantiate(baseIdenti) as GameObject;
         novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura, idade);
         novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
@@ -229,7 +228,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void LimparIdentificadores() {
         for(int i = 0; i < GetTamanhoListaIdentificadores(); i++) {
-            listaIdentificadores[i].GetComponent<Identificador>().Destroi();
+            RemoveIdentificador(listaIdentificadores[i]);
         }
     }
 
