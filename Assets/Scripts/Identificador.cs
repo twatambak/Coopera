@@ -343,6 +343,8 @@ public class Identificador : MonoBehaviour {
         return conversao;
     }
 
+    //============================================================================================================
+    //============================================================================================================
     public void Destroi() {
         instance.RemoveIdentificador(this.gameObject);
     }

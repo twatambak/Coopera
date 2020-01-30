@@ -48,7 +48,6 @@ public class Fase1 : MonoBehaviour {
             quantAlvos = instance.GetQuantidadeAlvos();
             tamListaAlvos = instance.GetTamanhoListaAlvos();
             tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
-
         }
     }
 
@@ -69,10 +68,6 @@ public class Fase1 : MonoBehaviour {
     }
 
     //===================================================================================================
-     /// <summary>
-     /// 
-     /// </summary>
-     /// <returns></returns>
     //===================================================================================================
     public bool Botao() {
         return true;
