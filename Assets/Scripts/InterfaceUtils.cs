@@ -143,7 +143,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="alvo"> O GameObject a ser adicionado na lista de alvos. </param>
     //==========================================================================================================//
-    void AddListaAlvos(GameObject alvo);
+    void AddAlvo(GameObject alvo);
 
     //==========================================================================================================//
      /// <summary>
@@ -151,7 +151,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="alvo"> O GameObejct a ser removido da lista de alvos. </param>
     //==========================================================================================================//
-    void RemoveListaAlvos(GameObject alvo);
+    void RemoveAlvo(GameObject alvo);
 
     //==========================================================================================================//
      /// <summary>
@@ -159,7 +159,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
     //==========================================================================================================//
-    void CriarAlvos(GameObject baseAlvo);
+    void CriarAlvo(GameObject baseAlvo);
 
     //==========================================================================================================//
      /// <summary>
@@ -174,7 +174,7 @@ interface InterfaceUtils {
      /// Aumenta em 1 a quantidade de alvos.
      /// </summary>
     //==========================================================================================================//
-    public void AddQuantidadeAlvos();
+    void AddQuantidadeAlvos();
 
     //==========================================================================================================//
      /// <summary>

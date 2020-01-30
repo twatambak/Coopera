@@ -8,26 +8,37 @@ using UnityEngine;
  /// </summary>
 /************************************************************************************************************/
 public class Alvo : MonoBehaviour {
+
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
+
     /// <summary> Ponto X da posição de origem. </summary>
     public float x;
+
     /// <summary> Ponto Y da posição de origem. </summary>
     public float y;
-    /// <summary> Direção de movimentação no eixo X </summary>
-    public float dirX;  
-    /// <summary> Direção de movimentação no eixo Y </summary>
-    public float dirY;
-    /// <summary> Velocidade de movimentação </summary>
-    public float vel;
-    /// <summary> Tamanho da Alvo </summary>
-    public float tam;
+
     /// <summary> Ponto de origem do alvo. </summary>
     public Vector2 pontoOrigem;
+
     /// <summary> Posição inicial do viewport (localizada no canto esquerdo inferior do objeto). </summary>
     public Vector2 pontoInicial;
+
     /// <summary> Posição final do viewport (localizada no canto direito superior do objeto). </summary>
     public Vector2 pontoFinal;
+
+    /// <summary> Direção de movimentação no eixo X </summary>
+    public float dirX;  
+
+    /// <summary> Direção de movimentação no eixo Y </summary>
+    public float dirY;
+
+    /// <summary> Velocidade de movimentação </summary>
+    public float vel;
+
+    /// <summary> Tamanho da Alvo </summary>
+    public float tam;
+
     /// <summary> A cor do alvo. </summary>
     public Color cor;
 
@@ -39,8 +50,8 @@ public class Alvo : MonoBehaviour {
     void Start() {
         dirX = 0.1f;
         dirY = 0.1f;
-        vel = instance.CSVGetVelocidadeAlvos();
-        tam = instance.CSVGetTamanhoAlvos();
+        vel = instance.CSV_GetVelocidadeAlvos();
+        tam = instance.CSV_GetTamanhoAlvos();
         cor = this.GetComponent<Renderer>().material.color;
     }
 
@@ -60,9 +71,9 @@ public class Alvo : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o ponto central X original do alvo.
+     /// Retorna o ponto central x original do alvo.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O ponto x da posição central original do alvo. </returns>
     //============================================================================================================
     public float GetX() {
         return x;
@@ -70,9 +81,9 @@ public class Alvo : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o ponto central Y original do alvo.
+     /// Retorna o ponto central y original do alvo.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O ponto y da posição central original do alvo. </returns>
     //============================================================================================================
     public float GetY() {
         return y;
@@ -80,19 +91,9 @@ public class Alvo : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna o tamanho do alvo.
-     /// </summary>
-     /// <returns></returns>
-    //============================================================================================================
-    public float GetTam() {
-        return tam;
-    }
-
-    //============================================================================================================
-     /// <summary>
      /// Retorna a posição central original do alvo.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> Retorna o vetor de posição de origem do alvo. </returns>
     //============================================================================================================
     public Vector2 GetPontoOrigem() {
         return pontoOrigem;
@@ -102,27 +103,49 @@ public class Alvo : MonoBehaviour {
      /// <summary>
      /// Retorna o ponto inicial do viewport do alvo. O ponto é localizado no canto esquerdo inferior.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O ponto inicial do viewport do alvo. </returns>
     //============================================================================================================
     public Vector2 GetPontoInicial() {
         return pontoInicial;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Define o ponto inicial (localizado no canto esquerdo inferior) do viewport do alvo.
+     /// </summary>
+     /// <returns> O ponto inicial do viewport do alvo. </returns>
+    //==========================================================================================================//
+    public Vector2 PontoInicial() {
+        Vector2 pos = new Vector2((x / 2) - tam, (y / 2) + tam);
+        return pos;
     }
 
     //============================================================================================================
      /// <summary>
      /// Retorna o ponto final do viewport do alvo. O ponto é localizado no canto direito superior.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O ponto inicial do viewport do alvo. </returns>
     //============================================================================================================
     public Vector2 GetPontoFinal() {
         return pontoFinal;
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Define o ponto fianl (localizado no canto direito superior) do viewport do alvo.
+     /// </summary>
+     /// <returns> O ponto final do viewport do alvo. </returns>
+    //==========================================================================================================//
+    public Vector2 PontoFinal() {
+        Vector2 pos = new Vector2((x / 2) + tam, (y / 2) - tam);
+        return pos;
+    }
+
     //============================================================================================================
      /// <summary>
-     /// Retorna a direção de movimento no eixo X do alvo.
+     /// Retorna a direção de movimento no eixo x do alvo.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O valor que representa o eixo x de movimentação. </returns>
     //============================================================================================================
     public float GetDirX() {
         return dirX;
@@ -130,46 +153,12 @@ public class Alvo : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a direção de movimento no eixo X do alvo.
+     /// Retorna a direção de movimento no eixo y do alvo.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O valor que representa o eixo y de movimentação. </returns>
     //============================================================================================================
     public float GetDirY() {
         return dirY;
-    }
-
-    //============================================================================================================
-     /// <summary>
-     /// Retorna a velocidade de movimento do alvo.
-     /// </summary>
-     /// <returns></returns>
-    //============================================================================================================
-    public float GetVel() {
-        return vel;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto X central do alvo (localizado no canto superior direito da alvo).
-     /// </summary>
-     /// <param name="alvo"> O alvo a ser reconhecido o ponto central X. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector2 PontoInicial() {
-        Vector2 pos = new Vector2((x / 2) - tam, (y / 2) + tam);
-        return pos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o ponto Y central do alvo (localizado no canto inferior esquerdo do alvo).
-     /// </summary>
-     /// <param name="alvo"> O alvo a ser reconhecido o ponto central Y. </param>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public Vector2 PontoFinal() {
-        Vector2 pos = new Vector2((x / 2) + tam, (y / 2) - tam);
-        return pos;
     }
 
     //==========================================================================================================//
@@ -182,18 +171,34 @@ public class Alvo : MonoBehaviour {
         transform.Translate(Vector2.up * (dirY * vel) * Time.deltaTime); // Movimenta o quadrado na vertical.
     }
 
+    //============================================================================================================
+     /// <summary>
+     /// Retorna o tamanho do alvo.
+     /// </summary>
+     /// <returns> O tamanho do alvo. </returns>
+    //============================================================================================================
+    public float GetTam() {
+        return tam;
+    }
+          
+    //============================================================================================================
+     /// <summary>
+     /// Retorna a velocidade de movimento do alvo.
+     /// </summary>
+     /// <returns> A velocidade de movimento do alvo. </returns>
+    //============================================================================================================
+    public float GetVel() {
+        return vel;
+    }
+
     //==========================================================================================================//
      /// <summary>
      /// Recebe uma alvo e a destrói.
      /// </summary>
      /// <param name="alvo"></param>
     //==========================================================================================================//
-    public void DestroiAlvo(GameObject alvo) {
-        if(instance.GetQuantidadeAlvos() > 0) {
-            instance.RemoveQuantidadeAlvos();
-            instance.AddPontosAmarelos(1);
-            Destroy(alvo);
-        }
+    public void Destroi(GameObject alvo) {
+        instance.RemoveAlvo();
     }
 
     //============================================================================================================
@@ -203,8 +208,7 @@ public class Alvo : MonoBehaviour {
     //============================================================================================================
     public void Destroi() {
         if(instance.GetQuantidadeAlvos() > 0) {
-            instance.RemoveListaAlvos(this.gameObject);
-            Destroy(this.gameObject);
+            instance.RemoveAlvo(this.gameObject);
         }
     }
 

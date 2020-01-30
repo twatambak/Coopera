@@ -248,8 +248,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
      /// <param name="alvo"> O GameObject a ser adicionado na lista de alvos. </param>
     //==========================================================================================================//
-    public void AddListaAlvos(GameObject alvo) {
-        if(GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
+    public void AddAlvo(GameObject alvo) {
+        if(GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() && GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
             listaAlvos.Add(alvo);
             AddQuantidadeAlvos();
         }
@@ -261,9 +261,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// </summary>
     /// <param name="alvo"> O GameObejct a ser removido da lista de alvos. </param>
     //==========================================================================================================//
-    public void RemoveListaAlvos(GameObject alvo) {
-        if(GetQuantidadeAlvos() > 0) {
+    public void RemoveAlvo(GameObject alvo) {
+        if(GetTamanhoListaAlvos() > 0 && GetQuantidadeAlvos() > 0) {
             listaAlvos.Remove(alvo);
+            Destroy(alvo);
             qtdAlvos--;
         }
     }
@@ -274,22 +275,18 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
      /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
     //==========================================================================================================//
-    public void CriarAlvos(GameObject baseAlvo) {
+    public void CriarAlvo(GameObject baseAlvo) {
         GameObject novoAlvo;
-        int maxAlvos = CSV_GetMaximoAlvos();
-        qtdAlvos = GetQuantidadeAlvos();
-        CSV_Vel = CSV_GetVelocidadeAlvos();
-        CSV_Tam = CSV_GetTamanhoAlvos();
-        if (qtdAlvos < maxAlvos) {
+        if (GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() && GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
             for(int i = 0; i < maxAlvos; i++) {
-                if(qtdAlvos < maxAlvos) {
+                if(GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() && GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
                     novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
                     novoAlvo = Instantiate(baseAlvo) as GameObject;
                     novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
-                    novoAlvo.transform.localScale = new Vector3(CSV_Tam, CSV_Tam, CSV_Tam);
+                    novoAlvo.transform.localScale = new Vector3(CSV_GetTamanhoAlvos(), CSV_GetTamanhoAlvos(), 1);
                     material = novoAlvo.GetComponent<Renderer>().material;
                     material.color = novaCor;
-                    AddListaAlvos(novoAlvo);
+                    AddAlvo(novoAlvo);
                 }
             }
         }
@@ -367,22 +364,4 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void GoToScene(string scene) {
       SceneManager.LoadScene(scene);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
