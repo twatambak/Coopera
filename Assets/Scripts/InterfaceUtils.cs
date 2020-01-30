@@ -154,5 +154,6 @@ interface InterfaceUtils {
     void AddListaIdentificadores(GameObject identificador);
     int GetTamanhoListaIdentificadores();
     void RemoveListaIdentificadores(GameObject identificador);
+    void LimparIdentificadores();
 }
 

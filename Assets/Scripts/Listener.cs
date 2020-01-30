@@ -54,6 +54,8 @@ public class Listener : MonoBehaviour {
                 dados.Add(item);
             }
             ArmazenaBolasRastreadas();
+        } else {
+            //instance.LimparIdentificadores();
         }
     }
 

@@ -300,4 +300,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public int GetTamanhoListaIdentificadores() {
         return listaIdentificadores.Count;
     }
+
+    public void LimparIdentificadores() {
+        for(int i = 0; i < GetTamanhoListaIdentificadores(); i++) {
+            listaIdentificadores[i].GetComponent<Identificador>().Destroi();
+        }
+    }
 }
