@@ -56,9 +56,9 @@ public class Alvo : MonoBehaviour {
     }
 
     //==========================================================================================================//
-    /// <summary>
-    /// Chamada a cada novo frame. Chama a função de movimentação da alvo <see cref="Movimentar()">.
-    /// </summary>
+     /// <summary>
+     /// Chamada a cada novo frame. Chama a função de movimentação da alvo <see cref="Movimentar()">.
+     /// </summary>
     //==========================================================================================================//
     void Update() {
         Movimentar();
@@ -231,7 +231,8 @@ public class Alvo : MonoBehaviour {
             dirY *= -1;
         } else if (outro.gameObject.tag == "Identificador") {
             this.Destroi();
-            outro.gameObject.GetComponent<Identificador>().Destroi();
+            //outro.gameObject.GetComponent<Identificador>().Destroi();
+            outro.gameObject.transform.position = new Vector3(2000, 2000, 1);
             //instance.LimparIdentificadores();
             if (outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaAmarela()) {
                 instance.AddPontosAmarelos(1);
@@ -243,17 +244,6 @@ public class Alvo : MonoBehaviour {
 
     //==========================================================================================================//
      /// <summary>
-     /// É chamada quando o objeto é clicado.
-     /// A função verifica a quantia de elementos na cena e caso essa quantia seja maior do que 0, o
-     /// objeto que foi clicado é destruído.
-     /// </summary>
-    //==========================================================================================================//
-    void OnMouseDown() {
-        Destroi();
-    }
-
-    //==========================================================================================================//
-     /// <summary>
      /// ToString
      /// </summary>
      /// <returns></returns>
@@ -261,5 +251,16 @@ public class Alvo : MonoBehaviour {
     public string Texto() {
         string texto = "ALVO => Posição Original(" + GetPontoOrigem().x + " | " + GetPontoOrigem().y + ") => Posição Inicial(" + GetPontoInicial().x + " | " + GetPontoInicial().y + ") => Posição Final(" + GetPontoFinal().x + " | " + GetPontoFinal().y + ")";
         return texto;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// É chamada quando o objeto é clicado.
+     /// A função verifica a quantia de elementos na cena e caso essa quantia seja maior do que 0, o
+     /// objeto que foi clicado é destruído.
+     /// </summary>
+    //==========================================================================================================//
+    void OnMouseDown() {
+        Destroi();
     }
 }

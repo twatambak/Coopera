@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5707619720097823267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.649567, y: 42.248947, z: -38.02381}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.88, y: -1.1674418, z: 0}
+  m_LocalScale: {x: 5.546667, y: 1.6930232, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,19 +93,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205f1e2cc590f254db1e2fce6558d38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  assinatura: 0
-  x: 0
-  y: 0
-  pontoOrigem: {x: 0, y: 0}
-  pontoOrigemConvertido: {x: 0, y: 0}
-  pontoInicial: {x: 0, y: 0}
-  pontoFinal: {x: 0, y: 0}
-  largura: 0
-  larguraConvertida: 0
-  altura: 0
-  alturaConvertida: 0
-  idade: 0
+  id: 172
+  assinatura: 1
+  x: 96
+  y: 128
+  pontoOrigem: {x: 96, y: 128}
+  pontoOrigemConvertido: {x: -2.88, y: -1.1674418}
+  pontoInicial: {x: -2.88, y: -2.860465}
+  pontoFinal: {x: 2.6666667, y: -1.1674418}
+  largura: 104
+  larguraConvertida: 5.546667
+  altura: 52
+  alturaConvertida: 1.6930232
+  idade: 66
 --- !u!65 &3869389997393411941
 BoxCollider:
   m_ObjectHideFlags: 0

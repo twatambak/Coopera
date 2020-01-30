@@ -8,12 +8,16 @@ using UnityEngine;
  /// </summary>
 /************************************************************************************************************/
 public class Listener : MonoBehaviour {
+
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
+
     /// <summary> Cores dos novos alvos. </summary>
     public GameObject baseIdentificador;
+
     /// <summary> Vetor de string contendo as informações recebidas pelo serial.  </summary>
     string[] vetorStringSerial = null;
+
     /// <summary> Lista de dados do arduino.  </summary>
     List<string> dados = new List<string>();
 

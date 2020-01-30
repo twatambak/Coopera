@@ -8,36 +8,55 @@ using UnityEngine;
  /// </summary>
 /************************************************************************************************************/
 public class Identificador : MonoBehaviour {
+
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
+
     /// <summary> ID do objeto rastreado. </summary>
     public float id;
-    /// <summary> Assinatura de cor do objeto rastreado. </summary>
-    public float assinatura;
-    /// <summary> Posição X do objeto rastreado. </summary>
-    public float x;
-    /// <summary> Posição Y do objeto rastreado. </summary>
-    public float y;
-    /// <summary> Vetor de posição de origem original do objeto rastreado. </summary>
-    public Vector2 pontoOrigem;
-    /// <summary> Vetor de posição de origem original do objeto rastreado. </summary>
-    public Vector2 pontoOrigemConvertido;
-    /// <summary> Vetor de posição do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
-    public Vector2 pontoInicial;
-    /// <summary> Vetor de posição do final da BoundingBox (posição localizada no canto superior direito). </summary>
-    public Vector2 pontoFinal;
-    /// <summary> Largura do objeto rastreado. </summary>
-    public float largura;
-    /// <summary> Largura do objeto rastreado. </summary>
-    public float larguraConvertida;
-    /// <summary> Altura do objeto rastreado. </summary>
-    public float altura;
-    /// <summary> Altura do objeto rastreado. </summary>
-    public float alturaConvertida;
+
     /// <summary> A idade em frames do objeto rastreado. </summary>
     public float idade;
 
+    /// <summary> Assinatura de cor do objeto rastreado. </summary>
+    public float assinatura;
+
+    /// <summary> Posição X do objeto rastreado. </summary>
+    public float x;
+
+    /// <summary> Posição Y do objeto rastreado. </summary>
+    public float y;
+
+    /// <summary> Vetor de posição de origem original do objeto rastreado. </summary>
+    public Vector2 pontoOrigem;
+
+    /// <summary> Vetor de posição de origem original do objeto rastreado. </summary>
+    public Vector2 pontoOrigemConvertido;
+
+    /// <summary> Vetor de posição do início da BoundingBox (posição localizada no canto inferior esquerdo). </summary>
+    public Vector2 pontoInicial;
+
+    /// <summary> Vetor de posição do final da BoundingBox (posição localizada no canto superior direito). </summary>
+    public Vector2 pontoFinal;
+
+    /// <summary> Largura do objeto rastreado. </summary>
+    public float largura;
+
+    /// <summary> Largura do objeto rastreado. </summary>
+    public float larguraConvertida;
+
+    /// <summary> Altura do objeto rastreado. </summary>
+    public float altura;
+
+    /// <summary> Altura do objeto rastreado. </summary>
+    public float alturaConvertida;
+
     //============================================================================================================
+     /// <summary>
+     /// Atualiza as informações do GameObject do identificador. Caso o objeto já exista dentro da lista de
+     /// identificadores ele atualiza as informações do objeto já inserido com os novos dados. Caso o objeto não
+     /// exista ele adiciona este novo elemento na lista.
+     /// </summary>
     //============================================================================================================
     void Update() {
         List<GameObject> identificadores = instance.GetListaIdentificadores();
@@ -195,6 +214,9 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define a altura convertida.
+     /// </summary>
     //============================================================================================================
     public void SetAlturaConvertida() {
         this.alturaConvertida = pontoFinal.y - pontoInicial.y;
