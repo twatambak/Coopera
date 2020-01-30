@@ -195,10 +195,10 @@ public class Alvo : MonoBehaviour {
      /// <summary>
      /// Recebe uma alvo e a destrói.
      /// </summary>
-     /// <param name="alvo"></param>
+     /// <param name="alvo"> O alvo a ser destruído. </param>
     //==========================================================================================================//
     public void Destroi(GameObject alvo) {
-        instance.RemoveAlvo();
+        instance.RemoveAlvo(alvo);
     }
 
     //============================================================================================================
@@ -207,9 +207,7 @@ public class Alvo : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     public void Destroi() {
-        if(instance.GetQuantidadeAlvos() > 0) {
-            instance.RemoveAlvo(this.gameObject);
-        }
+        instance.RemoveAlvo(this.gameObject);
     }
 
     //==========================================================================================================//
@@ -233,10 +231,11 @@ public class Alvo : MonoBehaviour {
             dirY *= -1;
         } else if (outro.gameObject.tag == "Identificador") {
             this.Destroi();
+            //outro.gameObject.GetComponent<Identificador>().Destroi();
             instance.LimparIdentificadores();
-            if (outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSVGetAssinaturaAmarela()) {
+            if (outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaAmarela()) {
                 instance.AddPontosAmarelos(1);
-            } else if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSVGetAssinaturaVerde()){
+            } else if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaVerde()){
                 instance.AddPontosVerdes(1);
             }
         }

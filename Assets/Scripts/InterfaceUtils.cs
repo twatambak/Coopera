@@ -94,7 +94,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
     //==========================================================================================================//
-    void AddListaIdentificadores(GameObject identificador);
+    bool AddIdentificador(GameObject identificador);
 
     //==========================================================================================================//
      /// <summary>
@@ -102,7 +102,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="identificador"> O GameObject a ser removido na lista de identificadores. </param>
     //==========================================================================================================//
-    void RemoveListaIdentificadores(GameObject identificador);
+    void RemoveIdentificador(GameObject identificador);
 
     //==========================================================================================================//
      /// <summary>

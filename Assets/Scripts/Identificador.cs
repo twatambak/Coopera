@@ -68,9 +68,6 @@ public class Identificador : MonoBehaviour {
         this.largura = largura;
         this.altura = altura;
         this.idade = idade;
-        pontoOrigem = new Vector2(x, y);
-        pontoInicial = PontoInicial();
-        pontoFinal = PontoFinal();
     }
 
     //============================================================================================================
@@ -348,8 +345,7 @@ public class Identificador : MonoBehaviour {
 
     public void Destroi() {
         if(instance.GetTamanhoListaIdentificadores() > 0) {
-            instance.RemoveListaIdentificadores(this.gameObject);
-            Destroy(this.gameObject);
+            instance.RemoveIdentificador(this.gameObject);
         }
     }
 

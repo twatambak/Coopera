@@ -167,13 +167,21 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Adiciona o GameObject passado na lista de identificadores dos objetos rastreados pela Pixy.
-     /// </summary>
-     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
+    /// <summary>
+    /// Adiciona o GameObject passado na lista de identificadores dos objetos rastreados pela Pixy.
+    /// </summary>
+    /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
     //==========================================================================================================//
-    public void AddListaIdentificadores(GameObject identificador) {
+    public bool AddIdentificador(GameObject identificador) {
+        List<GameObject> identificadores = GetListaIdentificadores();
+        for (int i = 0; i < identificadores.Count; i++) { 
+            if (identificadores[i].GetComponent<Identificador>().GetID() == identificador.GetComponent<Identificador>().GetID()) {
+                listaIdentificadores[i] = identificador;
+                return true;
+            }
+        }
         listaIdentificadores.Add(identificador);
+        return false;
     }
 
     //==========================================================================================================//
@@ -182,8 +190,11 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
      /// <param name="identificador"> O GameObject a ser removido na lista de identificadores. </param>
     //==========================================================================================================//
-    public void RemoveListaIdentificadores(GameObject identificador) {
-        listaIdentificadores.Remove(identificador);
+    public void RemoveIdentificador(GameObject identificador) {
+        if(GetTamanhoListaIdentificadores() > 0) {
+            listaIdentificadores.Remove(identificador);
+            Destroy(identificador);
+        }
     }
 
     //==========================================================================================================//
@@ -208,7 +219,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura, idade);
         novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
         novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);
-        AddListaIdentificadores(novoIdenti);
+        bool teste = AddIdentificador(novoIdenti);
     }
 
     //==========================================================================================================//
@@ -249,7 +260,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// <param name="alvo"> O GameObject a ser adicionado na lista de alvos. </param>
     //==========================================================================================================//
     public void AddAlvo(GameObject alvo) {
-        if(GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() && GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
+        if(GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() & GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
             listaAlvos.Add(alvo);
             AddQuantidadeAlvos();
         }
@@ -262,7 +273,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <param name="alvo"> O GameObejct a ser removido da lista de alvos. </param>
     //==========================================================================================================//
     public void RemoveAlvo(GameObject alvo) {
-        if(GetTamanhoListaAlvos() > 0 && GetQuantidadeAlvos() > 0) {
+        if(GetTamanhoListaAlvos() > 0 & GetQuantidadeAlvos() > 0) {
             listaAlvos.Remove(alvo);
             Destroy(alvo);
             qtdAlvos--;
@@ -277,9 +288,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void CriarAlvo(GameObject baseAlvo) {
         GameObject novoAlvo;
-        if (GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() && GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
-            for(int i = 0; i < maxAlvos; i++) {
-                if(GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() && GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
+        if (GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() & GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
+            for(int i = 0; i < CSV_GetMaximoAlvos(); i++) {
+                if(GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() & GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
                     novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
                     novoAlvo = Instantiate(baseAlvo) as GameObject;
                     novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
