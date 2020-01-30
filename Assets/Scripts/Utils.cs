@@ -6,46 +6,59 @@ using UnityEngine.SceneManagement;
 
 /************************************************************************************************************/
  /// <summary>
- ///  A classe Utils contém alguns métodos de uso geral utilizados por classes distintas.
+ ///  A classe Utils contém alguns métodos de uso geral utilizados por classes distintas. A Utils implementa
+ ///  a interface de base das funções usadas para o Singleton;
  /// </summary>
 /************************************************************************************************************/
 public class Utils : MonoBehaviour, InterfaceUtils {
-    /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
+
+    /// <summary> A instância de Utils (Singleton). Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static Utils instance = null;
-    /// <summary> Lista dos IDENTIFICADORES rastreados pela PixyCam. </summary>
+
+    /// <summary> Valor de CSV. Velocidade das alvos. Valor obtido através do CSV de configuração. Posição (4) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    int CSV_Vel;
+
+    /// <summary> Valor de CSV. Tamanho das alvos. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    int CSV_Tam;
+
+    /// <summary> Valor de CSV. Cores dos novos alvos. Valor obtido através do CSV de configuração. Posição (8) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    int CSV_AssAmarelo;
+
+    /// <summary> Valor de CSV. Cores dos novos alvos. Valor obtido através do CSV de configuração. Posição (10) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
+    int CSV_AssVerde;
+
+    /// <summary> Lista de GameObjects criados a partir dos objetos rastreados pela PixyCam. Armazena os objetos que são utilizados para a criação dos GameObjects para a análise de colisão. </summary>
     public static List<GameObject> listaIdentificadores = new List<GameObject>();
+
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public static List<GameObject> listaAlvos = new List<GameObject>();
+
     /// <summary> Quantidade atual de alvos presentes na tela. </summary>
     public static int qtdAlvos;
+
     /// <summary> Quantia de pontos do time amarelo. </summary>
     public static int pontosTimeAmarelo;
+
     /// <summary> Quantia de pontos do time verde. </summary>
     public static int pontosTimeVerde;
+
     /// <summary> Cores dos novos alvos. </summary>
     public static Color novaCor;
-    /// <summary> Velocidade das alvos. Valor obtido através do CSV de configuração. Posição (4) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
-    int vel;
-    /// <summary> Tamanho das alvos. Valor obtido através do CSV de configuração. Posição (6) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
-    int tam;
+
     /// <summary> Material de base utilizado para alterar a cor das alvos conforme elas são criadas. </summary>
     Material material;
-    /// <summary> Cores dos novos alvos. </summary>
-    int assinaturaAmarela;
-    /// <summary> Cores dos novos alvos. </summary>
-    int assinaturaVerde;
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna uma instância de Utils.
-     /// </summary>
-     /// <returns></returns>
+    /// <summary>
+    /// Retorna uma instância de Utils.
+    /// </summary>
+    /// <returns></returns>
     //==========================================================================================================//
     public static Utils GetInstance() { 
         if(instance == null) {
             return new Utils();
-        } else {
-            return instance;
+        } else { 
+            return instance; 
         }
     }
 
@@ -78,46 +91,135 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
      /// <summary>
      /// Retorna a quantidade máxima de alvos possíveis. Essa informação está disponível na posição 1 (com o vetor
-     /// iniciando em 0) do arquivo CSV.
+     /// iniciando em 0) do arquivo CSV. Como decrementamos um valor na função de leitura do CSV passamos o ID 2. 
      /// </summary>
      /// <returns> A quantidade máxima possível para os alvos. </returns>
     //==========================================================================================================//
-    public int CSVGetMaximoAlvos() {
+    public int CSV_GetMaximoAlvos() {
         return (ToInt(LoadCSV(2)));
     }
 
     //==========================================================================================================//
      /// <summary>
      /// Retorna a velocidade dos alvos. Essa informação está disponível na posição 3 (com o vetor iniciando em 0)
-     /// do arquivo CSV.
+     /// do arquivo CSV. Como decrementamos um valor na função de leitura do CSV passamos o ID 4. 
      /// </summary>
      /// <returns> A velocidade de movimento dos alvos. </returns>
     //==========================================================================================================//
-    public int CSVGetVelocidadeAlvos() {
+    public int CSV_GetVelocidadeAlvos() {
         return (ToInt(LoadCSV(4)));
     }
 
     //==========================================================================================================//
      /// <summary>
      /// Retorna o tamanho dos alvos. Essa informação está disponível na posição 5 (com o vetor iniciando em 0)
-     /// do arquivo CSV. 
+     /// do arquivo CSV. Como decrementamos um valor na função de leitura do CSV passamos o ID 6. 
      /// </summary>
      /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public int CSVGetTamanhoAlvos() {
+    public int CSV_GetTamanhoAlvos() {
         return (ToInt(LoadCSV(6)));
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o valor de assinatura que representa a cor amarela (ou cor do time 1) da Pixy. Essa informação 
+     /// está disponível na posição 7 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
+     /// na função de leitura do CSV passamos o ID 8.
+     /// </summary>
+     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public int CSVGetAssinaturaAmarela() {
+    public int CSV_GetAssinaturaAmarela() {
         return (ToInt(LoadCSV(8)));
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o valor de assinatura que representa a cor amarela (ou cor do time 1) da Pixy. Essa informação 
+     /// está disponível na posição 9 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
+     /// na função de leitura do CSV passamos o ID 10.
+     /// </summary>
+     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public int CSVGetAssinaturaVerde() {
+    public int CSV_GetAssinaturaVerde() {
         return (ToInt(LoadCSV(10)));
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
+     /// lista servem de base para analisar se bola acertou o alvo.
+     /// </summary>
+     /// <returns> A lista de GameObjects de identificação de posição da bola rastreada pela Pixy. </returns>
+    //==========================================================================================================//
+    public List<GameObject> GetListaIdentificadores() {
+        return listaIdentificadores;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o tamanho da lista de identificadores.
+     /// </summary>
+     /// <returns> O tamanho da lista de identificadores. </returns>
+    //==========================================================================================================//
+    public int GetTamanhoListaIdentificadores() {
+        return listaIdentificadores.Count;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona o GameObject passado na lista de identificadores dos objetos rastreados pela Pixy.
+     /// </summary>
+     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
+    //==========================================================================================================//
+    public void AddListaIdentificadores(GameObject identificador) {
+        listaIdentificadores.Add(identificador);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Remove o GameObject passado da lista de identificadores dos objetos rastreados pela Pixy.
+     /// </summary>
+     /// <param name="identificador"> O GameObject a ser removido na lista de identificadores. </param>
+    //==========================================================================================================//
+    public void RemoveListaIdentificadores(GameObject identificador) {
+        listaIdentificadores.Remove(identificador);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Cria um novo identificador com base nos dados coletados dos objetos rastreados pela Pixy. Todas as
+     /// informações do objeto rastreado são aplicadas em dados correspondentes em um script aplicado no
+     /// GameObject base dos identificadores. Essas informações são posteriormente acessadas utilizando os Gets()
+     /// específicos através do GetComponent() para o identificador.
+     /// </summary>
+     /// <param name="baseIdenti"> O GameObject base usado para a criação dos identificadores. </param>
+     /// <param name="id"> O ID do objeto rastreado pela Pixy. </param>
+     /// <param name="assinatura"> A assinatura de cor do objeto rastreado pela Pixy. </param>
+     /// <param name="x"> A posição X do objeto rastreado pela Pixy. </param>
+     /// <param name="y"> A posição y do objeto rastreado pela Pixy. </param>
+     /// <param name="largura"> A largura do objeto rastreado pela Pixy. </param>
+     /// <param name="altura"> A altura do objeto rastreado pela Pixy. </param>
+     /// <param name="idade"> A idade (quanto tempo foi rastreado) do objeto rastreado pela Pixy. </param>
+    //==========================================================================================================//
+    public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
+        GameObject novoIdenti;
+        novoIdenti = Instantiate(baseIdenti) as GameObject;
+        novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura, idade);
+        novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
+        novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);
+        AddListaIdentificadores(novoIdenti);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Limpa (remove todos os elementos) da lista de identificadores.
+     /// </summary>
+    //==========================================================================================================//
+    public void LimparIdentificadores() {
+        for(int i = 0; i < GetTamanhoListaIdentificadores(); i++) {
+            listaIdentificadores[i].GetComponent<Identificador>().Destroi();
+        }
     }
 
     //==========================================================================================================//
@@ -142,81 +244,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a quantidade atual de alvos.
+     /// Adiciona o alvo passado na lista de alvos. A adição à quantidade de alvos já é realizada.
      /// </summary>
-     /// <returns></returns>
-    //==========================================================================================================//
-    public int GetQuantidadeAlvos() {
-        return qtdAlvos;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Converte uma string para int.
-     /// </summary>
-     /// <param name="texto"> O texto a ser convertido. </param>
-     /// <returns> O resultado da conversão do texto. </returns>
-    //==========================================================================================================//
-    public int ToInt(string texto) {
-        return System.Int32.Parse(texto);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Recebe o nome de uma cena e redireciona a essa cena.
-     /// </summary>
-     /// <param name="scene"> O nome da cena a qual se deseja ir. </param>
-    //==========================================================================================================//
-    public void GoToScene(string scene){
-      SceneManager.LoadScene(scene);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Cria os alvos. a serem acertadas pelo jogador.
-     /// </summary>
-     /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
-    //==========================================================================================================//
-    public void CriarAlvos(GameObject baseAlvo) {
-        GameObject novoAlvo;
-        int maxAlvos = CSVGetMaximoAlvos();
-        qtdAlvos = GetQuantidadeAlvos();
-        vel = CSVGetVelocidadeAlvos();
-        tam = CSVGetTamanhoAlvos();
-        if (qtdAlvos < maxAlvos) {
-            for(int i = 0; i < maxAlvos; i++) {
-                if(qtdAlvos < maxAlvos) {
-                    novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
-                    novoAlvo = Instantiate(baseAlvo) as GameObject;
-                    novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
-                    novoAlvo.transform.localScale = new Vector3(tam, tam, tam);
-                    material = novoAlvo.GetComponent<Renderer>().material;
-                    material.color = novaCor;
-                    AddListaAlvos(novoAlvo);
-                }
-            }
-        }
-    }
-
-    //==========================================================================================================//
-    //==========================================================================================================//
-    public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
-        GameObject novoIdenti;
-        novoIdenti = Instantiate(baseIdenti) as GameObject;
-        novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura, idade);
-        novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
-        novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);
-        AddListaIdentificadores(novoIdenti);
-    }
-
-    //==========================================================================================================//
-    /// <summary>
-    /// Adiciona o alvo recebido na lista de alvos.
-    /// </summary>
-    /// <param name="alvo"> O alvo a ser adicionado na respectiva lista. </param>
+     /// <param name="alvo"> O GameObject a ser adicionado na lista de alvos. </param>
     //==========================================================================================================//
     public void AddListaAlvos(GameObject alvo) {
-        if(GetQuantidadeAlvos() < CSVGetMaximoAlvos()) {
+        if(GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
             listaAlvos.Add(alvo);
             AddQuantidadeAlvos();
         }
@@ -224,9 +257,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
     /// <summary>
-    /// Remove o alvo recebido da lista de alvos.
+    /// Remove o alvo recebido da lista de alvos. A subtração da quantidade de alvos já é realizada.
     /// </summary>
-    /// <param name="alvo"> O alvo a ser removido da respectiva lista. </param>
+    /// <param name="alvo"> O GameObejct a ser removido da lista de alvos. </param>
     //==========================================================================================================//
     public void RemoveListaAlvos(GameObject alvo) {
         if(GetQuantidadeAlvos() > 0) {
@@ -237,11 +270,48 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
+     /// Cria os alvos a serem acertados pelo jogador.
+     /// </summary>
+     /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
+    //==========================================================================================================//
+    public void CriarAlvos(GameObject baseAlvo) {
+        GameObject novoAlvo;
+        int maxAlvos = CSV_GetMaximoAlvos();
+        qtdAlvos = GetQuantidadeAlvos();
+        CSV_Vel = CSV_GetVelocidadeAlvos();
+        CSV_Tam = CSV_GetTamanhoAlvos();
+        if (qtdAlvos < maxAlvos) {
+            for(int i = 0; i < maxAlvos; i++) {
+                if(qtdAlvos < maxAlvos) {
+                    novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+                    novoAlvo = Instantiate(baseAlvo) as GameObject;
+                    novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
+                    novoAlvo.transform.localScale = new Vector3(CSV_Tam, CSV_Tam, CSV_Tam);
+                    material = novoAlvo.GetComponent<Renderer>().material;
+                    material.color = novaCor;
+                    AddListaAlvos(novoAlvo);
+                }
+            }
+        }
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna a quantidade atual de alvos.
+     /// </summary>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public int GetQuantidadeAlvos() {
+        return qtdAlvos;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
      /// Aumenta em 1 a quantidade de alvos.
      /// </summary>
     //==========================================================================================================//
     public void AddQuantidadeAlvos() {
-        if(GetQuantidadeAlvos() < CSVGetMaximoAlvos()) {
+        if(GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
             qtdAlvos++;
         }
     }
@@ -278,32 +348,41 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Converte uma string para int.
+     /// </summary>
+     /// <param name="texto"> O texto a ser convertido. </param>
+     /// <returns> O resultado da conversão do texto. </returns>
     //==========================================================================================================//
-    public List<GameObject> GetListaIdentificadores() {
-        return listaIdentificadores;
+    public int ToInt(string texto) {
+        return System.Int32.Parse(texto);
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Recebe o nome de uma cena e redireciona a essa cena.
+     /// </summary>
+     /// <param name="scene"> O nome da cena a qual se deseja ir. </param>
     //==========================================================================================================//
-    public void AddListaIdentificadores(GameObject identificador) {
-        listaIdentificadores.Add(identificador);
+    public void GoToScene(string scene) {
+      SceneManager.LoadScene(scene);
     }
 
-    //==========================================================================================================//
-    //==========================================================================================================//
-    public void RemoveListaIdentificadores(GameObject identificador) {
-        listaIdentificadores.Remove(identificador);
-    }
 
-    //==========================================================================================================//
-    //==========================================================================================================//
-    public int GetTamanhoListaIdentificadores() {
-        return listaIdentificadores.Count;
-    }
 
-    public void LimparIdentificadores() {
-        for(int i = 0; i < GetTamanhoListaIdentificadores(); i++) {
-            listaIdentificadores[i].GetComponent<Identificador>().Destroi();
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
