@@ -100,6 +100,10 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define o ID do identificador como o novo ID passado como parâmetro.
+     /// </summary>
+     /// <param name="id"> O novo ID a ser definido para o identificador. </param>
     //============================================================================================================
     public void SetID(float id) {
         this.id = id;
@@ -116,6 +120,10 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define a assinatura do identificador como a nova assinatura passada como parâmetro.
+     /// </summary>
+     /// <param name="assinatura"> A nova assinatura a ser definida para o identificador. </param>
     //============================================================================================================
     public void SetAssinatura(float assinatura) {
         this.assinatura = assinatura;
@@ -132,6 +140,10 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define o ponto x do identificador como o novo ponto x passado como parâmetro.
+     /// </summary>
+     /// <param name="x"> O novo ponto x a ser definido para o identificador. </param>
     //============================================================================================================
     public void SetX(float x) {
         this.x = x;
@@ -148,6 +160,10 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define o ponto y do identificador como o novo ponto y passado como parâmetro.
+     /// </summary>
+     /// <param name="y"> O novo ponto y a ser definido para o identificador. </param>
     //============================================================================================================
     public void SetY(float y) {
         this.y = y;
@@ -164,6 +180,10 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define a largura do identificador como a nova largura passada como parâmetro.
+     /// </summary>
+     /// <param name="largura"> A nova largura a ser definida para o identificador. </param>
     //============================================================================================================
     public void SetLargura(float largura) {
         this.largura = largura;
@@ -171,7 +191,7 @@ public class Identificador : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a largura da bola.
+     /// Retorna a largura convertida da bola.
      /// </summary>
      /// <returns></returns>
     //============================================================================================================
@@ -181,6 +201,9 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define a largura do identificador como sendo o ponto final no eixo x menos o ponto inicial do eixo x.
+     /// </summary>
     //============================================================================================================
     public void SetLarguraConvertida() {
         this.larguraConvertida = pontoFinal.x - pontoInicial.x;
@@ -197,6 +220,10 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define a altura do identificador como a nova altura passada como parâmetro.
+     /// </summary>
+     /// <param name="altura"> A nova altura a ser definida para o identificador. </param>
     //============================================================================================================
     public void SetAltura(float altura) {
         this.altura = altura;
@@ -204,9 +231,9 @@ public class Identificador : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     /// Retorna a altura da bola.
+     /// Retorna a altura convertida da bola.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> A altura convertida. </returns>
     //============================================================================================================
     public float GetAlturaConvertida() {
         SetAlturaConvertida();
@@ -215,7 +242,7 @@ public class Identificador : MonoBehaviour {
 
     //============================================================================================================
      /// <summary>
-     /// Define a altura convertida.
+     /// Define a altura do identificador como sendo o ponto final no eixo y menos o ponto inicial do eixo y.
      /// </summary>
     //============================================================================================================
     public void SetAlturaConvertida() {
@@ -226,13 +253,17 @@ public class Identificador : MonoBehaviour {
      /// <summary>
      /// Retorna a idade (tempo que está sendo rastreada) da bola.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> A idade da bola. </returns>
     //============================================================================================================
     public float GetIdade() {
         return idade;
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Define a idade do identificador como a nova idade passada como parâmetro.
+     /// </summary>
+     /// <param name="altura"> A nova idade a ser definida para o identificador. </param>
     //============================================================================================================
     public void SetIdade(float idade) {
         this.idade = idade;
@@ -249,12 +280,19 @@ public class Identificador : MonoBehaviour {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Define o ponto de origem do identificador como sendo um vetor com o ponto x e y de origem da bola.
+     /// </summary>
     //==========================================================================================================//
     public void SetPontoOrigem() {
         pontoOrigem = new Vector2(this.transform.localPosition.x, this.transform.localPosition.y);
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o ponto de origem convertido da bola.
+     /// </summary>
+     /// <returns> O vetor de origem convertido da bola. </returns>
     //==========================================================================================================//
     public Vector2 GetPontoOrigemConvertido() {
         SetPontoOrigemConvertido();
@@ -262,6 +300,10 @@ public class Identificador : MonoBehaviour {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Define o ponto de origem convertido chamando a função de conversão de vetor passando o ponto de origem
+     /// como parâmetro.
+     /// </summary>
     //==========================================================================================================//
     public void SetPontoOrigemConvertido() {
         this.pontoOrigemConvertido = ConverteVetor(pontoOrigem);
@@ -271,13 +313,17 @@ public class Identificador : MonoBehaviour {
      /// <summary>
      /// Retorna o ponto inicial da bola.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O vetor do ponto inicial do viewport da bola. </returns>
     //==========================================================================================================//
     public Vector2 GetPontoInicial() {
         return pontoInicial;
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Define o ponto inicial chamando a função que define o ponto inicial fazendo a conversão dos valores para
+     /// o viewport.
+     /// </summary>
     //==========================================================================================================//
     public void SetPontoInicial() {
         this.pontoInicial = PontoInicial();
@@ -287,13 +333,17 @@ public class Identificador : MonoBehaviour {
      /// <summary>
      /// Retorna o ponto final da bola.
      /// </summary>
-     /// <returns></returns>
+     /// <returns> O vetor do ponto final do viewport da bola. </returns>
     //==========================================================================================================//
     public Vector2 GetPontoFinal() {
         return pontoFinal;
     }
  
     //==========================================================================================================//
+     /// <summary>
+     /// Define o ponto final chamando a função que define o ponto final fazendo a conversão dos valores para o
+     /// viewport.
+     /// </summary>
     //==========================================================================================================//
     public void SetPontoFinal() {
         this.pontoFinal = PontoFinal();
@@ -366,6 +416,9 @@ public class Identificador : MonoBehaviour {
     }
 
     //============================================================================================================
+     /// <summary>
+     /// Destrói o GameObject do identificador chamando a função que tanto destrói quanto remove o objeto da lista.
+     /// </summary>
     //============================================================================================================
     public void Destroi() {
         instance.RemoveIdentificador(this.gameObject);

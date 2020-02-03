@@ -34,25 +34,32 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Objeto de base para o identificador da alvo de identificação dos objetos rastreados. </summary>
     public GameObject identificador;
 
-    /// <summary> Teste. </summary>
+    /// <summary> Objeto do botão de início de jogo (não está implementado). </summary>
     public Button botao;
 
-    /// <summary> Teste. </summary>
+    /// <summary> Quantidade de alvos. </summary>
     public int quantAlvos;
 
-    /// <summary> Teste. </summary>
+    /// <summary> Tamanho da lista de alvos. </summary>
     public int tamListaAlvos;
 
-    /// <summary> Teste. </summary>s
+    /// <summary> Tamanho da lista de identificadores. </summary>
     public int tamListaIdentificadores;
 
     //============================================================================================================
+     /// <summary>
+     /// No início do script o booleano que define o funcionamento do game é definido como falso.
+     /// </summary>
     //============================================================================================================
     void Start() {
         game = false;
     }
 
     //============================================================================================================
+     /// <summary>
+     /// A cada novo frame a função de criação dos alvos é chamada para garantir que a quantidade de alvos na tela
+     /// seja a mesma informada no arquivo CSV e as variáveis de informação são atualizadas.
+     /// </summary>
     //============================================================================================================
     void Update() {
         if(game) {
@@ -80,6 +87,10 @@ public class Fase1 : MonoBehaviour {
     }
 
     //===================================================================================================
+     /// <summary>
+     /// Uso do botão.
+     /// </summary>
+     /// <returns></returns>
     //===================================================================================================
     public bool Botao() {
         return true;
