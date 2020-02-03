@@ -214,7 +214,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
         GameObject novoIdenti;
         novoIdenti = baseIdenti; // Para caso queira ser só um
-        //novoIdenti = Instantiate(baseIdenti) as GameObject;
+        //novoIdenti = Instantiate(baseIdenti) as GameObject; // Para caso sejam vários.
         novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura, idade);
         novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
         novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);

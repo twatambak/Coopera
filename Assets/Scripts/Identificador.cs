@@ -75,6 +75,16 @@ public class Identificador : MonoBehaviour {
     }    
 
     //============================================================================================================
+     /// <summary>
+     /// Define os dados da bola.
+     /// </summary>
+     /// <param name="id"> O ID da bola. </param>
+     /// <param name="assinatura"> A assinatura da bola. </param>
+     /// <param name="x"> O ponto x da bola. </param>
+     /// <param name="y"> O ponto y da bola. </param>
+     /// <param name="largura"> A largura da bola. </param>
+     /// <param name="altura"> A altura da bola. </param>
+     /// <param name="idade"> A idade da bola. </param>
     //============================================================================================================
     public void Bola(float id, float assinatura, float x, float y, float largura, float altura, float idade) {
         this.id = id;
