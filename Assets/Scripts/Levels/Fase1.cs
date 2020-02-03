@@ -63,7 +63,7 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Update() {
         if(game) {
-            instance.CriarAlvo(baseAlvo);
+            Alvo.CriarAlvo(baseAlvo);
             quantAlvos = instance.GetQuantidadeAlvos();
             tamListaAlvos = instance.GetTamanhoListaAlvos();
             tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();

@@ -12,12 +12,6 @@ public class Identificador : MonoBehaviour {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
 
-    /// <summary> ID do objeto rastreado. </summary>
-    public float id;
-
-    /// <summary> A idade em frames do objeto rastreado. </summary>
-    public float idade;
-
     /// <summary> Assinatura de cor do objeto rastreado. </summary>
     public float assinatura;
 
@@ -52,71 +46,37 @@ public class Identificador : MonoBehaviour {
     public float alturaConvertida;
 
     //============================================================================================================
-     /// <summary>
-     /// Atualiza as informações do GameObject do identificador. Caso o objeto já exista dentro da lista de
-     /// identificadores ele atualiza as informações do objeto já inserido com os novos dados. Caso o objeto não
-     /// exista ele adiciona este novo elemento na lista.
-     /// </summary>
+    /// <summary>
+    /// Atualiza as informações do GameObject do identificador. Caso o objeto já exista dentro da lista de
+    /// identificadores ele atualiza as informações do objeto já inserido com os novos dados. Caso o objeto não
+    /// exista ele adiciona este novo elemento na lista.
+    /// </summary>
     //============================================================================================================
     void Update() {
-        List<GameObject> identificadores = instance.GetListaIdentificadores();
-        for (int i = 0; i < identificadores.Count; i++) {
-            if(identificadores[i].GetComponent<Identificador>().GetID() == this.GetID()) {
-                identificadores[i] = this.gameObject;
-                identificadores[i].GetComponent<Identificador>().Bola(this.id, this.assinatura, this.x, this.y, this.largura, this.altura, this.idade);
-            } else {
-                x = this.transform.localPosition.x;
-                y = this.transform.localPosition.y;
-                SetPontoInicial();
-                SetPontoFinal();
-                SetPontoOrigem();
-            }
-        }
+        x = this.transform.localPosition.x;
+        y = this.transform.localPosition.y;
+        SetPontoInicial();
+        SetPontoFinal();
+        SetPontoOrigem();
     }    
 
     //============================================================================================================
      /// <summary>
      /// Define os dados da bola.
      /// </summary>
-     /// <param name="id"> O ID da bola. </param>
      /// <param name="assinatura"> A assinatura da bola. </param>
      /// <param name="x"> O ponto x da bola. </param>
      /// <param name="y"> O ponto y da bola. </param>
-     /// <param name="largura"> A largura da bola. </param>
-     /// <param name="altura"> A altura da bola. </param>
-     /// <param name="idade"> A idade da bola. </param>
     //============================================================================================================
-    public void Bola(float id, float assinatura, float x, float y, float largura, float altura, float idade) {
-        this.id = id;
+    public void Bola(float assinatura, float x, float y, float largura, float altura) {
         this.assinatura = assinatura;
         this.x = x;
         this.y = y;
         this.largura = largura;
         this.altura = altura;
-        this.idade = idade;
         pontoOrigem = new Vector2(x, y);
         pontoInicial = PontoInicial();
         pontoFinal = PontoFinal();
-    }
-
-    //============================================================================================================
-     /// <summary>
-     /// Retorna o ID da bola.
-     /// </summary>
-     /// <returns></returns>
-    //============================================================================================================
-    public float GetID() {
-        return id;
-    }
-
-    //============================================================================================================
-     /// <summary>
-     /// Define o ID do identificador como o novo ID passado como parâmetro.
-     /// </summary>
-     /// <param name="id"> O novo ID a ser definido para o identificador. </param>
-    //============================================================================================================
-    public void SetID(float id) {
-        this.id = id;
     }
 
     //============================================================================================================
@@ -257,26 +217,6 @@ public class Identificador : MonoBehaviour {
     //============================================================================================================
     public void SetAlturaConvertida() {
         this.alturaConvertida = pontoFinal.y - pontoInicial.y;
-    }
-
-    //============================================================================================================
-     /// <summary>
-     /// Retorna a idade (tempo que está sendo rastreada) da bola.
-     /// </summary>
-     /// <returns> A idade da bola. </returns>
-    //============================================================================================================
-    public float GetIdade() {
-        return idade;
-    }
-
-    //============================================================================================================
-     /// <summary>
-     /// Define a idade do identificador como a nova idade passada como parâmetro.
-     /// </summary>
-     /// <param name="altura"> A nova idade a ser definida para o identificador. </param>
-    //============================================================================================================
-    public void SetIdade(float idade) {
-        this.idade = idade;
     }
 
     //==========================================================================================================//
@@ -431,6 +371,7 @@ public class Identificador : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     public void Destroi() {
+        Destroy(this.gameObject);
         instance.RemoveIdentificador(this.gameObject);
     }
 

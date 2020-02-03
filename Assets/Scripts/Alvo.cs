@@ -69,6 +69,31 @@ public class Alvo : MonoBehaviour {
         pontoFinal = PontoFinal();
     }
 
+    //==========================================================================================================//
+     /// <summary>
+     /// Cria os alvos a serem acertados pelo jogador.
+     /// </summary>
+     /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
+    //==========================================================================================================//
+    public static void CriarAlvo(GameObject baseAlvo) {
+        Color novaCor;
+        GameObject novoAlvo;
+        Material material;
+        if (instance.GetTamanhoListaAlvos() < instance.CSV_GetMaximoAlvos() & instance.GetQuantidadeAlvos() < instance.CSV_GetMaximoAlvos()) {
+            for(int i = 0; i < instance.CSV_GetMaximoAlvos(); i++) {
+                if(instance.GetTamanhoListaAlvos() < instance.CSV_GetMaximoAlvos() & instance.GetQuantidadeAlvos() < instance.CSV_GetMaximoAlvos()) {
+                    novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+                    novoAlvo = Instantiate(baseAlvo) as GameObject;
+                    novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
+                    novoAlvo.transform.localScale = new Vector3(instance.CSV_GetTamanhoAlvos(), instance.CSV_GetTamanhoAlvos(), 1);
+                    material = novoAlvo.GetComponent<Renderer>().material;
+                    material.color = novaCor;
+                    instance.AddAlvo(novoAlvo);
+                }
+            }
+        }
+    }
+
     //============================================================================================================
      /// <summary>
      /// Retorna o ponto central x original do alvo.
@@ -198,6 +223,7 @@ public class Alvo : MonoBehaviour {
      /// <param name="alvo"> O alvo a ser destruído. </param>
     //==========================================================================================================//
     public void Destroi(GameObject alvo) {
+        Destroy(alvo);
         instance.RemoveAlvo(alvo);
     }
 
@@ -207,6 +233,7 @@ public class Alvo : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     public void Destroi() {
+        Destroy(this.gameObject);
         instance.RemoveAlvo(this.gameObject);
     }
 

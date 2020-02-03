@@ -42,12 +42,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <summary> Quantia de pontos do time verde. </summary>
     public static int pontosTimeVerde;
 
-    /// <summary> Cores dos novos alvos. </summary>
-    public static Color novaCor;
-
-    /// <summary> Material de base utilizado para alterar a cor das alvos conforme elas são criadas. </summary>
-    Material material;
-
     //==========================================================================================================//
      /// <summary>
      /// Retorna uma instância de Utils.
@@ -172,16 +166,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// </summary>
     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
     //==========================================================================================================//
-    public bool AddIdentificador(GameObject identificador) {
-        List<GameObject> identificadores = GetListaIdentificadores();
-        for (int i = 0; i < identificadores.Count; i++) { 
-            if (identificadores[i].GetComponent<Identificador>().GetID() == identificador.GetComponent<Identificador>().GetID()) {
-                listaIdentificadores[i] = identificador;
-                return true;
-            }
-        }
+    public void AddIdentificador(GameObject identificador) {
         listaIdentificadores.Add(identificador);
-        return false;
     }
 
     //==========================================================================================================//
@@ -193,32 +179,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void RemoveIdentificador(GameObject identificador) {
         listaIdentificadores.Remove(identificador);
         Destroy(identificador);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Cria um novo identificador com base nos dados coletados dos objetos rastreados pela Pixy. Todas as
-     /// informações do objeto rastreado são aplicadas em dados correspondentes em um script aplicado no
-     /// GameObject base dos identificadores. Essas informações são posteriormente acessadas utilizando os Gets()
-     /// específicos através do GetComponent() para o identificador.
-     /// </summary>
-     /// <param name="baseIdenti"> O GameObject base usado para a criação dos identificadores. </param>
-     /// <param name="id"> O ID do objeto rastreado pela Pixy. </param>
-     /// <param name="assinatura"> A assinatura de cor do objeto rastreado pela Pixy. </param>
-     /// <param name="x"> A posição X do objeto rastreado pela Pixy. </param>
-     /// <param name="y"> A posição y do objeto rastreado pela Pixy. </param>
-     /// <param name="largura"> A largura do objeto rastreado pela Pixy. </param>
-     /// <param name="altura"> A altura do objeto rastreado pela Pixy. </param>
-     /// <param name="idade"> A idade (quanto tempo foi rastreado) do objeto rastreado pela Pixy. </param>
-    //==========================================================================================================//
-    public void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade) {
-        GameObject novoIdenti;
-        novoIdenti = baseIdenti; // Para caso queira ser só um
-        //novoIdenti = Instantiate(baseIdenti) as GameObject; // Para caso sejam vários.
-        novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura, idade);
-        novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
-        novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);
-        bool teste = AddIdentificador(novoIdenti);
     }
 
     //==========================================================================================================//
@@ -274,31 +234,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void RemoveAlvo(GameObject alvo) {
         if(GetTamanhoListaAlvos() > 0 & GetQuantidadeAlvos() > 0) {
             listaAlvos.Remove(alvo);
-            Destroy(alvo);
             qtdAlvos--;
-        }
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Cria os alvos a serem acertados pelo jogador.
-     /// </summary>
-     /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
-    //==========================================================================================================//
-    public void CriarAlvo(GameObject baseAlvo) {
-        GameObject novoAlvo;
-        if (GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() & GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
-            for(int i = 0; i < CSV_GetMaximoAlvos(); i++) {
-                if(GetTamanhoListaAlvos() < CSV_GetMaximoAlvos() & GetQuantidadeAlvos() < CSV_GetMaximoAlvos()) {
-                    novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
-                    novoAlvo = Instantiate(baseAlvo) as GameObject;
-                    novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
-                    novoAlvo.transform.localScale = new Vector3(CSV_GetTamanhoAlvos(), CSV_GetTamanhoAlvos(), 1);
-                    material = novoAlvo.GetComponent<Renderer>().material;
-                    material.color = novaCor;
-                    AddAlvo(novoAlvo);
-                }
-            }
         }
     }
 

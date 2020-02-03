@@ -94,7 +94,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
     //==========================================================================================================//
-    bool AddIdentificador(GameObject identificador);
+    void AddIdentificador(GameObject identificador);
 
     //==========================================================================================================//
      /// <summary>
@@ -103,24 +103,6 @@ interface InterfaceUtils {
      /// <param name="identificador"> O GameObject a ser removido na lista de identificadores. </param>
     //==========================================================================================================//
     void RemoveIdentificador(GameObject identificador);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Cria um novo identificador com base nos dados coletados dos objetos rastreados pela Pixy. Todas as
-     /// informações do objeto rastreado são aplicadas em dados correspondentes em um script aplicado no
-     /// GameObject base dos identificadores. Essas informações são posteriormente acessadas utilizando os Gets()
-     /// específicos através do GetComponent() para o identificador.
-     /// </summary>
-     /// <param name="baseIdenti"> O GameObject base usado para a criação dos identificadores. </param>
-     /// <param name="id"> O ID do objeto rastreado pela Pixy. </param>
-     /// <param name="assinatura"> A assinatura de cor do objeto rastreado pela Pixy. </param>
-     /// <param name="x"> A posição X do objeto rastreado pela Pixy. </param>
-     /// <param name="y"> A posição y do objeto rastreado pela Pixy. </param>
-     /// <param name="largura"> A largura do objeto rastreado pela Pixy. </param>
-     /// <param name="altura"> A altura do objeto rastreado pela Pixy. </param>
-     /// <param name="idade"> A idade (quanto tempo foi rastreado) do objeto rastreado pela Pixy. </param>
-    //==========================================================================================================//
-    void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura, float idade);
 
     //==========================================================================================================//
      /// <summary>
@@ -152,14 +134,6 @@ interface InterfaceUtils {
      /// <param name="alvo"> O GameObejct a ser removido da lista de alvos. </param>
     //==========================================================================================================//
     void RemoveAlvo(GameObject alvo);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Cria os alvos a serem acertados pelo jogador.
-     /// </summary>
-     /// <param name="baseAlvo"> A GameObject de referência para criação dos alvos. </param>
-    //==========================================================================================================//
-    void CriarAlvo(GameObject baseAlvo);
 
     //==========================================================================================================//
      /// <summary>
