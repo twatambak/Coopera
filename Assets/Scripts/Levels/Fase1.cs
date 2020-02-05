@@ -46,10 +46,16 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Tamanho da lista de identificadores. </summary>
     public int tamListaIdentificadores;
 
+    /// <summary> Quantia de pontos do time verde. </summary>
+    public GameObject baseIdentificadorAmarelo;
+
+    /// <summary> Quantia de pontos do time verde. </summary>
+    public GameObject baseIdentificadorVerde;
+
     //============================================================================================================
-     /// <summary>
-     /// No início do script o booleano que define o funcionamento do game é definido como falso.
-     /// </summary>
+    /// <summary>
+    /// No início do script o booleano que define o funcionamento do game é definido como falso.
+    /// </summary>
     //============================================================================================================
     void Start() {
         game = false;

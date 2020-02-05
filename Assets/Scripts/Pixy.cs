@@ -21,6 +21,12 @@ public class Pixy : MonoBehaviour {
     //==========================================================================================================//
     public static void CriarIdentificadores(GameObject baseIdenti, float id, float assinatura, float x, float y, float largura, float altura) {
         GameObject novoIdenti;
+        //GameObject baseIdenti;
+        /*if(assinatura == instance.CSV_GetAssinaturaAmarela()) {
+            baseIdenti = instance.GetBaseAmarela();
+        } else {
+            baseIdenti = instance.GetBaseVerde();
+        }*/
         novoIdenti = baseIdenti; // Para caso queira ser só um
         //novoIdenti = Instantiate(baseIdenti) as GameObject; // Para caso sejam vários.
         novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura);
