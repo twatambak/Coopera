@@ -66,7 +66,7 @@ public class Fase1 : MonoBehaviour {
             Alvo.CriarAlvo(baseAlvo);
             quantAlvos = instance.GetQuantidadeAlvos();
             tamListaAlvos = instance.GetTamanhoListaAlvos();
-            tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
+            //tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
         }
     }
 

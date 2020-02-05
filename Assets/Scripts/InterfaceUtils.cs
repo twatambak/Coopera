@@ -78,7 +78,7 @@ interface InterfaceUtils {
      /// </summary>
      /// <returns> A lista de GameObjects de identificação de posição da bola rastreada pela Pixy. </returns>
     //==========================================================================================================//
-    List<GameObject> GetListaIdentificadores();
+    /*List<GameObject> GetListaIdentificadores();
 
     //==========================================================================================================//
      /// <summary>
@@ -109,7 +109,7 @@ interface InterfaceUtils {
      /// Limpa (remove todos os elementos) da lista de identificadores.
      /// </summary>
     //==========================================================================================================//
-    void LimparIdentificadores();
+    void LimparIdentificadores();*/
 
     //==========================================================================================================//
      /// <summary>

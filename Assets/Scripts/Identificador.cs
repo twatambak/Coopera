@@ -372,7 +372,7 @@ public class Identificador : MonoBehaviour {
     //============================================================================================================
     public void Destroi() {
         Destroy(this.gameObject);
-        instance.RemoveIdentificador(this.gameObject);
+        //instance.RemoveIdentificador(this.gameObject);
     }
 
     //============================================================================================================
