@@ -166,16 +166,8 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// </summary>
     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
     //==========================================================================================================//
-    public bool AddIdentificador(GameObject identificador) {
-        List<GameObject> identificadores = GetListaIdentificadores();
-        for (int i = 0; i < identificadores.Count; i++) { 
-            if (identificadores[i].GetComponent<Identificador>().GetID() == identificador.GetComponent<Identificador>().GetID()) {
-                listaIdentificadores[i] = identificador;
-                return true;
-            }
-        }
+    public void AddIdentificador(GameObject identificador) {
         listaIdentificadores.Add(identificador);
-        return false;
     }
 
     //==========================================================================================================//
@@ -186,7 +178,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void RemoveIdentificador(GameObject identificador) {
         listaIdentificadores.Remove(identificador);
-        Destroy(identificador);
     }
 
     //==========================================================================================================//

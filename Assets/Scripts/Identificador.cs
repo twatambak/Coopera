@@ -71,7 +71,7 @@ public class Identificador : MonoBehaviour {
      /// <param name="x"> O ponto x da bola. </param>
      /// <param name="y"> O ponto y da bola. </param>
     //============================================================================================================
-    public void Bola(float assinatura, float id, float x, float y, float largura, float altura) {
+    public void Bola(float id, float assinatura, float x, float y, float largura, float altura) {
         this.id = id;
         this.assinatura = assinatura;
         this.x = x;
@@ -396,7 +396,7 @@ public class Identificador : MonoBehaviour {
     //============================================================================================================
     public void Destroi() {
         Destroy(this.gameObject);
-        instance.RemoveIdentificador(this.gameObject);
+        //instance.RemoveIdentificador(this.gameObject);
     }
 
     //============================================================================================================
