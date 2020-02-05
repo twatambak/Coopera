@@ -34,8 +34,8 @@ public class Listener : MonoBehaviour {
     //==========================================================================================================//
     void ArmazenaBolasRastreadas(){
         if(dados != null) { 
-            while(dados.Count >= 5){
-                Pixy.CriarIdentificadores(baseIdentificador, instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]));
+            while(dados.Count >= 6){
+                Pixy.CriarIdentificadores(baseIdentificador, instance.ToInt(dados[0]), instance.ToInt(dados[1]), instance.ToInt(dados[2]), instance.ToInt(dados[3]), instance.ToInt(dados[4]), instance.ToInt(dados[4]));
                 dados.Clear();
             }
         }

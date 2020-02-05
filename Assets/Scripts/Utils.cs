@@ -146,7 +146,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
      /// </summary>
      /// <returns> A lista de GameObjects de identificação de posição da bola rastreada pela Pixy. </returns>
     //==========================================================================================================//
-    /*public List<GameObject> GetListaIdentificadores() {
+    public List<GameObject> GetListaIdentificadores() {
         return listaIdentificadores;
     }
 
@@ -166,8 +166,16 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// </summary>
     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
     //==========================================================================================================//
-    public void AddIdentificador(GameObject identificador) {
+    public bool AddIdentificador(GameObject identificador) {
+        List<GameObject> identificadores = GetListaIdentificadores();
+        for (int i = 0; i < identificadores.Count; i++) { 
+            if (identificadores[i].GetComponent<Identificador>().GetID() == identificador.GetComponent<Identificador>().GetID()) {
+                listaIdentificadores[i] = identificador;
+                return true;
+            }
+        }
         listaIdentificadores.Add(identificador);
+        return false;
     }
 
     //==========================================================================================================//
@@ -190,7 +198,7 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         for(int i = 0; i < GetTamanhoListaIdentificadores(); i++) {
             RemoveIdentificador(listaIdentificadores[i]);
         }
-    }*/
+    }
 
     //==========================================================================================================//
      /// <summary>

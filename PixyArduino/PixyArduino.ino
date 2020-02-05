@@ -14,7 +14,7 @@ void loop() {
 
   if (pixy.ccc.numBlocks) {
     for (i = 0; i < pixy.ccc.numBlocks; i++) {
-      Serial.println((String)pixy.ccc.blocks[i].m_signature + '|' + (String)pixy.ccc.blocks[i].m_x + '|' + (String)pixy.ccc.blocks[i].m_y + '|' + (String)pixy.ccc.blocks[i].m_width + '|' + (String)pixy.ccc.blocks[i].m_height);
+      Serial.println((String)pixy.ccc.blocks[i].m_index + '|' + (String)pixy.ccc.blocks[i].m_signature + '|' + (String)pixy.ccc.blocks[i].m_x + '|' + (String)pixy.ccc.blocks[i].m_y + '|' + (String)pixy.ccc.blocks[i].m_width + '|' + (String)pixy.ccc.blocks[i].m_height);
     }
   }
   Serial.flush();

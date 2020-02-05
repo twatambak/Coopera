@@ -12,6 +12,9 @@ public class Identificador : MonoBehaviour {
     /// <summary> A instância de Utils. Utilizada para implementar o modelo de classe único, usado para gerenciamento de dados. </summary>
     static InterfaceUtils instance = Utils.GetInstance();
 
+    /// <summary> ID. </summary>
+    public float id;
+
     /// <summary> Assinatura de cor do objeto rastreado. </summary>
     public float assinatura;
 
@@ -68,7 +71,8 @@ public class Identificador : MonoBehaviour {
      /// <param name="x"> O ponto x da bola. </param>
      /// <param name="y"> O ponto y da bola. </param>
     //============================================================================================================
-    public void Bola(float assinatura, float x, float y, float largura, float altura) {
+    public void Bola(float assinatura, float id, float x, float y, float largura, float altura) {
+        this.id = id;
         this.assinatura = assinatura;
         this.x = x;
         this.y = y;
@@ -77,6 +81,26 @@ public class Identificador : MonoBehaviour {
         pontoOrigem = new Vector2(x, y);
         pontoInicial = PontoInicial();
         pontoFinal = PontoFinal();
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Retorna o ID da bola.
+     /// </summary>
+     /// <returns></returns>
+    //============================================================================================================
+    public float GetID() {
+        return id;
+    }
+
+    //============================================================================================================
+     /// <summary>
+     /// Define o ID do identificador como o novo ID passado como parâmetro.
+     /// </summary>
+     /// <param name="id"> O novo ID a ser definido para o identificador. </param>
+    //============================================================================================================
+    public void SetID(float id) {
+        this.id = id;
     }
 
     //============================================================================================================
@@ -372,7 +396,7 @@ public class Identificador : MonoBehaviour {
     //============================================================================================================
     public void Destroi() {
         Destroy(this.gameObject);
-        //instance.RemoveIdentificador(this.gameObject);
+        instance.RemoveIdentificador(this.gameObject);
     }
 
     //============================================================================================================
