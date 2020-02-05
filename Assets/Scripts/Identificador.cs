@@ -49,11 +49,11 @@ public class Identificador : MonoBehaviour {
     public float alturaConvertida;
 
     //============================================================================================================
-    /// <summary>
-    /// Atualiza as informações do GameObject do identificador. Caso o objeto já exista dentro da lista de
-    /// identificadores ele atualiza as informações do objeto já inserido com os novos dados. Caso o objeto não
-    /// exista ele adiciona este novo elemento na lista.
-    /// </summary>
+     /// <summary>
+     /// Atualiza as informações do GameObject do identificador. Caso o objeto já exista dentro da lista de
+     /// identificadores ele atualiza as informações do objeto já inserido com os novos dados. Caso o objeto não
+     /// exista ele adiciona este novo elemento na lista.
+     /// </summary>
     //============================================================================================================
     void Update() {
         x = this.transform.localPosition.x;

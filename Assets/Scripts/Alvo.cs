@@ -248,12 +248,12 @@ public class Alvo : MonoBehaviour {
      /// </summary>
      /// <param name="outro"></param>
     //==========================================================================================================//
-    void OnCollisionEnter(Collision outro) {
+    void OnCollisionEnter2D(Collision2D outro) {
         if(outro.gameObject.tag == "Vertical") {
             dirX *= -1;
         } else if(outro.gameObject.tag == "Horizontal") {
             dirY *= -1;
-        } else if(outro.gameObject.tag == "Forma"){
+        } else if(outro.gameObject.tag == "Forma") {
             dirX *= -1;
             dirY *= -1;
         } else if (outro.gameObject.tag == "Identificador") {
