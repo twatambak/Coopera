@@ -79,7 +79,7 @@ public class Alvo : MonoBehaviour {
         Color novaCor;
         GameObject novoAlvo;
         Material material;
-        if (instance.GetTamanhoListaAlvos() < instance.CSV_GetMaximoAlvos() & instance.GetQuantidadeAlvos() < instance.CSV_GetMaximoAlvos()) {
+        if(instance.GetTamanhoListaAlvos() < instance.CSV_GetMaximoAlvos() & instance.GetQuantidadeAlvos() < instance.CSV_GetMaximoAlvos()) {
             for(int i = 0; i < instance.CSV_GetMaximoAlvos(); i++) {
                 if(instance.GetTamanhoListaAlvos() < instance.CSV_GetMaximoAlvos() & instance.GetQuantidadeAlvos() < instance.CSV_GetMaximoAlvos()) {
                     novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
