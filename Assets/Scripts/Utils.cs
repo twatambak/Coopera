@@ -321,4 +321,5 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void GoToScene(string scene) {
       SceneManager.LoadScene(scene);
     }
+
 }

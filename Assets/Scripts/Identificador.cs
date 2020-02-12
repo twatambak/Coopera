@@ -409,4 +409,5 @@ public class Identificador : MonoBehaviour {
         string texto = "BOLA => Posição Original(" + GetPontoOrigem().x + " | " + GetPontoOrigem().y + ") => Posição Inicial(" + GetPontoInicial().x + " | " + GetPontoInicial().y + ") => Posição Final(" + GetPontoFinal().x + " | " + GetPontoFinal().y + ")";
         return texto;
     }
+
 }

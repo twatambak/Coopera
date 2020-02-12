@@ -53,9 +53,9 @@ public class Fase1 : MonoBehaviour {
     public GameObject baseIdentificadorVerde;
 
     //============================================================================================================
-    /// <summary>
-    /// No início do script o booleano que define o funcionamento do game é definido como falso.
-    /// </summary>
+     /// <summary>
+     /// No início do script o booleano que define o funcionamento do game é definido como falso.
+     /// </summary>
     //============================================================================================================
     void Start() {
         game = false;
