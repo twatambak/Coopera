@@ -141,6 +141,18 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
+     /// Retorna o método de reconhecimento das bolas. Essa informação 
+     /// está disponível na posição 11 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
+     /// na função de leitura do CSV passamos o ID 12.
+     /// </summary>
+     /// <returns> O tamanho dos alvos. </returns>
+    //==========================================================================================================//
+    public string CSV_GetMetodoReconhecimento() {
+        return LoadCSV(12);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
      /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
      /// lista servem de base para analisar se bola acertou o alvo.
      /// </summary>
