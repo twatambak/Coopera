@@ -153,6 +153,18 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
+     /// Retorna o tempo de duração do jogo. Essa informação 
+     /// está disponível na posição 13 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
+     /// na função de leitura do CSV passamos o ID 14.
+     /// </summary>
+     /// <returns> O tamanho dos alvos. </returns>
+    //==========================================================================================================//
+    public int CSV_GetTempoJogo() {
+        return (ToInt(LoadCSV(14)));
+    }
+
+    //==========================================================================================================//
+     /// <summary>
      /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
      /// lista servem de base para analisar se bola acertou o alvo.
      /// </summary>
@@ -173,10 +185,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
-    /// <summary>
-    /// Adiciona o GameObject passado na lista de identificadores dos objetos rastreados pela Pixy.
-    /// </summary>
-    /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
+     /// <summary>
+     /// Adiciona o GameObject passado na lista de identificadores dos objetos rastreados pela Pixy.
+     /// </summary>
+     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
     //==========================================================================================================//
     public void AddIdentificador(GameObject identificador) {
         listaIdentificadores.Add(identificador);
@@ -246,6 +258,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         if(GetTamanhoListaAlvos() > 0 & GetQuantidadeAlvos() > 0) {
             listaAlvos.Remove(alvo);
             qtdAlvos--;
+        }
+    }
+
+    public void LimparAlvos() {
+        for (int i = GetTamanhoListaAlvos(); i > 1; i--) {
+            listaAlvos[i].GetComponent<Alvo>().Destroi();
         }
     }
 

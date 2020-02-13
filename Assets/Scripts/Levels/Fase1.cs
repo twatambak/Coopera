@@ -19,8 +19,12 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Texto de exibição de pontos do time amarelo. </summary>
     public Text textoPontosAmarelos;
 
+    public Text textoTempo;
+
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
     public bool game;
+
+    public int tempoGame;
 
     /// <summary> HUD referente ao time amarelo. </summary>
     public GameObject amareloHUD;
@@ -52,13 +56,16 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Quantia de pontos do time verde. </summary>
     public GameObject baseIdentificadorVerde;
 
+    private float timer;
+
     //============================================================================================================
      /// <summary>
      /// No início do script o booleano que define o funcionamento do game é definido como falso.
      /// </summary>
     //============================================================================================================
     void Start() {
-        game = false;
+        game = true;
+        tempoGame = instance.CSV_GetTempoJogo();
     }
 
     //============================================================================================================
@@ -68,11 +75,19 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void Update() {
-        if(game) {
+        if(game == true) {
             Alvo.CriarAlvo(baseAlvo);
             quantAlvos = instance.GetQuantidadeAlvos();
             tamListaAlvos = instance.GetTamanhoListaAlvos();
             //tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
+            timer += Time.deltaTime;
+            if(timer > 1) {
+                tempoGame--;
+                timer = 0;
+            }
+            if(tempoGame < 0) {
+                EndGame();
+            }
         }
     }
 
@@ -83,13 +98,15 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void OnGUI() {
-        if(!game) {
+        /*if(!game) {
             if(Botao()) {
                 game = true;
             }
-        }
+        }*/
         textoPontosAmarelos.text = "Pontos: " + Utils.pontosTimeAmarelo;
         textoPontosVerdes.text = "Pontos: " + Utils.pontosTimeVerde;
+        textoTempo.text = "" + tempoGame;
+
     }
 
     //===================================================================================================
@@ -100,5 +117,10 @@ public class Fase1 : MonoBehaviour {
     //===================================================================================================
     public bool Botao() {
         return true;
+    }
+
+    public void EndGame() {
+        game = false;
+        instance.LimparAlvos();
     }
 }

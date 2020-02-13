@@ -83,10 +83,20 @@ interface InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
-     /// lista servem de base para analisar se bola acertou o alvo.
+     /// Retorna o tempo de duração do jogo. Essa informação 
+     /// está disponível na posição 13 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
+     /// na função de leitura do CSV passamos o ID 14.
      /// </summary>
-     /// <returns> A lista de GameObjects de identificação de posição da bola rastreada pela Pixy. </returns>
+     /// <returns> O tamanho dos alvos. </returns>
+    //==========================================================================================================//
+    int CSV_GetTempoJogo();
+
+    //==========================================================================================================//
+    /// <summary>
+    /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
+    /// lista servem de base para analisar se bola acertou o alvo.
+    /// </summary>
+    /// <returns> A lista de GameObjects de identificação de posição da bola rastreada pela Pixy. </returns>
     //==========================================================================================================//
     List<GameObject> GetListaIdentificadores();
 
@@ -145,11 +155,13 @@ interface InterfaceUtils {
     //==========================================================================================================//
     void RemoveAlvo(GameObject alvo);
 
+    void LimparAlvos();
+
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna a quantidade atual de alvos.
-     /// </summary>
-     /// <returns></returns>
+    /// <summary>
+    /// Retorna a quantidade atual de alvos.
+    /// </summary>
+    /// <returns></returns>
     //==========================================================================================================//
     int GetQuantidadeAlvos();
 
