@@ -316,6 +316,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         }
     }
 
+    public int GetPontosAmarelos() {
+        return pontosTimeAmarelo;
+    }
+
     //==========================================================================================================//
      /// <summary>
      /// Adiciona o valor passado aos pontos do time amarelo.
@@ -326,6 +330,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         pontosTimeAmarelo += pontos;
     }
 
+    public int GetPontosVerdes() {
+        return pontosTimeVerde;
+    }
+
     //==========================================================================================================//
      /// <summary>
      /// Adiciona o valor passado aos pontos do time verde.
@@ -334,6 +342,11 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public void AddPontosVerdes(int pontos) {
         pontosTimeVerde += pontos;
+    }
+
+    public void ZerarPontos() {
+        pontosTimeAmarelo = 0;
+        pontosTimeVerde = 0;
     }
 
     //==========================================================================================================//

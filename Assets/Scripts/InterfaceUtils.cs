@@ -189,6 +189,8 @@ interface InterfaceUtils {
     //==========================================================================================================//
     void RemoveQuantidadeAlvos();
 
+    int GetPontosAmarelos();
+
     //==========================================================================================================//
      /// <summary>
      /// Adiciona o valor passado aos pontos do time amarelo.
@@ -196,6 +198,8 @@ interface InterfaceUtils {
      /// <param name="pontos"> Valor a ser adicionado aos pontos do time amarelo. </param>
     //==========================================================================================================//
     void AddPontosAmarelos(int pontos);
+
+    int GetPontosVerdes();
 
     //==========================================================================================================//
      /// <summary>
@@ -205,12 +209,14 @@ interface InterfaceUtils {
     //==========================================================================================================//
     void AddPontosVerdes(int pontos);
 
+    void ZerarPontos();
+
     //==========================================================================================================//
-     /// <summary>
-     /// Converte uma string para int.
-     /// </summary>
-     /// <param name="texto"> O texto a ser convertido. </param>
-     /// <returns> O resultado da conversão do texto. </returns>
+    /// <summary>
+    /// Converte uma string para int.
+    /// </summary>
+    /// <param name="texto"> O texto a ser convertido. </param>
+    /// <returns> O resultado da conversão do texto. </returns>
     //==========================================================================================================//
     int ToInt(string texto);
 

@@ -21,6 +21,8 @@ public class Fase1 : MonoBehaviour {
 
     public Text textoTempo;
 
+    public Text textoVencedor;
+
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
     public bool game;
 
@@ -68,6 +70,7 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Start() {
         game = false;
+        textoVencedor.gameObject.SetActive(false);
     }
 
     //============================================================================================================
@@ -99,8 +102,8 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void OnGUI() {
-        textoPontosAmarelos.text = "Pontos: " + Utils.pontosTimeAmarelo;
-        textoPontosVerdes.text = "Pontos: " + Utils.pontosTimeVerde;
+        textoPontosAmarelos.text = "Pontos: " + instance.GetPontosAmarelos();
+        textoPontosVerdes.text = "Pontos: " + instance.GetPontosVerdes();
         textoTempo.text = "" + tempoGame;
 
     }
@@ -115,6 +118,8 @@ public class Fase1 : MonoBehaviour {
         game = true;
         botao.gameObject.SetActive(false);
         tempoGame = instance.CSV_GetTempoJogo();
+        textoVencedor.gameObject.SetActive(false);
+        instance.ZerarPontos();
     }
 
     //===================================================================================================
@@ -126,7 +131,14 @@ public class Fase1 : MonoBehaviour {
         game = false;
         instance.LimparAlvos();
         botao.gameObject.SetActive(true);
-         
+        textoVencedor.gameObject.SetActive(true);
+        if(instance.GetPontosVerdes() > instance.GetPontosAmarelos()) {
+            textoVencedor.text = "O time vencedor é o time Verde com " + instance.GetPontosVerdes() + " pontos.";
+        } else if(instance.GetPontosVerdes() < instance.GetPontosAmarelos()) {
+            textoVencedor.text = "O time vencedor é o time Amarelo com " + instance.GetPontosAmarelos() + " pontos.";
+        } else if(instance.GetPontosVerdes() == instance.GetPontosAmarelos()) {
+            textoVencedor.text = "Os times empataram com " + instance.GetPontosVerdes() + " pontos.";
+        }
     }
 
     //===================================================================================================
