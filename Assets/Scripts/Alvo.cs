@@ -85,7 +85,7 @@ public class Alvo : MonoBehaviour {
                     novaCor = new Vector4(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
                     novoAlvo = Instantiate(baseAlvo) as GameObject;
                     novoAlvo.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
-                    novoAlvo.transform.localScale = new Vector3(instance.CSV_GetTamanhoAlvos(), instance.CSV_GetTamanhoAlvos(), 1);
+                    novoAlvo.transform.localScale = new Vector3(instance.CSV_GetTamanhoAlvos(), instance.CSV_GetTamanhoAlvos(), 0.001f);
                     material = novoAlvo.GetComponent<Renderer>().material;
                     material.color = novaCor;
                     instance.AddAlvo(novoAlvo);

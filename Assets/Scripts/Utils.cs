@@ -165,6 +165,18 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
+     /// Retorna o tipo dos alvos. Essa informação 
+     /// está disponível na posição 15 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
+     /// na função de leitura do CSV passamos o ID 16.
+     /// </summary>
+     /// <returns> O tamanho dos alvos. </returns>
+    //==========================================================================================================//
+    public string CSV_GetTipoAlvos() {
+        return LoadCSV(16);
+    }
+
+    //==========================================================================================================//
+     /// <summary>
      /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
      /// lista servem de base para analisar se bola acertou o alvo.
      /// </summary>
@@ -261,10 +273,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
         }
     }
 
+    //==========================================================================================================//
+    //==========================================================================================================//
     public void LimparAlvos() {
-        for (int i = GetTamanhoListaAlvos(); i > 1; i--) {
+        /*for (int i = GetTamanhoListaAlvos(); i > 1; i--) {
             listaAlvos[i].GetComponent<Alvo>().Destroi();
-        }
+        }*/
     }
 
     //==========================================================================================================//

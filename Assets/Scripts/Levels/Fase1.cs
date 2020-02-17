@@ -33,7 +33,10 @@ public class Fase1 : MonoBehaviour {
     public GameObject verdeHUD;
 
     /// <summary> A <see cref="Alvo"/> base para criação das alvos de alvo. </summary>
-    public GameObject baseAlvo;
+    public GameObject baseAlvoQuadrado;
+
+    /// <summary> A <see cref="Alvo"/> base para criação das alvos de alvo. </summary>
+    public GameObject baseAlvoCirculo;
 
     /// <summary> Objeto de base para o identificador da alvo de identificação dos objetos rastreados. </summary>
     public GameObject identificador;
@@ -76,10 +79,6 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Update() {
         if(game == true) {
-            Alvo.CriarAlvo(baseAlvo);
-            quantAlvos = instance.GetQuantidadeAlvos();
-            tamListaAlvos = instance.GetTamanhoListaAlvos();
-            //tamListaIdentificadores = instance.GetTamanhoListaIdentificadores();
             timer += Time.deltaTime;
             if(timer > 1) {
                 tempoGame--;
@@ -88,6 +87,9 @@ public class Fase1 : MonoBehaviour {
             if(tempoGame < 0) {
                 EndGame();
             }
+            CriarAlvos();
+            quantAlvos = instance.GetQuantidadeAlvos();
+            tamListaAlvos = instance.GetTamanhoListaAlvos();
         }
     }
 
@@ -119,8 +121,20 @@ public class Fase1 : MonoBehaviour {
         return true;
     }
 
+    //===================================================================================================
+    //===================================================================================================
     public void EndGame() {
         game = false;
         instance.LimparAlvos();
+    }
+
+    //===================================================================================================
+    //===================================================================================================
+    public void CriarAlvos() {
+        if (instance.CSV_GetTipoAlvos() == "Circulo") {
+            Alvo.CriarAlvo(baseAlvoCirculo);
+        } else if(instance.CSV_GetTipoAlvos() == "Quadrado") {
+            Alvo.CriarAlvo(baseAlvoQuadrado);
+        }
     }
 }

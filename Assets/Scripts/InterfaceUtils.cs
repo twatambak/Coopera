@@ -92,6 +92,16 @@ interface InterfaceUtils {
     int CSV_GetTempoJogo();
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna o tipo dos alvos. Essa informação 
+     /// está disponível na posição 15 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
+     /// na função de leitura do CSV passamos o ID 16.
+     /// </summary>
+     /// <returns> O tamanho dos alvos. </returns>
+    //==========================================================================================================//
+    string CSV_GetTipoAlvos();
+
+    //==========================================================================================================//
     /// <summary>
     /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
     /// lista servem de base para analisar se bola acertou o alvo.
