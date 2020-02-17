@@ -1129,8 +1129,10 @@ MonoBehaviour:
   quantAlvos: 0
   tamListaAlvos: 0
   tamListaIdentificadores: 0
-  baseIdentificadorAmarelo: {fileID: 0}
-  baseIdentificadorVerde: {fileID: 0}
+  baseIdentificadorAmarelo: {fileID: 6623083013238093510, guid: f82643e913f948c4eb05e029f7561840,
+    type: 3}
+  baseIdentificadorVerde: {fileID: 2438802764018875752, guid: 0aa31481e19090c4dbed12f074d20f75,
+    type: 3}
 --- !u!4 &1506620288
 Transform:
   m_ObjectHideFlags: 0
@@ -1616,7 +1618,7 @@ GameObject:
   - component: {fileID: 1745410989}
   - component: {fileID: 1745410988}
   m_Layer: 8
-  m_Name: Botao
+  m_Name: BotaoJogar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

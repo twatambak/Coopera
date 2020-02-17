@@ -105,7 +105,6 @@ public class Fase1 : MonoBehaviour {
         textoPontosAmarelos.text = "Pontos: " + instance.GetPontosAmarelos();
         textoPontosVerdes.text = "Pontos: " + instance.GetPontosVerdes();
         textoTempo.text = "" + tempoGame;
-
     }
 
     //===================================================================================================
@@ -134,8 +133,10 @@ public class Fase1 : MonoBehaviour {
         textoVencedor.gameObject.SetActive(true);
         if(instance.GetPontosVerdes() > instance.GetPontosAmarelos()) {
             textoVencedor.text = "O time vencedor é o time Verde com " + instance.GetPontosVerdes() + " pontos.";
+            textoVencedor.gameObject.GetComponent<Text>().color = Color.green;
         } else if(instance.GetPontosVerdes() < instance.GetPontosAmarelos()) {
             textoVencedor.text = "O time vencedor é o time Amarelo com " + instance.GetPontosAmarelos() + " pontos.";
+            textoVencedor.gameObject.GetComponent<Text>().color = Color.yellow;
         } else if(instance.GetPontosVerdes() == instance.GetPontosAmarelos()) {
             textoVencedor.text = "Os times empataram com " + instance.GetPontosVerdes() + " pontos.";
         }
