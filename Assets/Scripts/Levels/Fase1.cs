@@ -68,7 +68,6 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Start() {
         game = false;
-        tempoGame = instance.CSV_GetTempoJogo();
     }
 
     //============================================================================================================
@@ -87,7 +86,7 @@ public class Fase1 : MonoBehaviour {
                 tempoGame--;
                 timer = 0;
             }
-            if(tempoGame < 0) {
+            if(tempoGame <= 0) {
                 EndGame();
             }
         }
@@ -115,6 +114,7 @@ public class Fase1 : MonoBehaviour {
     public void Botao() {
         game = true;
         botao.gameObject.SetActive(false);
+        tempoGame = instance.CSV_GetTempoJogo();
     }
 
     //===================================================================================================
@@ -125,6 +125,8 @@ public class Fase1 : MonoBehaviour {
     public void EndGame() {
         game = false;
         instance.LimparAlvos();
+        botao.gameObject.SetActive(true);
+         
     }
 
     //===================================================================================================
