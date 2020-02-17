@@ -124,8 +124,8 @@ public class Fase1 : MonoBehaviour {
     //===================================================================================================
     //===================================================================================================
     public void EndGame() {
-        game = false;
-        instance.LimparAlvos();
+        //game = false;
+        //instance.LimparAlvos();
     }
 
     //===================================================================================================
@@ -135,6 +135,15 @@ public class Fase1 : MonoBehaviour {
             Alvo.CriarAlvo(baseAlvoCirculo);
         } else if(instance.CSV_GetTipoAlvos() == "Quadrado") {
             Alvo.CriarAlvo(baseAlvoQuadrado);
+        } else if(instance.CSV_GetTipoAlvos() == "Misto") {
+            int x = Random.Range(0, 2);
+            if(x == 0) {
+                Alvo.CriarAlvo(baseAlvoCirculo);
+            } else if(x == 1) {
+                Alvo.CriarAlvo(baseAlvoQuadrado);
+            } else {
+                Alvo.CriarAlvo(baseAlvoCirculo);
+            }
         }
     }
 }
