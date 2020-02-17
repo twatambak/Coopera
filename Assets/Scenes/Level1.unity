@@ -1538,7 +1538,7 @@ GameObject:
   - component: {fileID: 1745410989}
   - component: {fileID: 1745410988}
   m_Layer: 8
-  m_Name: Button
+  m_Name: Botao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1561,7 +1561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1243, y: -807}
+  m_AnchoredPosition: {x: -0.00012207, y: -0.000061035}
   m_SizeDelta: {x: 404.2, y: 213.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1745410988
@@ -1607,15 +1607,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 0e391bc26988e434995a7df4f2f98102, type: 3}
-        m_MethodName: set_name
-        m_Mode: 5
+      - m_Target: {fileID: 1506620287}
+        m_MethodName: Botao
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Botao()
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1745410989

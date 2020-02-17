@@ -26,7 +26,6 @@ public class Pixy : MonoBehaviour {
         novoIdenti.GetComponent<Identificador>().Bola(id, assinatura, x, y, largura, altura);
         novoIdenti.transform.position = novoIdenti.GetComponent<Identificador>().GetPontoOrigemConvertido();
         novoIdenti.transform.localScale = new Vector3(novoIdenti.GetComponent<Identificador>().GetLarguraConvertida(), novoIdenti.GetComponent<Identificador>().GetAlturaConvertida(), 1);
-        //instance.AddIdentificador(novoIdenti);
     }
 
 }

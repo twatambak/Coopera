@@ -274,11 +274,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Limpa os alvos da tela.
+     /// </summary>
     //==========================================================================================================//
     public void LimparAlvos() {
-        /*for (int i = GetTamanhoListaAlvos(); i > 1; i--) {
+        for (int i = GetTamanhoListaAlvos() - 1; i >= 0; i--) {
             listaAlvos[i].GetComponent<Alvo>().Destroi();
-        }*/
+        }
     }
 
     //==========================================================================================================//
@@ -353,5 +356,4 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void GoToScene(string scene) {
       SceneManager.LoadScene(scene);
     }
-
 }

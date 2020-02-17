@@ -67,7 +67,7 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void Start() {
-        game = true;
+        game = false;
         tempoGame = instance.CSV_GetTempoJogo();
     }
 
@@ -79,6 +79,9 @@ public class Fase1 : MonoBehaviour {
     //============================================================================================================
     void Update() {
         if(game == true) {
+            CriarAlvos();
+            quantAlvos = instance.GetQuantidadeAlvos();
+            tamListaAlvos = instance.GetTamanhoListaAlvos();
             timer += Time.deltaTime;
             if(timer > 1) {
                 tempoGame--;
@@ -87,9 +90,6 @@ public class Fase1 : MonoBehaviour {
             if(tempoGame < 0) {
                 EndGame();
             }
-            CriarAlvos();
-            quantAlvos = instance.GetQuantidadeAlvos();
-            tamListaAlvos = instance.GetTamanhoListaAlvos();
         }
     }
 
@@ -100,11 +100,6 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //============================================================================================================
     void OnGUI() {
-        /*if(!game) {
-            if(Botao()) {
-                game = true;
-            }
-        }*/
         textoPontosAmarelos.text = "Pontos: " + Utils.pontosTimeAmarelo;
         textoPontosVerdes.text = "Pontos: " + Utils.pontosTimeVerde;
         textoTempo.text = "" + tempoGame;
@@ -117,18 +112,25 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
      /// <returns></returns>
     //===================================================================================================
-    public bool Botao() {
-        return true;
+    public void Botao() {
+        game = true;
+        botao.gameObject.SetActive(false);
     }
 
     //===================================================================================================
+     /// <summary>
+     /// Finaliza o jogo.
+     /// </summary>
     //===================================================================================================
     public void EndGame() {
-        //game = false;
-        //instance.LimparAlvos();
+        game = false;
+        instance.LimparAlvos();
     }
 
     //===================================================================================================
+     /// <summary>
+     /// Cria os alvos.
+     /// </summary>
     //===================================================================================================
     public void CriarAlvos() {
         if (instance.CSV_GetTipoAlvos() == "Circulo") {

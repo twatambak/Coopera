@@ -5,5 +5,5 @@ Assinatura da Pixy para a cor amarela		|1
 Assinatura da Pixy para a cor verde		|2	
 Método de reconhecimento			|Pixy
 Tempo de duração do jogo			|2
-Tipo de alvos (Quadrado, Circulo, Misto) 	|Misto
+Tipo de alvos (Quadrado, Circulo, Misto) 	|Quadrado
 Porta Arduino					|COM3
