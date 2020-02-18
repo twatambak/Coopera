@@ -263,6 +263,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retorna os pontos amarelos.
+     /// </summary>
+     /// <returns> Os pontos do time amarelo. </returns>
     //==========================================================================================================//
     public int GetPontosAmarelos() {
         return pontosTimeAmarelo;
@@ -279,6 +283,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Retornas os pontos verdes.
+     /// </summary>
+     /// <returns> Os pontos do time verde, </returns>
     //==========================================================================================================//
     public int GetPontosVerdes() {
         return pontosTimeVerde;
@@ -295,6 +303,9 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+     /// <summary>
+     /// Zera os pontos.
+     /// </summary>
     //==========================================================================================================//
     public void ZerarPontos() {
         pontosTimeAmarelo = 0;

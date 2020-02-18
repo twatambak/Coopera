@@ -1309,7 +1309,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "O time vencedor \xE9 o:"
+  m_Text: 
 --- !u!222 &1528511442
 CanvasRenderer:
   m_ObjectHideFlags: 0

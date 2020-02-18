@@ -29,6 +29,7 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
     public bool game;
 
+    /// <summary> Timer do jogo. </summary>
     public int tempoGame;
 
     /// <summary> HUD referente ao time amarelo. </summary>

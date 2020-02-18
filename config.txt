@@ -4,6 +4,6 @@ Tamanho das Formas (Padrão: 1)			|1
 Assinatura da Pixy para a cor amarela		|1	
 Assinatura da Pixy para a cor verde		|2	
 Método de reconhecimento			|Pixy
-Tempo de duração do jogo			|60
-Tipo de alvos (Quadrado, Circulo, Misto) 	|Quadrado
+Tempo de duração do jogo			|6
+Tipo de alvos (Quadrado, Circulo, Misto) 	|Circulo
 Porta Arduino					|COM3
