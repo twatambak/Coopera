@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEditor;
 
 /************************************************************************************************************/
  /// <summary>
@@ -29,10 +30,10 @@ public class Fase1 : MonoBehaviour {
     public int tempoGame;
 
     /// <summary> HUD referente ao time amarelo. </summary>
-    public GameObject amareloHUD;
+    public static GameObject amareloHUD;
 
     /// <summary> HUD referente ao time verde. </summary>
-    public GameObject verdeHUD;
+    public static GameObject verdeHUD;
 
     /// <summary> A <see cref="Alvo"/> base para criação das alvos de alvo. </summary>
     public GameObject baseAlvoQuadrado;
@@ -161,6 +162,16 @@ public class Fase1 : MonoBehaviour {
             } else {
                 Alvo.CriarAlvo(baseAlvoCirculo);
             }
+        }
+    }
+
+    //===================================================================================================
+    //===================================================================================================
+    public static void Brilha(float assinatura) { 
+        if(assinatura == instance.CSV_GetAssinaturaAmarela()) {
+            instance.BrilhaHUD(amareloHUD);
+        } else if(assinatura == instance.CSV_GetAssinaturaVerde()) {
+            instance.BrilhaHUD(verdeHUD);
         }
     }
 }

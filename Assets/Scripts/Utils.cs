@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 /************************************************************************************************************/
  /// <summary>
@@ -356,6 +357,12 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
+    //==========================================================================================================//
+    public void BrilhaHUD(GameObject HUD) {
+        HUD.GetComponent<HUD>().Brilha();
+    }
+
+    //==========================================================================================================//
      /// <summary>
      /// Converte uma string para int.
      /// </summary>
@@ -364,6 +371,10 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public int ToInt(string texto) {
         return System.Int32.Parse(texto);
+    }
+
+    IEnumerator Wait() {
+        yield return new WaitForSeconds(0.3f);
     }
 
     //==========================================================================================================//

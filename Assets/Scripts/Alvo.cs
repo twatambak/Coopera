@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 /************************************************************************************************************/
  /// <summary>
  /// A classe Alvo é responsável por definir as variáveis e comportamentos dos alvos presentes nas fases.
@@ -53,6 +53,11 @@ public class Alvo : MonoBehaviour {
         vel = instance.CSV_GetVelocidadeAlvos();
         tam = instance.CSV_GetTamanhoAlvos();
         cor = this.GetComponent<Renderer>().material.color;
+        SerializedObject halo = new SerializedObject(GetComponent("Halo"));
+        halo.FindProperty("m_Size").floatValue = 0.8f;
+        halo.FindProperty("m_Enabled").boolValue = true;
+        halo.FindProperty("m_Color").colorValue = cor;
+        halo.ApplyModifiedProperties();
     }
 
     //==========================================================================================================//
@@ -264,6 +269,7 @@ public class Alvo : MonoBehaviour {
             } else if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaVerde()){
                 instance.AddPontosVerdes(1);
             }
+            Fase1.Brilha(outro.gameObject.GetComponent<Identificador>().GetAssinatura());
         }
     }
 
