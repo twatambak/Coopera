@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEditor;
 
 public class HUD : MonoBehaviour {
-    public Color cor;
 
-    public void BrilhaHUD() {
+    public void Brilha() {
         SerializedObject halo = new SerializedObject(GetComponent("Halo"));
         halo.FindProperty("m_Size").floatValue = 0.8f;
         halo.FindProperty("m_Enabled").boolValue = true;

@@ -20,8 +20,10 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Texto de exibição de pontos do time amarelo. </summary>
     public Text textoPontosAmarelos;
 
+    /// <summary> Texto de exibição do tempo. </summary>
     public Text textoTempo;
 
+    /// <summary> Texto de exibição do vencedor. </summary>
     public Text textoVencedor;
 
     /// <summary> Booleano que define o funcionamento do jogo. </summary>
@@ -162,16 +164,6 @@ public class Fase1 : MonoBehaviour {
             } else {
                 Alvo.CriarAlvo(baseAlvoCirculo);
             }
-        }
-    }
-
-    //===================================================================================================
-    //===================================================================================================
-    public static void Brilha(float assinatura) { 
-        if(assinatura == instance.CSV_GetAssinaturaAmarela()) {
-            instance.BrilhaHUD(amareloHUD);
-        } else if(assinatura == instance.CSV_GetAssinaturaVerde()) {
-            instance.BrilhaHUD(verdeHUD);
         }
     }
 }

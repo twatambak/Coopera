@@ -28,9 +28,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <summary> Valor de CSV. Cores dos novos alvos. Valor obtido através do CSV de configuração. Posição (10) a ser chamada pela função <see cref="LoadCSV(int)"/>. </summary>
     int CSV_AssVerde;
 
-    /// <summary> Lista de GameObjects criados a partir dos objetos rastreados pela PixyCam. Armazena os objetos que são utilizados para a criação dos GameObjects para a análise de colisão. </summary>
-    public static List<GameObject> listaIdentificadores = new List<GameObject>();
-
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public static List<GameObject> listaAlvos = new List<GameObject>();
 
@@ -178,58 +175,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
 
     //==========================================================================================================//
      /// <summary>
-     /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
-     /// lista servem de base para analisar se bola acertou o alvo.
-     /// </summary>
-     /// <returns> A lista de GameObjects de identificação de posição da bola rastreada pela Pixy. </returns>
-    //==========================================================================================================//
-    public List<GameObject> GetListaIdentificadores() {
-        return listaIdentificadores;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o tamanho da lista de identificadores.
-     /// </summary>
-     /// <returns> O tamanho da lista de identificadores. </returns>
-    //==========================================================================================================//
-    public int GetTamanhoListaIdentificadores() {
-        return listaIdentificadores.Count;
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Adiciona o GameObject passado na lista de identificadores dos objetos rastreados pela Pixy.
-     /// </summary>
-     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
-    //==========================================================================================================//
-    public void AddIdentificador(GameObject identificador) {
-        listaIdentificadores.Add(identificador);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove o GameObject passado da lista de identificadores dos objetos rastreados pela Pixy.
-     /// </summary>
-     /// <param name="identificador"> O GameObject a ser removido na lista de identificadores. </param>
-    //==========================================================================================================//
-    public void RemoveIdentificador(GameObject identificador) {
-        listaIdentificadores.Remove(identificador);
-    }
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Limpa (remove todos os elementos) da lista de identificadores.
-     /// </summary>
-    //==========================================================================================================//
-    public void LimparIdentificadores() {
-        for(int i = 0; i < GetTamanhoListaIdentificadores(); i++) {
-            RemoveIdentificador(listaIdentificadores[i]);
-        }
-    }
-
-    //==========================================================================================================//
-     /// <summary>
      /// Retorna a lista de alvos.
      /// </summary>
      /// <returns> A lista de alvos armazenados. </returns>
@@ -357,12 +302,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
-    //==========================================================================================================//
-    public void BrilhaHUD(GameObject HUD) {
-        HUD.GetComponent<HUD>().Brilha();
-    }
-
-    //==========================================================================================================//
      /// <summary>
      /// Converte uma string para int.
      /// </summary>
@@ -371,10 +310,6 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     //==========================================================================================================//
     public int ToInt(string texto) {
         return System.Int32.Parse(texto);
-    }
-
-    IEnumerator Wait() {
-        yield return new WaitForSeconds(0.3f);
     }
 
     //==========================================================================================================//

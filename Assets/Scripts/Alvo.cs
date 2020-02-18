@@ -269,7 +269,6 @@ public class Alvo : MonoBehaviour {
             } else if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaVerde()){
                 instance.AddPontosVerdes(1);
             }
-            Fase1.Brilha(outro.gameObject.GetComponent<Identificador>().GetAssinatura());
         }
     }
 

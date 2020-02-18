@@ -80,5 +80,4 @@ public class Listener : MonoBehaviour {
     void OnConnectionEvent(bool success){
       Debug.Log(success ? "Device Connected" : "Device disconnected");
     }
-
 }

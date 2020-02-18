@@ -413,7 +413,6 @@ GameObject:
   - component: {fileID: 508028819}
   - component: {fileID: 508028818}
   - component: {fileID: 508028821}
-  - component: {fileID: 508028822}
   m_Layer: 0
   m_Name: HUD Verde
   m_TagString: Horizontal
@@ -507,18 +506,6 @@ Halo:
     serializedVersion: 2
     rgba: 4282811724
   m_Size: 0
---- !u!114 &508028822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508028816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1349ced44fb49643a6edcce057cd704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,7 +970,6 @@ GameObject:
   - component: {fileID: 1132299888}
   - component: {fileID: 1132299887}
   - component: {fileID: 1132299892}
-  - component: {fileID: 1132299891}
   m_Layer: 0
   m_Name: HUD Amarelo
   m_TagString: Horizontal
@@ -1065,18 +1051,6 @@ Transform:
   m_Father: {fileID: 1382671890}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!122 &1132299891
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132299886}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4279542752
-  m_Size: 0
 --- !u!114 &1132299892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,8 +1131,6 @@ MonoBehaviour:
   textoVencedor: {fileID: 1528511441}
   game: 0
   tempoGame: 0
-  amareloHUD: {fileID: 1132299886}
-  verdeHUD: {fileID: 508028816}
   baseAlvoQuadrado: {fileID: 556991348657645420, guid: eb3e28ebd898a5746a3a537ef6e8e5f7,
     type: 3}
   baseAlvoCirculo: {fileID: 5026155009366607472, guid: 0cf993bcd8282434f8a0430ded144af6,

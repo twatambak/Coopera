@@ -102,46 +102,6 @@ interface InterfaceUtils {
     string CSV_GetTipoAlvos();
 
     //==========================================================================================================//
-    /// <summary>
-    /// Retorna a lista de GameObjects criados a partir dos objetos rastreados pela Pixy. Os elementos dessa
-    /// lista servem de base para analisar se bola acertou o alvo.
-    /// </summary>
-    /// <returns> A lista de GameObjects de identificação de posição da bola rastreada pela Pixy. </returns>
-    //==========================================================================================================//
-    List<GameObject> GetListaIdentificadores();
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Retorna o tamanho da lista de identificadores.
-     /// </summary>
-     /// <returns> O tamanho da lista de identificadores. </returns>
-    //==========================================================================================================//
-    int GetTamanhoListaIdentificadores();
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Adiciona o GameObject passado na lista de identificadores dos objetos rastreados pela Pixy.
-     /// </summary>
-     /// <param name="identificador"> O GameObject a ser adicionado na lista de identificadores. </param>
-    //==========================================================================================================//
-    void AddIdentificador(GameObject identificador);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Remove o GameObject passado da lista de identificadores dos objetos rastreados pela Pixy.
-     /// </summary>
-     /// <param name="identificador"> O GameObject a ser removido na lista de identificadores. </param>
-    //==========================================================================================================//
-    void RemoveIdentificador(GameObject identificador);
-
-    //==========================================================================================================//
-     /// <summary>
-     /// Limpa (remove todos os elementos) da lista de identificadores.
-     /// </summary>
-    //==========================================================================================================//
-    void LimparIdentificadores();
-
-    //==========================================================================================================//
      /// <summary>
      /// Retorna o tamanho da lista de alvos.
      /// </summary>
@@ -214,10 +174,6 @@ interface InterfaceUtils {
     //==========================================================================================================//
     //==========================================================================================================//
     void ZerarPontos();
-
-    //==========================================================================================================//
-    //==========================================================================================================//
-    void BrilhaHUD(GameObject HUD);
 
     //==========================================================================================================//
     /// <summary>
