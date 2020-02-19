@@ -47,12 +47,13 @@ public class Distracao : MonoBehaviour {
         dirY = 0.1f;
         vel = instance.CSV_GetVelocidadeAlvos();
         tam = instance.CSV_GetTamanhoAlvos();
-        cor = Color.red;
-        SerializedObject halo = new SerializedObject(GetComponent("Halo"));
-        halo.FindProperty("m_Size").floatValue = 0.8f;
-        halo.FindProperty("m_Enabled").boolValue = true;
-        halo.FindProperty("m_Color").colorValue = Color.red;
-        halo.ApplyModifiedProperties();
+        //cor = Color.red;
+        //SerializedObject halo = new SerializedObject(GetComponent("Halo"));
+        //halo.FindProperty("m_Size").floatValue = 0.8f;
+        //halo.FindProperty("m_Enabled").boolValue = true;
+        //halo.FindProperty("m_Color").colorValue = Color.red;
+        //halo.ApplyModifiedProperties();
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0.02f, 0.02f);
     }
 
     //==========================================================================================================//
@@ -61,7 +62,7 @@ public class Distracao : MonoBehaviour {
      /// </summary>
     //==========================================================================================================//
     void Update() {
-        Movimentar();
+        //Movimentar();
         pontoOrigem = this.transform.localPosition;
         x = this.transform.localPosition.x;
         y = this.transform.localPosition.y;
@@ -83,7 +84,8 @@ public class Distracao : MonoBehaviour {
                     novaCor = Color.red;
                     novaDistracao = Instantiate(baseDistracao) as GameObject;
                     novaDistracao.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
-                    novaDistracao.transform.localScale = new Vector3(instance.CSV_GetTamanhoAlvos(), instance.CSV_GetTamanhoAlvos(), 0.001f);
+                    //novaDistracao.transform.localScale = new Vector3(instance.CSV_GetTamanhoAlvos(), instance.CSV_GetTamanhoAlvos(), 0.001f);
+                    novaDistracao.transform.localScale = new Vector3(0.4f, 0.4f, 0.5f);
                     material = novaDistracao.GetComponent<Renderer>().material;
                     material.color = novaCor;
                     instance.AddDistracao(novaDistracao);
@@ -165,7 +167,7 @@ public class Distracao : MonoBehaviour {
     //============================================================================================================
      /// <summary>
      /// Retorna a velocidade de movimento do alvo.
-     /// </summary>
+     /// </summary>a
      /// <returns> A velocidade de movimento do alvo. </returns>
     //============================================================================================================
     public float GetVel() {
@@ -206,12 +208,12 @@ public class Distracao : MonoBehaviour {
     //==========================================================================================================//
     void OnCollisionEnter2D(Collision2D outro) {
         if(outro.gameObject.tag == "Vertical") {
-            dirX *= -1;
+            //dirX *= -1;
         } else if(outro.gameObject.tag == "Horizontal") {
-            dirY *= -1;
+            //dirY *= -1;
         } else if(outro.gameObject.tag == "Forma") {
-            dirX *= -1;
-            dirY *= -1;
+            //dirX *= -1;
+            //dirY *= -1;
         } else if (outro.gameObject.tag == "Identificador") {
             this.Destroi();
             outro.gameObject.transform.position = new Vector3(2000, 2000, 1);
