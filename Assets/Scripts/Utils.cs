@@ -31,8 +31,14 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     /// <summary> Lista de alvos geradas pelo jogo. </summary>
     public static List<GameObject> listaAlvos = new List<GameObject>();
 
+    /// <summary> Lista de alvos geradas pelo jogo. </summary>
+    public static List<GameObject> listaDistracoes = new List<GameObject>();
+
     /// <summary> Quantidade atual de alvos presentes na tela. </summary>
     public static int qtdAlvos;
+
+    /// <summary> Quantidade atual de alvos presentes na tela. </summary>
+    public static int qtdDistracoes;
 
     /// <summary> Quantia de pontos do time amarelo. </summary>
     public static int pontosTimeAmarelo;
@@ -81,96 +87,75 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna a quantidade máxima de alvos possíveis. Essa informação está disponível na posição 1 (com o vetor
-     /// iniciando em 0) do arquivo CSV. Como decrementamos um valor na função de leitura do CSV passamos o ID 2. 
-     /// </summary>
-     /// <returns> A quantidade máxima possível para os alvos. </returns>
     //==========================================================================================================//
-    public int CSV_GetMaximoAlvos() {
+    public int CSV_GetTempoJogo() {
         return (ToInt(LoadCSV(2)));
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna a velocidade dos alvos. Essa informação está disponível na posição 3 (com o vetor iniciando em 0)
-     /// do arquivo CSV. Como decrementamos um valor na função de leitura do CSV passamos o ID 4. 
-     /// </summary>
-     /// <returns> A velocidade de movimento dos alvos. </returns>
     //==========================================================================================================//
-    public int CSV_GetVelocidadeAlvos() {
-        return (ToInt(LoadCSV(4)));
+    public string CSV_GetTipoAlvos() {
+        return LoadCSV(4);
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna o tamanho dos alvos. Essa informação está disponível na posição 5 (com o vetor iniciando em 0)
-     /// do arquivo CSV. Como decrementamos um valor na função de leitura do CSV passamos o ID 6. 
-     /// </summary>
-     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public int CSV_GetTamanhoAlvos() {
+    public int CSV_GetMaximoAlvos() {
         return (ToInt(LoadCSV(6)));
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna o valor de assinatura que representa a cor amarela (ou cor do time 1) da Pixy. Essa informação 
-     /// está disponível na posição 7 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
-     /// na função de leitura do CSV passamos o ID 8.
-     /// </summary>
-     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public int CSV_GetAssinaturaAmarela() {
+    public int CSV_GetVelocidadeAlvos() {
         return (ToInt(LoadCSV(8)));
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna o valor de assinatura que representa a cor amarela (ou cor do time 1) da Pixy. Essa informação 
-     /// está disponível na posição 9 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
-     /// na função de leitura do CSV passamos o ID 10.
-     /// </summary>
-     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public int CSV_GetAssinaturaVerde() {
+    public int CSV_GetTamanhoAlvos() {
         return (ToInt(LoadCSV(10)));
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna o método de reconhecimento das bolas. Essa informação 
-     /// está disponível na posição 11 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
-     /// na função de leitura do CSV passamos o ID 12.
-     /// </summary>
-     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public string CSV_GetMetodoReconhecimento() {
-        return LoadCSV(12);
+    public int CSV_GetMaximoDistracoes() {
+        return (ToInt(LoadCSV(12)));
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna o tempo de duração do jogo. Essa informação 
-     /// está disponível na posição 13 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
-     /// na função de leitura do CSV passamos o ID 14.
-     /// </summary>
-     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public int CSV_GetTempoJogo() {
+    public int CSV_GetVelocidadeDistracoes() {
         return (ToInt(LoadCSV(14)));
     }
 
     //==========================================================================================================//
-     /// <summary>
-     /// Retorna o tipo dos alvos. Essa informação 
-     /// está disponível na posição 15 (com o vetor iniciando em 0) do arquivo CSV.  Como decrementamos um valor
-     /// na função de leitura do CSV passamos o ID 16.
-     /// </summary>
-     /// <returns> O tamanho dos alvos. </returns>
     //==========================================================================================================//
-    public string CSV_GetTipoAlvos() {
-        return LoadCSV(16);
+    public int CSV_GetTamanhoDistracoes() {
+        return (ToInt(LoadCSV(16)));
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public string CSV_GetPortaArduino() {
+        return LoadCSV(18);
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public string CSV_GetMetodoReconhecimento() {
+        return LoadCSV(20);
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public int CSV_GetAssinaturaAmarela() {
+        return (ToInt(LoadCSV(22)));
+    }
+
+    //==========================================================================================================//
+    //==========================================================================================================//
+    public int CSV_GetAssinaturaVerde() {
+        return (ToInt(LoadCSV(24)));
     }
 
     //==========================================================================================================//
@@ -259,6 +244,95 @@ public class Utils : MonoBehaviour, InterfaceUtils {
     public void RemoveQuantidadeAlvos() { 
         if(GetQuantidadeAlvos() > 0) {
             qtdAlvos--;
+        }
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna a lista de distrações.
+     /// </summary>
+     /// <returns> A lista de distrações armazenadas. </returns>
+    //==========================================================================================================//
+    public List<GameObject> GetListaDistracoes() {
+        return listaDistracoes;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna o tamanho da lista de distrações.
+     /// </summary>
+     /// <returns> O tamanho da lista de distrações. </returns>
+    //==========================================================================================================//
+    public int GetTamanhoListaDistracoes() {
+        return listaDistracoes.Count;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Adiciona a distração passada na lista de distrações. A adição à quantidade de distrações já é realizada.
+     /// </summary>
+     /// <param name="distracao"> O GameObject a ser adicionado na lista de distrações. </param>
+    //==========================================================================================================//
+    public void AddDistracao(GameObject distracao) {
+        if(GetTamanhoListaDistracoes() < CSV_GetMaximoDistracoes() & GetQuantidadeDistracoes() < CSV_GetMaximoDistracoes()) {
+            listaDistracoes.Add(distracao);
+            AddQuantidadeDistracoes();
+        }
+    }
+
+    //==========================================================================================================//
+    /// <summary>
+    /// Remove a distração recebida da lista de distrações. A subtração da quantidade de distrações já é realizada.
+    /// </summary>
+    /// <param name="distracao"> O GameObejct a ser removido da lista de distrações. </param>
+    //==========================================================================================================//
+    public void RemoveDistracao(GameObject distracao) {
+        if(GetTamanhoListaDistracoes() > 0 & GetQuantidadeDistracoes() > 0) {
+            listaDistracoes.Remove(distracao);
+            qtdDistracoes--;
+        }
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Limpa as distrações da tela.
+     /// </summary>
+    //==========================================================================================================//
+    public void LimparDistracoes() {
+        for (int i = GetTamanhoListaDistracoes() - 1; i >= 0; i--) {
+            listaDistracoes[i].GetComponent<Distracao>().Destroi();
+        }
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Retorna a quantidade atual de distrações.
+     /// </summary>
+     /// <returns></returns>
+    //==========================================================================================================//
+    public int GetQuantidadeDistracoes() {
+        return qtdDistracoes;
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Aumenta em 1 a quantidade de distrações.
+     /// </summary>
+    //==========================================================================================================//
+    public void AddQuantidadeDistracoes() {
+        if(GetQuantidadeDistracoes() < CSV_GetMaximoDistracoes()) {
+            qtdDistracoes++;
+        }
+    }
+
+    //==========================================================================================================//
+     /// <summary>
+     /// Subtrai em 1 a quantidade de distrações.
+     /// </summary>
+    //==========================================================================================================//
+    public void RemoveQuantidadeDistracoes() { 
+        if(GetQuantidadeDistracoes() > 0) {
+            qtdDistracoes--;
         }
     }
 

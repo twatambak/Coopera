@@ -44,6 +44,8 @@ public class Fase1 : MonoBehaviour {
     /// <summary> A <see cref="Alvo"/> base para criação das alvos de alvo. </summary>
     public GameObject baseAlvoCirculo;
 
+    public GameObject baseDistracao;
+
     /// <summary> Objeto de base para o identificador da alvo de identificação dos objetos rastreados. </summary>
     public GameObject identificador;
 
@@ -86,6 +88,7 @@ public class Fase1 : MonoBehaviour {
     void Update() {
         if(game == true) {
             CriarAlvos();
+            Distracao.CriarDistracao(baseDistracao);
             quantAlvos = instance.GetQuantidadeAlvos();
             tamListaAlvos = instance.GetTamanhoListaAlvos();
             timer += Time.deltaTime;

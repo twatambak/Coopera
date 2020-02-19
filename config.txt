@@ -1,9 +1,15 @@
-Quantidade de Máxima de Formas (Padrão: 5)	|5
-Velocidade das Formas (Padrão: 30)		|30
-Tamanho das Formas (Padrão: 1)			|1
-Assinatura da Pixy para a cor amarela		|1	
-Assinatura da Pixy para a cor verde		|2	
-Método de reconhecimento			|Pixy
-Tempo de duração do jogo			|6
-Tipo de alvos (Quadrado, Circulo, Misto) 	|Circulo
-Porta Arduino					|COM3
+-> Tempo de duração do jogo				|6
+-> Tipo de alvos (Quadrado, Circulo, Misto) 		|Quadrado
+-> Quantidade de Máxima de Formas (Padrão: 5)		|5
+-> Velocidade das Formas (Padrão: 30)			|30
+-> Tamanho das Formas (Padrão: 1)			|1
+-> Quantidade de Máxima de Distrações (Padrão: 3)	|3
+-> Velocidade das Distracoes (Padrão: 30)		|30
+-> Tamanho das Distracoes (Padrão: 1)			|1
+-> Porta Arduino					|COM9
+-> Método de reconhecimento				|Pixy
+-> Assinatura da Pixy para a cor amarela		|1	
+-> Assinatura da Pixy para a cor verde			|2	
+
+
+

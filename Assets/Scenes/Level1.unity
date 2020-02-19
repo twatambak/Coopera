@@ -1135,6 +1135,8 @@ MonoBehaviour:
     type: 3}
   baseAlvoCirculo: {fileID: 5026155009366607472, guid: 0cf993bcd8282434f8a0430ded144af6,
     type: 3}
+  baseDistracao: {fileID: 124105511716037011, guid: 4eca6232345dd1047a93086e3cdd21b3,
+    type: 3}
   identificador: {fileID: 957783949}
   botao: {fileID: 1745410988}
   quantAlvos: 0
