@@ -178,9 +178,9 @@ public class Distracao : MonoBehaviour {
      /// </summary>
      /// <param name="alvo"> O alvo a ser destruído. </param>
     //==========================================================================================================//
-    public void Destroi(GameObject alvo) {
-        Destroy(alvo);
-        instance.RemoveAlvo(alvo);
+    public void Destroi(GameObject distracao) {
+        Destroy(distracao);
+        instance.RemoveDistracao(distracao);
     }
 
     //============================================================================================================
@@ -190,7 +190,7 @@ public class Distracao : MonoBehaviour {
     //============================================================================================================
     public void Destroi() {
         Destroy(this.gameObject);
-        instance.RemoveAlvo(this.gameObject);
+        instance.RemoveDistracao(this.gameObject);
     }
 
     //==========================================================================================================//

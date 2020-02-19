@@ -67,6 +67,7 @@ public class Fase1 : MonoBehaviour {
     /// <summary> Quantia de pontos do time verde. </summary>
     public GameObject baseIdentificadorVerde;
 
+    /// <summary> Timer. </summary>
     private float timer;
 
     //============================================================================================================
@@ -134,8 +135,8 @@ public class Fase1 : MonoBehaviour {
      /// </summary>
     //===================================================================================================
     public void EndGame() {
-        game = false;
         instance.LimparAlvos();
+        instance.LimparDistracoes();
         botao.gameObject.SetActive(true);
         textoVencedor.gameObject.SetActive(true);
         if(instance.GetPontosVerdes() > instance.GetPontosAmarelos()) {
@@ -147,6 +148,7 @@ public class Fase1 : MonoBehaviour {
         } else if(instance.GetPontosVerdes() == instance.GetPontosAmarelos()) {
             textoVencedor.text = "Os times empataram com " + instance.GetPontosVerdes() + " pontos.";
         }
+        game = false;
     }
 
     //===================================================================================================
