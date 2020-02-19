@@ -53,7 +53,7 @@ public class Distracao : MonoBehaviour {
         //halo.FindProperty("m_Enabled").boolValue = true;
         //halo.FindProperty("m_Color").colorValue = Color.red;
         //halo.ApplyModifiedProperties();
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0.02f, 0.02f);
+        //GetComponent<Rigidbody2D>().velocity = new Vector2(0.02f, 0.02f);
     }
 
     //==========================================================================================================//
@@ -62,7 +62,7 @@ public class Distracao : MonoBehaviour {
      /// </summary>
     //==========================================================================================================//
     void Update() {
-        //Movimentar();
+        Movimentar();
         pontoOrigem = this.transform.localPosition;
         x = this.transform.localPosition.x;
         y = this.transform.localPosition.y;
@@ -208,14 +208,16 @@ public class Distracao : MonoBehaviour {
     //==========================================================================================================//
     void OnCollisionEnter2D(Collision2D outro) {
         if(outro.gameObject.tag == "Vertical") {
-            //dirX *= -1;
+            dirX *= -1;
         } else if(outro.gameObject.tag == "Horizontal") {
-            //dirY *= -1;
+            dirY *= -1;
         } else if(outro.gameObject.tag == "Forma") {
-            //dirX *= -1;
-            //dirY *= -1;
+            dirX *= -1;
+            dirY *= -1;
         } else if (outro.gameObject.tag == "Identificador") {
-            this.Destroi();
+            if(instance.GetQuantidadeDistracoes() > 0) {
+                this.Destroi();
+            }
             outro.gameObject.transform.position = new Vector3(2000, 2000, 1);
             if(outro.gameObject.GetComponent<Identificador>().GetAssinatura() == instance.CSV_GetAssinaturaAmarela()) {
                 instance.AddPontosAmarelos(-1);
