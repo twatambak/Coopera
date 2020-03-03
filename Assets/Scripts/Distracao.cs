@@ -81,13 +81,13 @@ public class Distracao : MonoBehaviour {
         if(instance.GetTamanhoListaDistracoes() < instance.CSV_GetMaximoDistracoes() & instance.GetQuantidadeDistracoes() < instance.CSV_GetMaximoDistracoes()) {
             for(int i = 0; i < instance.CSV_GetMaximoDistracoes(); i++) {
                 if(instance.GetTamanhoListaDistracoes() < instance.CSV_GetMaximoDistracoes() & instance.GetQuantidadeDistracoes() < instance.CSV_GetMaximoDistracoes()) {
-                    novaCor = Color.red;
+                    //novaCor = Color.red; // Pinta a distração
                     novaDistracao = Instantiate(baseDistracao) as GameObject;
                     novaDistracao.transform.position = new Vector2(UnityEngine.Random.Range(-7, 7), UnityEngine.Random.Range(-3, 3));
                     //novaDistracao.transform.localScale = new Vector3(instance.CSV_GetTamanhoAlvos(), instance.CSV_GetTamanhoAlvos(), 0.001f);
                     novaDistracao.transform.localScale = new Vector3(0.4f, 0.4f, 0.5f);
                     material = novaDistracao.GetComponent<Renderer>().material;
-                    material.color = novaCor;
+                    //material.color = novaCor;
                     instance.AddDistracao(novaDistracao);
                 }
             }
